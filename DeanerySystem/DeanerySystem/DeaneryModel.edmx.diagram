@@ -10,10 +10,10 @@
         <AssociationConnector Association="DeaneryModel.FacultyStream" />
         <EntityTypeShape EntityType="DeaneryModel.Department" Width="1.5" PointX="4.5" PointY="6.75" />
         <AssociationConnector Association="DeaneryModel.StreamDepartment" />
-        <EntityTypeShape EntityType="DeaneryModel.Group" Width="1.875" PointX="6.875" PointY="7.875" />
+        <EntityTypeShape EntityType="DeaneryModel.Group" Width="1.875" PointX="7.25" PointY="8.25" />
         <AssociationConnector Association="DeaneryModel.DepartmentGroup" />
         <EntityTypeShape EntityType="DeaneryModel.User" Width="1.5" PointX="8.375" PointY="0.625" />
-        <EntityTypeShape EntityType="DeaneryModel.Student" Width="1.5" PointX="9.75" PointY="3.875" />
+        <EntityTypeShape EntityType="DeaneryModel.Student" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
         <AssociationConnector Association="DeaneryModel.GroupStudent" />
         <EntityTypeShape EntityType="DeaneryModel.Professor" Width="1.5" PointX="7.25" PointY="3.875" />
         <InheritanceConnector EntityType="DeaneryModel.Professor" />
@@ -24,15 +24,11 @@
         <AssociationConnector Association="DeaneryModel.HeadDepartment" ></AssociationConnector>
         <AssociationConnector Association="DeaneryModel.MentorGroup" />
         <EntityTypeShape EntityType="DeaneryModel.Subject" Width="2.25" PointX="12.375" PointY="3.75" />
-        <EntityTypeShape EntityType="DeaneryModel.Semester" Width="2.25" PointX="9.875" PointY="7.875" />
+        <EntityTypeShape EntityType="DeaneryModel.Semester" Width="2.25" PointX="10.75" PointY="9" />
         <AssociationConnector Association="DeaneryModel.SemesterGroup" />
         <EntityTypeShape EntityType="DeaneryModel.Class" Width="1.5" PointX="15.75" PointY="5.75" />
         <EntityTypeShape EntityType="DeaneryModel.Journal" Width="1.5" PointX="15.75" PointY="2.625" />
-        <AssociationConnector Association="DeaneryModel.GroupSubject" ManuallyRouted="true" >
-          <ConnectorPoint PointX="8.75" PointY="9.1862665593817532" />
-          <ConnectorPoint PointX="9.125" PointY="9.1862665593817532" />
-          <ConnectorPoint PointX="9.125" PointY="7.0481826521007012" />
-          <ConnectorPoint PointX="12.375" PointY="7.0481826521007012" />
+        <AssociationConnector Association="DeaneryModel.GroupSubject" ManuallyRouted="false" >
         </AssociationConnector>
         <EntityTypeShape EntityType="DeaneryModel.BookOfSuccess" Width="1.5" PointX="11.375" PointY="0.625" />
         <AssociationConnector Association="DeaneryModel.StudentBookOfSuccess" />
@@ -44,7 +40,7 @@
         <AssociationConnector Association="DeaneryModel.StudentJournal" />
         <AssociationConnector Association="DeaneryModel.ClassJournal" />
         <AssociationConnector Association="DeaneryModel.SubjectClass" />
-        <EntityTypeShape EntityType="DeaneryModel.TimeTable" Width="1.5" PointX="13.125" PointY="8.125" />
+        <EntityTypeShape EntityType="DeaneryModel.TimeTable" Width="1.5" PointX="13.5" PointY="8.125" />
         <EntityTypeShape EntityType="DeaneryModel.ClassNumberTime" Width="1.5" PointX="15.75" PointY="9" />
         <AssociationConnector Association="DeaneryModel.ClassTimeTable" />
         <AssociationConnector Association="DeaneryModel.TimeTableClassNumberTime" />

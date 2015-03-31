@@ -208,7 +208,6 @@
           <Property Name="MiddleName" Type="String" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
-          <Property Name="ComplexProperty" Nullable="false" Type="DeaneryModel.ComplexType1" />
         </EntityType>
         <EnumType Name="Roles">
           <Member Name="Administrator" Value="1" />
@@ -217,7 +216,6 @@
           <Member Name="Student" Value="4" />
         </EnumType>
         <EntityType Name="Student" BaseType="DeaneryModel.User">
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentCode" Type="String" Nullable="false" />
           <NavigationProperty Name="Group" Relationship="DeaneryModel.GroupStudent" FromRole="Student" ToRole="Group" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
@@ -243,7 +241,6 @@
           <Member Name="Payer" Value="2" />
         </EnumType>
         <EntityType Name="Professor" BaseType="DeaneryModel.User">
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Position" Type="DeaneryModel.Positions" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="DeaneryModel.DepartmentProfessor" FromRole="Professor" ToRole="Department" />
           <Property Name="DepartmentId" Type="Int32" Nullable="true" />
@@ -261,7 +258,7 @@
           <Member Name="EngineerOfTheSecondCategory" Value="6" />
         </EnumType>
         <Association Name="DepartmentProfessor">
-          <End Type="DeaneryModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="DeaneryModel.Department" Role="Department" Multiplicity="0..1" />
           <End Type="DeaneryModel.Professor" Role="Professor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
@@ -301,6 +298,8 @@
           <NavigationProperty Name="BookOfSuccess" Relationship="DeaneryModel.SubjectBookOfSuccess" FromRole="Subject" ToRole="BookOfSuccess" />
           <NavigationProperty Name="Writing" Relationship="DeaneryModel.SubjectWriting" FromRole="Subject" ToRole="Writing" />
           <NavigationProperty Name="Classes" Relationship="DeaneryModel.SubjectClass" FromRole="Subject" ToRole="Class" />
+          <Property Name="ExaminationId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EnumType Name="SemesterControlTypes">
           <Member Name="Exam" Value="1" />
@@ -389,10 +388,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Mark" Type="Byte" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="TermMark" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="DeaneryModel.StudentBookOfSuccess" FromRole="BookOfSuccess" ToRole="Student" />
           <NavigationProperty Name="Subject" Relationship="DeaneryModel.SubjectBookOfSuccess" FromRole="BookOfSuccess" ToRole="Subject" />
+          <Property Name="ExamMark" Type="Byte" Nullable="false" />
         </EntityType>
         <Association Name="StudentBookOfSuccess">
           <End Type="DeaneryModel.Student" Role="Student" Multiplicity="1" />
@@ -523,9 +522,8 @@
           <Property Name="Number" Type="Int32" Nullable="false" />
           <Property Name="TimeOfBeginning" Type="Time" Nullable="false" />
           <Property Name="TimeOfEnding" Type="Time" Nullable="false" />
-          <Property Name="TimeTableId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TimeTable" Relationship="DeaneryModel.TimeTableClassNumberTime" FromRole="ClassNumberTime" ToRole="TimeTable" />
-          <Property Name="TimeTableId1" Type="Int32" Nullable="false" />
+          <Property Name="TimeTableId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="ClassTimeTable">
           <End Type="DeaneryModel.Class" Role="Class" Multiplicity="1" />
@@ -547,7 +545,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ClassNumberTime">
-              <PropertyRef Name="TimeTableId1" />
+              <PropertyRef Name="TimeTableId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

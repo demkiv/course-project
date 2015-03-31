@@ -113,7 +113,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="DateOfFoundation" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Streams" Relationship="DeaneryModel.FacultyStream" FromRole="Faculty" ToRole="Stream" />
           <NavigationProperty Name="Dean" Relationship="DeaneryModel.Dean" FromRole="Faculty" ToRole="Professor" />
         </EntityType>

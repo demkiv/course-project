@@ -1,0 +1,14 @@
+﻿@using DeanerySystem.Domain.Entities
+@model IEnumerable<Faculty>
+
+@{
+    ViewBag.Title = "Faculties";
+}
+
+@foreach (var faculty in Model)
+{
+    <div>
+        <h3>@faculty.Name</h3>
+    </div>
+}
+

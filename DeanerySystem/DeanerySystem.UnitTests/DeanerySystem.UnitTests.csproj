@@ -107,9 +107,9 @@
       <Project>{9d449daa-41be-461f-bef9-5fa2aac89967}</Project>
       <Name>DeanerySystem.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DeanerySystem\DeanerySystem.WebUI.csproj">
+    <ProjectReference Include="..\DeanerySystem\DeanerySyst.csproj">
       <Project>{d8e815d5-b1d2-4025-a058-a99db76214e1}</Project>
-      <Name>DeanerySystem.WebUI</Name>
+      <Name>DeanerySyst</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

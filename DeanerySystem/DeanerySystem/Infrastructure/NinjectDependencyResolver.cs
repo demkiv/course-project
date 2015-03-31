@@ -3,7 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Moq;
 using System.Web.Mvc;
+using DeanerySystem.Domain.Abstract;
+using DeanerySystem.Domain.Concrete;
+using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Infrastructure
 {
@@ -25,7 +29,14 @@ namespace DeanerySystem.Infrastructure
         }
         private void AddBindings()
         {
-            // put bindings here
+            //Mock<IFacultyRepository> mock = new Mock<IFacultyRepository>();
+            //mock.Setup(m => m.Faculties).Returns(new List<Faculty> {
+            //    new Faculty { Name = "Aplied Math" },
+            //    new Faculty { Name = "Math" },
+            //    new Faculty { Name = "Physics" }
+            //});
+            //kernel.Bind<IFacultyRepository>().ToConstant(mock.Object);
+            kernel.Bind<IFacultyRepository>().To<EFFacultyRepository>();
         }
         
     }

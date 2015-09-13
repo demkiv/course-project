@@ -11,7 +11,7 @@ namespace DeanerySystem.Domain.Concrete
     public class EFFacultyRepository: IFacultyRepository
     {
         private EFDbContext context = new EFDbContext();
-        public IEnumerable<Faculty> Faculties
+        public IEnumerable<FacultyExample> Faculties
         {
             get { return context.Faculties; }
         }

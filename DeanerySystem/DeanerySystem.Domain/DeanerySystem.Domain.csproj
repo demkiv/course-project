@@ -74,15 +74,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IEntitiesRepository.cs" />
     <Compile Include="Abstract\IFacultyRepository.cs" />
+    <Compile Include="Concrete\CustomDbContext.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFFacultyRepository.cs" />
+    <Compile Include="Configurations\BookOfSuccessConfiguration.cs" />
+    <Compile Include="Configurations\CelluleConfiguration.cs" />
+    <Compile Include="Configurations\ClassNumberTimeConfiguration.cs" />
+    <Compile Include="Configurations\DepartmentConfiguration.cs" />
+    <Compile Include="Configurations\FacultyConfiguration.cs" />
+    <Compile Include="Configurations\GroupConfiguration.cs" />
+    <Compile Include="Configurations\JournalConfiguration.cs" />
+    <Compile Include="Configurations\ProfessorConfiguration.cs" />
+    <Compile Include="Configurations\SemesterConfiguration.cs" />
+    <Compile Include="Configurations\StreamConfiguration.cs" />
+    <Compile Include="Configurations\StudentConfiguration.cs" />
+    <Compile Include="Configurations\SubjectConfiguration.cs" />
+    <Compile Include="Configurations\TimeTableConfiguration.cs" />
+    <Compile Include="Configurations\UserConfiguration.cs" />
+    <Compile Include="Configurations\WritingConfiguration.cs" />
+    <Compile Include="Entities\BookOfSuccess.cs" />
+    <Compile Include="Entities\Cellule.cs" />
+    <Compile Include="Entities\ClassNumberTime.cs" />
+    <Compile Include="Entities\ClassTypes.cs" />
+    <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Faculty.cs" />
+    <Compile Include="Entities\Fractions.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Journal.cs" />
+    <Compile Include="Entities\JournalForMarking.cs" />
+    <Compile Include="Entities\JournalTypes.cs" />
+    <Compile Include="Entities\MarkingTypes.cs" />
+    <Compile Include="Entities\Roles.cs" />
+    <Compile Include="Entities\TimeTable.cs" />
+    <Compile Include="Entities\Positions.cs" />
+    <Compile Include="Entities\Professor.cs" />
+    <Compile Include="Entities\Semester.cs" />
+    <Compile Include="Entities\SemesterControlTypes.cs" />
+    <Compile Include="Entities\Stream.cs" />
+    <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\Subject.cs" />
+    <Compile Include="Entities\TuitionFees.cs" />
+    <Compile Include="Entities\Tuitions.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Writing.cs" />
+    <Compile Include="Entities\WritingTypes.cs" />
+    <Compile Include="FacultyExample.cs" />
+    <Compile Include="Migrations\201504271239536_InitialCreate.cs" />
+    <Compile Include="Migrations\201504271239536_InitialCreate.Designer.cs">
+      <DependentUpon>201504271239536_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201504271239536_InitialCreate.resx">
+      <DependentUpon>201504271239536_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

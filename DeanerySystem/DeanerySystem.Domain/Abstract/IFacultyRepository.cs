@@ -9,6 +9,6 @@ namespace DeanerySystem.Domain.Abstract
 {
     public interface IFacultyRepository
     {
-        IEnumerable<Faculty> Faculties { get; }
+        IEnumerable<FacultyExample> Faculties { get; }
     }
 }

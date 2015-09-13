@@ -56,8 +56,8 @@
             <End Role="Semester" EntitySet="SemesterSet" />
             <End Role="Group" EntitySet="GroupSet" />
           </AssociationSet>
-          <EntitySet Name="ClassSet" EntityType="DeaneryModel.Class" />
-          <EntitySet Name="JournalSet" EntityType="DeaneryModel.Journal" />
+          <EntitySet Name="JournalsSet" EntityType="DeaneryModel.Journals" />
+          <EntitySet Name="СelluleSet" EntityType="DeaneryModel.Сellule" />
           <AssociationSet Name="GroupSubject" Association="DeaneryModel.GroupSubject">
             <End Role="Group" EntitySet="GroupSet" />
             <End Role="Subject" EntitySet="SubjectSet" />
@@ -82,24 +82,24 @@
           </AssociationSet>
           <AssociationSet Name="ProfessorClass" Association="DeaneryModel.ProfessorClass">
             <End Role="Professor" EntitySet="UserSet" />
-            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Class" EntitySet="JournalsSet" />
           </AssociationSet>
           <AssociationSet Name="StudentJournal" Association="DeaneryModel.StudentJournal">
             <End Role="Student" EntitySet="UserSet" />
-            <End Role="Journal" EntitySet="JournalSet" />
+            <End Role="Journal" EntitySet="СelluleSet" />
           </AssociationSet>
           <AssociationSet Name="ClassJournal" Association="DeaneryModel.ClassJournal">
-            <End Role="Class" EntitySet="ClassSet" />
-            <End Role="Journal" EntitySet="JournalSet" />
+            <End Role="Class" EntitySet="JournalsSet" />
+            <End Role="Journal" EntitySet="СelluleSet" />
           </AssociationSet>
           <AssociationSet Name="SubjectClass" Association="DeaneryModel.SubjectClass">
             <End Role="Subject" EntitySet="SubjectSet" />
-            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Class" EntitySet="JournalsSet" />
           </AssociationSet>
           <EntitySet Name="TimeTableSet" EntityType="DeaneryModel.TimeTable" />
           <EntitySet Name="ClassNumberTimeSet" EntityType="DeaneryModel.ClassNumberTime" />
           <AssociationSet Name="ClassTimeTable" Association="DeaneryModel.ClassTimeTable">
-            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Class" EntitySet="JournalsSet" />
             <End Role="TimeTable" EntitySet="TimeTableSet" />
           </AssociationSet>
           <AssociationSet Name="TimeTableClassNumberTime" Association="DeaneryModel.TimeTableClassNumberTime">
@@ -175,9 +175,9 @@
           <Property Name="Tuition" Type="DeaneryModel.Tuitions" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="DeaneryModel.DepartmentGroup" FromRole="Group" ToRole="Department" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Student" Relationship="DeaneryModel.GroupStudent" FromRole="Group" ToRole="Student" />
           <NavigationProperty Name="Mentor" Relationship="DeaneryModel.MentorGroup" FromRole="Group" ToRole="Professor" />
           <NavigationProperty Name="ActualSemester" Relationship="DeaneryModel.SemesterGroup" FromRole="Group" ToRole="Semester" />
+          <NavigationProperty Name="Students" Relationship="DeaneryModel.GroupStudent" FromRole="Group" ToRole="Student" />
           <Property Name="SemesterId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Subjects" Relationship="DeaneryModel.GroupSubject" FromRole="Group" ToRole="Subject" />
         </EntityType>
@@ -207,6 +207,7 @@
           <Property Name="MiddleName" Type="String" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Role" Type="DeaneryModel.Roles" Nullable="false" />
         </EntityType>
         <EnumType Name="Roles">
           <Member Name="Administrator" Value="1" />
@@ -221,7 +222,7 @@
           <Property Name="TuitionFee" Type="DeaneryModel.TuitionFees" Nullable="false" />
           <NavigationProperty Name="BookOfSuccess" Relationship="DeaneryModel.StudentBookOfSuccess" FromRole="Student" ToRole="BookOfSuccess" />
           <NavigationProperty Name="Writing" Relationship="DeaneryModel.StudentWriting" FromRole="Student" ToRole="Writing" />
-          <NavigationProperty Name="Journal" Relationship="DeaneryModel.StudentJournal" FromRole="Student" ToRole="Journal" />
+          <NavigationProperty Name="Cellules" Relationship="DeaneryModel.StudentJournal" FromRole="Student" ToRole="Journal" />
         </EntityType>
         <Association Name="GroupStudent">
           <End Type="DeaneryModel.Group" Role="Group" Multiplicity="1" />
@@ -246,7 +247,7 @@
           <NavigationProperty Name="DeanFaculty" Relationship="DeaneryModel.Dean" FromRole="Professor" ToRole="Faculty" />
           <NavigationProperty Name="HeadDepartment" Relationship="DeaneryModel.HeadDepartment" FromRole="Professor" ToRole="Department" />
           <NavigationProperty Name="MentorGroup" Relationship="DeaneryModel.MentorGroup" FromRole="Professor" ToRole="Group" />
-          <NavigationProperty Name="Class" Relationship="DeaneryModel.ProfessorClass" FromRole="Professor" ToRole="Class" />
+          <NavigationProperty Name="Journal" Relationship="DeaneryModel.ProfessorClass" FromRole="Professor" ToRole="Class" />
         </EntityType>
         <EnumType Name="Positions" UnderlyingType="Byte">
           <Member Name="Professor" Value="1" />
@@ -293,12 +294,12 @@
           <Property Name="NumberOfConsultations" Type="String" Nullable="false" />
           <Property Name="SemesterControl" Type="DeaneryModel.SemesterControlTypes" Nullable="false" />
           <NavigationProperty Name="Group" Relationship="DeaneryModel.GroupSubject" FromRole="Subject" ToRole="Group" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BookOfSuccess" Relationship="DeaneryModel.SubjectBookOfSuccess" FromRole="Subject" ToRole="BookOfSuccess" />
-          <NavigationProperty Name="Writing" Relationship="DeaneryModel.SubjectWriting" FromRole="Subject" ToRole="Writing" />
-          <NavigationProperty Name="Classes" Relationship="DeaneryModel.SubjectClass" FromRole="Subject" ToRole="Class" />
+          <NavigationProperty Name="Writings" Relationship="DeaneryModel.SubjectWriting" FromRole="Subject" ToRole="Writing" />
+          <NavigationProperty Name="Journals" Relationship="DeaneryModel.SubjectClass" FromRole="Subject" ToRole="Class" />
           <Property Name="ExaminationId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EnumType Name="SemesterControlTypes">
           <Member Name="Exam" Value="1" />
@@ -338,22 +339,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Class">
+        <EntityType Name="Journals">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="Type" Type="DeaneryModel.ClassTypes" Nullable="false" />
+          <Property Name="ClassType" Type="DeaneryModel.ClassTypes" Nullable="false" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Professor" Relationship="DeaneryModel.ProfessorClass" FromRole="Class" ToRole="Professor" />
           <Property Name="ProfessorId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Journal" Relationship="DeaneryModel.ClassJournal" FromRole="Class" ToRole="Journal" />
           <NavigationProperty Name="Subject" Relationship="DeaneryModel.SubjectClass" FromRole="Class" ToRole="Subject" />
+          <NavigationProperty Name="Cellules" Relationship="DeaneryModel.ClassJournal" FromRole="Class" ToRole="Journal" />
           <Property Name="SubjectId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TimeTable" Relationship="DeaneryModel.ClassTimeTable" FromRole="Class" ToRole="TimeTable" />
+          <NavigationProperty Name="TimeTables" Relationship="DeaneryModel.ClassTimeTable" FromRole="Class" ToRole="TimeTable" />
+          <Property Name="JournalType" Type="DeaneryModel.JournalTypes" Nullable="false" />
         </EntityType>
-        <EntityType Name="Journal">
+        <EntityType Name="Сellule">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -362,7 +364,7 @@
           <Property Name="Mark" Type="String" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="DeaneryModel.StudentJournal" FromRole="Journal" ToRole="Student" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Class" Relationship="DeaneryModel.ClassJournal" FromRole="Journal" ToRole="Class" />
+          <NavigationProperty Name="Journal" Relationship="DeaneryModel.ClassJournal" FromRole="Journal" ToRole="Class" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
         </EntityType>
         <EnumType Name="ClassTypes">
@@ -405,8 +407,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
-          <Property Name="Type" Type="DeaneryModel.WritingTypes" Nullable="false" />
+          <Property Name="PassingDate" Type="DateTime" Nullable="false" />
+          <Property Name="WritingType" Type="DeaneryModel.WritingTypes" Nullable="false" />
           <Property Name="IsPassed" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="DeaneryModel.StudentWriting" FromRole="Writing" ToRole="Student" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
@@ -444,7 +446,7 @@
         </Association>
         <Association Name="ProfessorClass">
           <End Type="DeaneryModel.Professor" Role="Professor" Multiplicity="1" />
-          <End Type="DeaneryModel.Class" Role="Class" Multiplicity="*" />
+          <End Type="DeaneryModel.Journals" Role="Class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Professor">
               <PropertyRef Name="Id" />
@@ -456,7 +458,7 @@
         </Association>
         <Association Name="StudentJournal">
           <End Type="DeaneryModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="DeaneryModel.Journal" Role="Journal" Multiplicity="*" />
+          <End Type="DeaneryModel.Сellule" Role="Journal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
@@ -467,8 +469,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ClassJournal">
-          <End Type="DeaneryModel.Class" Role="Class" Multiplicity="1" />
-          <End Type="DeaneryModel.Journal" Role="Journal" Multiplicity="*" />
+          <End Type="DeaneryModel.Journals" Role="Class" Multiplicity="1" />
+          <End Type="DeaneryModel.Сellule" Role="Journal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
               <PropertyRef Name="Id" />
@@ -480,7 +482,7 @@
         </Association>
         <Association Name="SubjectClass">
           <End Type="DeaneryModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="DeaneryModel.Class" Role="Class" Multiplicity="*" />
+          <End Type="DeaneryModel.Journals" Role="Class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
               <PropertyRef Name="Id" />
@@ -495,21 +497,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DayOfWeek" Type="DeaneryModel.DaysOfWeek" Nullable="false" />
-          <Property Name="Fraction" Type="DeaneryModel.Fraction" Nullable="false" />
-          <Property Name="ClassNumberTimeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Class" Relationship="DeaneryModel.ClassTimeTable" FromRole="TimeTable" ToRole="Class" />
+          <Property Name="DayOfWeek" Type="Int32" Nullable="false" />
+          <Property Name="Fraction" Nullable="false" Type="DeaneryModel.Fraction" />
+          <NavigationProperty Name="Journal" Relationship="DeaneryModel.ClassTimeTable" FromRole="TimeTable" ToRole="Class" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ClassNumberTime" Relationship="DeaneryModel.TimeTableClassNumberTime" FromRole="TimeTable" ToRole="ClassNumberTime" />
         </EntityType>
-        <EnumType Name="DaysOfWeek">
-          <Member Name="Monday" Value="1" />
-          <Member Name="Tuesday" Value="2" />
-          <Member Name="Wednesday" Value="3" />
-          <Member Name="Thursday" Value="4" />
-          <Member Name="Friday" Value="5" />
-        </EnumType>
-        <EnumType Name="Fraction">
+        <EnumType Name="Fractions">
           <Member Name="Numerator" Value="1" />
           <Member Name="Denominator" Value="2" />
         </EnumType>
@@ -521,11 +515,11 @@
           <Property Name="Number" Type="Int32" Nullable="false" />
           <Property Name="TimeOfBeginning" Type="Time" Nullable="false" />
           <Property Name="TimeOfEnding" Type="Time" Nullable="false" />
-          <NavigationProperty Name="TimeTable" Relationship="DeaneryModel.TimeTableClassNumberTime" FromRole="ClassNumberTime" ToRole="TimeTable" />
           <Property Name="TimeTableId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TimeTable" Relationship="DeaneryModel.TimeTableClassNumberTime" FromRole="ClassNumberTime" ToRole="TimeTable" />
         </EntityType>
         <Association Name="ClassTimeTable">
-          <End Type="DeaneryModel.Class" Role="Class" Multiplicity="1" />
+          <End Type="DeaneryModel.Journals" Role="Class" Multiplicity="1" />
           <End Type="DeaneryModel.TimeTable" Role="TimeTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -537,17 +531,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TimeTableClassNumberTime">
-          <End Type="DeaneryModel.TimeTable" Role="TimeTable" Multiplicity="1" />
+          <End Type="DeaneryModel.TimeTable" Role="TimeTable" Multiplicity="*" />
           <End Type="DeaneryModel.ClassNumberTime" Role="ClassNumberTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TimeTable">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClassNumberTime">
-              <PropertyRef Name="TimeTableId" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
+        <EnumType Name="JournalTypes">
+          <Member Name="Visiting" Value="1" />
+          <Member Name="Assessment" Value="2" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

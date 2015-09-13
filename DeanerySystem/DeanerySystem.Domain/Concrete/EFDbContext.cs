@@ -10,6 +10,6 @@ namespace DeanerySystem.Domain.Concrete
 {
     public class EFDbContext : DbContext
     {
-        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<FacultyExample> Faculties { get; set; }
     }
 }

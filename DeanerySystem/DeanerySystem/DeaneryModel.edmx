@@ -62,14 +62,14 @@
             <End Role="Group" EntitySet="GroupSet" />
             <End Role="Subject" EntitySet="SubjectSet" />
           </AssociationSet>
-          <EntitySet Name="BookOfSuccessSet" EntityType="DeaneryModel.BookOfSuccess" />
-          <AssociationSet Name="StudentBookOfSuccess" Association="DeaneryModel.StudentBookOfSuccess">
+          <EntitySet Name="ProgressRecordSet" EntityType="DeaneryModel.ProgressRecord" />
+          <AssociationSet Name="StudentProgressRecord" Association="DeaneryModel.StudentProgressRecord">
             <End Role="Student" EntitySet="UserSet" />
-            <End Role="BookOfSuccess" EntitySet="BookOfSuccessSet" />
+            <End Role="ProgressRecord" EntitySet="ProgressRecordSet" />
           </AssociationSet>
-          <AssociationSet Name="SubjectBookOfSuccess" Association="DeaneryModel.SubjectBookOfSuccess">
+          <AssociationSet Name="SubjectProgressRecord" Association="DeaneryModel.SubjectProgressRecord">
             <End Role="Subject" EntitySet="SubjectSet" />
-            <End Role="BookOfSuccess" EntitySet="BookOfSuccessSet" />
+            <End Role="ProgressRecord" EntitySet="ProgressRecordSet" />
           </AssociationSet>
           <EntitySet Name="WritingSet" EntityType="DeaneryModel.Writing" />
           <AssociationSet Name="StudentWriting" Association="DeaneryModel.StudentWriting">
@@ -220,7 +220,7 @@
           <NavigationProperty Name="Group" Relationship="DeaneryModel.GroupStudent" FromRole="Student" ToRole="Group" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <Property Name="TuitionFee" Type="DeaneryModel.TuitionFees" Nullable="false" />
-          <NavigationProperty Name="BookOfSuccess" Relationship="DeaneryModel.StudentBookOfSuccess" FromRole="Student" ToRole="BookOfSuccess" />
+          <NavigationProperty Name="ProgressRecord" Relationship="DeaneryModel.StudentProgressRecord" FromRole="Student" ToRole="ProgressRecord" />
           <NavigationProperty Name="Writing" Relationship="DeaneryModel.StudentWriting" FromRole="Student" ToRole="Writing" />
           <NavigationProperty Name="Cellules" Relationship="DeaneryModel.StudentJournal" FromRole="Student" ToRole="Journal" />
         </EntityType>
@@ -296,7 +296,7 @@
           <NavigationProperty Name="Group" Relationship="DeaneryModel.GroupSubject" FromRole="Subject" ToRole="Group" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BookOfSuccess" Relationship="DeaneryModel.SubjectBookOfSuccess" FromRole="Subject" ToRole="BookOfSuccess" />
+          <NavigationProperty Name="ProgressRecord" Relationship="DeaneryModel.SubjectProgressRecord" FromRole="Subject" ToRole="ProgressRecord" />
           <NavigationProperty Name="Writings" Relationship="DeaneryModel.SubjectWriting" FromRole="Subject" ToRole="Writing" />
           <NavigationProperty Name="Journals" Relationship="DeaneryModel.SubjectClass" FromRole="Subject" ToRole="Class" />
           <Property Name="ExaminationId" Type="Int32" Nullable="false" />
@@ -384,23 +384,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="BookOfSuccess">
+        <EntityType Name="ProgressRecord">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TermMark" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="Student" Relationship="DeaneryModel.StudentBookOfSuccess" FromRole="BookOfSuccess" ToRole="Student" />
-          <NavigationProperty Name="Subject" Relationship="DeaneryModel.SubjectBookOfSuccess" FromRole="BookOfSuccess" ToRole="Subject" />
+          <NavigationProperty Name="Student" Relationship="DeaneryModel.StudentProgressRecord" FromRole="ProgressRecord" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="DeaneryModel.SubjectProgressRecord" FromRole="ProgressRecord" ToRole="Subject" />
           <Property Name="ExamMark" Type="Byte" Nullable="false" />
         </EntityType>
-        <Association Name="StudentBookOfSuccess">
+        <Association Name="StudentProgressRecord">
           <End Type="DeaneryModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="DeaneryModel.BookOfSuccess" Role="BookOfSuccess" Multiplicity="*" />
+          <End Type="DeaneryModel.ProgressRecord" Role="ProgressRecord" Multiplicity="*" />
         </Association>
-        <Association Name="SubjectBookOfSuccess">
+        <Association Name="SubjectProgressRecord">
           <End Type="DeaneryModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="DeaneryModel.BookOfSuccess" Role="BookOfSuccess" Multiplicity="*" />
+          <End Type="DeaneryModel.ProgressRecord" Role="ProgressRecord" Multiplicity="*" />
         </Association>
         <EntityType Name="Writing">
           <Key>
@@ -498,10 +498,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DayOfWeek" Type="Int32" Nullable="false" />
-          <Property Name="Fraction" Nullable="false" Type="DeaneryModel.Fraction" />
           <NavigationProperty Name="Journal" Relationship="DeaneryModel.ClassTimeTable" FromRole="TimeTable" ToRole="Class" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ClassNumberTime" Relationship="DeaneryModel.TimeTableClassNumberTime" FromRole="TimeTable" ToRole="ClassNumberTime" />
+          <Property Name="Fraction" Type="DeaneryModel.Fractions" Nullable="false" />
         </EntityType>
         <EnumType Name="Fractions">
           <Member Name="Numerator" Value="1" />

@@ -7,26 +7,18 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
+using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.WebUI.Models;
 
 namespace DeanerySystem.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private IEntitiesRepository repository;
-        public HomeController(IEntitiesRepository entitiesRepository)
+        private IDeaneryEntitiesRepository repository;
+        public HomeController(IDeaneryEntitiesRepository deaneryEntitiesRepository)
         {
-            this.repository = entitiesRepository;
+            this.repository = deaneryEntitiesRepository;
         }
-
-        // GET: Home
-        //public ActionResult Index()
-        //{
-        //    //StudentProfessorModel model = new StudentProfessorModel() { Students = repository.Students, Professors = repository.Professors };
-        //    List<User> users = repository.Students.Cast<User>().ToList();
-        //    users.AddRange(repository.Professors.Cast<User>());
-        //    return View(users);
-        //}
 
         public ActionResult Index()
         {
@@ -41,7 +33,7 @@ namespace DeanerySystem.WebUI.Controllers
             List<JournalRecord> journalRecords = new List<JournalRecord>();
 
             int number = 1;
-            foreach (var student in repository.Subjects.First(s => s.Id == subjectId).Group.Students)
+            foreach (var student in repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Group.Students)
             {
                 string[] marks = new string[dates.Count];
                 
@@ -76,7 +68,7 @@ namespace DeanerySystem.WebUI.Controllers
                 ActualJournalTypeId = actualJournalTypeId,
 
                 SubjectName = subject.Name,
-                GroupName = subject.Group.Name,
+                GroupName = subject.SemesterEducationalPlan.Group.Name,
                 ClassType = GetClassType(subject.Journals.First(j => j.Id == journalId).ClassType),
                 //JournalType = actualJournalType,
                 LecturerFirstName = subject.Journals.First(j => j.Id == journalId).Professor.FirstName,
@@ -98,7 +90,7 @@ namespace DeanerySystem.WebUI.Controllers
                 foreach (var lesson in schedule.ClassNumberTimes)
                 {
                     bool isNumerator = true;
-                    DateTime firstDate = repository.Subjects.First(s => s.Id == subjectId).Group.ActualSemester.DateOfBeginning;
+                    DateTime firstDate = repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Semester.DateOfBeginning;
                     while (firstDate.DayOfWeek != schedule.DayOfWeek)
                     {
                         if (firstDate.DayOfWeek == DayOfWeek.Sunday)
@@ -120,7 +112,7 @@ namespace DeanerySystem.WebUI.Controllers
                             lesson.TimeOfBeginning.Hours, lesson.TimeOfBeginning.Minutes, lesson.TimeOfBeginning.Seconds));
                     }
                     for (DateTime date = firstDate.AddDays(14);
-                        date < repository.Subjects.First().Group.ActualSemester.DateOfEndCreditSession;
+                        date < repository.Subjects.First().SemesterEducationalPlan.Semester.DateOfEndCreditSession;
                         date = date.AddDays(14))
                     {
                         dates.Add(new DateTime(date.Year, date.Month, date.Day,
@@ -156,7 +148,7 @@ namespace DeanerySystem.WebUI.Controllers
                 {
                     Cellule cellule = repository.Cellules.FirstOrDefault(c =>
                         c.Date == dates.ElementAt(columnId-1) &&
-                        c.Student == repository.Subjects.First(s => s.Id == subjectId).Group.Students.ElementAt(rowId - 1));
+                        c.Student == repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Group.Students.ElementAt(rowId - 1));
 
                     if (cellule == null)
                     {
@@ -168,7 +160,7 @@ namespace DeanerySystem.WebUI.Controllers
                                 Id = repository.Cellules.Last().Id + 1,
                                 Date = dates.ElementAt(columnId - 1),
                                 Student = repository.Subjects.First(s => s.Id == subjectId)
-                                        .Group.Students.ElementAt(rowId - 1),
+                                        .SemesterEducationalPlan.Group.Students.ElementAt(rowId - 1),
                                 Mark = mark
                             });
                     }

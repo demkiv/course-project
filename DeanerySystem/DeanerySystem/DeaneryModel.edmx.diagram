@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="33bd74a4b669490da89192dd1d0ed7bf" Name="Diagram1" ZoomLevel="61" >
+      <Diagram DiagramId="33bd74a4b669490da89192dd1d0ed7bf" Name="Diagram1" ZoomLevel="86" >
         <EntityTypeShape EntityType="DeaneryModel.Faculty" Width="1.875" PointX="5.625" PointY="1.125" />
         <EntityTypeShape EntityType="DeaneryModel.Stream" Width="1.875" PointX="5" PointY="3.625" />
         <AssociationConnector Association="DeaneryModel.FacultyStream" />

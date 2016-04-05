@@ -11,6 +11,7 @@ namespace DeanerySystem.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
+	    public virtual University University { get; set; }
         public virtual Professor Dean { get; set; }
         public virtual ICollection<Stream> Streams { get; set; }
         public Faculty()

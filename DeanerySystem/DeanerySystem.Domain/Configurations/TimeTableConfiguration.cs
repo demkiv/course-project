@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,14 @@ namespace DeanerySystem.Domain.Configurations
 {
     class TimeTableConfiguration : EntityTypeConfiguration<TimeTable>
     {
-    }
+	    public TimeTableConfiguration() {
+			this.ToTable("TimeTables");
+			this.HasKey(t => t.Id);
+			this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+			this.HasRequired(t => t.Journal).WithMany(j => j.TimeTables);
+
+			this.HasMany(t => t.ClassNumberTimes).WithRequired(t => t.TimeTable);
+		}
+	}
 }

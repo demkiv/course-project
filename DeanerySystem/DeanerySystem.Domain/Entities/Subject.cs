@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeanerySystem.Domain.Entities.Enums;
 
 namespace DeanerySystem.Domain.Entities
 {
@@ -18,13 +19,14 @@ namespace DeanerySystem.Domain.Entities
         public SemesterControlTypes SemesterControl { get; set; }
         public DateTime? PassingDate { get; set; }
 
-        public virtual Group Group { get; set; }
-        public virtual ICollection<BookOfSuccess> BooksOfSuccess { get; set; }
+        public virtual SemesterEducationalPlan SemesterEducationalPlan { get; set; }
+        public virtual ICollection<ProgressRecord> ProgressRecords { get; set; }
         public virtual ICollection<Writing> Writings { get; set; }
         public virtual ICollection<Journal> Journals { get; set; }
+
         public Subject()
         {
-            this.BooksOfSuccess = new List<BookOfSuccess>();
+            this.ProgressRecords = new List<ProgressRecord>();
             this.Writings = new List<Writing>();
             this.Journals = new List<Journal>();
         }

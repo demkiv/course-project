@@ -1,5 +1,6 @@
 ﻿@using System.Activities.Statements
 @using DeanerySystem.Domain.Entities
+@using DeanerySystem.Domain.Entities.Enums
 @model IEnumerable<Subject>
 
 @{
@@ -24,7 +25,7 @@
     {
         foreach (var journal in subject.Journals)
         {
-            if (subject.Group.Name != "ПМІ-32")
+            if (subject.SemesterEducationalPlan.Group.Name != "ПМІ-32")
             {
                 <a href='@Url.Action("Journal", "Home", new {subjectId = @subject.Id, journalId = @journal.Id, actualJournalTypeId = @journal.JournalsForMarking.First(j => j.JournalType == JournalTypes.Assessment).Id})'>
                     <div class="row grid-item grey-border">
@@ -35,7 +36,7 @@
                             @journal.Professor.LastName @journal.Professor.FirstName @journal.Professor.MiddleName
                         </div>
                         <div class="col-md-4">
-                            @subject.Group.Name
+                            @subject.SemesterEducationalPlan.Group.Name
                         </div>
                     </div>
                 </a>
@@ -51,7 +52,7 @@
                             @journal.Professor.LastName @journal.Professor.FirstName @journal.Professor.MiddleName
                         </div>
                         <div class="col-md-4">
-                            @subject.Group.Name
+                            @subject.SemesterEducationalPlan.Group.Name
                         </div>
                     </div>
                 </a>

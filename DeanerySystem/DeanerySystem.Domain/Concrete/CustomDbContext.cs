@@ -6,46 +6,56 @@ using System.Text;
 using System.Threading.Tasks;
 using DeanerySystem.Domain.Configurations;
 using DeanerySystem.Domain.Entities;
+using DeanerySystem.Domain.Entities.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.Domain.Concrete
 {
-    class CustomDbContext : DbContext
-    {
-        public DbSet<Faculty> Faculties { get; set; }
-        public DbSet<Stream> Streams { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Professor> Professors { get; set; }
+	public class CustomDbContext : IdentityDbContext<ApplicationUser> {
+		public DbSet<Cellule> Cellules { get; set; }
+		public DbSet<ClassNumberTime> ClassNumberTimes { get; set; }
+		public DbSet<DeanaryUser> DeaneryUsers { get; set; }
+		public DbSet<Department> Departments { get; set; }
+		public DbSet<Faculty> Faculties { get; set; }
+		public DbSet<Group> Groups { get; set; }
+		public DbSet<Journal> Journals { get; set; }
+		public DbSet<JournalForMarking> JournalsForMarking { get; set; }
+		public DbSet<Professor> Professors { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Semester> Semesters { get; set; }
-        public DbSet<Subject> Subjects { get; set; }
-        public DbSet<Journal> Journals { get; set; }
-        public DbSet<JournalForMarking> JournalsForMarking { get; set; }
-        public DbSet<Cellule> Cellules { get; set; }
-        public DbSet<TimeTable> TimeTables { get; set; }
-        public DbSet<ClassNumberTime> ClassNumberTimes { get; set; }
-        public DbSet<BookOfSuccess> BooksOfSuccesses { get; set; }
-        public DbSet<Writing> Writings { get; set; }
+		public DbSet<ProgressRecord> ProgressRecords { get; set; }
+		public DbSet<Semester> Semesters { get; set; }
+		public DbSet<SemesterEducationalPlan> SemesterEducationalPlans { get; set; }
+		public DbSet<Stream> Streams { get; set; }
+		public DbSet<Subject> Subjects { get; set; }
+		public DbSet<TimeTable> TimeTables { get; set; }
+		public DbSet<University> Universities { get; set; }
+		public DbSet<Writing> Writings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Configurations.Add(new FacultyConfiguration());
-            modelBuilder.Configurations.Add(new StreamConfiguration());
+			modelBuilder.Configurations.Add(new CelluleConfiguration());
+			modelBuilder.Configurations.Add(new ClassNumberTimeConfiguration());
+			modelBuilder.Configurations.Add(new DeanaryUserConfiguration());
             modelBuilder.Configurations.Add(new DepartmentConfiguration());
-            modelBuilder.Configurations.Add(new UserConfiguration());
-            modelBuilder.Configurations.Add(new ProfessorConfiguration());
-            modelBuilder.Configurations.Add(new StudentConfiguration());
+            modelBuilder.Configurations.Add(new FacultyConfiguration());
             modelBuilder.Configurations.Add(new GroupConfiguration());
-            modelBuilder.Configurations.Add(new SemesterConfiguration());
-            modelBuilder.Configurations.Add(new SubjectConfiguration());
             modelBuilder.Configurations.Add(new JournalConfiguration());
-            modelBuilder.Configurations.Add(new CelluleConfiguration());
+			modelBuilder.Configurations.Add(new JournalForMarkingConfiguration());
+            modelBuilder.Configurations.Add(new ProfessorConfiguration());
+            modelBuilder.Configurations.Add(new ProgressRecordConfiguration());
+            modelBuilder.Configurations.Add(new SemesterConfiguration());
+			modelBuilder.Configurations.Add(new SemesterEducationalPlanConfiguration());
+            modelBuilder.Configurations.Add(new StreamConfiguration());
+            modelBuilder.Configurations.Add(new StudentConfiguration());
+            modelBuilder.Configurations.Add(new SubjectConfiguration());
             modelBuilder.Configurations.Add(new TimeTableConfiguration());
-            modelBuilder.Configurations.Add(new ClassNumberTimeConfiguration());
-            modelBuilder.Configurations.Add(new BookOfSuccessConfiguration());
-            modelBuilder.Configurations.Add(new WritingConfiguration());
+			modelBuilder.Configurations.Add(new UniversityConfiguration());
+			modelBuilder.Configurations.Add(new WritingConfiguration());
         }
-    }
+
+		public static CustomDbContext Create() {
+			return new CustomDbContext();
+		}
+	}
 }

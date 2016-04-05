@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DeanerySystem.Domain.Entities;
+
+namespace DeanerySystem.Domain.Configurations {
+	class UniversityConfiguration : EntityTypeConfiguration<University> {
+		public UniversityConfiguration() {
+			this.ToTable("Universities");
+			this.HasKey(u => u.Id);
+			this.Property(u => u.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+			this.HasOptional(u => u.Rector).WithRequired(u => u.Rector);
+
+			this.HasMany(u => u.Faculties).WithRequired(f => f.University);
+		}
+	}
+}

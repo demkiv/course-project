@@ -5,15 +5,14 @@ namespace DeanerySystem.Domain.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DeanerySystem.Domain.Concrete.EFDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DeanerySystem.Domain.Concrete.CustomDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "DeanerySystem.Domain.Concrete.EFDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(DeanerySystem.Domain.Concrete.EFDbContext context)
+        protected override void Seed(DeanerySystem.Domain.Concrete.CustomDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

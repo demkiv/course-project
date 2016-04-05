@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,11 +21,12 @@ namespace DeanerySystem.Domain.Entities
         // first or second
         public int Number { get; set; }
 
-        public virtual ICollection<Group> Groups { get; set; }
+	    public virtual SemesterEducationalPlan SemesterEducationalPlan { get; set; }
+	    public virtual ICollection<Student> Students { get; set; }
+
         public Semester()
         {
-            this.Groups = new List<Group>();
+			this.Students = new List<Student>();
         }
-
     }
 }

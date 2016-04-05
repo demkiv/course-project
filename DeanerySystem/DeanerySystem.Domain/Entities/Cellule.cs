@@ -13,6 +13,6 @@ namespace DeanerySystem.Domain.Entities
         public string Mark { get; set; }
 
         public virtual Student Student { get; set; }
-        public virtual Journal Journal { get; set; }
+        public virtual JournalForMarking JournalForMarking { get; set; }
     }
 }

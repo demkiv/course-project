@@ -19,14 +19,8 @@ namespace DeanerySystem.Domain.Configurations
 			this.HasRequired(s => s.Group).WithMany(g => g.Students);
 
 			this.HasMany(s => s.ProgressRecords).WithRequired(r => r.Student);
-			this.HasMany(s => s.Writings).WithRequired(w => w.Student);
+			this.HasMany(s => s.FailureTickets).WithRequired(w => w.Student);
 			this.HasMany(s => s.Cellules).WithRequired(w => w.Student);
-
-			this.HasMany(s => s.Semesters).WithMany(s => s.Students).Map(ss => {
-				ss.MapRightKey("StudentId");
-				ss.MapRightKey("SemesterId");				
-				ss.ToTable("StudentsSemesters");
-			});
 		}
 	}
 }

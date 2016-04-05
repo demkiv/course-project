@@ -7,11 +7,11 @@ using DeanerySystem.Domain.Entities.Enums;
 
 namespace DeanerySystem.Domain.Entities
 {
-    public class Writing
+    public class FailureTicket
     {
         public int Id { get; set; }
         public DateTime PassingDate { get; set; }
-        public WritingTypes WritingType { get; set; }
+        public FailureTicketTypes Type { get; set; }
         public bool IsPassed { get; set; }
 
         public virtual Student Student { get; set; }

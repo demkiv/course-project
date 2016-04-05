@@ -83,9 +83,9 @@ namespace DeanerySystem.WebUI.Infrastructure
 				new Semester
 				{
 					Id = 1,
-					Number = 2,
-					DateOfBeginning = new DateTime(2015, 1, 22),
-					DateOfEndCreditSession = new DateTime(2015, 6, 6)
+					Number = SemesterNumber.Second,
+					Start = new DateTime(2015, 1, 22),
+					CreditSessionStart = new DateTime(2015, 6, 6)
 				}
 			});
 
@@ -430,7 +430,6 @@ namespace DeanerySystem.WebUI.Infrastructure
 				{
 					Id = 1,
 					Name = "ПМІ-31",
-					CurrentSemester = 6,
                     //Mentor = entitiesMock.Object.Professors.ElementAt(0),
                     Department = entitiesMock.Object.Departments.ElementAt(0),
 					Students = new List<Student>()
@@ -465,7 +464,6 @@ namespace DeanerySystem.WebUI.Infrastructure
 				{
 					Id = 2,
 					Name = "ПМІ-32",
-					CurrentSemester = 6,
 					Mentor = entitiesMock.Object.Professors.ElementAt(0),
 					Department = entitiesMock.Object.Departments.ElementAt(0),
 					Students = new List<Student>()
@@ -506,36 +504,36 @@ namespace DeanerySystem.WebUI.Infrastructure
 				{
 					Id = 1,
 					Number = 1,
-					TimeOfBeginning = new TimeSpan(0, 8, 30, 0, 0),
-					TimeOfEnding = new TimeSpan(0, 9, 50, 0, 0)
+					Start = new TimeSpan(0, 8, 30, 0, 0),
+					End = new TimeSpan(0, 9, 50, 0, 0)
 				},
 				new ClassNumberTime()
 				{
 					Id = 2,
 					Number = 2,
-					TimeOfBeginning = new TimeSpan(0, 10, 10, 0, 0),
-					TimeOfEnding = new TimeSpan(0, 11, 30, 0, 0)
+					Start = new TimeSpan(0, 10, 10, 0, 0),
+					End = new TimeSpan(0, 11, 30, 0, 0)
 				},
 				new ClassNumberTime()
 				{
 					Id = 3,
 					Number = 3,
-					TimeOfBeginning = new TimeSpan(0, 11, 50, 0, 0),
-					TimeOfEnding = new TimeSpan(0, 13, 10, 0, 0)
+					Start = new TimeSpan(0, 11, 50, 0, 0),
+					End = new TimeSpan(0, 13, 10, 0, 0)
 				},
 				new ClassNumberTime()
 				{
 					Id = 4,
 					Number = 4,
-					TimeOfBeginning = new TimeSpan(0, 13, 30, 0, 0),
-					TimeOfEnding = new TimeSpan(0, 14, 50, 0, 0)
+					Start = new TimeSpan(0, 13, 30, 0, 0),
+					End = new TimeSpan(0, 14, 50, 0, 0)
 				},
 				new ClassNumberTime()
 				{
 					Id = 5,
 					Number = 5,
-					TimeOfBeginning = new TimeSpan(0, 15, 15, 0, 0),
-					TimeOfEnding = new TimeSpan(0, 16, 25, 0, 0)
+					Start = new TimeSpan(0, 15, 15, 0, 0),
+					End = new TimeSpan(0, 16, 25, 0, 0)
 				}
 			});
 			#endregion

@@ -13,10 +13,10 @@ namespace DeanerySystem.Domain.Entities
 
         public virtual Department Department { get; set; }
 
-		public virtual University Rector { get; set; }
-        public virtual Faculty Dean { get; set; }
-        public virtual Department Head { get; set; }
-        public virtual Group Mentor { get; set; }
+		public virtual University RectorOfUniversity { get; set; }
+        public virtual Faculty DeanOfFaculty { get; set; }
+        public virtual Department HeadOfDepartment { get; set; }
+        public virtual Group MentorOfGroup { get; set; }
 
         public virtual ICollection<Journal> Journals { get; set; }
 

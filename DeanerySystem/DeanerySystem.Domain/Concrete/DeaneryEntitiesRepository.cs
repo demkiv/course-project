@@ -8,7 +8,7 @@ using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.Concrete {
 	public class DeaneryEntitiesRepository : IDeaneryEntitiesRepository {
-		private CustomDbContext context = new CustomDbContext();
+		private DeaneryDbContext context = new DeaneryDbContext();
 
 		public IEnumerable<Cellule> Cellules => context.Cellules;
 
@@ -17,6 +17,8 @@ namespace DeanerySystem.Domain.Concrete {
 		public IEnumerable<Department> Departments => context.Departments;
 
 		public IEnumerable<Faculty> Faculties => context.Faculties;
+
+		public IEnumerable<FailureTicket> FailureTickets => context.FailureTickets;
 
 		public IEnumerable<Group> Groups => context.Groups;
 
@@ -41,7 +43,5 @@ namespace DeanerySystem.Domain.Concrete {
 		public IEnumerable<TimeTable> TimeTables => context.TimeTables;
 
 		public IEnumerable<University> Universities => context.Universities; 
-
-		public IEnumerable<Writing> Writings => context.Writings;
 	}
 }

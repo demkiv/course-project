@@ -71,14 +71,14 @@
             <End Role="Subject" EntitySet="SubjectSet" />
             <End Role="ProgressRecord" EntitySet="ProgressRecordSet" />
           </AssociationSet>
-          <EntitySet Name="WritingSet" EntityType="DeaneryModel.Writing" />
-          <AssociationSet Name="StudentWriting" Association="DeaneryModel.StudentWriting">
+          <EntitySet Name="FailureTicketSet" EntityType="DeaneryModel.FailureTicket" />
+          <AssociationSet Name="StudentFailureTicket" Association="DeaneryModel.StudentFailureTicket">
             <End Role="Student" EntitySet="UserSet" />
-            <End Role="Writing" EntitySet="WritingSet" />
+            <End Role="FailureTicket" EntitySet="FailureTicketSet" />
           </AssociationSet>
-          <AssociationSet Name="SubjectWriting" Association="DeaneryModel.SubjectWriting">
+          <AssociationSet Name="SubjectFailureTicket" Association="DeaneryModel.SubjectFailureTicket">
             <End Role="Subject" EntitySet="SubjectSet" />
-            <End Role="Writing" EntitySet="WritingSet" />
+            <End Role="FailureTicket" EntitySet="FailureTicketSet" />
           </AssociationSet>
           <AssociationSet Name="ProfessorClass" Association="DeaneryModel.ProfessorClass">
             <End Role="Professor" EntitySet="UserSet" />
@@ -221,7 +221,7 @@
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <Property Name="TuitionFee" Type="DeaneryModel.TuitionFees" Nullable="false" />
           <NavigationProperty Name="ProgressRecord" Relationship="DeaneryModel.StudentProgressRecord" FromRole="Student" ToRole="ProgressRecord" />
-          <NavigationProperty Name="Writing" Relationship="DeaneryModel.StudentWriting" FromRole="Student" ToRole="Writing" />
+          <NavigationProperty Name="FailureTicket" Relationship="DeaneryModel.StudentFailureTicket" FromRole="Student" ToRole="FailureTicket" />
           <NavigationProperty Name="Cellules" Relationship="DeaneryModel.StudentJournal" FromRole="Student" ToRole="Journal" />
         </EntityType>
         <Association Name="GroupStudent">
@@ -297,7 +297,7 @@
           <Property Name="EndDate" Type="DateTime" Nullable="false" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProgressRecord" Relationship="DeaneryModel.SubjectProgressRecord" FromRole="Subject" ToRole="ProgressRecord" />
-          <NavigationProperty Name="Writings" Relationship="DeaneryModel.SubjectWriting" FromRole="Subject" ToRole="Writing" />
+          <NavigationProperty Name="FailureTickets" Relationship="DeaneryModel.SubjectFailureTicket" FromRole="Subject" ToRole="FailureTicket" />
           <NavigationProperty Name="Journals" Relationship="DeaneryModel.SubjectClass" FromRole="Subject" ToRole="Class" />
           <Property Name="ExaminationId" Type="Int32" Nullable="false" />
         </EntityType>
@@ -312,14 +312,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateOfBeginning" Type="DateTime" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
           <Property Name="DateOfEnding" Type="DateTime" Nullable="false" />
           <Property Name="DateOfBeginCreditSession" Type="DateTime" Nullable="false" />
-          <Property Name="DateOfEndCreditSession" Type="DateTime" Nullable="false" />
+          <Property Name="CreditSessionStart" Type="DateTime" Nullable="false" />
           <Property Name="DateOfBeginSession" Type="DateTime" Nullable="false" />
           <Property Name="DateOfEndSession" Type="DateTime" Nullable="false" />
-          <Property Name="DateOfEndSecondWriting" Type="DateTime" Nullable="false" />
-          <Property Name="DateOfEndThirdWriting" Type="DateTime" Nullable="false" />
+          <Property Name="DateOfEndSecondFailureTicket" Type="DateTime" Nullable="false" />
+          <Property Name="DateOfEndThirdFailureTicket" Type="DateTime" Nullable="false" />
           <Property Name="Number" Type="DeaneryModel.SemestrNumbers" Nullable="false" />
           <NavigationProperty Name="Groups" Relationship="DeaneryModel.SemesterGroup" FromRole="Semester" ToRole="Group" />
         </EntityType>
@@ -402,44 +402,44 @@
           <End Type="DeaneryModel.Subject" Role="Subject" Multiplicity="1" />
           <End Type="DeaneryModel.ProgressRecord" Role="ProgressRecord" Multiplicity="*" />
         </Association>
-        <EntityType Name="Writing">
+        <EntityType Name="FailureTicket">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PassingDate" Type="DateTime" Nullable="false" />
-          <Property Name="WritingType" Type="DeaneryModel.WritingTypes" Nullable="false" />
+          <Property Name="FailureTicketType" Type="DeaneryModel.FailureTicketTypes" Nullable="false" />
           <Property Name="IsPassed" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Student" Relationship="DeaneryModel.StudentWriting" FromRole="Writing" ToRole="Student" />
+          <NavigationProperty Name="Student" Relationship="DeaneryModel.StudentFailureTicket" FromRole="FailureTicket" ToRole="Student" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Subject" Relationship="DeaneryModel.SubjectWriting" FromRole="Writing" ToRole="Subject" />
+          <NavigationProperty Name="Subject" Relationship="DeaneryModel.SubjectFailureTicket" FromRole="FailureTicket" ToRole="Subject" />
           <Property Name="SubjectId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EnumType Name="WritingTypes">
-          <Member Name="FirstWriting" Value="1" />
-          <Member Name="SecondWriting" Value="2" />
-          <Member Name="ThirdWriting" Value="3" />
+        <EnumType Name="FailureTicketTypes">
+          <Member Name="FirstFailureTicket" Value="1" />
+          <Member Name="SecondFailureTicket" Value="2" />
+          <Member Name="ThirdFailureTicket" Value="3" />
         </EnumType>
-        <Association Name="StudentWriting">
+        <Association Name="StudentFailureTicket">
           <End Type="DeaneryModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="DeaneryModel.Writing" Role="Writing" Multiplicity="*" />
+          <End Type="DeaneryModel.FailureTicket" Role="FailureTicket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Writing">
+            <Dependent Role="FailureTicket">
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SubjectWriting">
+        <Association Name="SubjectFailureTicket">
           <End Type="DeaneryModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="DeaneryModel.Writing" Role="Writing" Multiplicity="*" />
+          <End Type="DeaneryModel.FailureTicket" Role="FailureTicket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Writing">
+            <Dependent Role="FailureTicket">
               <PropertyRef Name="SubjectId" />
             </Dependent>
           </ReferentialConstraint>
@@ -513,8 +513,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Number" Type="Int32" Nullable="false" />
-          <Property Name="TimeOfBeginning" Type="Time" Nullable="false" />
-          <Property Name="TimeOfEnding" Type="Time" Nullable="false" />
+          <Property Name="Start" Type="Time" Nullable="false" />
+          <Property Name="End" Type="Time" Nullable="false" />
           <Property Name="TimeTableId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TimeTable" Relationship="DeaneryModel.TimeTableClassNumberTime" FromRole="ClassNumberTime" ToRole="TimeTable" />
         </EntityType>

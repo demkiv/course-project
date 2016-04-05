@@ -5,10 +5,10 @@ using System.Text;
 
 namespace DeanerySystem.Domain.Entities.Enums
 {
-    public enum WritingTypes
+    public enum FailureTicketTypes
     {
-        FirstWriting,
-        SecondWriting,
-        ThirdWriting
+        First,
+        Second,
+        Third
     }
 }

@@ -11,8 +11,8 @@ namespace DeanerySystem.Domain.Entities
     {
         public int Id { get; set; }
         public int Number { get; set; }
-        public TimeSpan TimeOfBeginning { get; set; }
-        public TimeSpan TimeOfEnding { get; set; }
+        public TimeSpan Start { get; set; }
+        public TimeSpan End { get; set; }
 
         public virtual TimeTable TimeTable { get; set; }
     }

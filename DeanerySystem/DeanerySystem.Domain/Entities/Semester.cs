@@ -4,22 +4,20 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using DeanerySystem.Domain.Entities.Enums;
 
 namespace DeanerySystem.Domain.Entities
 {
     public class Semester
     {
         public int Id { get; set; }
-        public DateTime DateOfBeginning { get; set; }
-        public DateTime DateOfEnding { get; set; }
-        public DateTime DateOfBeginCreditSession { get; set; }
-        public DateTime DateOfEndCreditSession { get; set; }
-        public DateTime DateOfBeginSession { get; set; }
-        public DateTime DateOfEndSession { get; set; }
-        public DateTime DateOfEndSecondWriting { get; set; }
-        public DateTime DateOfEndThirdWriting { get; set; }
-        // first or second
-        public int Number { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime CreditSessionStart { get; set; }
+        public DateTime SessionStart { get; set; }
+        public DateTime SecondWritingStart { get; set; }
+        public DateTime ThirdWritingStart { get; set; }
+		public DateTime End { get; set; }
+		public SemesterNumber Number { get; set; }
 
 	    public virtual SemesterEducationalPlan SemesterEducationalPlan { get; set; }
 	    public virtual ICollection<Student> Students { get; set; }

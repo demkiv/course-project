@@ -9,15 +9,15 @@ using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.Configurations
 {
-    class WritingConfiguration : EntityTypeConfiguration<Writing>
+    class FailureTicketConfiguration : EntityTypeConfiguration<FailureTicket>
     {
-	    public WritingConfiguration() {
-			this.ToTable("Writings");
+	    public FailureTicketConfiguration() {
+			this.ToTable("FailureTickets");
 			this.HasKey(w => w.Id);
 			this.Property(w => w.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(w => w.Student).WithMany(s => s.Writings);
-			this.HasRequired(w => w.Subject).WithMany(s => s.Writings);
+			this.HasRequired(w => w.Student).WithMany(s => s.FailureTickets);
+			this.HasRequired(w => w.Subject).WithMany(s => s.FailureTickets);
 		}
 	}
 }

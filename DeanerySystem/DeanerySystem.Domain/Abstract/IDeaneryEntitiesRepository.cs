@@ -13,6 +13,7 @@ namespace DeanerySystem.Domain.Abstract
 		IEnumerable<ClassNumberTime> ClassNumberTimes { get; }
 		IEnumerable<Department> Departments { get; }
 		IEnumerable<Faculty> Faculties { get; }
+		IEnumerable<FailureTicket> FailureTickets { get; }
 		IEnumerable<Group> Groups { get; }
 		IEnumerable<Journal> Journals { get; }
 		IEnumerable<JournalForMarking> JournalsForMarking { get; }
@@ -25,6 +26,5 @@ namespace DeanerySystem.Domain.Abstract
 		IEnumerable<Subject> Subjects { get; }
 		IEnumerable<TimeTable> TimeTables { get; }
 		IEnumerable<University> Universities { get; }
-		IEnumerable<Writing> Writings { get; }
     }
 }

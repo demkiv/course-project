@@ -11,8 +11,6 @@ namespace DeanerySystem.Domain.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int NumberOfSemesters { get; set; }
-        public int CurrentSemester { get; set; }
         public Tuitions Tuition { get; set; }
 
         public virtual Department Department { get; set; }

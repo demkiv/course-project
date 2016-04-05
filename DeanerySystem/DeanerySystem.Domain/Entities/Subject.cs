@@ -21,13 +21,13 @@ namespace DeanerySystem.Domain.Entities
 
         public virtual SemesterEducationalPlan SemesterEducationalPlan { get; set; }
         public virtual ICollection<ProgressRecord> ProgressRecords { get; set; }
-        public virtual ICollection<Writing> Writings { get; set; }
+        public virtual ICollection<FailureTicket> FailureTickets { get; set; }
         public virtual ICollection<Journal> Journals { get; set; }
 
         public Subject()
         {
             this.ProgressRecords = new List<ProgressRecord>();
-            this.Writings = new List<Writing>();
+            this.FailureTickets = new List<FailureTicket>();
             this.Journals = new List<Journal>();
         }
     }

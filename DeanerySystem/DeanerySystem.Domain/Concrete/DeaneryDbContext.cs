@@ -11,12 +11,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.Domain.Concrete
 {
-	public class CustomDbContext : IdentityDbContext<ApplicationUser> {
+	public class DeaneryDbContext : IdentityDbContext<ApplicationUser> {
 		public DbSet<Cellule> Cellules { get; set; }
 		public DbSet<ClassNumberTime> ClassNumberTimes { get; set; }
 		public DbSet<DeanaryUser> DeaneryUsers { get; set; }
 		public DbSet<Department> Departments { get; set; }
 		public DbSet<Faculty> Faculties { get; set; }
+		public DbSet<FailureTicket> FailureTickets { get; set; }
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Journal> Journals { get; set; }
 		public DbSet<JournalForMarking> JournalsForMarking { get; set; }
@@ -29,7 +30,6 @@ namespace DeanerySystem.Domain.Concrete
 		public DbSet<Subject> Subjects { get; set; }
 		public DbSet<TimeTable> TimeTables { get; set; }
 		public DbSet<University> Universities { get; set; }
-		public DbSet<Writing> Writings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,7 +39,8 @@ namespace DeanerySystem.Domain.Concrete
 			modelBuilder.Configurations.Add(new DeanaryUserConfiguration());
             modelBuilder.Configurations.Add(new DepartmentConfiguration());
             modelBuilder.Configurations.Add(new FacultyConfiguration());
-            modelBuilder.Configurations.Add(new GroupConfiguration());
+			modelBuilder.Configurations.Add(new FailureTicketConfiguration());
+			modelBuilder.Configurations.Add(new GroupConfiguration());
             modelBuilder.Configurations.Add(new JournalConfiguration());
 			modelBuilder.Configurations.Add(new JournalForMarkingConfiguration());
             modelBuilder.Configurations.Add(new ProfessorConfiguration());
@@ -51,11 +52,10 @@ namespace DeanerySystem.Domain.Concrete
             modelBuilder.Configurations.Add(new SubjectConfiguration());
             modelBuilder.Configurations.Add(new TimeTableConfiguration());
 			modelBuilder.Configurations.Add(new UniversityConfiguration());
-			modelBuilder.Configurations.Add(new WritingConfiguration());
         }
 
-		public static CustomDbContext Create() {
-			return new CustomDbContext();
+		public static DeaneryDbContext Create() {
+			return new DeaneryDbContext();
 		}
 	}
 }

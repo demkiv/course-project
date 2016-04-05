@@ -14,14 +14,14 @@ namespace DeanerySystem.Domain.Entities
 
         public virtual Group Group { get; set; }
         public virtual ICollection<ProgressRecord> ProgressRecords { get; set; }
-        public virtual ICollection<Writing> Writings { get; set; }
+        public virtual ICollection<FailureTicket> FailureTickets { get; set; }
         public virtual ICollection<Cellule> Cellules { get; set; }
 	    public virtual ICollection<Semester> Semesters { get; set; }
 
         public Student()
         {
             this.ProgressRecords = new List<ProgressRecord>();
-            this.Writings = new List<Writing>();
+            this.FailureTickets = new List<FailureTicket>();
 			this.Cellules = new List<Cellule>();
 			this.Semesters = new List<Semester>();
         }

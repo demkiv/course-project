@@ -17,11 +17,11 @@ namespace DeanerySystem.Domain.Configurations
 			this.HasKey(s => s.Id);
 			this.Property(s => s.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(s => s.SemesterEducationalPlan).WithRequiredDependent(p => p.Semester);
+			this.HasRequired(s => s.SemesterEducationalPlan).WithRequiredPrincipal(p => p.Semester);
 
 			this.HasMany(s => s.Students).WithMany(s => s.Semesters).Map(ss => {
 				ss.MapLeftKey("SemesterId");
-				ss.MapLeftKey("StudentId");
+				ss.MapRightKey("StudentId");
 				ss.ToTable("StudentsSemesters");
 			});
 		}

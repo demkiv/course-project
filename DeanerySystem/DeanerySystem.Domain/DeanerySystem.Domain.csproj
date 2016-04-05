@@ -96,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDeaneryEntitiesRepository.cs" />
-    <Compile Include="Concrete\CustomDbContext.cs" />
+    <Compile Include="Concrete\DeaneryDbContext.cs" />
     <Compile Include="Concrete\DeaneryEntitiesRepository.cs" />
     <Compile Include="Configurations\JournalForMarkingConfiguration.cs" />
     <Compile Include="Configurations\ProgressRecordConfiguration.cs" />
@@ -115,7 +115,8 @@
     <Compile Include="Configurations\TimeTableConfiguration.cs" />
     <Compile Include="Configurations\UniversityConfiguration.cs" />
     <Compile Include="Configurations\DeanaryUserConfiguration.cs" />
-    <Compile Include="Configurations\WritingConfiguration.cs" />
+    <Compile Include="Configurations\FailureTicketConfiguration.cs" />
+    <Compile Include="Entities\Enums\SemesterNumber.cs" />
     <Compile Include="Entities\ProgressRecord.cs" />
     <Compile Include="Entities\Cellule.cs" />
     <Compile Include="Entities\ClassNumberTime.cs" />
@@ -144,11 +145,11 @@
     <Compile Include="Entities\Enums\Tuitions.cs" />
     <Compile Include="Entities\DeanaryUser.cs" />
     <Compile Include="Entities\University.cs" />
-    <Compile Include="Entities\Writing.cs" />
-    <Compile Include="Entities\Enums\WritingTypes.cs" />
-    <Compile Include="Migrations\201504271239536_InitialCreate.cs" />
-    <Compile Include="Migrations\201504271239536_InitialCreate.Designer.cs">
-      <DependentUpon>201504271239536_InitialCreate.cs</DependentUpon>
+    <Compile Include="Entities\FailureTicket.cs" />
+    <Compile Include="Entities\Enums\FailureTicketTypes.cs" />
+    <Compile Include="Migrations\201604052107382_Initialize db.cs" />
+    <Compile Include="Migrations\201604052107382_Initialize db.Designer.cs">
+      <DependentUpon>201604052107382_Initialize db.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,8 +159,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504271239536_InitialCreate.resx">
-      <DependentUpon>201504271239536_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604052107382_Initialize db.resx">
+      <DependentUpon>201604052107382_Initialize db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

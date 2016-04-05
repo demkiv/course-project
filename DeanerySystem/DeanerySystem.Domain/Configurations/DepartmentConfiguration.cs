@@ -18,7 +18,7 @@ namespace DeanerySystem.Domain.Configurations
 			this.Property(d => d.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			this.HasRequired(d => d.Stream).WithMany(s => s.Departments);
-			this.HasRequired(d => d.Head).WithOptional(p => p.Head);
+			this.HasRequired(d => d.Head).WithOptional(p => p.HeadOfDepartment);
 
 			this.HasMany(d => d.Groups).WithRequired(g => g.Department);
 			this.HasMany(d => d.Professors).WithRequired(p => p.Department);

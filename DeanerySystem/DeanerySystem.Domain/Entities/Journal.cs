@@ -12,7 +12,6 @@ namespace DeanerySystem.Domain.Entities
         public int Id { get; set; }
         public string Description { get; set; }
         public ClassTypes ClassType { get; set; }
-        //public JournalTypes JournalType { get; set; }
 
         public virtual Professor Professor { get; set; }
         public virtual Subject Subject { get; set; }

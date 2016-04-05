@@ -19,7 +19,7 @@ namespace DeanerySystem.Domain.Configurations
 			this.HasRequired(s => s.SemesterEducationalPlan).WithMany(p => p.Subjects);
 
 			this.HasMany(s => s.ProgressRecords).WithRequired(r => r.Subject);
-			this.HasMany(s => s.Writings).WithRequired(w => w.Subject);
+			this.HasMany(s => s.FailureTickets).WithRequired(w => w.Subject);
 			this.HasMany(s => s.Journals).WithRequired(j => j.Subject);
 		}
 	}

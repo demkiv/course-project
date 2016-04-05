@@ -19,10 +19,10 @@ namespace DeanerySystem.Domain.Configurations
 
 			this.HasRequired(p => p.Department).WithMany(d => d.Professors);
 
-			this.HasOptional(p => p.Rector).WithRequired(u => u.Rector);
-			this.HasOptional(p => p.Dean).WithRequired(f => f.Dean);
-			this.HasOptional(p => p.Head).WithRequired(d => d.Head);
-			this.HasOptional(p => p.Mentor).WithRequired(g => g.Mentor);
+			this.HasOptional(p => p.RectorOfUniversity).WithRequired(u => u.Rector);
+			this.HasOptional(p => p.DeanOfFaculty).WithRequired(f => f.Dean);
+			this.HasOptional(p => p.HeadOfDepartment).WithRequired(d => d.Head);
+			this.HasOptional(p => p.MentorOfGroup).WithRequired(g => g.Mentor);
 
 			this.HasMany(p => p.Journals).WithRequired(j => j.Professor);
 		}

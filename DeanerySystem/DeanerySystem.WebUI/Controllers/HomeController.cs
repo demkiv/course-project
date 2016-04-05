@@ -90,7 +90,7 @@ namespace DeanerySystem.WebUI.Controllers
                 foreach (var lesson in schedule.ClassNumberTimes)
                 {
                     bool isNumerator = true;
-                    DateTime firstDate = repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Semester.DateOfBeginning;
+                    DateTime firstDate = repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Semester.Start;
                     while (firstDate.DayOfWeek != schedule.DayOfWeek)
                     {
                         if (firstDate.DayOfWeek == DayOfWeek.Sunday)
@@ -103,20 +103,20 @@ namespace DeanerySystem.WebUI.Controllers
                     {
                         firstDate = (isNumerator) ? firstDate : firstDate.AddDays(7);
                         dates.Add(new DateTime(firstDate.Year, firstDate.Month, firstDate.Day,
-                            lesson.TimeOfBeginning.Hours, lesson.TimeOfBeginning.Minutes, lesson.TimeOfBeginning.Seconds));
+                            lesson.Start.Hours, lesson.Start.Minutes, lesson.Start.Seconds));
                     }
                     else
                     {
                         firstDate = (!isNumerator) ? firstDate : firstDate.AddDays(7);
                         dates.Add(new DateTime(firstDate.Year, firstDate.Month, firstDate.Day,
-                            lesson.TimeOfBeginning.Hours, lesson.TimeOfBeginning.Minutes, lesson.TimeOfBeginning.Seconds));
+                            lesson.Start.Hours, lesson.Start.Minutes, lesson.Start.Seconds));
                     }
                     for (DateTime date = firstDate.AddDays(14);
-                        date < repository.Subjects.First().SemesterEducationalPlan.Semester.DateOfEndCreditSession;
+                        date < repository.Subjects.First().SemesterEducationalPlan.Semester.SessionStart;
                         date = date.AddDays(14))
                     {
                         dates.Add(new DateTime(date.Year, date.Month, date.Day,
-                            lesson.TimeOfBeginning.Hours, lesson.TimeOfBeginning.Minutes, lesson.TimeOfBeginning.Seconds));
+                            lesson.Start.Hours, lesson.Start.Minutes, lesson.Start.Seconds));
                     }
                 }
             }

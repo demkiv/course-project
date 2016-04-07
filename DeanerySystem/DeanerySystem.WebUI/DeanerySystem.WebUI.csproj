@@ -151,7 +151,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Models\IndexInfo.cs" />
     <Compile Include="Models\JournalInfo.cs" />
     <Compile Include="Models\JournalRecord.cs" />
     <Compile Include="Models\StudentProfessorModel.cs" />

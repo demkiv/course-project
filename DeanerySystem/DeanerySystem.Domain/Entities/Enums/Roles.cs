@@ -7,9 +7,9 @@ namespace DeanerySystem.Domain.Entities.Enums
 {
     public enum Roles
     {
+		SuperAdministrator,
         Administrator,
         Professor,
-        GroupLeader,
         Student
     }
 }

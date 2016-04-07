@@ -112,7 +112,7 @@ namespace DeanerySystem.WebUI.Controllers
                             lesson.Start.Hours, lesson.Start.Minutes, lesson.Start.Seconds));
                     }
                     for (DateTime date = firstDate.AddDays(14);
-                        date < repository.Subjects.First().SemesterEducationalPlan.Semester.SessionStart;
+                        date < repository.Subjects.First().SemesterEducationalPlan.Semester.CreditSessionStart;
                         date = date.AddDays(14))
                     {
                         dates.Add(new DateTime(date.Year, date.Month, date.Day,

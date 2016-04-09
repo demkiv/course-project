@@ -1,5 +1,20 @@
 ﻿$(document).ready(function () {
 
+	$("#loader").click(function () {
+		console.log("xxx");
+		$.ajax({
+			url: "http://localhost:4401/Admin/ManageUniversity/",
+			dataType: "html",
+			method: "GET",
+			success: function (data) {
+				console.log(data);
+			},
+			error: function (jqXhr, textStatus, errorThrown) {
+				console.log(textStatus, errorThrown);
+			}
+		});
+	});
+
     $(document).on("click", "#back-button", function () {
         window.location.href = $(this).data("url");
     });

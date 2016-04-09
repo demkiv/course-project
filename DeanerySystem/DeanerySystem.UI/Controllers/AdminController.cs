@@ -15,5 +15,12 @@ namespace DeanerySystem.UI.Controllers
         {
             return View();
         }
+
+		[Authorize(Roles = "SuperAdministrator")]
+		public ActionResult ManageUniversity() {
+			return PartialView("Partials/_ManageUniversityPartial");
+		}
+
+
     }
 }

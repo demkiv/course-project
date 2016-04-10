@@ -8,11 +8,11 @@ namespace DeanerySystem.WebUI.Models
 {
     public class JournalInfo
     {
-        public int SubjectId { get; set; }
-        public int JournalId { get; set; }
-        public int AssessmentJournalId { get; set; }
+        public int EducationalPlanId { get; set; }
+        public int ClassId { get; set; }
+		public int JournalId { get; set; }
+		public int AssessmentJournalId { get; set; }
         public int VisitingJournalId { get; set; }
-        public int ActualJournalTypeId { get; set; }
 
         public string SubjectName { get; set; }
         public string ClassType { get; set; }

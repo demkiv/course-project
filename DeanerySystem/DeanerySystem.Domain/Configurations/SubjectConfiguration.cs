@@ -16,11 +16,10 @@ namespace DeanerySystem.Domain.Configurations
 			this.HasKey(s => s.Id);
 			this.Property(s => s.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(s => s.SemesterEducationalPlan).WithMany(p => p.Subjects);
-
+			this.HasMany(s => s.EducationalPlans).WithRequired(p => p.Subject);
 			this.HasMany(s => s.ProgressRecords).WithRequired(r => r.Subject);
 			this.HasMany(s => s.FailureTickets).WithRequired(w => w.Subject);
-			this.HasMany(s => s.Journals).WithRequired(j => j.Subject);
+			this.HasMany(s => s.Classes).WithRequired(j => j.Subject);
 		}
 	}
 }

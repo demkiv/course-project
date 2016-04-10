@@ -72,8 +72,6 @@ namespace DeanerySystem.UI.Infrastructure
                 }
 			});
 
-
-
 			entitiesMock.Setup(m => m.Semesters).Returns(new List<Semester>
 			{
 				new Semester
@@ -451,10 +449,10 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.Students.ElementAt(38),
 						entitiesMock.Object.Students.ElementAt(39)
 					},
-					SemesterEducationalPlan = new SemesterEducationalPlan()
-					{
-						Semester = entitiesMock.Object.Semesters.ElementAt(0)
-					}
+					//EducationalPlans = new List<EducationalPlan>()
+					//{
+					//	new EducationalPlan() { Semester = entitiesMock.Object.Semesters.ElementAt(0) }
+					//}
 				},
 				new Group
 				{
@@ -485,10 +483,10 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.Students.ElementAt(18),
 						entitiesMock.Object.Students.ElementAt(19)
 					},
-					SemesterEducationalPlan = new SemesterEducationalPlan()
-					{
-						Semester = entitiesMock.Object.Semesters.ElementAt(0)
-					}
+					//EducationalPlans = new List<EducationalPlan>()
+					//{
+					//	new EducationalPlan() { Semester = entitiesMock.Object.Semesters.ElementAt(0) }
+					//}
 				}
 			});
 			#endregion
@@ -664,10 +662,10 @@ namespace DeanerySystem.UI.Infrastructure
 			});
 			#endregion
 
-			#region JournalsForMarking
-			entitiesMock.Setup(m => m.JournalsForMarking).Returns(new List<JournalForMarking>
+			#region Journals
+			entitiesMock.Setup(m => m.Journals).Returns(new List<Journal>
 			{
-				new JournalForMarking
+				new Journal
 				{
 					Id = 1,
 					JournalType = JournalTypes.Assessment,
@@ -682,7 +680,7 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.Cellules.ElementAt(6)
 					}
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 2,
 					JournalType = JournalTypes.Visiting,
@@ -690,7 +688,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 3,
 					JournalType = JournalTypes.Assessment,
@@ -698,7 +696,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 4,
 					JournalType = JournalTypes.Visiting,
@@ -706,7 +704,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 5,
 					JournalType = JournalTypes.Assessment,
@@ -714,7 +712,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 6,
 					JournalType = JournalTypes.Visiting,
@@ -722,7 +720,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 7,
 					JournalType = JournalTypes.Assessment,
@@ -730,7 +728,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 8,
 					JournalType = JournalTypes.Visiting,
@@ -738,7 +736,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 9,
 					JournalType = JournalTypes.Assessment,
@@ -746,7 +744,7 @@ namespace DeanerySystem.UI.Infrastructure
 					{
 					},
 				},
-				new JournalForMarking
+				new Journal
 				{
 					Id = 10,
 					JournalType = JournalTypes.Visiting,
@@ -757,18 +755,18 @@ namespace DeanerySystem.UI.Infrastructure
 			});
 			#endregion
 
-			#region Journals
-			entitiesMock.Setup(m => m.Journals).Returns(new List<Journal>
+			#region Classes
+			entitiesMock.Setup(m => m.Classes).Returns(new List<Class>
 			{
-				new Journal
+				new Class
 				{
 					Id = 1,
 					ClassType = ClassTypes.PracticalClass,
 					Professor = entitiesMock.Object.Professors.ElementAt(1),
-					JournalsForMarking = new List<JournalForMarking>
+					Journals = new List<Journal>
 					{
-						entitiesMock.Object.JournalsForMarking.ElementAt(0),
-						entitiesMock.Object.JournalsForMarking.ElementAt(1)
+						entitiesMock.Object.Journals.ElementAt(0),
+						entitiesMock.Object.Journals.ElementAt(1)
 					},
 					TimeTables = new List<TimeTable>
 					{
@@ -776,15 +774,15 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.TimeTables.ElementAt(1)
 					}
 				},
-				new Journal
+				new Class
 				{
 					Id = 2,
 					ClassType = ClassTypes.Lecture,
 					Professor = entitiesMock.Object.Professors.ElementAt(3),
-					JournalsForMarking = new List<JournalForMarking>
+					Journals = new List<Journal>
 					{
-						entitiesMock.Object.JournalsForMarking.ElementAt(2),
-						entitiesMock.Object.JournalsForMarking.ElementAt(3)
+						entitiesMock.Object.Journals.ElementAt(2),
+						entitiesMock.Object.Journals.ElementAt(3)
 					},
 					TimeTables = new List<TimeTable>
 					{
@@ -792,15 +790,15 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.TimeTables.ElementAt(3)
 					}
 				},
-				new Journal
+				new Class
 				{
 					Id = 3,
 					ClassType = ClassTypes.Lecture,
 					Professor = entitiesMock.Object.Professors.ElementAt(3),
-					JournalsForMarking = new List<JournalForMarking>
+					Journals = new List<Journal>
 					{
-						entitiesMock.Object.JournalsForMarking.ElementAt(4),
-						entitiesMock.Object.JournalsForMarking.ElementAt(5)
+						entitiesMock.Object.Journals.ElementAt(4),
+						entitiesMock.Object.Journals.ElementAt(5)
 					},
 					TimeTables = new List<TimeTable>
 					{
@@ -808,15 +806,15 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.TimeTables.ElementAt(3)
 					}
 				},
-				new Journal
+				new Class
 				{
 					Id = 4,
 					ClassType = ClassTypes.Lecture,
 					Professor = entitiesMock.Object.Professors.ElementAt(4),
-					JournalsForMarking = new List<JournalForMarking>
+					Journals = new List<Journal>
 					{
-						entitiesMock.Object.JournalsForMarking.ElementAt(6),
-						entitiesMock.Object.JournalsForMarking.ElementAt(7)
+						entitiesMock.Object.Journals.ElementAt(6),
+						entitiesMock.Object.Journals.ElementAt(7)
 					},
 					TimeTables = new List<TimeTable>
 					{
@@ -824,15 +822,15 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.TimeTables.ElementAt(5)
 					}
 				},
-				new Journal
+				new Class
 				{
 					Id = 5,
 					ClassType = ClassTypes.Lecture,
 					Professor = entitiesMock.Object.Professors.ElementAt(4),
-					JournalsForMarking = new List<JournalForMarking>
+					Journals = new List<Journal>
 					{
-						entitiesMock.Object.JournalsForMarking.ElementAt(8),
-						entitiesMock.Object.JournalsForMarking.ElementAt(9)
+						entitiesMock.Object.Journals.ElementAt(8),
+						entitiesMock.Object.Journals.ElementAt(9)
 					},
 					TimeTables = new List<TimeTable>
 					{
@@ -842,20 +840,6 @@ namespace DeanerySystem.UI.Infrastructure
 				},
 			});
 			#endregion
-
-			entitiesMock.Setup(m => m.SemesterEducationalPlans).Returns(new List<SemesterEducationalPlan>
-			{
-				new SemesterEducationalPlan()
-				{
-					Group = entitiesMock.Object.Groups.ElementAt(0),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0)
-				},
-				new SemesterEducationalPlan()
-				{
-					Group = entitiesMock.Object.Groups.ElementAt(1),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0)
-				}
-			});
 
 			entitiesMock.Setup(m => m.Subjects).Returns(new List<Subject>
 			{
@@ -869,10 +853,13 @@ namespace DeanerySystem.UI.Infrastructure
 					NumberOfPracticalClasses = 17,
 					NumberOflLaboratoryClasses = 0,
 					PassingDate = new DateTime(2015, 6, 6),
-					SemesterEducationalPlan = entitiesMock.Object.SemesterEducationalPlans.ElementAt(0),
-					Journals = new List<Journal>()
+					//EducationalPlans = new List<EducationalPlan> 
+					//{
+					//	entitiesMock.Object.EducationalPlans.ElementAt(0)
+					//},
+					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Journals.ElementAt(0)
+						entitiesMock.Object.Classes.ElementAt(0)
 					}
 				},
                 // PMI-31 Monday Numerator, Denominator
@@ -882,10 +869,13 @@ namespace DeanerySystem.UI.Infrastructure
 					Name = "Комп'ютерні мережі",
 					SemesterControl = SemesterControlTypes.Credit,
 					PassingDate = new DateTime(2015, 6, 6),
-					SemesterEducationalPlan = entitiesMock.Object.SemesterEducationalPlans.ElementAt(0),
-					Journals = new List<Journal>()
+					//EducationalPlans = new List<EducationalPlan>
+					//{
+					//	entitiesMock.Object.EducationalPlans.ElementAt(0)
+					//},
+					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Journals.ElementAt(1)
+						entitiesMock.Object.Classes.ElementAt(1)
 					}
 				},
                 // PMI-32 Monday Numerator, Denominator
@@ -895,10 +885,13 @@ namespace DeanerySystem.UI.Infrastructure
 					Name = "Комп'ютерні мережі",
 					SemesterControl = SemesterControlTypes.Credit,
 					PassingDate = new DateTime(2015, 6, 6),
-					SemesterEducationalPlan = entitiesMock.Object.SemesterEducationalPlans.ElementAt(1),
-					Journals = new List<Journal>()
+					//EducationalPlans = new List<EducationalPlan>
+					//{
+					//	entitiesMock.Object.EducationalPlans.ElementAt(1)
+					//},
+					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Journals.ElementAt(2)
+						entitiesMock.Object.Classes.ElementAt(2)
 					}
 				},
 				new Subject
@@ -907,10 +900,13 @@ namespace DeanerySystem.UI.Infrastructure
 					Name = "Методи оптимізації",
 					SemesterControl = SemesterControlTypes.Exam,
 					PassingDate = new DateTime(2015, 6, 6),
-					SemesterEducationalPlan = entitiesMock.Object.SemesterEducationalPlans.ElementAt(0),
-					Journals = new List<Journal>()
+					//EducationalPlans = new List<EducationalPlan>
+					//{
+					//	entitiesMock.Object.EducationalPlans.ElementAt(0)
+					//},
+					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Journals.ElementAt(3)
+						entitiesMock.Object.Classes.ElementAt(3)
 					}
 				},
 				new Subject
@@ -919,13 +915,57 @@ namespace DeanerySystem.UI.Infrastructure
 					Name = "Методи оптимізації",
 					SemesterControl = SemesterControlTypes.Exam,
 					PassingDate = new DateTime(2015, 6, 6),
-					SemesterEducationalPlan = entitiesMock.Object.SemesterEducationalPlans.ElementAt(1),
-					Journals = new List<Journal>()
+					//EducationalPlans = new List<EducationalPlan>
+					//{
+					//	entitiesMock.Object.EducationalPlans.ElementAt(1)
+					//},
+					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Journals.ElementAt(4)
+						entitiesMock.Object.Classes.ElementAt(4)
 					}
 				},
 			});
+
+
+			entitiesMock.Setup(m => m.EducationalPlans).Returns(new List<EducationalPlan>
+			{
+				new EducationalPlan()
+				{
+					Id = 1,
+					Group = entitiesMock.Object.Groups.ElementAt(1),
+					Semester = entitiesMock.Object.Semesters.ElementAt(0),
+					Subject = entitiesMock.Object.Subjects.ElementAt(0)
+				},
+				new EducationalPlan()
+				{
+					Id = 2,
+					Group = entitiesMock.Object.Groups.ElementAt(0),
+					Semester = entitiesMock.Object.Semesters.ElementAt(0),
+					Subject = entitiesMock.Object.Subjects.ElementAt(1)
+				},
+				new EducationalPlan()
+				{
+					Id = 3,
+					Group = entitiesMock.Object.Groups.ElementAt(1),
+					Semester = entitiesMock.Object.Semesters.ElementAt(0),
+					Subject = entitiesMock.Object.Subjects.ElementAt(2)
+				},
+				new EducationalPlan()
+				{
+					Id = 4,
+					Group = entitiesMock.Object.Groups.ElementAt(0),
+					Semester = entitiesMock.Object.Semesters.ElementAt(0),
+					Subject = entitiesMock.Object.Subjects.ElementAt(3)
+				},
+				new EducationalPlan()
+				{
+					Id = 5,
+					Group = entitiesMock.Object.Groups.ElementAt(1),
+					Semester = entitiesMock.Object.Semesters.ElementAt(0),
+					Subject = entitiesMock.Object.Subjects.ElementAt(4)
+				}
+			});
+
 
 			kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
 			//kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();   

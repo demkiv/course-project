@@ -10,17 +10,13 @@ namespace DeanerySystem.Domain.Entities
     public class Journal
     {
         public int Id { get; set; }
-        public string Description { get; set; }
-        public ClassTypes ClassType { get; set; }
+        public JournalTypes JournalType { get; set; }
 
-        public virtual Professor Professor { get; set; }
-        public virtual Subject Subject { get; set; }
-        public virtual ICollection<JournalForMarking> JournalsForMarking { get; set; }
-        public virtual ICollection<TimeTable> TimeTables { get; set; }
+        public virtual Class Class { get; set; }
+        public virtual ICollection<Cellule> Cellules { get; set; }
         public Journal()
         {
-            this.JournalsForMarking = new List<JournalForMarking>();
-            this.TimeTables = new List<TimeTable>();
+            this.Cellules = new List<Cellule>();
         }
     }
 }

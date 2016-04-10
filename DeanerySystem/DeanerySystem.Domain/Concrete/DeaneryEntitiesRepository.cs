@@ -12,9 +12,13 @@ namespace DeanerySystem.Domain.Concrete {
 
 		public IEnumerable<Cellule> Cellules => context.Cellules;
 
+		public IEnumerable<Class> Classes => context.Classes;
+
 		public IEnumerable<ClassNumberTime> ClassNumberTimes => context.ClassNumberTimes;
 
 		public IEnumerable<Department> Departments => context.Departments;
+
+		public IEnumerable<EducationalPlan> EducationalPlans => context.EducationalPlans;
 
 		public IEnumerable<Faculty> Faculties => context.Faculties;
 
@@ -24,15 +28,11 @@ namespace DeanerySystem.Domain.Concrete {
 
 		public IEnumerable<Journal> Journals => context.Journals;
 
-		public IEnumerable<JournalForMarking> JournalsForMarking => context.JournalsForMarking;
-
 		public IEnumerable<Professor> Professors => context.Professors;
 
 		public IEnumerable<ProgressRecord> ProgressRecords => context.ProgressRecords;
 
 		public IEnumerable<Semester> Semesters => context.Semesters;
-
-		public IEnumerable<SemesterEducationalPlan> SemesterEducationalPlans => context.SemesterEducationalPlans; 
 
 		public IEnumerable<Stream> Streams => context.Streams;
 

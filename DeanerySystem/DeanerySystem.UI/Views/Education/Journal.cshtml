@@ -1,0 +1,93 @@
+﻿@model DeanerySystem.WebUI.Models.JournalInfo
+
+@{
+	ViewBag.Title = "Journal";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div>
+        <h2 style="text-align: center;">Журнал</h2>
+
+        <p class="col-md-12 text-center">
+            <label>Предмет</label> : @Model.SubjectName
+        </p>
+        <div class="row">
+            <p class="col-md-offset-2 col-md-4">
+                <label>Викладач</label> : @Model.LecturerLastName @Model.LecturerFirstName @Model.LecturerMiddleName
+            </p>
+            <p class="col-md-offset-1 col-md-5">
+                <label>Група</label> : @Model.GroupName
+            </p>
+        </div>
+        <div class="row">
+            <p class="col-md-offset-2 col-md-4">
+                <label>Тип пари</label> : @Model.ClassType
+            </p>
+
+            <p class="col-md-offset-1 col-md-5 form-inline">
+                <label>Режим журналу</label> :
+                @Html.DropDownListFor(model => model.JournalId, new SelectList(
+					new List<Object>
+					{
+						new {value = Model.AssessmentJournalId, text = "Оцінювання"},
+						new {value = Model.VisitingJournalId, text = "Відвідування"}
+					},
+					"value",
+					"text", 2), new { @id = "JournalTypeSelection", @class = "form-control dropdown" })
+            </p>
+        </div>
+    </div>
+    <div>
+        @using (Html.BeginForm("SaveMarkings", "Education", FormMethod.Post, new {@id = "submit-mark-form"}))
+        {
+            <div class="table-scrollable">
+	            <table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th style = "text-align: center;  width: 52px;">#</th>
+							<th style="width: 150px;">
+								<p style="width: 150px; margin: 0">Прізвище Ім'я<br/>По-батькові</p>
+							</th>
+							@foreach (var date in @Model.Date) {
+								<th style = "text-align: center;">
+									<span>@date.Day/@date.Month</span><br/>
+									<span>@date.Hour:@date.Minute</span>
+								</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var jornalRecorl in @Model.JournalRecords) {
+							<tr>
+								<td style = "text-align: center;">
+									<span>@jornalRecorl.Number</span>
+								</td>
+								<td>
+									<span>@jornalRecorl.StudentLastName @jornalRecorl.StudentFirstName<br/>@jornalRecorl.StudentMiddleName</span>
+								</td>
+								@foreach (var mark in jornalRecorl.Marks) {
+									<td style="padding: 0;">
+										@Html.TextBoxFor(x => mark, new { @class = "form-control", style = "border: 0px; width: 52px; height: 52px; text-align: center;" })
+									</td>
+								}
+							</tr>
+						}
+					</tbody>
+	            </table>
+            </div>
+            
+            <br/>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="submit" value="Зберегти зміни" class="btn btn-default form-control" id="save-marks-button" data-educationalplanid=@Model.EducationalPlanId data-classid=@Model.ClassId data-journalid=@Model.JournalId />
+                </div>
+                <div class="col-md-6">
+                    <input value="Назад" class="btn btn-default form-control" id="back-button" data-url="@Url.Action("Index", "Education")"/>
+                </div>
+            </div>
+            <br /><br />
+        }
+    </div>
+</div>
+

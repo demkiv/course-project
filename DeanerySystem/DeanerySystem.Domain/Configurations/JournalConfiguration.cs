@@ -7,19 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
 
-namespace DeanerySystem.Domain.Configurations
-{
-    class JournalConfiguration : EntityTypeConfiguration<Journal> {
-	    public JournalConfiguration() {
+namespace DeanerySystem.Domain.Configurations {
+	class JournalConfiguration : EntityTypeConfiguration<Journal> {
+		public JournalConfiguration() {
 			this.ToTable("Journals");
 			this.HasKey(j => j.Id);
 			this.Property(j => j.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(j => j.Professor).WithMany(p => p.Journals);
-			this.HasRequired(j => j.Subject).WithMany(s => s.Journals);
+			this.HasRequired(j => j.Class).WithMany(j => j.Journals);
 
-			this.HasMany(j => j.JournalsForMarking).WithRequired(j => j.Journal);
-			this.HasMany(j => j.TimeTables).WithRequired(t => t.Journal);
+			this.HasMany(j => j.Cellules).WithRequired(c => c.Journal);
 		}
 	}
 }

@@ -98,17 +98,17 @@
     <Compile Include="Abstract\IDeaneryEntitiesRepository.cs" />
     <Compile Include="Concrete\DeaneryDbContext.cs" />
     <Compile Include="Concrete\DeaneryEntitiesRepository.cs" />
-    <Compile Include="Configurations\JournalForMarkingConfiguration.cs" />
+    <Compile Include="Configurations\JournalConfiguration.cs" />
     <Compile Include="Configurations\ProgressRecordConfiguration.cs" />
     <Compile Include="Configurations\CelluleConfiguration.cs" />
     <Compile Include="Configurations\ClassNumberTimeConfiguration.cs" />
     <Compile Include="Configurations\DepartmentConfiguration.cs" />
     <Compile Include="Configurations\FacultyConfiguration.cs" />
     <Compile Include="Configurations\GroupConfiguration.cs" />
-    <Compile Include="Configurations\JournalConfiguration.cs" />
+    <Compile Include="Configurations\ClassConfiguration.cs" />
     <Compile Include="Configurations\ProfessorConfiguration.cs" />
     <Compile Include="Configurations\SemesterConfiguration.cs" />
-    <Compile Include="Configurations\SemesterEducationalPlanConfiguration.cs" />
+    <Compile Include="Configurations\EducationalPlanConfiguration.cs" />
     <Compile Include="Configurations\StreamConfiguration.cs" />
     <Compile Include="Configurations\StudentConfiguration.cs" />
     <Compile Include="Configurations\SubjectConfiguration.cs" />
@@ -127,12 +127,12 @@
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Identity\ApplicationUser.cs" />
     <Compile Include="Entities\Identity\UserRole.cs" />
+    <Compile Include="Entities\Class.cs" />
     <Compile Include="Entities\Journal.cs" />
-    <Compile Include="Entities\JournalForMarking.cs" />
     <Compile Include="Entities\Enums\JournalTypes.cs" />
     <Compile Include="Entities\Enums\MarkingTypes.cs" />
     <Compile Include="Entities\Enums\Roles.cs" />
-    <Compile Include="Entities\SemesterEducationalPlan.cs" />
+    <Compile Include="Entities\EducationalPlan.cs" />
     <Compile Include="Entities\TimeTable.cs" />
     <Compile Include="Entities\Enums\Positions.cs" />
     <Compile Include="Entities\Professor.cs" />
@@ -151,6 +151,10 @@
     <Compile Include="Migrations\201604052107382_Initialize db.Designer.cs">
       <DependentUpon>201604052107382_Initialize db.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604091951367_EducationPlan refactoring.cs" />
+    <Compile Include="Migrations\201604091951367_EducationPlan refactoring.Designer.cs">
+      <DependentUpon>201604091951367_EducationPlan refactoring.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -161,6 +165,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604052107382_Initialize db.resx">
       <DependentUpon>201604052107382_Initialize db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604091951367_EducationPlan refactoring.resx">
+      <DependentUpon>201604091951367_EducationPlan refactoring.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

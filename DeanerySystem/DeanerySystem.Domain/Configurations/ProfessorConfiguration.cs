@@ -24,7 +24,7 @@ namespace DeanerySystem.Domain.Configurations
 			this.HasOptional(p => p.HeadOfDepartment).WithRequired(d => d.Head);
 			this.HasOptional(p => p.MentorOfGroup).WithRequired(g => g.Mentor);
 
-			this.HasMany(p => p.Journals).WithRequired(j => j.Professor);
+			this.HasMany(p => p.Classes).WithRequired(j => j.Professor);
 		}
     }
 }

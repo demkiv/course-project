@@ -16,7 +16,7 @@ namespace DeanerySystem.Domain.Configurations
 			this.HasKey(t => t.Id);
 			this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(t => t.Journal).WithMany(j => j.TimeTables);
+			this.HasRequired(t => t.Class).WithMany(j => j.TimeTables);
 
 			this.HasMany(t => t.ClassNumberTimes).WithRequired(t => t.TimeTable);
 		}

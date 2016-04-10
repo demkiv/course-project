@@ -20,32 +20,27 @@
     });
 
     $("select#JournalTypeSelection").change(function () {
-        //alert($("#save-marks-button").data("subjectid") + " " + $("#save-marks-button").data("journalid") + " " + $(this).val());
-        var subjectId = $("#save-marks-button").data("subjectid");
-        var journalId = $("#save-marks-button").data("journalid");
-        window.location.href = "/Journal/Journal?subjectId=" + subjectId + "&journalId=" + journalId + "&actualJournalTypeId=" + $(this).val();
+    	var educationalPlanId = $("#save-marks-button").data("educationalplanid");
+        var classId = $("#save-marks-button").data("classid");
+        window.location.href = "/Education/Journal?educationalPlanId=" + educationalPlanId + "&classId=" + classId + "&journalId=" + $(this).val();
     });
 
-    $(document).on("submit", "#submit-mark-form", function(e) {
-        //alert("submit");
-        alert($(this).serialize());
-        alert($("#save-marks-button").data("subjectid"));
-        alert($("#save-marks-button").data("journalid"));
-        alert($("#save-marks-button").data("journaltypeid"));
+    $(document).on("submit", "#submit-mark-form", function (e) {
+    	e.preventDefault();
+    	e.stopImmediatePropagation();
 
-        var subjectId = $("#save-marks-button").data("subjectid");
+        var educationalPlanId = $("#save-marks-button").data("educationalplanid");
+        var classId = $("#save-marks-button").data("classid");
         var journalId = $("#save-marks-button").data("journalid");
-        var journalTypeId = $("#save-marks-button").data("journaltypeid");
-
-        e.preventDefault();
+       
         $.ajax({
             url: $(this).attr('action'),
             type: $(this).attr('method'),
             data: {
                 marks : $(this).serialize(),
-                subjectId : subjectId,
-                journalId : journalId,
-                journalTypeId: journalTypeId
+                educationalPlanId: educationalPlanId,
+                classId : classId,
+                journalId: journalId
             },
             success: function (data) {
                 alert("Зміни збережено!");

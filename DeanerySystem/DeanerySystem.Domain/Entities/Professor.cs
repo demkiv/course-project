@@ -18,11 +18,11 @@ namespace DeanerySystem.Domain.Entities
         public virtual Department HeadOfDepartment { get; set; }
         public virtual Group MentorOfGroup { get; set; }
 
-        public virtual ICollection<Journal> Journals { get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
 
         public Professor()
         {
-            this.Journals = new List<Journal>();
+            this.Classes = new List<Class>();
         }
     }
 }

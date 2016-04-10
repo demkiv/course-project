@@ -18,7 +18,7 @@ namespace DeanerySystem.Domain.Configurations
 			this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			this.HasRequired(c => c.Student).WithMany(s => s.Cellules);
-			this.HasRequired(c => c.JournalForMarking).WithMany(j => j.Cellules);
+			this.HasRequired(c => c.Journal).WithMany(j => j.Cellules);
 		}
     }
 }

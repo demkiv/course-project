@@ -1,0 +1,43 @@
+﻿@using DeanerySystem.Domain.Entities
+@using DeanerySystem.Domain.Entities.Enums
+@model IEnumerable<EducationalPlan>
+
+@{
+	ViewBag.Title = "Schedule";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<title>Schedule</title>
+
+<div>
+	<h2 class="custom-title">Виберіть журнал</h2>
+	<div class="row" style="margin: 5px 8px;">
+		<div class="col-md-4">
+			<label>Дисципліна : </label>
+		</div>
+		<div class="col-md-4">
+			<label>Викладач : </label>
+		</div>
+		<div class="col-md-4">
+			<label>Група : </label>
+		</div>
+	</div>
+	@foreach (var educationalPlan in @Model) {
+		foreach (var _class in educationalPlan.Subject.Classes) {
+			<a href='@Url.Action("Journal", "Education", new {educationalPlanId = @educationalPlan.Id, classId = @_class.Id,
+					journalId = @_class.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id})'>
+				<div class="row grid-item grey-border">
+					<div class="col-md-4">
+						@educationalPlan.Subject.Name
+					</div>
+					<div class="col-md-4">
+						@_class.Professor.LastName @_class.Professor.FirstName @_class.Professor.MiddleName
+					</div>
+					<div class="col-md-4">
+						@educationalPlan.Group.Name
+					</div>
+				</div>
+			</a>
+		}
+	}
+</div>

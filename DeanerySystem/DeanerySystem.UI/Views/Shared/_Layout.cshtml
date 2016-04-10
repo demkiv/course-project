@@ -24,7 +24,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta content="" name="description" />
     <meta content="" name="author" />
-    <script src="~/Theme/assets/global/plugins/jquery.min.js"></script>
+	@Scripts.Render("~/bundles/modernizr")
+	<script type="text/javascript" src="/Scripts/jquery-2.2.2.min.js"></script>
+	@RenderSection("JavaScript", required: false)
+	@RenderSection("scripts", required: false)
     <script src="~/Theme/assets/global/plugins/jquery-migrate.min.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />

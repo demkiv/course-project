@@ -14,7 +14,7 @@ namespace DeanerySystem.Domain.Entities
         public DayOfWeek DayOfWeek { get; set; }
         public Fractions Fraction { get; set; }
 
-        public virtual Journal Journal { get; set; }
+        public virtual Class Class { get; set; }
         public virtual ICollection<ClassNumberTime> ClassNumberTimes { get; set; }
         public TimeTable()
         {

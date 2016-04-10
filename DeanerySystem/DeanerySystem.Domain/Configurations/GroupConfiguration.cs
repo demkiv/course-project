@@ -20,8 +20,8 @@ namespace DeanerySystem.Domain.Configurations
 
 			this.HasRequired(g => g.Department).WithMany(d => d.Groups);
 			this.HasRequired(g => g.Mentor).WithOptional(p => p.MentorOfGroup);
-			this.HasRequired(g => g.SemesterEducationalPlan).WithRequiredPrincipal(p => p.Group);
 
+			this.HasMany(g => g.EducationalPlans).WithRequired(p => p.Group);
 			this.HasMany(g => g.Students).WithRequired(s => s.Group);
 	    }
     }

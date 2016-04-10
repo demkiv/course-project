@@ -19,16 +19,17 @@ namespace DeanerySystem.Domain.Entities
         public SemesterControlTypes SemesterControl { get; set; }
         public DateTime? PassingDate { get; set; }
 
-        public virtual SemesterEducationalPlan SemesterEducationalPlan { get; set; }
+        public virtual ICollection<EducationalPlan> EducationalPlans { get; set; }
         public virtual ICollection<ProgressRecord> ProgressRecords { get; set; }
         public virtual ICollection<FailureTicket> FailureTickets { get; set; }
-        public virtual ICollection<Journal> Journals { get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
 
         public Subject()
         {
+			this.EducationalPlans = new List<EducationalPlan>();
             this.ProgressRecords = new List<ProgressRecord>();
             this.FailureTickets = new List<FailureTicket>();
-            this.Journals = new List<Journal>();
+            this.Classes = new List<Class>();
         }
     }
 }

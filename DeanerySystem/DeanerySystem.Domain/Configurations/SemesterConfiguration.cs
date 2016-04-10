@@ -17,8 +17,7 @@ namespace DeanerySystem.Domain.Configurations
 			this.HasKey(s => s.Id);
 			this.Property(s => s.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(s => s.SemesterEducationalPlan).WithRequiredPrincipal(p => p.Semester);
-
+			this.HasMany(s => s.EducationalPlans).WithRequired(p => p.Semester);
 			this.HasMany(s => s.Students).WithMany(s => s.Semesters).Map(ss => {
 				ss.MapLeftKey("SemesterId");
 				ss.MapRightKey("StudentId");

@@ -19,12 +19,13 @@ namespace DeanerySystem.Domain.Entities
 		public DateTime End { get; set; }
 		public SemesterNumber Number { get; set; }
 
-	    public virtual SemesterEducationalPlan SemesterEducationalPlan { get; set; }
+	    public virtual ICollection<EducationalPlan> EducationalPlans { get; set; }
 	    public virtual ICollection<Student> Students { get; set; }
 
         public Semester()
         {
-			this.Students = new List<Student>();
+			this.EducationalPlans = new List<EducationalPlan>();
+            this.Students = new List<Student>();
         }
     }
 }

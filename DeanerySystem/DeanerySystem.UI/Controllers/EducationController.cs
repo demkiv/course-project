@@ -11,30 +11,32 @@ using DeanerySystem.WebUI.Models;
 namespace DeanerySystem.UI.Controllers
 {
 	[Authorize]
-    public class JournalController : Controller
+    public class EducationController : Controller
     {
 		private IDeaneryEntitiesRepository repository;
-		public JournalController(IDeaneryEntitiesRepository deaneryEntitiesRepository) {
+		public EducationController(IDeaneryEntitiesRepository deaneryEntitiesRepository) {
 			this.repository = deaneryEntitiesRepository;
 		}
 
-		public ActionResult Index() {
-			return View(repository.Subjects.ToList());
+		public ActionResult Schedule() {
+			var currentSemester = repository.Semesters.First();
+			var educationalPlan = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
+			return View(educationalPlan);
 		}
 
-		public ActionResult Journal(int subjectId = 1, int journalId = 1, int actualJournalTypeId = 1) {
-			Subject subject = repository.Subjects.First(s => s.Id == subjectId);
-			List<DateTime> dates = GetDates(subjectId, journalId);
+		public ActionResult Journal(int educationalPlanId, int classId, int journalId) {
+			var educationalPlan = repository.EducationalPlans.First(plan => plan.Id == educationalPlanId);
+            Subject subject = educationalPlan.Subject;
+			var _class = repository.Classes.First(c => c.Id == classId);
+			List<DateTime> dates = GetDates(educationalPlan, _class);
 
 			List<JournalRecord> journalRecords = new List<JournalRecord>();
 
 			int number = 1;
-			foreach (var student in repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Group.Students) {
+			foreach (var student in educationalPlan.Group.Students) {
 				string[] marks = new string[dates.Count];
 
-				foreach (var cellule in repository.Subjects.First(s => s.Id == subjectId)
-					.Journals.First(j => j.Id == journalId)
-					.JournalsForMarking.First(j => j.Id == actualJournalTypeId).Cellules) {
+				foreach (var cellule in _class.Journals.First(j => j.Id == journalId).Cellules) {
 					if (cellule.Student == student) {
 						marks[dates.IndexOf(cellule.Date)] = cellule.Mark;
 					}
@@ -51,20 +53,20 @@ namespace DeanerySystem.UI.Controllers
 			}
 
 			JournalInfo journalInfo = new JournalInfo {
-				SubjectId = subjectId,
+				EducationalPlanId = educationalPlanId,
+				ClassId = classId,
 				JournalId = journalId,
 
-				AssessmentJournalId = repository.Journals.First(j => j.Id == journalId).JournalsForMarking.First(j => j.JournalType == JournalTypes.Assessment).Id,
-				VisitingJournalId = repository.Journals.First(j => j.Id == journalId).JournalsForMarking.First(j => j.JournalType == JournalTypes.Visiting).Id,
-				ActualJournalTypeId = actualJournalTypeId,
+				AssessmentJournalId = _class.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id,
+				VisitingJournalId = _class.Journals.First(j => j.JournalType == JournalTypes.Visiting).Id,
 
 				SubjectName = subject.Name,
-				GroupName = subject.SemesterEducationalPlan.Group.Name,
-				ClassType = GetClassType(subject.Journals.First(j => j.Id == journalId).ClassType),
-				//JournalType = actualJournalType,
-				LecturerFirstName = subject.Journals.First(j => j.Id == journalId).Professor.FirstName,
-				LecturerLastName = subject.Journals.First(j => j.Id == journalId).Professor.LastName,
-				LecturerMiddleName = subject.Journals.First(j => j.Id == journalId).Professor.MiddleName,
+				GroupName = educationalPlan.Group.Name,
+				ClassType = GetClassType(_class.ClassType),
+				
+				LecturerFirstName = _class.Professor.FirstName,
+				LecturerLastName = _class.Professor.LastName,
+				LecturerMiddleName = _class.Professor.MiddleName,
 
 				JournalRecords = journalRecords,
 				Date = dates
@@ -73,12 +75,12 @@ namespace DeanerySystem.UI.Controllers
 			return View(journalInfo);
 		}
 
-		private List<DateTime> GetDates(int subjectId, int journalId) {
+		private List<DateTime> GetDates(EducationalPlan educationalPlan, Class _class) {
 			List<DateTime> dates = new List<DateTime>();
-			foreach (var schedule in repository.Subjects.First(s => s.Id == subjectId).Journals.First(j => j.Id == journalId).TimeTables) {
+			foreach (var schedule in _class.TimeTables) {
 				foreach (var lesson in schedule.ClassNumberTimes) {
 					bool isNumerator = true;
-					DateTime firstDate = repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Semester.Start;
+					DateTime firstDate = educationalPlan.Semester.Start;
 					while (firstDate.DayOfWeek != schedule.DayOfWeek) {
 						if (firstDate.DayOfWeek == DayOfWeek.Sunday) {
 							isNumerator = false;
@@ -95,7 +97,7 @@ namespace DeanerySystem.UI.Controllers
 							lesson.Start.Hours, lesson.Start.Minutes, lesson.Start.Seconds));
 					}
 					for (DateTime date = firstDate.AddDays(14);
-						date < repository.Subjects.First().SemesterEducationalPlan.Semester.CreditSessionStart;
+						date < educationalPlan.Semester.CreditSessionStart;
 						date = date.AddDays(14)) {
 						dates.Add(new DateTime(date.Year, date.Month, date.Day,
 							lesson.Start.Hours, lesson.Start.Minutes, lesson.Start.Seconds));
@@ -107,8 +109,11 @@ namespace DeanerySystem.UI.Controllers
 		}
 
 		[HttpPost]
-		public void SaveMarkings(string marks, int subjectId, int journalId, int journalTypeId) {
-			List<DateTime> dates = GetDates(subjectId, journalId);
+		public void SaveMarkings(string marks, int educationalPlanId, int classId, int journalId) {
+			var educationalPlan = repository.EducationalPlans.First(plan => plan.Id == educationalPlanId);
+			var _class = repository.Classes.First(c => c.Id == classId);
+			var journal = repository.Journals.First(j => j.Id == journalId);
+			List<DateTime> dates = GetDates(educationalPlan, _class);
 
 			string[] str = marks.Split(new char[] { '=', '&' });
 			List<string> temp = str.ToList();
@@ -124,21 +129,17 @@ namespace DeanerySystem.UI.Controllers
 				}
 
 				if (mark != String.Empty) {
-					Cellule cellule = repository.Cellules.FirstOrDefault(c =>
-						c.Date == dates.ElementAt(columnId - 1) &&
-						c.Student == repository.Subjects.First(s => s.Id == subjectId).SemesterEducationalPlan.Group.Students.ElementAt(rowId - 1));
+					Cellule cellule = repository.Cellules.FirstOrDefault(c => c.Journal == journal
+						&& c.Date == dates.ElementAt(columnId - 1) 
+						&& c.Student == educationalPlan.Group.Students.ElementAt(rowId - 1));
 
 					if (cellule == null) {
-						repository.Subjects.First(s => s.Id == subjectId)
-							.Journals.First(j => j.Id == journalId)
-							.JournalsForMarking.First(j => j.Id == journalTypeId)
-							.Cellules.Add(new Cellule() {
-								Id = repository.Cellules.Last().Id + 1,
-								Date = dates.ElementAt(columnId - 1),
-								Student = repository.Subjects.First(s => s.Id == subjectId)
-										.SemesterEducationalPlan.Group.Students.ElementAt(rowId - 1),
-								Mark = mark
-							});
+						journal.Cellules.Add(new Cellule() {
+							Id = repository.Cellules.Last().Id + 1,
+							Date = dates.ElementAt(columnId - 1),
+							Student = educationalPlan.Group.Students.ElementAt(rowId - 1),
+							Mark = mark
+						});
 					} else {
 						cellule.Mark = mark;
 					}

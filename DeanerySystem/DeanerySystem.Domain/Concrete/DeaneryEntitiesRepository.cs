@@ -8,40 +8,147 @@ using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.Concrete {
 	public class DeaneryEntitiesRepository : IDeaneryEntitiesRepository {
-		private DeaneryDbContext context = new DeaneryDbContext();
 
-		public IEnumerable<Cellule> Cellules => context.Cellules;
+        private DeaneryDbContext context;
+        public DeaneryEntitiesRepository()
+        {
+            context = new DeaneryDbContext();
+        }
 
-		public IEnumerable<ClassNumberTime> ClassNumberTimes => context.ClassNumberTimes;
+		public IEnumerable<Cellule> Cellules 
+        {
+            get
+            {
+                return context.Cellules;
+            }
+        }
 
-		public IEnumerable<Department> Departments => context.Departments;
+		public IEnumerable<ClassNumberTime> ClassNumberTimes 
+                    {
+            get
+            {
+                return context.ClassNumberTimes;
+            }
+        }
 
-		public IEnumerable<Faculty> Faculties => context.Faculties;
+		public IEnumerable<Department> Departments        
+        {
+            get
+            {
+                return context.Departments;
+            }
+        }
 
-		public IEnumerable<FailureTicket> FailureTickets => context.FailureTickets;
+		public IEnumerable<Faculty> Faculties 
+                    {
+            get
+            {
+                return context.Faculties;
+            }
+        }
 
-		public IEnumerable<Group> Groups => context.Groups;
+		public IEnumerable<FailureTicket> FailureTickets 
+                    {
+            get
+            {
+                return context.FailureTickets;
+            }
+        }
 
-		public IEnumerable<Journal> Journals => context.Journals;
+		public IEnumerable<Group> Groups 
+                    {
+            get
+            {
+                return context.Groups;
+            }
+        }
 
-		public IEnumerable<JournalForMarking> JournalsForMarking => context.JournalsForMarking;
+		public IEnumerable<Journal> Journals      
+        {
+            get
+            {
+                return context.Journals;
+            }
+        }
 
-		public IEnumerable<Professor> Professors => context.Professors;
+		public IEnumerable<JournalForMarking> JournalsForMarking 
+        {
+            get
+            {
+                return context.JournalsForMarking;
+            }
+        }
 
-		public IEnumerable<ProgressRecord> ProgressRecords => context.ProgressRecords;
+		public IEnumerable<Professor> Professors
+        {
+            get
+            {
+                return context.Professors;
+            }
+        }
 
-		public IEnumerable<Semester> Semesters => context.Semesters;
+		public IEnumerable<ProgressRecord> ProgressRecords
+        {
+            get
+            {
+                return context.ProgressRecords;
+            }
+        }
 
-		public IEnumerable<SemesterEducationalPlan> SemesterEducationalPlans => context.SemesterEducationalPlans; 
+		public IEnumerable<Semester> Semesters 
+        {
+            get
+            {
+                return context.Semesters;
+            }
+        }
 
-		public IEnumerable<Stream> Streams => context.Streams;
+		public IEnumerable<SemesterEducationalPlan> SemesterEducationalPlans
+        {
+            get
+            {
+                return context.SemesterEducationalPlans;
+            }
+        }
 
-		public IEnumerable<Student> Students => context.Students;
+		public IEnumerable<Stream> Streams 
+        {
+            get
+            {
+                return context.Streams;
+            }
+        }
 
-		public IEnumerable<Subject> Subjects => context.Subjects;
+		public IEnumerable<Student> Students 
+        {
+            get
+            {
+                return context.Students;
+            }
+        }
 
-		public IEnumerable<TimeTable> TimeTables => context.TimeTables;
+		public IEnumerable<Subject> Subjects 
+        {
+            get
+            {
+                return context.Subjects;
+            }
+        }
 
-		public IEnumerable<University> Universities => context.Universities; 
+		public IEnumerable<TimeTable> TimeTables 
+        {
+            get
+            {
+                return context.TimeTables;
+            }
+        }
+
+		public IEnumerable<University> Universities 
+        {
+            get
+            {
+                return context.Universities;
+            }
+        } 
 	}
 }

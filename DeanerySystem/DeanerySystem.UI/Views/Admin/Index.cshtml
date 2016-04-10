@@ -1,27 +1,179 @@
 ﻿<script src="~/Scripts/Admin/Administration.js"></script>
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Адміністрування</h2>
-
-<div>
-
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a id="university_management" href="#university_tab" aria-controls="university" role="tab" data-toggle="tab">Університет</a></li>
-        <li role="presentation"><a href="#users_tab" aria-controls="users" role="tab" data-toggle="tab">Користувачі</a></li>
-        <li role="presentation"><a href="#faculties_tab" aria-controls="faculties" role="tab" data-toggle="tab">Факультети</a></li>
-        <li role="presentation"><a href="#departments_tab" aria-controls="departments" role="tab" data-toggle="tab">Кафедри</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="university_tab">1</div>
-        <div role="tabpanel" class="tab-pane" id="users_tab">2</div>
-        <div role="tabpanel" class="tab-pane" id="faculties_tab">3</div>
-        <div role="tabpanel" class="tab-pane" id="departments_tab">4</div>
+@model DeanerySystem.UI.Models.Admin.GeneralInfo
+<div class="page-content">
+    <h3 class="page-title">
+        Адміністрування <small>Університет</small>
+    </h3>
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href=@Url.Action("Index", "Home")>Головна</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">Адміністрування</a>
+            </li>
+        </ul>
     </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN DASHBOARD STATS -->
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat blue-madison">
+                        <div class="visual">
+                            <i class="fa fa-university"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                @Model.FacultiesCount
+                            </div>
+                            <div class="desc">
+                                Факультети
+                            </div>
+                        </div>
+                        <a class="more" href=@Url.Action("OverviewFaculties", "Admin")>
+                            Детальніше <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat red-intense">
+                        <div class="visual">
+                            <i class="fa fa-graduation-cap"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                @Model.FacultiesCount
+                            </div>
+                            <div class="desc">
+                                Потоки
+                            </div>
+                        </div>
+                        <a class="more" href="#">
+                            Детальніше <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat green-haze">
+                        <div class="visual">
+                            <i class="fa fa-cubes"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                @Model.DepartmentsCount
+                            </div>
+                            <div class="desc">
+                                Кафедри
+                            </div>
+                        </div>
+                        <a class="more" href="#">
+                            Детальніше <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat purple-plum">
+                        <div class="visual">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                @Model.GroupsCount
+                            </div>
+                            <div class="desc">
+                                Групи
+                            </div>
+                        </div>
+                        <a class="more" href="#">
+                            Детальніше <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat blue-dark">
+                        <div class="visual">
+                            <i class="fa fa-briefcase"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                @Model.ProfessorsCount
+                            </div>
+                            <div class="desc">
+                                Викладачі
+                            </div>
+                        </div>
+                        <a class="more" href="#">
+                            Детальніше <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat yellow">
+                        <div class="visual">
+                            <i class="fa fa-child"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                @Model.StudentsCount
+                            </div>
+                            <div class="desc">
+                                Студенти
+                            </div>
+                        </div>
+                        <a class="more" href="#">
+                            Детальніше <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- END DASHBOARD STATS -->
+            <div id="manage_university_edit_mode" style="display:none">
+                @using (Html.BeginForm("PostUniversityInfo", "Admin", FormMethod.Post, new { id = "university_info_form" }))
+                {
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Назва університету</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.University.Name, new { htmlAttributes = new { @class = "form-control", id="university_name" } })
+                                @Html.ValidationMessageFor(model => model.University.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Ректор</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control" id="rector_name">
 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="submit" value="Зберегти" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div id="manage_university_display_mode">
+                <h4><span style="font-weight:bold">Назва університету: </span><span id="university_name_label">@Model.University.Name</span></h4>
+                <h4><span style="font-weight:bold">Ректор: </span><span id="university_name_label">@Model.University.RectorFirstName @Model.University.RectorLastName</span></h4>
+                <button id="switch_to_edit_mode" class="btn btn-default">Редагувати</button>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
 </div>
+
+

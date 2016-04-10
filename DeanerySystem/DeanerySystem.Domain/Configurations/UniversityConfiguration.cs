@@ -14,7 +14,7 @@ namespace DeanerySystem.Domain.Configurations {
 			this.HasKey(u => u.Id);
 			this.Property(u => u.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(u => u.Rector).WithOptional(u => u.RectorOfUniversity);
+			this.HasOptional(u => u.Rector).WithOptionalDependent(u => u.RectorOfUniversity);
 
 			this.HasMany(u => u.Faculties).WithRequired(f => f.University);
 		}

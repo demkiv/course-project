@@ -90,7 +90,12 @@ namespace DeanerySystem.UI.Controllers
 
         [Authorize(Roles = "SuperAdministrator")]
         [HttpGet]
-        public OverviewFaculties() {
+        public ActionResult OverviewFaculties() {
+            using (var ctx = new DeaneryDbContext()) {
+                var faculties = ctx.Faculties.Any() ? ctx.Faculties.Select(x => new Models.Admin.Faculty() { Name = x.Name, Id = x.Id }).ToList() : new List<Models.Admin.Faculty>();
+                return View(faculties);
+            }
+                
         }
 
         public Models.Admin.University GetUniversityInfo() {

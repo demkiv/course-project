@@ -3,7 +3,7 @@ namespace DeanerySystem.Domain.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initializedb : DbMigration
+    public partial class InitializeDataBase : DbMigration
     {
         public override void Up()
         {
@@ -14,29 +14,29 @@ namespace DeanerySystem.Domain.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Date = c.DateTime(nullable: false),
                         Mark = c.String(),
-                        JournalForMarking_Id = c.Int(nullable: false),
+                        Journal_Id = c.Int(nullable: false),
                         Student_Id = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.JournalsForMarking", t => t.JournalForMarking_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Journals", t => t.Journal_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Students", t => t.Student_Id)
-                .Index(t => t.JournalForMarking_Id)
+                .Index(t => t.Journal_Id)
                 .Index(t => t.Student_Id);
             
             CreateTable(
-                "dbo.JournalsForMarking",
+                "dbo.Journals",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         JournalType = c.Int(nullable: false),
-                        Journal_Id = c.Int(nullable: false),
+                        Class_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Journals", t => t.Journal_Id, cascadeDelete: true)
-                .Index(t => t.Journal_Id);
+                .ForeignKey("dbo.Classes", t => t.Class_Id, cascadeDelete: true)
+                .Index(t => t.Class_Id);
             
             CreateTable(
-                "dbo.Journals",
+                "dbo.Classes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -126,15 +126,21 @@ namespace DeanerySystem.Domain.Migrations
                 .Index(t => t.Department_Id);
             
             CreateTable(
-                "dbo.SemesterEducationalPlans",
+                "dbo.EducationalPlans",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Group_Id = c.Int(nullable: false),
+                        Semester_Id = c.Int(nullable: false),
+                        Subject_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Semesters", t => t.Id)
-                .ForeignKey("dbo.Groups", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Groups", t => t.Group_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Semesters", t => t.Semester_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Subjects", t => t.Subject_Id, cascadeDelete: true)
+                .Index(t => t.Group_Id)
+                .Index(t => t.Semester_Id)
+                .Index(t => t.Subject_Id);
             
             CreateTable(
                 "dbo.Semesters",
@@ -181,11 +187,8 @@ namespace DeanerySystem.Domain.Migrations
                         NumberOfConsultations = c.Int(nullable: false),
                         SemesterControl = c.Int(nullable: false),
                         PassingDate = c.DateTime(),
-                        SemesterEducationalPlan_Id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SemesterEducationalPlans", t => t.SemesterEducationalPlan_Id, cascadeDelete: true)
-                .Index(t => t.SemesterEducationalPlan_Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.ProgressRecorsds",
@@ -267,7 +270,7 @@ namespace DeanerySystem.Domain.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Rector_Id = c.Guid(nullable: false),
+                        Rector_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Professors", t => t.Rector_Id)
@@ -280,11 +283,11 @@ namespace DeanerySystem.Domain.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         DayOfWeek = c.Int(nullable: false),
                         Fraction = c.Int(nullable: false),
-                        Journal_Id = c.Int(nullable: false),
+                        Class_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Journals", t => t.Journal_Id, cascadeDelete: true)
-                .Index(t => t.Journal_Id);
+                .ForeignKey("dbo.Classes", t => t.Class_Id, cascadeDelete: true)
+                .Index(t => t.Class_Id);
             
             CreateTable(
                 "dbo.ClassNumberTimes",
@@ -362,20 +365,20 @@ namespace DeanerySystem.Domain.Migrations
             DropForeignKey("dbo.Professors", "Id", "dbo.DeaneryUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Cellules", "Student_Id", "dbo.Students");
-            DropForeignKey("dbo.Cellules", "JournalForMarking_Id", "dbo.JournalsForMarking");
-            DropForeignKey("dbo.TimeTables", "Journal_Id", "dbo.Journals");
+            DropForeignKey("dbo.Cellules", "Journal_Id", "dbo.Journals");
+            DropForeignKey("dbo.TimeTables", "Class_Id", "dbo.Classes");
             DropForeignKey("dbo.ClassNumberTimes", "TimeTable_Id", "dbo.TimeTables");
-            DropForeignKey("dbo.Journals", "Subject_Id", "dbo.Subjects");
-            DropForeignKey("dbo.Journals", "Professor_Id", "dbo.Professors");
+            DropForeignKey("dbo.Classes", "Subject_Id", "dbo.Subjects");
+            DropForeignKey("dbo.Classes", "Professor_Id", "dbo.Professors");
             DropForeignKey("dbo.Universities", "Rector_Id", "dbo.Professors");
             DropForeignKey("dbo.Faculties", "University_Id", "dbo.Universities");
             DropForeignKey("dbo.Streams", "Faculty_Id", "dbo.Faculties");
             DropForeignKey("dbo.Departments", "Stream_Id", "dbo.Streams");
             DropForeignKey("dbo.Departments", "Head_Id", "dbo.Professors");
             DropForeignKey("dbo.Groups", "Department_Id", "dbo.Departments");
-            DropForeignKey("dbo.SemesterEducationalPlans", "Id", "dbo.Groups");
-            DropForeignKey("dbo.Subjects", "SemesterEducationalPlan_Id", "dbo.SemesterEducationalPlans");
-            DropForeignKey("dbo.SemesterEducationalPlans", "Id", "dbo.Semesters");
+            DropForeignKey("dbo.Groups", "Mentor_Id", "dbo.Professors");
+            DropForeignKey("dbo.EducationalPlans", "Subject_Id", "dbo.Subjects");
+            DropForeignKey("dbo.EducationalPlans", "Semester_Id", "dbo.Semesters");
             DropForeignKey("dbo.StudentsSemesters", "StudentId", "dbo.Students");
             DropForeignKey("dbo.StudentsSemesters", "SemesterId", "dbo.Semesters");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
@@ -386,9 +389,9 @@ namespace DeanerySystem.Domain.Migrations
             DropForeignKey("dbo.ProgressRecorsds", "Subject_Id", "dbo.Subjects");
             DropForeignKey("dbo.ProgressRecorsds", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.FailureTickets", "Student_Id", "dbo.Students");
-            DropForeignKey("dbo.Groups", "Mentor_Id", "dbo.Professors");
+            DropForeignKey("dbo.EducationalPlans", "Group_Id", "dbo.Groups");
             DropForeignKey("dbo.Faculties", "Dean_Id", "dbo.Professors");
-            DropForeignKey("dbo.JournalsForMarking", "Journal_Id", "dbo.Journals");
+            DropForeignKey("dbo.Journals", "Class_Id", "dbo.Classes");
             DropIndex("dbo.Students", new[] { "Group_Id" });
             DropIndex("dbo.Students", new[] { "Id" });
             DropIndex("dbo.Professors", new[] { "Department_Id" });
@@ -397,7 +400,7 @@ namespace DeanerySystem.Domain.Migrations
             DropIndex("dbo.StudentsSemesters", new[] { "SemesterId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.ClassNumberTimes", new[] { "TimeTable_Id" });
-            DropIndex("dbo.TimeTables", new[] { "Journal_Id" });
+            DropIndex("dbo.TimeTables", new[] { "Class_Id" });
             DropIndex("dbo.Universities", new[] { "Rector_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -406,10 +409,11 @@ namespace DeanerySystem.Domain.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.ProgressRecorsds", new[] { "Subject_Id" });
             DropIndex("dbo.ProgressRecorsds", new[] { "Student_Id" });
-            DropIndex("dbo.Subjects", new[] { "SemesterEducationalPlan_Id" });
             DropIndex("dbo.FailureTickets", new[] { "Subject_Id" });
             DropIndex("dbo.FailureTickets", new[] { "Student_Id" });
-            DropIndex("dbo.SemesterEducationalPlans", new[] { "Id" });
+            DropIndex("dbo.EducationalPlans", new[] { "Subject_Id" });
+            DropIndex("dbo.EducationalPlans", new[] { "Semester_Id" });
+            DropIndex("dbo.EducationalPlans", new[] { "Group_Id" });
             DropIndex("dbo.Groups", new[] { "Department_Id" });
             DropIndex("dbo.Groups", new[] { "Mentor_Id" });
             DropIndex("dbo.Departments", new[] { "Stream_Id" });
@@ -418,11 +422,11 @@ namespace DeanerySystem.Domain.Migrations
             DropIndex("dbo.Faculties", new[] { "University_Id" });
             DropIndex("dbo.Faculties", new[] { "Dean_Id" });
             DropIndex("dbo.DeaneryUsers", new[] { "Identity_Id" });
-            DropIndex("dbo.Journals", new[] { "Subject_Id" });
-            DropIndex("dbo.Journals", new[] { "Professor_Id" });
-            DropIndex("dbo.JournalsForMarking", new[] { "Journal_Id" });
+            DropIndex("dbo.Classes", new[] { "Subject_Id" });
+            DropIndex("dbo.Classes", new[] { "Professor_Id" });
+            DropIndex("dbo.Journals", new[] { "Class_Id" });
             DropIndex("dbo.Cellules", new[] { "Student_Id" });
-            DropIndex("dbo.Cellules", new[] { "JournalForMarking_Id" });
+            DropIndex("dbo.Cellules", new[] { "Journal_Id" });
             DropTable("dbo.Students");
             DropTable("dbo.Professors");
             DropTable("dbo.StudentsSemesters");
@@ -438,14 +442,14 @@ namespace DeanerySystem.Domain.Migrations
             DropTable("dbo.Subjects");
             DropTable("dbo.FailureTickets");
             DropTable("dbo.Semesters");
-            DropTable("dbo.SemesterEducationalPlans");
+            DropTable("dbo.EducationalPlans");
             DropTable("dbo.Groups");
             DropTable("dbo.Departments");
             DropTable("dbo.Streams");
             DropTable("dbo.Faculties");
             DropTable("dbo.DeaneryUsers");
+            DropTable("dbo.Classes");
             DropTable("dbo.Journals");
-            DropTable("dbo.JournalsForMarking");
             DropTable("dbo.Cellules");
         }
     }

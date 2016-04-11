@@ -147,13 +147,9 @@
     <Compile Include="Entities\University.cs" />
     <Compile Include="Entities\FailureTicket.cs" />
     <Compile Include="Entities\Enums\FailureTicketTypes.cs" />
-    <Compile Include="Migrations\201604052107382_Initialize db.cs" />
-    <Compile Include="Migrations\201604052107382_Initialize db.Designer.cs">
-      <DependentUpon>201604052107382_Initialize db.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604091951367_EducationPlan refactoring.cs" />
-    <Compile Include="Migrations\201604091951367_EducationPlan refactoring.Designer.cs">
-      <DependentUpon>201604091951367_EducationPlan refactoring.cs</DependentUpon>
+    <Compile Include="Migrations\201604111723091_InitializeDataBase.cs" />
+    <Compile Include="Migrations\201604111723091_InitializeDataBase.Designer.cs">
+      <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -163,11 +159,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604052107382_Initialize db.resx">
-      <DependentUpon>201604052107382_Initialize db.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604091951367_EducationPlan refactoring.resx">
-      <DependentUpon>201604091951367_EducationPlan refactoring.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604111723091_InitializeDataBase.resx">
+      <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,7 +15,7 @@ namespace DeanerySystem.Domain.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(DeanerySystem.Domain.Concrete.DeaneryDbContext context)

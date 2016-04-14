@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
+using DeanerySystem.UI.Models.Education;
 using DeanerySystem.WebUI.Models;
 
 namespace DeanerySystem.UI.Controllers
@@ -20,8 +21,40 @@ namespace DeanerySystem.UI.Controllers
 
 		public ActionResult Schedule() {
 			var currentSemester = repository.Semesters.First();
-			var educationalPlan = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
-			return View(educationalPlan);
+			var educationalPlans = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
+
+			var times = new Dictionary<DayOfWeek, List<ClassNumberTime>>();
+			var numberOfTimes = new Dictionary<DayOfWeek, int>();
+
+			foreach (var day in Enum.GetValues(typeof(DayOfWeek))) {
+				times.Add((DayOfWeek)day, null);
+				numberOfTimes.Add((DayOfWeek)day, 0);
+            }
+
+			foreach (var plan in educationalPlans) {
+	            foreach (var _class in plan.Subject.Classes) {
+		            foreach (var timeTable in _class.TimeTables) {
+						foreach (var time in timeTable.ClassNumberTimes) {
+							if (times[timeTable.DayOfWeek] == null) {
+								times[timeTable.DayOfWeek] = new List<ClassNumberTime>();
+							}
+							if (!times[timeTable.DayOfWeek].Contains(time)) {
+								times[timeTable.DayOfWeek].Add(time);
+								numberOfTimes[timeTable.DayOfWeek]++;
+							}
+						}
+                    }
+	            }
+			}
+
+			//times = times.Where(pair => pair.Value != null)
+			//		.OrderBy(pair => pair.Value.OrderBy(c => c.Number))
+			//		.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+			return View(new ScheduleInfo() { Groups = repository.Groups.ToList(),
+				Times = times,
+				NumberOfTimes = numberOfTimes,
+                EducationalPlans = educationalPlans.ToList() });
 		}
 
 		public ActionResult Journal(int educationalPlanId, int classId, int journalId) {

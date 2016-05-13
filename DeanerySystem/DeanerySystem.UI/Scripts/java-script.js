@@ -26,12 +26,13 @@
     });
 
     $(document).on("submit", "#submit-mark-form", function (e) {
+    	debugger;
     	e.preventDefault();
     	e.stopImmediatePropagation();
 
         var educationalPlanId = $("#save-marks-button").data("educationalplanid");
         var classId = $("#save-marks-button").data("classid");
-        var journalId = $("#save-marks-button").data("journalid");
+        var journalId = 1;
        
         $.ajax({
             url: $(this).attr('action'),

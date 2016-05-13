@@ -1,5 +1,6 @@
 ﻿@using DeanerySystem.Domain.Entities
 @using DeanerySystem.Domain.Entities.Enums
+@using DeanerySystem.UI.Models.Education
 @model DeanerySystem.UI.Models.Education.ScheduleInfo
 
 @{
@@ -8,85 +9,87 @@
 
 <title>Schedule</title>
 
-<div class="page-content">
-	<h3 class="page-title">
-		Розклад <small>Виберіть журнал</small>
-	</h3>
-	<div class="page-bar">
-		<ul class="page-breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a href=@Url.Action("Index", "Home")>Головна</a>
-				<i class="fa fa-angle-right"></i>
-			</li>
-			<li>
-				<a href="#">Розклад</a>
-			</li>
-		</ul>
-	</div>
+<h3 class="page-title">
+	Розклад <small>Виберіть журнал</small>
+</h3>
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a href=@Url.Action("Index", "Home")>Головна</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#">Розклад</a>
+		</li>
+	</ul>
+</div>
 
-	@*<div class="row" style="margin: 5px 8px;">
-		<div class="col-md-4">
-			<label>Дисципліна : </label>
-		</div>
-		<div class="col-md-4">
-			<label>Викладач : </label>
-		</div>
-		<div class="col-md-4">
-			<label>Група : </label>
-		</div>
-	</div>*@
-	<div class="table-scrollable">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>День</th>
-					<th>Пара</th>
-					@foreach (var group in @Model.Groups) {
-						<th style="text-align: center;">
-							<span>@group.Name</span>
-						</th>
-					}
-				</tr>
-			</thead>
-			<tbody>
+<div class="table-scrollable">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="text-align: center;">День</th>
+				<th style="text-align: center;">Пара</th>
+				@foreach (var group in @Model.Groups) {
+					<th style="text-align: center;">
+						<span>@group.Name</span>
+					</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
 
-			
-			@foreach (var day in @Model.Times.Keys) {
-				bool firstLoop = true; 
+
+			@foreach (var day in @Model.Times.Keys.Where(t => t != null)) { 
+				bool dayFirstLoop = true;
 				if (@Model.Times[day] != null) {
-					foreach (var time in @Model.Times[day]) {
-						<tr>
-							@if (@firstLoop) {
-								<td rowspan="@Model.NumberOfTimes[day]">@day</td>
-								{
-									firstLoop = false;
+					foreach (var time in @Model.Times[day].Where(t => t != null)) {
+						<tr style="text-align: center;">
+							@if (@dayFirstLoop) {
+								dayFirstLoop = false;
+								int span = @Model.Times[day].Count(t => t != null)*2;
+								<td rowspan="@span">@Model.DayNames[day]</td>
+							}
+
+							<td rowspan="2">
+								<span>@time.Number</span><br/>
+								<span>@time.Start.ToString(@"hh\:mm") - @time.End.ToString(@"hh\:mm")</span>
+							</td>
+
+							@foreach (var group in @Model.Groups) {
+								var key = new Tuple<ClassNumberTime, Group>(time, group);
+								if (Model.NumeratorDenomerators.ContainsKey(key)) {
+									NumeratorDenomerator numeratorDenomerator = @Model.NumeratorDenomerators[key];
+									Html.RenderPartial("_NumeratorDenominator", numeratorDenomerator);
+								} else {
+									<td rowspan="2"/>
 								}
 							}
-							<td>@time.Number</td>
+						</tr>
+						<tr style="text-align: center;">
 							@foreach (var group in @Model.Groups) {
-								<td style="text-align: center;">
-									@{ EducationalPlan educationalPlan = @Model.EducationalPlans.FirstOrDefault(plan => plan.Group == group
-											  && plan.Subject.Classes.Count(c => c.TimeTables.Count(t => t.ClassNumberTimes.Contains(time)) != 0) != 0); }
-									@if (educationalPlan != null) {
-										<span>@educationalPlan.Subject.Name</span>
-									}
-								</td>
+								var key = new Tuple<ClassNumberTime, Group>(time, group);
+								if (Model.NumeratorDenomerators.ContainsKey(key)) {
+									NumeratorDenomerator numeratorDenomerator = @Model.NumeratorDenomerators[key];
+									Html.RenderPartial("_Denominator", numeratorDenomerator);
+								}
 							}
 						</tr>
+
 					}
 				}
 			}
-			</tbody>
-		</table>
-	</div>
+		</tbody>
+	</table>
+</div>
 
-	@foreach (var educationalPlan in @Model.EducationalPlans) {
+@*@foreach (var educationalPlan in @Model.EducationalPlans) {
 		foreach (var _class in educationalPlan.Subject.Classes) {
 			<a href='@Url.Action("Journal", "Education", new {
-				         educationalPlanId = @educationalPlan.Id, classId = @_class.Id,
-				         journalId = @_class.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id
-			         })'>
+							educationalPlanId = @educationalPlan.Id, classId = @_class.Id,
+							journalId = @_class.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id
+						})'>
 				<div class="row grid-item grey-border">
 					<div class="col-md-4">
 						@educationalPlan.Subject.Name
@@ -108,5 +111,4 @@
 				</div>
 			</a>
 		}
-	}
-</div>
+	}*@

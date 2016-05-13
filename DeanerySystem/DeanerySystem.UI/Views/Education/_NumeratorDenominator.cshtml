@@ -1,0 +1,25 @@
+﻿@using DeanerySystem.Domain.Entities
+@using DeanerySystem.Domain.Entities.Enums
+@model DeanerySystem.UI.Models.Education.NumeratorDenomerator
+
+@if (Model.NumeratorPlan != null) {
+	if (Model.MergeSell) {
+		<td rowspan="2" style="text-align: center;">
+			@{ Html.RenderPartial("_JournalNumeratorCell", Model); }
+		</td>
+	}
+
+	if (!Model.MergeSell) {
+		<td style="text-align: center;">
+			@{ Html.RenderPartial("_JournalNumeratorCell", Model); }
+		</td>
+	}
+}
+
+@if (Model.NumeratorPlan == null && Model.DenumeratorPlan != null) {
+	<td />
+}
+			
+@if (Model.NumeratorPlan == null && Model.DenumeratorPlan == null) {
+	<td rowspan="2"/>
+}

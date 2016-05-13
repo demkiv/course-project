@@ -78,8 +78,8 @@ namespace DeanerySystem.UI.Infrastructure
 				{
 					Id = 1,
 					Number = SemesterNumber.Second,
-					Start = new DateTime(2015, 1, 22),
-					CreditSessionStart = new DateTime(2015, 6, 6)
+					Start = new DateTime(2016, 2, 9),
+					CreditSessionStart = new DateTime(2016, 5, 13)
 				}
 			});
 
@@ -413,6 +413,69 @@ namespace DeanerySystem.UI.Infrastructure
 					MiddleName = "Вікторівна",
                     //Role = Roles.Professor,
                     Position = Positions.AssociateProfessor
+				},
+				new Professor
+				{
+                    //Id = 8,
+                    FirstName = "Михайло",
+					LastName = "Щербатий",
+					MiddleName = "Васильович",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor
+				},
+				new Professor
+				{
+                    //Id = 8,
+                    FirstName = "Роман",
+					LastName = "Шандра",
+					MiddleName = "Станіславович",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor
+				},
+				new Professor
+				{
+                    //Id = 8,
+                    FirstName = "Валерія",
+					LastName = "Семків",
+					MiddleName = "Олегівна",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor
+				},
+				new Professor
+				{
+                    //Id = 8,
+                    FirstName = "Віталій",
+					LastName = "Чорненький",
+					MiddleName = "Ігорович",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor
+				},
+				new Professor
+				{
+                    //Id = 8,
+                    FirstName = "Надія",
+					LastName = "Колос",
+					MiddleName = "Мирославівна",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor
+				},
+				new Professor
+				{
+                    //Id = 8,
+                    FirstName = "Святослав",
+					LastName = "Літинський",
+					MiddleName = "Володимирович",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor
+				},
+				new Professor
+				{
+                    //Id = 8,
+                    FirstName = "Володимир",
+					LastName = "Вовк",
+					MiddleName = "Дмитрович",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor
 				}
 			});
 			#endregion
@@ -423,7 +486,7 @@ namespace DeanerySystem.UI.Infrastructure
 				new Group
 				{
 					Id = 1,
-					Name = "ПМІ-31",
+					Name = "ПМІ-41",
                     //Mentor = entitiesMock.Object.Professors.ElementAt(0),
                     Department = entitiesMock.Object.Departments.ElementAt(0),
 					Students = new List<Student>()
@@ -457,7 +520,7 @@ namespace DeanerySystem.UI.Infrastructure
 				new Group
 				{
 					Id = 2,
-					Name = "ПМІ-32",
+					Name = "ПМІ-42",
 					Mentor = entitiesMock.Object.Professors.ElementAt(0),
 					Department = entitiesMock.Object.Departments.ElementAt(0),
 					Students = new List<Student>()
@@ -528,6 +591,20 @@ namespace DeanerySystem.UI.Infrastructure
 					Number = 5,
 					Start = new TimeSpan(0, 15, 15, 0, 0),
 					End = new TimeSpan(0, 16, 25, 0, 0)
+				},
+				new ClassNumberTime()
+				{
+					Id = 6,
+					Number = 6,
+					Start = new TimeSpan(0, 16, 40, 0, 0),
+					End = new TimeSpan(0, 18, 0, 0, 0)
+				},
+				new ClassNumberTime()
+				{
+					Id = 7,
+					Number = 7,
+					Start = new TimeSpan(0, 18, 10, 0, 0),
+					End = new TimeSpan(0, 19, 30, 0, 0)
 				}
 			});
 			#endregion
@@ -535,66 +612,114 @@ namespace DeanerySystem.UI.Infrastructure
 			#region TimeTables
 			entitiesMock.Setup(m => m.TimeTables).Returns(new List<TimeTable>
 			{
-				new TimeTable
+				new TimeTable //щербатий лекція
 				{
 					Id = 1,
-					DayOfWeek = DayOfWeek.Tuesday,
+					DayOfWeek = DayOfWeek.Monday,
 					Fraction = Fractions.Numerator,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
-						entitiesMock.Object.ClassNumberTimes.ElementAt(3),
-						entitiesMock.Object.ClassNumberTimes.ElementAt(4)
+						entitiesMock.Object.ClassNumberTimes.ElementAt(5)
 					}
 				},
-				new TimeTable
+				new TimeTable //щербатий лекція
 				{
 					Id = 2,
-					DayOfWeek = DayOfWeek.Tuesday,
+					DayOfWeek = DayOfWeek.Monday,
 					Fraction = Fractions.Denominator,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
-						entitiesMock.Object.ClassNumberTimes.ElementAt(3),
-						entitiesMock.Object.ClassNumberTimes.ElementAt(4)
+						entitiesMock.Object.ClassNumberTimes.ElementAt(5)
 					}
 				},
-				new TimeTable
+				new TimeTable // право лекція
 				{
 					Id = 3,
 					DayOfWeek = DayOfWeek.Monday,
 					Fraction = Fractions.Numerator,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
-						entitiesMock.Object.ClassNumberTimes.ElementAt(1)
+						entitiesMock.Object.ClassNumberTimes.ElementAt(6)
 					}
 				},
-				new TimeTable
+				new TimeTable // право практична
 				{
 					Id = 4,
 					DayOfWeek = DayOfWeek.Monday,
 					Fraction = Fractions.Denominator,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
-						entitiesMock.Object.ClassNumberTimes.ElementAt(1)
+						entitiesMock.Object.ClassNumberTimes.ElementAt(6)
 					}
 				},
-				new TimeTable
+				new TimeTable // мод 42
 				{
 					Id = 5,
 					DayOfWeek = DayOfWeek.Monday,
 					Fraction = Fractions.Numerator,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
-						entitiesMock.Object.ClassNumberTimes.ElementAt(2)
+						entitiesMock.Object.ClassNumberTimes.ElementAt(4)
 					}
 				},
-				new TimeTable
+				new TimeTable // мод 42
 				{
 					Id = 6,
+					DayOfWeek = DayOfWeek.Monday,
+					Fraction = Fractions.Numerator,
+					ClassNumberTimes = new List<ClassNumberTime>
+					{
+						entitiesMock.Object.ClassNumberTimes.ElementAt(5)
+					}
+				},
+				new TimeTable // мод 42
+				{
+					Id = 7,
 					DayOfWeek = DayOfWeek.Monday,
 					Fraction = Fractions.Denominator,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
+						entitiesMock.Object.ClassNumberTimes.ElementAt(5)
+					}
+				},
+				new TimeTable // колос
+				{
+					Id = 8,
+					DayOfWeek = DayOfWeek.Tuesday,
+					Fraction = Fractions.Numerator,
+					ClassNumberTimes = new List<ClassNumberTime>
+					{
 						entitiesMock.Object.ClassNumberTimes.ElementAt(2)
+					}
+				},
+				new TimeTable // колос
+				{
+					Id = 9,
+					DayOfWeek = DayOfWeek.Tuesday,
+					Fraction = Fractions.Denominator,
+					ClassNumberTimes = new List<ClassNumberTime>
+					{
+						entitiesMock.Object.ClassNumberTimes.ElementAt(2)
+					}
+				},
+				new TimeTable // вовк
+				{
+					Id = 8,
+					DayOfWeek = DayOfWeek.Tuesday,
+					Fraction = Fractions.Numerator,
+					ClassNumberTimes = new List<ClassNumberTime>
+					{
+						entitiesMock.Object.ClassNumberTimes.ElementAt(3)
+					}
+				},
+				new TimeTable // вовк
+				{
+					Id = 9,
+					DayOfWeek = DayOfWeek.Tuesday,
+					Fraction = Fractions.Denominator,
+					ClassNumberTimes = new List<ClassNumberTime>
+					{
+						entitiesMock.Object.ClassNumberTimes.ElementAt(3)
 					}
 				}
 			});
@@ -751,6 +876,86 @@ namespace DeanerySystem.UI.Infrastructure
 					Cellules = new List<Cellule>()
 					{
 					},
+				},
+				new Journal
+				{
+					Id = 11,
+					JournalType = JournalTypes.Assessment,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 12,
+					JournalType = JournalTypes.Visiting,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 13,
+					JournalType = JournalTypes.Assessment,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 14,
+					JournalType = JournalTypes.Visiting,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 15,
+					JournalType = JournalTypes.Assessment,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 16,
+					JournalType = JournalTypes.Visiting,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 17,
+					JournalType = JournalTypes.Assessment,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 18,
+					JournalType = JournalTypes.Visiting,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 19,
+					JournalType = JournalTypes.Assessment,
+					Cellules = new List<Cellule>()
+					{
+					},
+				},
+				new Journal
+				{
+					Id = 20,
+					JournalType = JournalTypes.Visiting,
+					Cellules = new List<Cellule>()
+					{
+					},
 				}
 			});
 			#endregion
@@ -761,8 +966,8 @@ namespace DeanerySystem.UI.Infrastructure
 				new Class
 				{
 					Id = 1,
-					ClassType = ClassTypes.PracticalClass,
-					Professor = entitiesMock.Object.Professors.ElementAt(1),
+					ClassType = ClassTypes.Lecture,
+					Professor = entitiesMock.Object.Professors.ElementAt(5),
 					Journals = new List<Journal>
 					{
 						entitiesMock.Object.Journals.ElementAt(0),
@@ -774,11 +979,11 @@ namespace DeanerySystem.UI.Infrastructure
 						entitiesMock.Object.TimeTables.ElementAt(1)
 					}
 				},
-				new Class
+				new Class // право
 				{
 					Id = 2,
 					ClassType = ClassTypes.Lecture,
-					Professor = entitiesMock.Object.Professors.ElementAt(3),
+					Professor = entitiesMock.Object.Professors.ElementAt(6),
 					Journals = new List<Journal>
 					{
 						entitiesMock.Object.Journals.ElementAt(2),
@@ -786,15 +991,14 @@ namespace DeanerySystem.UI.Infrastructure
 					},
 					TimeTables = new List<TimeTable>
 					{
-						entitiesMock.Object.TimeTables.ElementAt(2),
-						entitiesMock.Object.TimeTables.ElementAt(3)
+						entitiesMock.Object.TimeTables.ElementAt(2)
 					}
 				},
-				new Class
+				new Class // право
 				{
 					Id = 3,
-					ClassType = ClassTypes.Lecture,
-					Professor = entitiesMock.Object.Professors.ElementAt(3),
+					ClassType = ClassTypes.PracticalClass,
+					Professor = entitiesMock.Object.Professors.ElementAt(7),
 					Journals = new List<Journal>
 					{
 						entitiesMock.Object.Journals.ElementAt(4),
@@ -802,15 +1006,14 @@ namespace DeanerySystem.UI.Infrastructure
 					},
 					TimeTables = new List<TimeTable>
 					{
-						entitiesMock.Object.TimeTables.ElementAt(2),
 						entitiesMock.Object.TimeTables.ElementAt(3)
 					}
 				},
 				new Class
 				{
 					Id = 4,
-					ClassType = ClassTypes.Lecture,
-					Professor = entitiesMock.Object.Professors.ElementAt(4),
+					ClassType = ClassTypes.PracticalClass,
+					Professor = entitiesMock.Object.Professors.ElementAt(5),
 					Journals = new List<Journal>
 					{
 						entitiesMock.Object.Journals.ElementAt(6),
@@ -818,15 +1021,14 @@ namespace DeanerySystem.UI.Infrastructure
 					},
 					TimeTables = new List<TimeTable>
 					{
-						entitiesMock.Object.TimeTables.ElementAt(4),
-						entitiesMock.Object.TimeTables.ElementAt(5)
+						entitiesMock.Object.TimeTables.ElementAt(4)
 					}
 				},
 				new Class
 				{
 					Id = 5,
 					ClassType = ClassTypes.Lecture,
-					Professor = entitiesMock.Object.Professors.ElementAt(4),
+					Professor = entitiesMock.Object.Professors.ElementAt(5),
 					Journals = new List<Journal>
 					{
 						entitiesMock.Object.Journals.ElementAt(8),
@@ -834,10 +1036,87 @@ namespace DeanerySystem.UI.Infrastructure
 					},
 					TimeTables = new List<TimeTable>
 					{
-						entitiesMock.Object.TimeTables.ElementAt(4),
-						entitiesMock.Object.TimeTables.ElementAt(5)
+						entitiesMock.Object.TimeTables.ElementAt(5),
+						entitiesMock.Object.TimeTables.ElementAt(6)
 					}
 				},
+				new Class // право
+				{
+					Id = 6,
+					ClassType = ClassTypes.Lecture,
+					Professor = entitiesMock.Object.Professors.ElementAt(6),
+					Journals = new List<Journal>
+					{
+						entitiesMock.Object.Journals.ElementAt(10),
+						entitiesMock.Object.Journals.ElementAt(11)
+					},
+					TimeTables = new List<TimeTable>
+					{
+						entitiesMock.Object.TimeTables.ElementAt(2)
+					}
+				},
+				new Class // право
+				{
+					Id = 7,
+					ClassType = ClassTypes.PracticalClass,
+					Professor = entitiesMock.Object.Professors.ElementAt(8),
+					Journals = new List<Journal>
+					{
+						entitiesMock.Object.Journals.ElementAt(12),
+						entitiesMock.Object.Journals.ElementAt(13)
+					},
+					TimeTables = new List<TimeTable>
+					{
+						entitiesMock.Object.TimeTables.ElementAt(3)
+					}
+				},
+				new Class // колос
+				{
+					Id = 8,
+					ClassType = ClassTypes.PracticalClass,
+					Professor = entitiesMock.Object.Professors.ElementAt(9),
+					Journals = new List<Journal>
+					{
+						entitiesMock.Object.Journals.ElementAt(14),
+						entitiesMock.Object.Journals.ElementAt(15)
+					},
+					TimeTables = new List<TimeTable>
+					{
+						entitiesMock.Object.TimeTables.ElementAt(7),
+						entitiesMock.Object.TimeTables.ElementAt(8)
+					}
+				},
+				new Class // вовк
+				{
+					Id = 9,
+					ClassType = ClassTypes.PracticalClass,
+					Professor = entitiesMock.Object.Professors.ElementAt(11),
+					Journals = new List<Journal>
+					{
+						entitiesMock.Object.Journals.ElementAt(16),
+						entitiesMock.Object.Journals.ElementAt(17)
+					},
+					TimeTables = new List<TimeTable>
+					{
+						entitiesMock.Object.TimeTables.ElementAt(9),
+						entitiesMock.Object.TimeTables.ElementAt(10)
+					}
+				},
+				new Class // літик
+				{
+					Id = 9,
+					ClassType = ClassTypes.PracticalClass,
+					Professor = entitiesMock.Object.Professors.ElementAt(10),
+					Journals = new List<Journal>
+					{
+						entitiesMock.Object.Journals.ElementAt(18),
+						entitiesMock.Object.Journals.ElementAt(19)
+					},
+					TimeTables = new List<TimeTable>
+					{
+						entitiesMock.Object.TimeTables.ElementAt(10)
+					}
+				}
 			});
 			#endregion
 
@@ -846,84 +1125,87 @@ namespace DeanerySystem.UI.Infrastructure
 				new Subject
 				{
 					Id = 1,
-					Name = "Адміністрування корпоративних систем",
+					Name = "Моделювання складних систем",
 					SemesterControl = SemesterControlTypes.Credit,
 					NumberOfConsultations = 0,
 					NumberOfLectures = 0,
 					NumberOfPracticalClasses = 17,
 					NumberOflLaboratoryClasses = 0,
 					PassingDate = new DateTime(2015, 6, 6),
-					//EducationalPlans = new List<EducationalPlan> 
-					//{
-					//	entitiesMock.Object.EducationalPlans.ElementAt(0)
-					//},
 					Classes = new List<Class>()
 					{
 						entitiesMock.Object.Classes.ElementAt(0)
 					}
 				},
-                // PMI-31 Monday Numerator, Denominator
-                new Subject
+				new Subject
 				{
 					Id = 2,
-					Name = "Комп'ютерні мережі",
+					Name = "Основи права та основи конституційного права",
 					SemesterControl = SemesterControlTypes.Credit,
 					PassingDate = new DateTime(2015, 6, 6),
-					//EducationalPlans = new List<EducationalPlan>
-					//{
-					//	entitiesMock.Object.EducationalPlans.ElementAt(0)
-					//},
 					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Classes.ElementAt(1)
-					}
-				},
-                // PMI-32 Monday Numerator, Denominator
-                new Subject
-				{
-					Id = 3,
-					Name = "Комп'ютерні мережі",
-					SemesterControl = SemesterControlTypes.Credit,
-					PassingDate = new DateTime(2015, 6, 6),
-					//EducationalPlans = new List<EducationalPlan>
-					//{
-					//	entitiesMock.Object.EducationalPlans.ElementAt(1)
-					//},
-					Classes = new List<Class>()
-					{
+						entitiesMock.Object.Classes.ElementAt(1),
 						entitiesMock.Object.Classes.ElementAt(2)
 					}
 				},
 				new Subject
 				{
-					Id = 4,
-					Name = "Методи оптимізації",
-					SemesterControl = SemesterControlTypes.Exam,
+					Id = 3,
+					Name = "Моделювання складних систем",
+					SemesterControl = SemesterControlTypes.Credit,
 					PassingDate = new DateTime(2015, 6, 6),
-					//EducationalPlans = new List<EducationalPlan>
-					//{
-					//	entitiesMock.Object.EducationalPlans.ElementAt(0)
-					//},
 					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Classes.ElementAt(3)
+						entitiesMock.Object.Classes.ElementAt(3),
+						entitiesMock.Object.Classes.ElementAt(4)
+					}
+				},
+				new Subject
+				{
+					Id = 4,
+					Name = "Основи права та основи конституційного права",
+					SemesterControl = SemesterControlTypes.Exam,
+					PassingDate = new DateTime(2015, 6, 6),
+					Classes = new List<Class>()
+					{
+						entitiesMock.Object.Classes.ElementAt(5),
+						entitiesMock.Object.Classes.ElementAt(6)
 					}
 				},
 				new Subject
 				{
 					Id = 5,
-					Name = "Методи оптимізації",
+					Name = "Системи штучного інтелекту",
 					SemesterControl = SemesterControlTypes.Exam,
 					PassingDate = new DateTime(2015, 6, 6),
-					//EducationalPlans = new List<EducationalPlan>
-					//{
-					//	entitiesMock.Object.EducationalPlans.ElementAt(1)
-					//},
 					Classes = new List<Class>()
 					{
-						entitiesMock.Object.Classes.ElementAt(4)
+						entitiesMock.Object.Classes.ElementAt(7)
 					}
 				},
+				new Subject
+				{
+					Id = 6,
+					Name = "Чисельні методи математичної фізики",
+					SemesterControl = SemesterControlTypes.Exam,
+					PassingDate = new DateTime(2015, 6, 6),
+					Classes = new List<Class>()
+					{
+						entitiesMock.Object.Classes.ElementAt(8)
+					}
+				},
+				new Subject
+				{
+					Id = 7,
+					Name = "Програмування під UNIX-подібними системами",
+					SemesterControl = SemesterControlTypes.Exam,
+					PassingDate = new DateTime(2015, 6, 6),
+					Classes = new List<Class>()
+					{
+						entitiesMock.Object.Classes.ElementAt(9)
+					}
+				}
 			});
 
 
@@ -932,7 +1214,7 @@ namespace DeanerySystem.UI.Infrastructure
 				new EducationalPlan()
 				{
 					Id = 1,
-					Group = entitiesMock.Object.Groups.ElementAt(1),
+					Group = entitiesMock.Object.Groups.ElementAt(0),
 					Semester = entitiesMock.Object.Semesters.ElementAt(0),
 					Subject = entitiesMock.Object.Subjects.ElementAt(0)
 				},
@@ -953,7 +1235,7 @@ namespace DeanerySystem.UI.Infrastructure
 				new EducationalPlan()
 				{
 					Id = 4,
-					Group = entitiesMock.Object.Groups.ElementAt(0),
+					Group = entitiesMock.Object.Groups.ElementAt(1),
 					Semester = entitiesMock.Object.Semesters.ElementAt(0),
 					Subject = entitiesMock.Object.Subjects.ElementAt(3)
 				},
@@ -963,6 +1245,20 @@ namespace DeanerySystem.UI.Infrastructure
 					Group = entitiesMock.Object.Groups.ElementAt(1),
 					Semester = entitiesMock.Object.Semesters.ElementAt(0),
 					Subject = entitiesMock.Object.Subjects.ElementAt(4)
+				},
+				new EducationalPlan()
+				{
+					Id = 6,
+					Group = entitiesMock.Object.Groups.ElementAt(1),
+					Semester = entitiesMock.Object.Semesters.ElementAt(0),
+					Subject = entitiesMock.Object.Subjects.ElementAt(5)
+				},
+				new EducationalPlan()
+				{
+					Id = 7,
+					Group = entitiesMock.Object.Groups.ElementAt(0),
+					Semester = entitiesMock.Object.Semesters.ElementAt(0),
+					Subject = entitiesMock.Object.Subjects.ElementAt(6)
 				}
 			});
 

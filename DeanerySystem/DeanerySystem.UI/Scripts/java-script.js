@@ -32,7 +32,7 @@
 
         var educationalPlanId = $("#save-marks-button").data("educationalplanid");
         var classId = $("#save-marks-button").data("classid");
-        var journalId = 1;
+        var journalId = $("#save-marks-button").data("journalid");
        
         $.ajax({
             url: $(this).attr('action'),

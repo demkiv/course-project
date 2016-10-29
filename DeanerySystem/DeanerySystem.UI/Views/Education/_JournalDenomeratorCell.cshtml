@@ -3,9 +3,9 @@
 @model DeanerySystem.UI.Models.Education.NumeratorDenomerator
 
 @{ Class _class2 = Model.DenumeratorPlan.Subject.Classes.First(c => c.TimeTables.Contains(Model.DenumeratorTimeTable)); }
-<a href='@Url.Action("Journal", "Education", new {educationalPlanId = @Model.DenumeratorPlan.Id, classId = @_class2.Id,
-		journalId = @_class2.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id})'>
-	<div class="row">
+<a href='@Url.Action("Journal", "Education", new { educationalPlanId = @Model.DenumeratorPlan.Id, classId = @_class2.Id,
+		journalId = @_class2.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id })'>
+	<div>
 		<span>@Model.DenumeratorPlan.Subject.Name<br />@_class2.Professor.LastName @_class2.Professor.FirstName @_class2.Professor.MiddleName</span>
 		<br />
 		@if (_class2.ClassType == ClassTypes.Lecture) { <span>Лекція</span> } else if (_class2.ClassType == ClassTypes.LaboratoryClass) { <span>Лабораторна</span> } else { <span>Практична</span> }

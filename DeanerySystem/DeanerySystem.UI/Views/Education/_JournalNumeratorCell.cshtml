@@ -2,13 +2,13 @@
 @using DeanerySystem.Domain.Entities.Enums
 @model DeanerySystem.UI.Models.Education.NumeratorDenomerator
 
-@{ Class _class2 = Model.NumeratorPlan.Subject.Classes.First(c => c.TimeTables.Contains(Model.NumeratorTimeTable)); }
-<a href='@Url.Action("Journal", "Education", new {educationalPlanId = @Model.NumeratorPlan.Id, classId = @_class2.Id,
-		journalId = @_class2.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id})'>
-	<div class="row">
-		<span>@Model.NumeratorPlan.Subject.Name<br />@_class2.Professor.LastName @_class2.Professor.FirstName @_class2.Professor.MiddleName</span>
+@{ Class class2 = Model.NumeratorPlan.Subject.Classes.First(c => c.TimeTables.Contains(Model.NumeratorTimeTable)); }
+<a href='@Url.Action("Journal", "Education", new { educationalPlanId = @Model.NumeratorPlan.Id, classId = class2.Id,
+		journalId = class2.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id })'>
+	<div>
+		<span>@Model.NumeratorPlan.Subject.Name<br />@class2.Professor.LastName @class2.Professor.FirstName @class2.Professor.MiddleName</span>
 		<br />
-		@if (_class2.ClassType == ClassTypes.Lecture) { <span>Лекція</span> } else if (_class2.ClassType == ClassTypes.LaboratoryClass) { <span>Лабораторна</span> } else { <span>Практична</span> }
+		@if (class2.ClassType == ClassTypes.Lecture) { <span>Лекція</span> } else if (class2.ClassType == ClassTypes.LaboratoryClass) { <span>Лабораторна</span> } else { <span>Практична</span> }
 
 	</div>
 </a>

@@ -704,7 +704,7 @@ namespace DeanerySystem.UI.Infrastructure
 				},
 				new TimeTable // вовк
 				{
-					Id = 8,
+					Id = 10,
 					DayOfWeek = DayOfWeek.Tuesday,
 					Fraction = Fractions.Numerator,
 					ClassNumberTimes = new List<ClassNumberTime>
@@ -714,7 +714,7 @@ namespace DeanerySystem.UI.Infrastructure
 				},
 				new TimeTable // вовк
 				{
-					Id = 9,
+					Id = 11,
 					DayOfWeek = DayOfWeek.Tuesday,
 					Fraction = Fractions.Denominator,
 					ClassNumberTimes = new List<ClassNumberTime>
@@ -796,13 +796,13 @@ namespace DeanerySystem.UI.Infrastructure
 					JournalType = JournalTypes.Assessment,
 					Cellules = new List<Cellule>()
 					{
-						entitiesMock.Object.Cellules.ElementAt(0),
-						entitiesMock.Object.Cellules.ElementAt(1),
-						entitiesMock.Object.Cellules.ElementAt(2),
-						entitiesMock.Object.Cellules.ElementAt(3),
-						entitiesMock.Object.Cellules.ElementAt(4),
-						entitiesMock.Object.Cellules.ElementAt(5),
-						entitiesMock.Object.Cellules.ElementAt(6)
+						//entitiesMock.Object.Cellules.ElementAt(0),
+						//entitiesMock.Object.Cellules.ElementAt(1),
+						//entitiesMock.Object.Cellules.ElementAt(2),
+						//entitiesMock.Object.Cellules.ElementAt(3),
+						//entitiesMock.Object.Cellules.ElementAt(4),
+						//entitiesMock.Object.Cellules.ElementAt(5),
+						//entitiesMock.Object.Cellules.ElementAt(6)
 					}
 				},
 				new Journal
@@ -1104,7 +1104,7 @@ namespace DeanerySystem.UI.Infrastructure
 				},
 				new Class // літик
 				{
-					Id = 9,
+					Id = 10,
 					ClassType = ClassTypes.PracticalClass,
 					Professor = entitiesMock.Object.Professors.ElementAt(10),
 					Journals = new List<Journal>

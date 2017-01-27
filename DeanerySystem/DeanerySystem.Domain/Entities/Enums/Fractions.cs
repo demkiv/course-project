@@ -8,6 +8,7 @@ namespace DeanerySystem.Domain.Entities.Enums
     public enum Fractions
     {
         Numerator,
-        Denominator
-    }
+        Denominator,
+		Integer
+	}
 }

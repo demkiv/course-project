@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.UI.Models.Education;
+using DeanerySystem.UI.Models.Education.Schedule;
 using DeanerySystem.WebUI.Models;
 using Rotativa;
-using Rotativa.Options;
+using Orientation = Rotativa.Options.Orientation;
+using Schedule = DeanerySystem.UI.Models.Education.Schedule;
+using ScheduleInfo = DeanerySystem.UI.Models.Education.ScheduleInfo;
 
 namespace DeanerySystem.UI.Controllers
 {
@@ -157,6 +161,71 @@ namespace DeanerySystem.UI.Controllers
                 EducationalPlans = educationalPlans.ToList() });
 		}
 
+		public ActionResult ScheduleNew() {
+			var scheduleInfo = new Schedule.ScheduleInfo();
+
+			var currentSemester = repository.Semesters.First();
+			var educationalPlans = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
+
+			foreach (var plan in educationalPlans) {
+				if (!scheduleInfo.GroupNames.ContainsKey(plan.Group.Id)) {
+					scheduleInfo.GroupNames.Add(plan.Group.Id, plan.Group.Name);
+				}
+				
+                foreach (var _class in plan.Subject.Classes) {
+					foreach (var timeTable in _class.TimeTables) {
+						if (!scheduleInfo.DayInfos.ContainsKey(timeTable.DayOfWeek)) {
+							string dayName = getUkrainianDay(timeTable.DayOfWeek);
+                            scheduleInfo.DayInfos.Add(timeTable.DayOfWeek, new DayInfo(dayName));
+						}
+						var dayInfo = scheduleInfo.DayInfos[timeTable.DayOfWeek];
+                        foreach (var time in timeTable.ClassNumberTimes) {
+							if (!dayInfo.LessonNumberInfos.ContainsKey(time.Number)) {
+								dayInfo.LessonNumberInfos.Add(time.Number, new LessonNumberInfo(time.Number, time.Start, time.End));
+							}
+
+							var lessonNumberInfo = dayInfo.LessonNumberInfos[time.Number];
+							if (!lessonNumberInfo.LessonGroupInfos.ContainsKey(plan.Group.Id)) {
+								lessonNumberInfo.LessonGroupInfos.Add(plan.Group.Id, new LessonGroupInfo() {
+									IsSolid = timeTable.Fraction == Fractions.Integer
+								});
+							}
+
+							var lessonGroupInfo = lessonNumberInfo.LessonGroupInfos[plan.Group.Id];
+							LessonInfo lessonInfo = new LessonInfo() {
+								Fraction = timeTable.Fraction,
+								Lector = _class.Professor.GetFullName(),
+								Subject = plan.Subject.Name,
+								Type = getClassType(_class.ClassType),
+                                JornalLink = Url.Action("JournalLink", "Education", new {
+									educationalPlanId = plan.Id,
+									classId = _class.Id
+								})
+							};
+
+							if (timeTable.Fraction == Fractions.Denominator) {
+								lessonGroupInfo.SecondRowLesson = lessonInfo;
+							} else {
+								lessonGroupInfo.FirstRowLesson = lessonInfo;
+							}
+						}
+					}
+				}
+			}
+
+			foreach (var dayInfo in scheduleInfo.DayInfos.Values) {
+				for (int i = dayInfo.LessonNumberInfos.First().Key + 1; i < dayInfo.LessonNumberInfos.Last().Key; i++) {
+					if (!dayInfo.LessonNumberInfos.ContainsKey(i)) {
+						var time = repository.ClassNumberTimes.Single(numberTime => numberTime.Number == i);
+                        dayInfo.LessonNumberInfos.Add(i, new LessonNumberInfo(time.Number, time.Start, time.End));
+					}
+				}
+				
+			}
+			
+            return View("Schedule/Schedule", scheduleInfo);
+		}
+
 		private string getUkrainianDay(DayOfWeek day) {
 			switch (day) {
 				case DayOfWeek.Monday: return "Понеділок";
@@ -170,11 +239,16 @@ namespace DeanerySystem.UI.Controllers
 			}
 		}
 
+		public ActionResult JournalLink(int educationalPlanId, int classId) {
+			var journalId = repository.Classes.First(c => c.Id == classId).Journals.First(j => j.JournalType == JournalTypes.Assessment).Id;
+            return RedirectToAction("Journal", new { educationalPlanId, classId, journalId });
+		}
+
 		public ActionResult Journal(int educationalPlanId, int classId, int journalId) {
 			var educationalPlan = repository.EducationalPlans.First(plan => plan.Id == educationalPlanId);
             Subject subject = educationalPlan.Subject;
 			var _class = repository.Classes.First(c => c.Id == classId);
-			List<DateTime> dates = GetDates(educationalPlan, _class);
+            List<DateTime> dates = GetDates(educationalPlan, _class);
 
 			List<JournalRecord> journalRecords = new List<JournalRecord>();
 
@@ -208,7 +282,7 @@ namespace DeanerySystem.UI.Controllers
 
 				SubjectName = subject.Name,
 				GroupName = educationalPlan.Group.Name,
-				ClassType = GetClassType(_class.ClassType),
+				ClassType = getClassType(_class.ClassType),
 				
 				LecturerFirstName = _class.Professor.FirstName,
 				LecturerLastName = _class.Professor.LastName,
@@ -259,7 +333,7 @@ namespace DeanerySystem.UI.Controllers
 
 				SubjectName = subject.Name,
 				GroupName = educationalPlan.Group.Name,
-				ClassType = GetClassType(_class.ClassType),
+				ClassType = getClassType(_class.ClassType),
 
 				LecturerFirstName = _class.Professor.FirstName,
 				LecturerLastName = _class.Professor.LastName,
@@ -361,7 +435,7 @@ namespace DeanerySystem.UI.Controllers
 			}
 		}
 
-		private string GetClassType(ClassTypes classType) {
+		private string getClassType(ClassTypes classType) {
 			string ukrClassType = "";
 			switch (classType) {
 				case ClassTypes.Lecture:

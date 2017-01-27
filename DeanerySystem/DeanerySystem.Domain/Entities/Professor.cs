@@ -24,5 +24,9 @@ namespace DeanerySystem.Domain.Entities
         {
             this.Classes = new List<Class>();
         }
-    }
+
+		public string GetFullName() {
+			return $"{LastName} {FirstName} {MiddleName}";
+		}
+	}
 }

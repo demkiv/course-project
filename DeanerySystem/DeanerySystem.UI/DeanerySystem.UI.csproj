@@ -197,6 +197,11 @@
     <Compile Include="Models\Admin\GeneralInfo.cs" />
     <Compile Include="Models\Admin\University.cs" />
     <Compile Include="Models\Education\ScheduleInfo.cs" />
+    <Compile Include="Models\Education\Schedule\DayInfo.cs" />
+    <Compile Include="Models\Education\Schedule\LessonGroupInfo.cs" />
+    <Compile Include="Models\Education\Schedule\LessonInfo.cs" />
+    <Compile Include="Models\Education\Schedule\LessonNumberInfo.cs" />
+    <Compile Include="Models\Education\Schedule\ScheduleInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\User.cs" />
@@ -830,6 +835,8 @@
     <Content Include="Views\Education\_Denominator.cshtml" />
     <Content Include="Views\Education\_JournalNumeratorCell.cshtml" />
     <Content Include="Views\Education\_JournalDenomeratorCell.cshtml" />
+    <Content Include="Views\Education\Schedule\Schedule.cshtml" />
+    <Content Include="Views\Education\Schedule\_LessonCell.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,3 +50,16 @@ a, a:hover, a:visited, a:link, a:active {
 .colored-border {
     border-left: solid 5px #00776B;
 }
+
+.lesson-cell {
+	padding: 0 !important;
+	vertical-align: middle !important;
+}
+
+.lesson-cell:hover {
+	background-color: #f3f4f6;
+}
+
+.lesson-cell .lesson-content {
+	padding: 8px;
+}

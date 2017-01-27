@@ -616,13 +616,13 @@ namespace DeanerySystem.UI.Infrastructure
 				{
 					Id = 1,
 					DayOfWeek = DayOfWeek.Monday,
-					Fraction = Fractions.Numerator,
+					Fraction = Fractions.Integer,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
 						entitiesMock.Object.ClassNumberTimes.ElementAt(5)
 					}
 				},
-				new TimeTable //щербатий лекція
+				new TimeTable //щербатий лекція // not used
 				{
 					Id = 2,
 					DayOfWeek = DayOfWeek.Monday,
@@ -666,13 +666,13 @@ namespace DeanerySystem.UI.Infrastructure
 				{
 					Id = 6,
 					DayOfWeek = DayOfWeek.Monday,
-					Fraction = Fractions.Numerator,
+					Fraction = Fractions.Integer,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
 						entitiesMock.Object.ClassNumberTimes.ElementAt(5)
 					}
 				},
-				new TimeTable // мод 42
+				new TimeTable // мод 42 // not used
 				{
 					Id = 7,
 					DayOfWeek = DayOfWeek.Monday,
@@ -686,13 +686,13 @@ namespace DeanerySystem.UI.Infrastructure
 				{
 					Id = 8,
 					DayOfWeek = DayOfWeek.Tuesday,
-					Fraction = Fractions.Numerator,
+					Fraction = Fractions.Integer,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
-						entitiesMock.Object.ClassNumberTimes.ElementAt(2)
+						entitiesMock.Object.ClassNumberTimes.ElementAt(0)
 					}
 				},
-				new TimeTable // колос
+				new TimeTable // колос // not used
 				{
 					Id = 9,
 					DayOfWeek = DayOfWeek.Tuesday,
@@ -706,13 +706,13 @@ namespace DeanerySystem.UI.Infrastructure
 				{
 					Id = 10,
 					DayOfWeek = DayOfWeek.Tuesday,
-					Fraction = Fractions.Numerator,
+					Fraction = Fractions.Integer,
 					ClassNumberTimes = new List<ClassNumberTime>
 					{
 						entitiesMock.Object.ClassNumberTimes.ElementAt(3)
 					}
 				},
-				new TimeTable // вовк
+				new TimeTable // літик
 				{
 					Id = 11,
 					DayOfWeek = DayOfWeek.Tuesday,
@@ -976,7 +976,7 @@ namespace DeanerySystem.UI.Infrastructure
 					TimeTables = new List<TimeTable>
 					{
 						entitiesMock.Object.TimeTables.ElementAt(0),
-						entitiesMock.Object.TimeTables.ElementAt(1)
+						//entitiesMock.Object.TimeTables.ElementAt(1)
 					}
 				},
 				new Class // право
@@ -1037,7 +1037,7 @@ namespace DeanerySystem.UI.Infrastructure
 					TimeTables = new List<TimeTable>
 					{
 						entitiesMock.Object.TimeTables.ElementAt(5),
-						entitiesMock.Object.TimeTables.ElementAt(6)
+						//entitiesMock.Object.TimeTables.ElementAt(6)
 					}
 				},
 				new Class // право
@@ -1083,7 +1083,7 @@ namespace DeanerySystem.UI.Infrastructure
 					TimeTables = new List<TimeTable>
 					{
 						entitiesMock.Object.TimeTables.ElementAt(7),
-						entitiesMock.Object.TimeTables.ElementAt(8)
+						//entitiesMock.Object.TimeTables.ElementAt(8)
 					}
 				},
 				new Class // вовк
@@ -1099,7 +1099,7 @@ namespace DeanerySystem.UI.Infrastructure
 					TimeTables = new List<TimeTable>
 					{
 						entitiesMock.Object.TimeTables.ElementAt(9),
-						entitiesMock.Object.TimeTables.ElementAt(10)
+						//entitiesMock.Object.TimeTables.ElementAt(10)
 					}
 				},
 				new Class // літик

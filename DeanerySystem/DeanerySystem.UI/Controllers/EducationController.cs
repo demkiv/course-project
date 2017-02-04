@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
-using DeanerySystem.UI.Models.Education;
 using DeanerySystem.UI.Models.Education.Schedule;
 using DeanerySystem.WebUI.Models;
 using Rotativa;
 using Orientation = Rotativa.Options.Orientation;
 using Schedule = DeanerySystem.UI.Models.Education.Schedule;
-using ScheduleInfo = DeanerySystem.UI.Models.Education.ScheduleInfo;
 
 namespace DeanerySystem.UI.Controllers
 {
@@ -25,143 +22,7 @@ namespace DeanerySystem.UI.Controllers
 			this.repository = deaneryEntitiesRepository;
 		}
 
-		public struct CellGenerationInfo {
-			public Group Group { get; set; }
-			public ClassNumberTime ClassNumberTime { get; set; }
-		}
-
 		public ActionResult Schedule() {
-			var currentSemester = repository.Semesters.First();
-			var educationalPlans = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
-
-			var times = new Dictionary<DayOfWeek, List<ClassNumberTime>>();
-			var timeTables = new Dictionary<ClassNumberTime, List<TimeTable>>();
-			var numeratorDenomerators = new Dictionary<Tuple<ClassNumberTime, Group>, NumeratorDenomerator>();
-
-			var numberOfTimeTables = new Dictionary<TimeTable, List<ClassNumberTime>>();
-			var numberOfTimes = new Dictionary<DayOfWeek, int>();
-
-			foreach (var day in Enum.GetValues(typeof(DayOfWeek))) {
-				times.Add((DayOfWeek)day, null);
-				numberOfTimes.Add((DayOfWeek)day, 0);
-			}
-
-			foreach (var timeTable in repository.TimeTables) {
-				numberOfTimeTables.Add(timeTable, null);
-			}
-
-			foreach (var time in repository.ClassNumberTimes) {
-				timeTables.Add(time, null);
-				//numeratorDenomerators.Add(time, null);
-            }
-
-			foreach (var plan in educationalPlans) {
-				foreach (var _class in plan.Subject.Classes) {
-					foreach (var timeTable in _class.TimeTables) {
-						if (times[timeTable.DayOfWeek] == null) {
-							times[timeTable.DayOfWeek] = new List<ClassNumberTime>();
-						}
-
-						if (numberOfTimeTables[timeTable] == null) {
-							numberOfTimeTables[timeTable] = new List<ClassNumberTime>();
-                        }
-						
-						foreach (var time in timeTable.ClassNumberTimes) {
-							if (!times[timeTable.DayOfWeek].Contains(time)) {
-								times[timeTable.DayOfWeek].Add(time);
-							}
-
-							if (timeTables[time] == null) {
-								timeTables[time] = new List<TimeTable>();
-							}
-
-							if (timeTables[time].Count(t => t.Fraction == timeTable.Fraction) == 0) {
-								timeTables[time].Add(timeTable);
-							}
-
-							Tuple<ClassNumberTime, Group> tuple = new Tuple<ClassNumberTime, Group>(time, plan.Group);
-							if (!numeratorDenomerators.ContainsKey(tuple)) {
-								numeratorDenomerators.Add(tuple, new NumeratorDenomerator());
-							}
-
-							if (timeTable.Fraction == Fractions.Numerator) {
-								numeratorDenomerators[tuple].NumeratorTimeTable = timeTable;
-								numeratorDenomerators[tuple].MergeSell = false;
-                            } else {
-								numeratorDenomerators[tuple].DenumeratorTimeTable = timeTable;
-								numeratorDenomerators[tuple].MergeSell = false;
-							}
-
-							if (!numberOfTimeTables[timeTable].Contains(time)) {
-								numberOfTimeTables[timeTable].Add(time);
-								numberOfTimes[timeTable.DayOfWeek]++;
-							}
-						}
-					}
-				}
-			}
-
-			//times = new Dictionary<DayOfWeek, List<ClassNumberTime>>();
-			//times = times.Where(pair => pair.Value != null)
-			//		.OrderBy(pair => pair.Value.OrderBy(c => c.Number))
-			//		.ToDictionary(pair => pair.Key, pair => pair.Value);
-
-			var timesSorted = new Dictionary<DayOfWeek, List<ClassNumberTime>>();
-			foreach (var time in times.Keys) {
-				if (times[time] != null) {
-					timesSorted.Add(time, times[time].OrderBy(t=>t.Number).ToList());
-					//times[time] = times[time].OrderBy(c => c.Number).ToList();
-				}
-			}
-
-			var timeTablesSorted = new Dictionary<ClassNumberTime, List<TimeTable>>();
-			foreach (var timeTable in timeTables.Keys) {
-				if (timeTables[timeTable] != null) {
-					timeTablesSorted.Add(timeTable, timeTables[timeTable].OrderBy(t => t.Fraction).ToList());
-					//times[time] = times[time].OrderBy(c => c.Number).ToList();
-				}
-			}
-
-			foreach (var val in numeratorDenomerators) {
-				Class numeratorClass = null;
-				Class demumeratorClass = null;
-				
-				if (val.Value.NumeratorTimeTable != null) {
-					val.Value.NumeratorPlan = educationalPlans.FirstOrDefault(plan => plan.Group == val.Key.Item2
-						&& plan.Subject.Classes.Count(c => c.TimeTables.Count(t => t.ClassNumberTimes.Contains(val.Key.Item1) && t.Fraction == Fractions.Numerator) != 0) != 0);
-					numeratorClass = val.Value.NumeratorPlan.Subject.Classes.First(c => c.TimeTables.Contains(val.Value.NumeratorTimeTable));
-					// EducationalPlan educationalPlan = @Model.EducationalPlans.FirstOrDefault(plan => plan.Group == group
-					//				&& plan.Subject.Classes.Count(c => c.TimeTables.Count(t => t.ClassNumberTimes.Contains(time)) != 0) != 0);
-				}
-				if (val.Value.DenumeratorTimeTable != null) {
-					val.Value.DenumeratorPlan = educationalPlans.FirstOrDefault(plan => plan.Group == val.Key.Item2
-						&& plan.Subject.Classes.Count(c => c.TimeTables.Count(t => t.ClassNumberTimes.Contains(val.Key.Item1) && t.Fraction == Fractions.Denominator) != 0) != 0);
-					demumeratorClass = val.Value.DenumeratorPlan.Subject.Classes.First(c => c.TimeTables.Contains(val.Value.DenumeratorTimeTable));
-					// EducationalPlan educationalPlan = @Model.EducationalPlans.FirstOrDefault(plan => plan.Group == group
-					//				&& plan.Subject.Classes.Count(c => c.TimeTables.Count(t => t.ClassNumberTimes.Contains(time)) != 0) != 0);
-				}
-
-				
-				if (numeratorClass == demumeratorClass) {
-					val.Value.MergeSell = true;
-				}
-			}
-
-			Dictionary<DayOfWeek, string> dayNames = new Dictionary<DayOfWeek, string>();
-            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek))) {
-				dayNames.Add(day, getUkrainianDay(day));
-			}
-
-			return View(new ScheduleInfo() { Groups = repository.Groups.ToList(),
-				TimeTables = timeTablesSorted,
-				Times = timesSorted,
-				NumeratorDenomerators = numeratorDenomerators,
-                NumberOfTimes = numberOfTimes,
-				DayNames = dayNames,
-                EducationalPlans = educationalPlans.ToList() });
-		}
-
-		public ActionResult ScheduleNew() {
 			var scheduleInfo = new Schedule.ScheduleInfo();
 
 			var currentSemester = repository.Semesters.First();

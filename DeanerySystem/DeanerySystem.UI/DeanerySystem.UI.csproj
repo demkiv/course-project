@@ -196,7 +196,6 @@
     <Compile Include="Models\Admin\Faculty.cs" />
     <Compile Include="Models\Admin\GeneralInfo.cs" />
     <Compile Include="Models\Admin\University.cs" />
-    <Compile Include="Models\Education\ScheduleInfo.cs" />
     <Compile Include="Models\Education\Schedule\DayInfo.cs" />
     <Compile Include="Models\Education\Schedule\LessonGroupInfo.cs" />
     <Compile Include="Models\Education\Schedule\LessonInfo.cs" />

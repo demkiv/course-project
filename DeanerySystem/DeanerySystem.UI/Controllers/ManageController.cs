@@ -320,6 +320,12 @@ namespace DeanerySystem.UI.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        [AllowAnonymous]
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

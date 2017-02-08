@@ -23,6 +23,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Initializer.ts" />
+    <TypeScriptCompile Include="Models\Adress.ts" />
+    <TypeScriptCompile Include="Models\ContactInfo.ts" />
+    <TypeScriptCompile Include="ViewModels\AdressVM.ts" />
+    <TypeScriptCompile Include="ViewModels\ContactInfoVM.ts" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DeanerySystem.ClientSide.Common.Definitions\DeanerySystem.ClientSide.Common.Definitions.csproj">
@@ -34,6 +38,7 @@
       <Name>DeanerySystem.ClientSide.Common.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

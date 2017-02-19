@@ -72,12 +72,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -185,8 +197,10 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\API\ScheduleController.cs" />
     <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -198,11 +212,12 @@
     <Compile Include="Models\Admin\Faculty.cs" />
     <Compile Include="Models\Admin\GeneralInfo.cs" />
     <Compile Include="Models\Admin\University.cs" />
-    <Compile Include="Models\Education\Schedule\DayInfo.cs" />
-    <Compile Include="Models\Education\Schedule\LessonGroupInfo.cs" />
-    <Compile Include="Models\Education\Schedule\LessonInfo.cs" />
-    <Compile Include="Models\Education\Schedule\LessonNumberInfo.cs" />
-    <Compile Include="Models\Education\Schedule\ScheduleInfo.cs" />
+    <Compile Include="Models\Education\Schedule\DayModel.cs" />
+    <Compile Include="Models\Education\Schedule\GroupModel.cs" />
+    <Compile Include="Models\Education\Schedule\LessonGroupModel.cs" />
+    <Compile Include="Models\Education\Schedule\LessonModel.cs" />
+    <Compile Include="Models\Education\Schedule\LessonNumberModel.cs" />
+    <Compile Include="Models\Education\Schedule\ScheduleModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\User.cs" />
@@ -838,6 +853,7 @@
     <Content Include="Views\Education\_JournalDenomeratorCell.cshtml" />
     <Content Include="Views\Education\Schedule\Schedule.cshtml" />
     <Content Include="Views\Education\Schedule\_LessonCell.cshtml" />
+    <Content Include="Views\Education\Schedule\ScheduleNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

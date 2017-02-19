@@ -1,6 +1,6 @@
-﻿@model DeanerySystem.UI.Models.Education.Schedule.LessonInfo
+﻿@model DeanerySystem.UI.Models.Education.Schedule.LessonModel
 
-<a class="lesson-link" href='@Model.JornalLink'>
+<a class="lesson-link" href='@Url.Action("JournalLink", "Education", new { educationalPlanId = @Model.PlanId, classId = @Model.ClassId })'>
 	<div class="lesson-content">
 		<span>@Model.Subject</span>
 		<br/>

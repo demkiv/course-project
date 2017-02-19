@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 
 namespace DeanerySystem.UI.Models.Education.Schedule {
-	public class LessonNumberInfo {
-		public LessonNumberInfo() {
-			LessonGroupInfos = new Dictionary<int, LessonGroupInfo>();
+	public class LessonNumberModel {
+		public LessonNumberModel() {
+			LessonGroupModels = new List<LessonGroupModel>();
 		}
 
-		public LessonNumberInfo(int number, TimeSpan start, TimeSpan end) : this() {
+		public LessonNumberModel(int number, TimeSpan start, TimeSpan end) : this() {
 			Number = number;
 			Start = start;
 			End = end;
@@ -17,6 +17,6 @@ namespace DeanerySystem.UI.Models.Education.Schedule {
 		public int Number { get; set; }
 		public TimeSpan Start { get; set; }
 		public TimeSpan End { get; set; }
-		public Dictionary<int, LessonGroupInfo> LessonGroupInfos { get; set; }
+		public List<LessonGroupModel> LessonGroupModels { get; set; }
 	}
 }

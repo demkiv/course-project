@@ -1,4 +1,4 @@
-﻿@model DeanerySystem.UI.Models.Education.Schedule.ScheduleInfo
+﻿@model DeanerySystem.UI.Models.Education.Schedule.ScheduleModel
 
 @{
 	ViewBag.Title = "Schedule";
@@ -28,21 +28,21 @@
 			<tr>
 				<th style="text-align: center;">День</th>
 				<th style="text-align: center;">Пара</th>
-				@foreach (var groupName in @Model.GroupNames.Values) {
+				@foreach (var group in @Model.GroupModels) {
 					<th style="text-align: center;">
-						<span>@groupName</span>
+						<span>@group.Name</span>
 					</th>
 				}
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var day in @Model.DayInfos.Values) {
+			@foreach (var day in @Model.DayModels) {
 				bool dayFirstLoop = true;
-				foreach (var lessonNumber in @day.LessonNumberInfos.Values) {
+				foreach (var lessonNumber in @day.LessonNumberModels) {
 					<tr style="text-align: center;">
 						@if (@dayFirstLoop) {
 							dayFirstLoop = false;
-							<td rowspan="@day.DayRowSpan">@day.Day</td>
+							<td rowspan="@day.DayRowSpan">@day.DayOfWeekName</td>
 						}
 
 						<td rowspan="2">
@@ -50,16 +50,17 @@
 							<span>@lessonNumber.Start.ToString(@"hh\:mm") - @lessonNumber.End.ToString(@"hh\:mm")</span>
 						</td>
 
-						@foreach (var groupId in @Model.GroupNames.Keys) {
-							if (lessonNumber.LessonGroupInfos.ContainsKey(groupId)) {
-								if (lessonNumber.LessonGroupInfos[groupId].FirstRowLesson != null) { 
-									if (lessonNumber.LessonGroupInfos[groupId].IsSolid) {
+						@foreach (var group in @Model.GroupModels) {
+							if (lessonNumber.LessonGroupModels.Exists(lg => lg.GroupId == group.Id)) {
+								var lessonGroupModel = lessonNumber.LessonGroupModels.Single(lg => lg.GroupId == group.Id);
+								if (lessonGroupModel.FirstRowLesson != null) {
+									if (lessonGroupModel.IsSolid) {
 										<td rowspan="2" class="lesson-cell">
-											@{ Html.RenderPartial("Schedule/_LessonCell", lessonNumber.LessonGroupInfos[groupId].FirstRowLesson); }
+											@{ Html.RenderPartial("Schedule/_LessonCell", lessonGroupModel.FirstRowLesson); }
 										</td>
 									} else {
 										<td class="lesson-cell">
-											@{ Html.RenderPartial("Schedule/_LessonCell", lessonNumber.LessonGroupInfos[groupId].FirstRowLesson); }
+											@{ Html.RenderPartial("Schedule/_LessonCell", lessonGroupModel.FirstRowLesson); }
 										</td>
 									}
 								} else {
@@ -71,13 +72,14 @@
 						}
 					</tr>
 					<tr style="text-align: center;">
-						@foreach (var groupId in @Model.GroupNames.Keys) {
-							if (lessonNumber.LessonGroupInfos.ContainsKey(groupId)) {
-								if (lessonNumber.LessonGroupInfos[groupId].SecondRowLesson != null) {
+						@foreach (var group in @Model.GroupModels) {
+							if (lessonNumber.LessonGroupModels.Exists(lg => lg.GroupId == group.Id)) {
+								var lessonGroupModel = lessonNumber.LessonGroupModels.Single(lg => lg.GroupId == group.Id);
+								if (lessonGroupModel.SecondRowLesson != null) {
 									<td class="lesson-cell">
-										@{ Html.RenderPartial("Schedule/_LessonCell", lessonNumber.LessonGroupInfos[groupId].SecondRowLesson); }
+										@{ Html.RenderPartial("Schedule/_LessonCell", lessonGroupModel.SecondRowLesson); }
 									</td>
-								} else if (!lessonNumber.LessonGroupInfos[groupId].IsSolid) {
+								} else if (!lessonGroupModel.IsSolid) {
 									@:<td />
 								}
 							} 

@@ -49,10 +49,10 @@ namespace DeanerySystem.UI.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                //GlobalConfiguration.Configuration.DependencyResolver = kernel.Get<System.Web.Http.Dependencies.IDependencyResolver>();
+                //GlobalConfiguration.Configuration.DependencyResolver = (IDependencyResolver)new NinjectDependencyResolver(kernel);
 
-				//GlobalConfiguration.Configuration.DependencyResolver = (IDependencyResolver)new NinjectDependencyResolver(kernel);
-
-				return kernel;
+                return kernel;
             }
             catch
             {

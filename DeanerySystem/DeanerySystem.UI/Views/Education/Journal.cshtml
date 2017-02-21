@@ -67,7 +67,7 @@
 						</td>
 						@foreach (var mark in jornalRecorl.Marks) {
 							<td style="padding: 0;">
-								@Html.TextBoxFor(x => mark, new {@class = "form-control", style = "border: 0px; width: 52px; height: 52px; text-align: center;"})
+								@Html.TextBoxFor(x => mark, new {@class = "form-control", style = "border: 0px; min-width: 52px; height: 52px; text-align: center;"})
 							</td>
 						}
 					</tr>

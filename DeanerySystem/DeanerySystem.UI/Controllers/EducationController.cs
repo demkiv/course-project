@@ -8,8 +8,6 @@ using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.UI.Models.Education.Schedule;
 using DeanerySystem.WebUI.Models;
-using Rotativa;
-using Orientation = Rotativa.Options.Orientation;
 using Schedule = DeanerySystem.UI.Models.Education.Schedule;
 
 namespace DeanerySystem.UI.Controllers
@@ -156,6 +154,13 @@ namespace DeanerySystem.UI.Controllers
 			return View(journalInfo);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="educationalPlanId"></param>
+		/// <param name="classId"></param>
+		/// <param name="journalId"></param>
+		/// <returns></returns>
 		public ActionResult JournalPrint(int educationalPlanId, int classId, int journalId) {
 			var educationalPlan = repository.EducationalPlans.First(plan => plan.Id == educationalPlanId);
 			Subject subject = educationalPlan.Subject;
@@ -205,20 +210,6 @@ namespace DeanerySystem.UI.Controllers
 			};
 
 			return View(journalInfo);
-		}
-		public ActionResult PrintJournal(JournalInfo journal) 
-		{
-			Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
-
-			foreach (var key in Request.Cookies.AllKeys) {
-				try {
-					cookieCollection.Add(key, Request.Cookies.Get(key).Value);
-				} catch{
-					continue;
-				}
-				
-			}
-				return new ActionAsPdf("JournalPrint", journal) { FileName = journal.GroupName + "_" + journal.SubjectName + ".pdf", Cookies = cookieCollection, PageOrientation = Orientation.Landscape};
 		}
 
 

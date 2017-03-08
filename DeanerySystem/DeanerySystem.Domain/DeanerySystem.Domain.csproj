@@ -147,12 +147,16 @@
     <Compile Include="Entities\University.cs" />
     <Compile Include="Entities\FailureTicket.cs" />
     <Compile Include="Entities\Enums\FailureTicketTypes.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Migrations\201604111723091_InitializeDataBase.cs" />
     <Compile Include="Migrations\201604111723091_InitializeDataBase.Designer.cs">
       <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -163,6 +167,7 @@
       <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

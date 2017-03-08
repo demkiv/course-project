@@ -7,7 +7,7 @@ using DeanerySystem.Domain.Entities.Enums;
 
 namespace DeanerySystem.Domain.Entities
 {
-    public class Student : DeanaryUser
+    public class Student : DeaneryUser
     {
         public string StudentCode { get; set; }
         public TuitionFees TuitionFee { get; set; }

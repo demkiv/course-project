@@ -1,4 +1,4 @@
-﻿/// <reference path="../deanerysystem.clientside.common.utilities/querystring.ts" />
+/// <reference path="../deanerysystem.clientside.common.utilities/querystring.ts" />
 /// <reference path="../deanerysystem.clientside.common.definitions/scripts/typings/jquery/jquery.d.ts" />
 
 module DeanerySystem.ClientSide.Cabinet {

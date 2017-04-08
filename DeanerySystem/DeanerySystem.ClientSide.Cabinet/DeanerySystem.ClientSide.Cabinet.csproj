@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <PropertyGroup>
@@ -23,10 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Initializer.ts" />
-    <TypeScriptCompile Include="Models\Adress.ts" />
-    <TypeScriptCompile Include="Models\ContactInfo.ts" />
-    <TypeScriptCompile Include="ViewModels\AdressVM.ts" />
-    <TypeScriptCompile Include="ViewModels\ContactInfoVM.ts" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DeanerySystem.ClientSide.Common.Definitions\DeanerySystem.ClientSide.Common.Definitions.csproj">
@@ -38,7 +34,6 @@
       <Name>DeanerySystem.ClientSide.Common.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

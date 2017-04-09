@@ -4,7 +4,8 @@
 		public Subject: string;
 		public Lector: string;
 		public Type: string;
-		public JornalLink: string;
+		public PlanId: number;
+		public ClassId: number;
 
 		constructor() { }
 	}

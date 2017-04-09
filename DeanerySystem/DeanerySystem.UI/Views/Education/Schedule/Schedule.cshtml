@@ -28,7 +28,7 @@
 			<tr>
 				<th style="text-align: center;">День</th>
 				<th style="text-align: center;">Пара</th>
-				@foreach (var group in @Model.GroupModels) {
+				@foreach (var group in @Model.Groups) {
 					<th style="text-align: center;">
 						<span>@group.Name</span>
 					</th>
@@ -36,23 +36,23 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var day in @Model.DayModels) {
+			@foreach (var day in @Model.Days) {
 				bool dayFirstLoop = true;
-				foreach (var lessonNumber in @day.LessonNumberModels) {
+				foreach (var lessonNumber in @day.LessonNumbers) {
 					<tr style="text-align: center;">
 						@if (@dayFirstLoop) {
 							dayFirstLoop = false;
-							<td rowspan="@day.DayRowSpan">@day.DayOfWeekName</td>
+							<td rowspan="@day.DayRowSpan">@day.Name</td>
 						}
 
 						<td rowspan="2">
 							<span>@lessonNumber.Number</span><br/>
-							<span>@lessonNumber.Start.ToString(@"hh\:mm") - @lessonNumber.End.ToString(@"hh\:mm")</span>
+							<span>@lessonNumber.Start - @lessonNumber.End</span>
 						</td>
 
-						@foreach (var group in @Model.GroupModels) {
-							if (lessonNumber.LessonGroupModels.Exists(lg => lg.GroupId == group.Id)) {
-								var lessonGroupModel = lessonNumber.LessonGroupModels.Single(lg => lg.GroupId == group.Id);
+						@foreach (var group in @Model.Groups) {
+							if (lessonNumber.LessonGroups.Exists(lg => lg.GroupId == group.Id)) {
+								var lessonGroupModel = lessonNumber.LessonGroups.Single(lg => lg.GroupId == group.Id);
 								if (lessonGroupModel.FirstRowLesson != null) {
 									if (lessonGroupModel.IsSolid) {
 										<td rowspan="2" class="lesson-cell">
@@ -72,9 +72,9 @@
 						}
 					</tr>
 					<tr style="text-align: center;">
-						@foreach (var group in @Model.GroupModels) {
-							if (lessonNumber.LessonGroupModels.Exists(lg => lg.GroupId == group.Id)) {
-								var lessonGroupModel = lessonNumber.LessonGroupModels.Single(lg => lg.GroupId == group.Id);
+						@foreach (var group in @Model.Groups) {
+							if (lessonNumber.LessonGroups.Exists(lg => lg.GroupId == group.Id)) {
+								var lessonGroupModel = lessonNumber.LessonGroups.Single(lg => lg.GroupId == group.Id);
 								if (lessonGroupModel.SecondRowLesson != null) {
 									<td class="lesson-cell">
 										@{ Html.RenderPartial("Schedule/_LessonCell", lessonGroupModel.SecondRowLesson); }

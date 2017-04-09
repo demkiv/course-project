@@ -84,8 +84,9 @@
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
-    <TypeScriptOutFile>cabinet.js</TypeScriptOutFile>
-    <TypeScriptOutDir>F:\Education\CourseProject\DeanerySystem\DeanerySystem.UI\Scripts</TypeScriptOutDir>
+    <TypeScriptOutFile>../DeanerySystem.UI/Scripts/Generated/cabinet.js</TypeScriptOutFile>
+    <TypeScriptOutDir>
+    </TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot />

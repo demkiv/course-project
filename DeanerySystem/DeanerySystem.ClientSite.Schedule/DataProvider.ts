@@ -6,8 +6,7 @@ module DeanerySystem.ClientSide.Schedule {
 		public static GetSchelude(): JQueryPromise<Models.ScheduleModel> {
 			var deferrer = jQuery.Deferred();
 
-			$.get("api/schedule/schedule", function (data) {
-				console.log(data);
+			$.get("../api/schedule/getSchedule", function (data) {
 				deferrer.resolve(data);
 			});
 
@@ -15,7 +14,3 @@ module DeanerySystem.ClientSide.Schedule {
 		}
 	}
 }
-
-$(document).ready(() => {
-	DeanerySystem.ClientSide.Schedule.DataProvider.GetSchelude().done();
-});

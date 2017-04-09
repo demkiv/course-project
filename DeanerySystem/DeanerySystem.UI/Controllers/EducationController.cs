@@ -28,33 +28,33 @@ namespace DeanerySystem.UI.Controllers
 			var educationalPlans = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
 
 			foreach (var plan in educationalPlans) {
-				if (!scheduleInfo.GroupModels.Exists(group => group.Id == plan.Group.Id)) {
-					scheduleInfo.GroupModels.Add(new GroupModel() { Id = plan.Group.Id, Name = plan.Group.Name });
+				if (!scheduleInfo.Groups.Exists(group => group.Id == plan.Group.Id)) {
+					scheduleInfo.Groups.Add(new GroupModel() { Id = plan.Group.Id, Name = plan.Group.Name });
 				}
 				
                 foreach (var _class in plan.Subject.Classes) {
 					foreach (var timeTable in _class.TimeTables) {
-						var dayInfo = scheduleInfo.DayModels.SingleOrDefault(day => day.DayOfWeek == timeTable.DayOfWeek);
+						var dayInfo = scheduleInfo.Days.SingleOrDefault(day => day.Id == timeTable.DayOfWeek);
 						if (dayInfo == null) {
 							string dayName = getUkrainianDay(timeTable.DayOfWeek);
 							dayInfo = new DayModel(timeTable.DayOfWeek, dayName);
-							scheduleInfo.DayModels.Add(dayInfo);
+							scheduleInfo.Days.Add(dayInfo);
 						}
 
                         foreach (var time in timeTable.ClassNumberTimes) {
-							var lessonNumberInfo = dayInfo.LessonNumberModels.SingleOrDefault(ln => ln.Number == time.Number);
+							var lessonNumberInfo = dayInfo.LessonNumbers.SingleOrDefault(ln => ln.Number == time.Number);
 							if (lessonNumberInfo == null) {
 								lessonNumberInfo = new LessonNumberModel(time.Number, time.Start, time.End);
-								dayInfo.LessonNumberModels.Add(lessonNumberInfo);
+								dayInfo.LessonNumbers.Add(lessonNumberInfo);
 							}
 
-							var lessonGroupInfo = lessonNumberInfo.LessonGroupModels.SingleOrDefault(lg => lg.GroupId == plan.Group.Id);
+							var lessonGroupInfo = lessonNumberInfo.LessonGroups.SingleOrDefault(lg => lg.GroupId == plan.Group.Id);
 							if (lessonGroupInfo == null) {
 								lessonGroupInfo = new LessonGroupModel() {
 									GroupId = plan.Group.Id,
 									IsSolid = timeTable.Fraction == Fractions.Integer
 								};
-								lessonNumberInfo.LessonGroupModels.Add(lessonGroupInfo);
+								lessonNumberInfo.LessonGroups.Add(lessonGroupInfo);
 							}
 
 
@@ -78,14 +78,14 @@ namespace DeanerySystem.UI.Controllers
 			}
 
 			// fill in empty sells in between 
-			foreach (var dayInfo in scheduleInfo.DayModels) {
-				for (int i = dayInfo.LessonNumberModels.Min(ln => ln.Number) + 1; i < dayInfo.LessonNumberModels.Max(ln => ln.Number); i++) {
-					if (!dayInfo.LessonNumberModels.Any(ln => ln.Number == i)) {
+			foreach (var dayInfo in scheduleInfo.Days) {
+				for (int i = dayInfo.LessonNumbers.Min(ln => ln.Number) + 1; i < dayInfo.LessonNumbers.Max(ln => ln.Number); i++) {
+					if (!dayInfo.LessonNumbers.Any(ln => ln.Number == i)) {
 						var time = repository.ClassNumberTimes.Single(numberTime => numberTime.Number == i);
-						dayInfo.LessonNumberModels.Add(new LessonNumberModel(time.Number, time.Start, time.End));
+						dayInfo.LessonNumbers.Add(new LessonNumberModel(time.Number, time.Start, time.End));
 					}
 				}
-				dayInfo.LessonNumberModels = dayInfo.LessonNumberModels.OrderBy(ln => ln.Number).ToList();
+				dayInfo.LessonNumbers = dayInfo.LessonNumbers.OrderBy(ln => ln.Number).ToList();
 			}
 
 			return View("Schedule/Schedule", scheduleInfo);

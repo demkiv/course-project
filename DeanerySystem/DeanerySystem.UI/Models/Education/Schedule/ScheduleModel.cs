@@ -3,11 +3,11 @@
 namespace DeanerySystem.UI.Models.Education.Schedule {
 	public class ScheduleModel {
 		public ScheduleModel() {
-			GroupModels = new List<GroupModel>();
-			DayModels = new List<DayModel>();
+			Groups = new List<GroupModel>();
+			Days = new List<DayModel>();
         }
 
-		public List<GroupModel> GroupModels { get; set; }
-		public List<DayModel> DayModels { get; set; }
+		public List<GroupModel> Groups { get; set; }
+		public List<DayModel> Days { get; set; }
 	}
 }

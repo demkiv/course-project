@@ -1,7 +1,7 @@
 ﻿module DeanerySystem.ClientSide.Schedule.Models {
 	export class ScheduleModel {
-		public GroupModels: GroupModel[];
-		public DayModels: DayModel[];
+		public Groups: GroupModel[];
+		public Days: DayModel[];
 
 		constructor() { }
 	}

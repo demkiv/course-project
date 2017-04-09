@@ -1,8 +1,9 @@
 ﻿module DeanerySystem.ClientSide.Schedule.Models {
 	export class DayModel {
-		public Day: string;
+		public Id: number;
+		public Name: string;
 		public DayRowSpan: number;
-		public LessonNumberModels: LessonNumberModel[];
+		public LessonNumbers: LessonNumberModel[];
 
 		constructor() {	}
 	}

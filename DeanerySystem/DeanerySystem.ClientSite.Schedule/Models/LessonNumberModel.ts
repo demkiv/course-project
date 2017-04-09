@@ -3,7 +3,7 @@
 		public Number: number;
 		public Start: Date;
 		public End: Date;
-		public LessonGroupModels: LessonGroupModel[];
+		public LessonGroups: LessonGroupModel[];
 
 		constructor() { }
 	}

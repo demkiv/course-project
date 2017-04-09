@@ -4,19 +4,19 @@ using System.Collections.Generic;
 namespace DeanerySystem.UI.Models.Education.Schedule {
 	public class LessonNumberModel {
 		public LessonNumberModel() {
-			LessonGroupModels = new List<LessonGroupModel>();
+			LessonGroups = new List<LessonGroupModel>();
 		}
 
 		public LessonNumberModel(int number, TimeSpan start, TimeSpan end) : this() {
 			Number = number;
-			Start = start;
-			End = end;
+			Start = start.ToString(@"hh\:mm");
+			End = end.ToString(@"hh\:mm");
 		}
 
 		public static readonly int LessonRowSpan = 2;
 		public int Number { get; set; }
-		public TimeSpan Start { get; set; }
-		public TimeSpan End { get; set; }
-		public List<LessonGroupModel> LessonGroupModels { get; set; }
+		public string Start { get; set; }
+		public string End { get; set; }
+		public List<LessonGroupModel> LessonGroups { get; set; }
 	}
 }

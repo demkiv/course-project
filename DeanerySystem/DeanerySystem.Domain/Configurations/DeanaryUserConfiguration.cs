@@ -9,7 +9,7 @@ using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.Configurations
 {
-    class DeanaryUserConfiguration : EntityTypeConfiguration<DeanaryUser>
+    class DeanaryUserConfiguration : EntityTypeConfiguration<DeaneryUser>
     {
 		public DeanaryUserConfiguration() 
 		{

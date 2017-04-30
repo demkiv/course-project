@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using DeanerySystem.Domain;
 using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
@@ -15,16 +16,16 @@ namespace DeanerySystem.UI.Controllers
 	[Authorize]
     public class EducationController : Controller
     {
-		private IDeaneryEntitiesRepository repository;
-		public EducationController(IDeaneryEntitiesRepository deaneryEntitiesRepository) {
-			this.repository = deaneryEntitiesRepository;
+		private IUnitOfWork unitOfWork;
+		public EducationController(IUnitOfWork unitOfWork) {
+			this.unitOfWork = unitOfWork;
 		}
 
 		public ActionResult Schedule() {
 			var scheduleInfo = new Schedule.ScheduleInfo();
 
-			var currentSemester = repository.Semesters.First();
-			var educationalPlans = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
+			var currentSemester = this.unitOfWork.SemesterRepository.Get().First();
+			var educationalPlans = this.unitOfWork.EducationalPlanRepository.Get().Where(plan => plan.Semester == currentSemester);
 
 			foreach (var plan in educationalPlans) {
 				if (!scheduleInfo.GroupNames.ContainsKey(plan.Group.Id)) {
@@ -75,7 +76,7 @@ namespace DeanerySystem.UI.Controllers
 			foreach (var dayInfo in scheduleInfo.DayInfos.Values) {
 				for (int i = dayInfo.LessonNumberInfos.First().Key + 1; i < dayInfo.LessonNumberInfos.Last().Key; i++) {
 					if (!dayInfo.LessonNumberInfos.ContainsKey(i)) {
-						var time = repository.ClassNumberTimes.Single(numberTime => numberTime.Number == i);
+						var time = this.unitOfWork.ClassNumberTimeRepository.Get().Single(numberTime => numberTime.Number == i);
                         dayInfo.LessonNumberInfos.Add(i, new LessonNumberInfo(time.Number, time.Start, time.End));
 					}
 				}
@@ -99,14 +100,14 @@ namespace DeanerySystem.UI.Controllers
 		}
 
 		public ActionResult JournalLink(int educationalPlanId, int classId) {
-			var journalId = repository.Classes.First(c => c.Id == classId).Journals.First(j => j.JournalType == JournalTypes.Assessment).Id;
+			var journalId = this.unitOfWork.ClassRepository.Get().First(c => c.Id == classId).Journals.First(j => j.JournalType == JournalTypes.Assessment).Id;
             return RedirectToAction("Journal", new { educationalPlanId, classId, journalId });
 		}
 
 		public ActionResult Journal(int educationalPlanId, int classId, int journalId) {
-			var educationalPlan = repository.EducationalPlans.First(plan => plan.Id == educationalPlanId);
+			var educationalPlan = this.unitOfWork.EducationalPlanRepository.Get().First(plan => plan.Id == educationalPlanId);
             Subject subject = educationalPlan.Subject;
-			var _class = repository.Classes.First(c => c.Id == classId);
+			var _class = this.unitOfWork.ClassRepository.Get().First(c => c.Id == classId);
             List<DateTime> dates = GetDates(educationalPlan, _class);
 
 			List<JournalRecord> journalRecords = new List<JournalRecord>();
@@ -162,9 +163,9 @@ namespace DeanerySystem.UI.Controllers
 		/// <param name="journalId"></param>
 		/// <returns></returns>
 		public ActionResult JournalPrint(int educationalPlanId, int classId, int journalId) {
-			var educationalPlan = repository.EducationalPlans.First(plan => plan.Id == educationalPlanId);
+			var educationalPlan = this.unitOfWork.EducationalPlanRepository.Get().First(plan => plan.Id == educationalPlanId);
 			Subject subject = educationalPlan.Subject;
-			var _class = repository.Classes.First(c => c.Id == classId);
+			var _class = this.unitOfWork.ClassRepository.Get().First(c => c.Id == classId);
 			List<DateTime> dates = GetDates(educationalPlan, _class);
 
 			List<JournalRecord> journalRecords = new List<JournalRecord>();
@@ -248,9 +249,9 @@ namespace DeanerySystem.UI.Controllers
 
 		[HttpPost]
 		public void SaveMarkings(string marks, int educationalPlanId, int classId, int journalId) {
-			var educationalPlan = repository.EducationalPlans.First(plan => plan.Id == educationalPlanId);
-			var _class = repository.Classes.First(c => c.Id == classId);
-			var journal = repository.Journals.First(j => j.Id == journalId);
+			var educationalPlan = unitOfWork.EducationalPlanRepository.Get().First(plan => plan.Id == educationalPlanId);
+			var _class = this.unitOfWork.ClassRepository.Get().First(c => c.Id == classId);
+			var journal = this.unitOfWork.JournalRepository.Get().First(j => j.Id == journalId);
 			List<DateTime> dates = GetDates(educationalPlan, _class);
 
 			string[] str = marks.Split(new char[] { '=', '&' });
@@ -267,13 +268,13 @@ namespace DeanerySystem.UI.Controllers
 				}
 
 				if (mark != String.Empty) {
-					Cellule cellule = repository.Cellules.FirstOrDefault(c => c.Journal == journal
+					Cellule cellule = this.unitOfWork.CelluleRepository.Get().FirstOrDefault(c => c.Journal == journal
 						&& c.Date == dates.ElementAt(columnId - 1) 
 						&& c.Student == educationalPlan.Group.Students.ElementAt(rowId - 1));
 
 					if (cellule == null) {
 						journal.Cellules.Add(new Cellule() {
-							Id = repository.Cellules.Last().Id + 1,
+							Id = this.unitOfWork.CelluleRepository.Get().Last().Id + 1,
 							Date = dates.ElementAt(columnId - 1),
 							Student = educationalPlan.Group.Students.ElementAt(rowId - 1),
 							Mark = mark

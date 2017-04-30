@@ -7,7 +7,7 @@ using DeanerySystem.Domain.Entities.Enums;
 
 namespace DeanerySystem.Domain.Entities
 {
-    public class Professor : DeanaryUser
+    public class Professor : DeaneryUser
     {
         public Positions Position { get; set; }
 

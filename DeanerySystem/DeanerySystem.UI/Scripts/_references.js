@@ -6,6 +6,7 @@
 /// <reference path="jquery.validate.unobtrusive.min.js" />
 /// <reference path="jquery-2.2.2.js" />
 /// <reference path="jquery-2.2.2.min.js" />
+/// <reference path="knockout-3.4.1.js" />
 /// <reference path="modernizr-2.6.2.js" />
 /// <reference path="respond.min.js" />
 /// <reference path="../theme/assets/admin/layout/scripts/demo.js" />

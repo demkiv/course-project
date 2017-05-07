@@ -8,8 +8,12 @@ using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.WebUI.Models;
+<<<<<<< HEAD
 using Rotativa;
 using Orientation = Rotativa.Options.Orientation;
+=======
+using Schedule = DeanerySystem.UI.Models.Education.Schedule;
+>>>>>>> origin/dev
 
 namespace DeanerySystem.UI.Controllers
 {
@@ -22,7 +26,72 @@ namespace DeanerySystem.UI.Controllers
 		}
 		
 		public ActionResult Schedule() {
+<<<<<<< HEAD
 			return View();
+=======
+			var scheduleInfo = new Schedule.ScheduleInfo();
+
+			var currentSemester = this.unitOfWork.SemesterRepository.Get().First();
+			var educationalPlans = this.unitOfWork.EducationalPlanRepository.Get().Where(plan => plan.Semester == currentSemester);
+
+			foreach (var plan in educationalPlans) {
+				if (!scheduleInfo.GroupNames.ContainsKey(plan.Group.Id)) {
+					scheduleInfo.GroupNames.Add(plan.Group.Id, plan.Group.Name);
+				}
+				
+                foreach (var _class in plan.Subject.Classes) {
+					foreach (var timeTable in _class.TimeTables) {
+						if (!scheduleInfo.DayInfos.ContainsKey(timeTable.DayOfWeek)) {
+							string dayName = getUkrainianDay(timeTable.DayOfWeek);
+                            scheduleInfo.DayInfos.Add(timeTable.DayOfWeek, new DayInfo(dayName));
+						}
+						var dayInfo = scheduleInfo.DayInfos[timeTable.DayOfWeek];
+                        foreach (var time in timeTable.ClassNumberTimes) {
+							if (!dayInfo.LessonNumberInfos.ContainsKey(time.Number)) {
+								dayInfo.LessonNumberInfos.Add(time.Number, new LessonNumberInfo(time.Number, time.Start, time.End));
+							}
+
+							var lessonNumberInfo = dayInfo.LessonNumberInfos[time.Number];
+							if (!lessonNumberInfo.LessonGroupInfos.ContainsKey(plan.Group.Id)) {
+								lessonNumberInfo.LessonGroupInfos.Add(plan.Group.Id, new LessonGroupInfo() {
+									IsSolid = timeTable.Fraction == Fractions.Integer
+								});
+							}
+
+							var lessonGroupInfo = lessonNumberInfo.LessonGroupInfos[plan.Group.Id];
+							LessonInfo lessonInfo = new LessonInfo() {
+								Fraction = timeTable.Fraction,
+								Lector = _class.Professor.GetFullName(),
+								Subject = plan.Subject.Name,
+								Type = getClassType(_class.ClassType),
+                                JornalLink = Url.Action("JournalLink", "Education", new {
+									educationalPlanId = plan.Id,
+									classId = _class.Id
+								})
+							};
+
+							if (timeTable.Fraction == Fractions.Denominator) {
+								lessonGroupInfo.SecondRowLesson = lessonInfo;
+							} else {
+								lessonGroupInfo.FirstRowLesson = lessonInfo;
+							}
+						}
+					}
+				}
+			}
+
+			foreach (var dayInfo in scheduleInfo.DayInfos.Values) {
+				for (int i = dayInfo.LessonNumberInfos.First().Key + 1; i < dayInfo.LessonNumberInfos.Last().Key; i++) {
+					if (!dayInfo.LessonNumberInfos.ContainsKey(i)) {
+						var time = this.unitOfWork.ClassNumberTimeRepository.Get().Single(numberTime => numberTime.Number == i);
+                        dayInfo.LessonNumberInfos.Add(i, new LessonNumberInfo(time.Number, time.Start, time.End));
+					}
+				}
+				
+			}
+			
+            return View("Schedule/Schedule", scheduleInfo);
+>>>>>>> origin/dev
 		}
 		
 		public ActionResult JournalLink(int educationalPlanId, int classId) {
@@ -81,6 +150,13 @@ namespace DeanerySystem.UI.Controllers
 			return View(journalInfo);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="educationalPlanId"></param>
+		/// <param name="classId"></param>
+		/// <param name="journalId"></param>
+		/// <returns></returns>
 		public ActionResult JournalPrint(int educationalPlanId, int classId, int journalId) {
 			var educationalPlan = this.unitOfWork.EducationalPlanRepository.Get().First(plan => plan.Id == educationalPlanId);
 			Subject subject = educationalPlan.Subject;

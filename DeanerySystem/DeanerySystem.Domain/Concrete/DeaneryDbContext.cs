@@ -15,7 +15,7 @@ namespace DeanerySystem.Domain.Concrete
 		public DbSet<Cellule> Cellules { get; set; }
 		public DbSet<Class> Classes { get; set; }
 		public DbSet<ClassNumberTime> ClassNumberTimes { get; set; }
-		public DbSet<DeanaryUser> DeaneryUsers { get; set; }
+		public DbSet<DeaneryUser> DeaneryUsers { get; set; }
 		public DbSet<Department> Departments { get; set; }
 		public DbSet<EducationalPlan> EducationalPlans { get; set; }
 		public DbSet<Faculty> Faculties { get; set; }

@@ -65,6 +65,7 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +78,8 @@
       <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
       <Private>True</Private>
     </Reference>
+=======
+>>>>>>> origin/dev
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -858,7 +861,17 @@
     <Content Include="Theme\assets\global\plugins\bootstrap-toastr\toastr.less" />
     <Content Include="Theme\assets\global\plugins\bootstrap-toastr\toastr.min.js.map" />
     <Content Include="Views\Education\JournalPrint.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Education\Schedule.cshtml" />
+=======
+    <Content Include="Views\Education\_NumeratorDenominator.cshtml" />
+    <Content Include="Views\Education\_Denominator.cshtml" />
+    <Content Include="Views\Education\_JournalNumeratorCell.cshtml" />
+    <Content Include="Views\Education\_JournalDenomeratorCell.cshtml" />
+    <Content Include="Views\Education\Schedule\Schedule.cshtml" />
+    <Content Include="Views\Education\Schedule\_LessonCell.cshtml" />
+    <Content Include="Views\Manage\Contact.cshtml" />
+>>>>>>> origin/dev
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

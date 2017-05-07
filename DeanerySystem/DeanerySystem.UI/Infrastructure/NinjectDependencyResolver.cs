@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using DeanerySystem.Domain;
 using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Concrete;
+using DeanerySystem.Domain.DataFeeders;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
+using DeanerySystem.Domain.Repositories;
 using Moq;
 using Ninject;
 
@@ -29,62 +32,213 @@ namespace DeanerySystem.UI.Infrastructure
         }
         private void AddBindings()
         {
-			Mock<IDeaneryEntitiesRepository> entitiesMock = new Mock<IDeaneryEntitiesRepository>();
-			entitiesMock.Setup(m => m.Faculties).Returns(new List<Faculty>
-			{
-				new Faculty {Id = 1, Name = "Biology"},
-				new Faculty {Id = 2, Name = "Geography"},
-				new Faculty {Id = 3, Name = "Geology"},
-				new Faculty {Id = 4, Name = "Economics"},
-				new Faculty {Id = 5, Name = "Electronics"},
-				new Faculty {Id = 6, Name = "Jornalism"},
-				new Faculty {Id = 7, Name = "Foreign Languages"},
-				new Faculty {Id = 8, Name = "History"},
-				new Faculty {Id = 9, Name = "Culture and Arts"},
-				new Faculty {Id = 10, Name = "International Relations"},
-				new Faculty {Id = 11, Name = "Mechanics and Mathematics"},
-				new Faculty {Id = 12, Name = "Applied Mathematics and Information Science"},
-				new Faculty {Id = 13, Name = "Physics"},
-				new Faculty {Id = 14, Name = "Philology"},
-				new Faculty {Id = 15, Name = "Philosophy"},
-				new Faculty {Id = 16, Name = "Chemistry"},
-				new Faculty {Id = 17, Name = "Law"}
-			});
-			entitiesMock.Setup(m => m.Streams).Returns(new List<Stream>
-			{
-				new Stream()
-				{
-					Id = 1,
-					Name = "Інформатика",
-					StreamAbbreviation = "ПМІ",
-					Faculty = entitiesMock.Object.Faculties.ElementAt(11)
-				}
-			});
-			entitiesMock.Setup(m => m.Departments).Returns(new List<Department>
-			{
-				new Department()
-				{
-					Id = 1,
-					Name = "Інформаційні системи",
+            #region UnitOfWork
+
+            Mock<IUnitOfWork> unitOfWorkMock = new Mock<IUnitOfWork>();
+
+            #region FacultiesUoW
+
+            var facultiesDataFeeder = new FacultyDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Faculty>> facultyRepositoryMock = new Mock<IGenericRepository<Faculty>>();
+            facultyRepositoryMock.Setup(fr => fr.Get(null, null, "")).Returns(facultiesDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.FacultyRepository).Returns(() => facultyRepositoryMock.Object);
+            #endregion
+
+            #region StreamsUoW
+            var streamDataFeeder = new StreamDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Stream>> streamRepositoryMock = new Mock<IGenericRepository<Stream>>();
+            streamRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(streamDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.StreamRepository).Returns(() => streamRepositoryMock.Object);
+            #endregion
+
+            #region DepartmentsUoW   
+
+            var departmentDataFeeder = new DepartmentDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Department>> departmentRepositoryMock = new Mock<IGenericRepository<Department>>();
+            departmentRepositoryMock.Setup(dr => dr.Get(null, null, "")).Returns(departmentDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.DepartmentRepository).Returns(() => departmentRepositoryMock.Object);
+            #endregion
+
+            #region SemestersUoW
+
+            var semesterDataFeeder = new SemesterDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Semester>> semesterRepositoryMock = new Mock<IGenericRepository<Semester>>();
+            semesterRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(semesterDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.SemesterRepository).Returns(() => semesterRepositoryMock.Object);
+            #endregion
+
+            #region StudentsUoW      
+
+            var studentDataFeeder = new StudentDataFeeder(unitOfWorkMock.Object);     
+            Mock<IGenericRepository<Student>> studentRepositoryMock = new Mock<IGenericRepository<Student>>();
+            studentRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(studentDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.StudentRepository).Returns(() => studentRepositoryMock.Object);
+            #endregion
+
+            #region ProfessorsUoW
+
+            var professorDataFeeder = new ProfessorDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Professor>> professorRepositoryMock = new Mock<IGenericRepository<Professor>>();
+            professorRepositoryMock.Setup(pr => pr.Get(null, null, "")).Returns(professorDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.ProfessorRepository).Returns(() => professorRepositoryMock.Object);
+            #endregion
+
+            #region GroupsUoW
+
+            var groupDataFeeder = new GroupDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Group>> groupRepositoryMock = new Mock<IGenericRepository<Group>>();
+            groupRepositoryMock.Setup(gr => gr.Get(null, null, "")).Returns(groupDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.GroupRepository).Returns(() => groupRepositoryMock.Object);
+
+            #endregion
+
+            #region ClassNumberTimesUow
+
+            var classNumberTimeDataFeeder = new ClassNumberTimeDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<ClassNumberTime>> classNumberTimeRepositoryMock =
+                new Mock<IGenericRepository<ClassNumberTime>>();
+            classNumberTimeRepositoryMock.Setup(cnt => cnt.Get(null, null, "")).Returns(classNumberTimeDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.ClassNumberTimeRepository).Returns(() => classNumberTimeRepositoryMock.Object);
+            #endregion
+
+            #region TimeTableUoW
+
+            var timeTableDataFeeder = new TimeTableDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<TimeTable>> timeTableRepositoryMock = new Mock<IGenericRepository<TimeTable>>();
+            timeTableRepositoryMock.Setup(ttr => ttr.Get(null, null, "")).Returns(timeTableDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.TimeTableRepository).Returns(() => timeTableRepositoryMock.Object);
+            #endregion
+
+            #region CellulesUoW
+
+            var cellulesDataFeeder = new CellulesDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Cellule>> celluleRepositoryMock = new Mock<IGenericRepository<Cellule>>();
+            celluleRepositoryMock.Setup(cr => cr.Get(null, null, "")).Returns(cellulesDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.CelluleRepository).Returns(() => celluleRepositoryMock.Object);
+            #endregion
+
+            #region JournalUoW
+
+            var journalDataFeeder = new JournalDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Journal>> journalRepository = new Mock<IGenericRepository<Journal>>();
+            journalRepository.Setup(jr => jr.Get(null, null, "")).Returns(journalDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.JournalRepository).Returns(() => journalRepository.Object);
+            #endregion
+
+            #region ClassesUoW
+
+            var classDataFeeder = new ClassDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Class>> classRepository = new Mock<IGenericRepository<Class>>();
+            classRepository.Setup(cr => cr.Get(null, null, "")).Returns(classDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.ClassRepository).Returns(() => classRepository.Object);
+            #endregion
+
+            #region SubjectsUoW
+
+            var subjectDataFeeder = new SubjectDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<Subject>> subjectRepositoryMock = new Mock<IGenericRepository<Subject>>();
+            subjectRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(subjectDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.SubjectRepository).Returns(() => subjectRepositoryMock.Object);
+            #endregion
+
+            #region EducationalPlanUoW
+
+            var educationalPlanDataFeeder = new EducationalPlanDataFeeder(unitOfWorkMock.Object);
+            Mock<IGenericRepository<EducationalPlan>> educationlPlanRepositoryMock =
+                new Mock<IGenericRepository<EducationalPlan>>();
+            educationlPlanRepositoryMock.Setup(epr => epr.Get(null, null, "")).Returns(educationalPlanDataFeeder.GetData());
+            unitOfWorkMock.Setup(uw => uw.EducationalPlanRepository).Returns(() => educationlPlanRepositoryMock.Object);
+            #endregion
+
+            #region UnitOfWorkSetup           
+
+
+
+
+            unitOfWorkMock.Setup(uw => uw.Save());
+            unitOfWorkMock.Setup(uw => uw.Dispose());
+            #endregion
+
+            #endregion
+
+            //------------------------------------------------------------------------------------
+
+            #region Repository
+            Mock<IDeaneryEntitiesRepository> entitiesMock = new Mock<IDeaneryEntitiesRepository>();
+
+            #region Faculties
+
+            entitiesMock.Setup(m => m.Faculties).Returns(new List<Faculty>
+            {
+                new Faculty {Id = 1, Name = "Biology"},
+                new Faculty {Id = 2, Name = "Geography"},
+                new Faculty {Id = 3, Name = "Geology"},
+                new Faculty {Id = 4, Name = "Economics"},
+                new Faculty {Id = 5, Name = "Electronics"},
+                new Faculty {Id = 6, Name = "Jornalism"},
+                new Faculty {Id = 7, Name = "Foreign Languages"},
+                new Faculty {Id = 8, Name = "History"},
+                new Faculty {Id = 9, Name = "Culture and Arts"},
+                new Faculty {Id = 10, Name = "International Relations"},
+                new Faculty {Id = 11, Name = "Mechanics and Mathematics"},
+                new Faculty {Id = 12, Name = "Applied Mathematics and Information Science"},
+                new Faculty {Id = 13, Name = "Physics"},
+                new Faculty {Id = 14, Name = "Philology"},
+                new Faculty {Id = 15, Name = "Philosophy"},
+                new Faculty {Id = 16, Name = "Chemistry"},
+                new Faculty {Id = 17, Name = "Law"}
+            });
+
+            #endregion
+
+            #region Streams
+
+            entitiesMock.Setup(m => m.Streams).Returns(new List<Stream>
+            {
+                new Stream()
+                {
+                    Id = 1,
+                    Name = "Інформатика",
+                    StreamAbbreviation = "ПМІ",
+                    Faculty = entitiesMock.Object.Faculties.ElementAt(11)
+                }
+            });
+
+            #endregion
+
+            #region Departments
+
+            entitiesMock.Setup(m => m.Departments).Returns(new List<Department>
+            {
+                new Department()
+                {
+                    Id = 1,
+                    Name = "Інформаційні системи",
                     //Head = entitiesMock.Object.Professors.ElementAt(1),
                     Number = 2
                     //Stream = entitiesMock.Object.Streams.ElementAt(0)
                 }
-			});
+            });
 
-			entitiesMock.Setup(m => m.Semesters).Returns(new List<Semester>
-			{
-				new Semester
-				{
-					Id = 1,
-					Number = SemesterNumber.Second,
-					Start = new DateTime(2016, 2, 9),
-					CreditSessionStart = new DateTime(2016, 5, 13)
-				}
-			});
+            #endregion
 
-			#region Students
-			entitiesMock.Setup(m => m.Students).Returns(new List<Student>
+            #region Semesters
+
+            entitiesMock.Setup(m => m.Semesters).Returns(new List<Semester>
+            {
+                new Semester
+                {
+                    Id = 1,
+                    Number = SemesterNumber.Second,
+                    Start = new DateTime(2016, 2, 9),
+                    CreditSessionStart = new DateTime(2016, 5, 13)
+                }
+            });
+
+            #endregion
+
+            #region Students
+            entitiesMock.Setup(m => m.Students).Returns(new List<Student>
 			{
 				new Student
 				{
@@ -1118,9 +1272,10 @@ namespace DeanerySystem.UI.Infrastructure
 					}
 				}
 			});
-			#endregion
+            #endregion
 
-			entitiesMock.Setup(m => m.Subjects).Returns(new List<Subject>
+            #region Subjects
+            entitiesMock.Setup(m => m.Subjects).Returns(new List<Subject>
 			{
 				new Subject
 				{
@@ -1207,64 +1362,69 @@ namespace DeanerySystem.UI.Infrastructure
 					}
 				}
 			});
+            #endregion
 
+            #region EducationalPlans
+            entitiesMock.Setup(m => m.EducationalPlans).Returns(new List<EducationalPlan>
+            {
+                new EducationalPlan()
+                {
+                    Id = 1,
+                    Group = entitiesMock.Object.Groups.ElementAt(0),
+                    Semester = entitiesMock.Object.Semesters.ElementAt(0),
+                    Subject = entitiesMock.Object.Subjects.ElementAt(0)
+                },
+                new EducationalPlan()
+                {
+                    Id = 2,
+                    Group = entitiesMock.Object.Groups.ElementAt(0),
+                    Semester = entitiesMock.Object.Semesters.ElementAt(0),
+                    Subject = entitiesMock.Object.Subjects.ElementAt(1)
+                },
+                new EducationalPlan()
+                {
+                    Id = 3,
+                    Group = entitiesMock.Object.Groups.ElementAt(1),
+                    Semester = entitiesMock.Object.Semesters.ElementAt(0),
+                    Subject = entitiesMock.Object.Subjects.ElementAt(2)
+                },
+                new EducationalPlan()
+                {
+                    Id = 4,
+                    Group = entitiesMock.Object.Groups.ElementAt(1),
+                    Semester = entitiesMock.Object.Semesters.ElementAt(0),
+                    Subject = entitiesMock.Object.Subjects.ElementAt(3)
+                },
+                new EducationalPlan()
+                {
+                    Id = 5,
+                    Group = entitiesMock.Object.Groups.ElementAt(1),
+                    Semester = entitiesMock.Object.Semesters.ElementAt(0),
+                    Subject = entitiesMock.Object.Subjects.ElementAt(4)
+                },
+                new EducationalPlan()
+                {
+                    Id = 6,
+                    Group = entitiesMock.Object.Groups.ElementAt(1),
+                    Semester = entitiesMock.Object.Semesters.ElementAt(0),
+                    Subject = entitiesMock.Object.Subjects.ElementAt(5)
+                },
+                new EducationalPlan()
+                {
+                    Id = 7,
+                    Group = entitiesMock.Object.Groups.ElementAt(0),
+                    Semester = entitiesMock.Object.Semesters.ElementAt(0),
+                    Subject = entitiesMock.Object.Subjects.ElementAt(6)
+                }
+            });
+            #endregion
 
-			entitiesMock.Setup(m => m.EducationalPlans).Returns(new List<EducationalPlan>
-			{
-				new EducationalPlan()
-				{
-					Id = 1,
-					Group = entitiesMock.Object.Groups.ElementAt(0),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0),
-					Subject = entitiesMock.Object.Subjects.ElementAt(0)
-				},
-				new EducationalPlan()
-				{
-					Id = 2,
-					Group = entitiesMock.Object.Groups.ElementAt(0),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0),
-					Subject = entitiesMock.Object.Subjects.ElementAt(1)
-				},
-				new EducationalPlan()
-				{
-					Id = 3,
-					Group = entitiesMock.Object.Groups.ElementAt(1),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0),
-					Subject = entitiesMock.Object.Subjects.ElementAt(2)
-				},
-				new EducationalPlan()
-				{
-					Id = 4,
-					Group = entitiesMock.Object.Groups.ElementAt(1),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0),
-					Subject = entitiesMock.Object.Subjects.ElementAt(3)
-				},
-				new EducationalPlan()
-				{
-					Id = 5,
-					Group = entitiesMock.Object.Groups.ElementAt(1),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0),
-					Subject = entitiesMock.Object.Subjects.ElementAt(4)
-				},
-				new EducationalPlan()
-				{
-					Id = 6,
-					Group = entitiesMock.Object.Groups.ElementAt(1),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0),
-					Subject = entitiesMock.Object.Subjects.ElementAt(5)
-				},
-				new EducationalPlan()
-				{
-					Id = 7,
-					Group = entitiesMock.Object.Groups.ElementAt(0),
-					Semester = entitiesMock.Object.Semesters.ElementAt(0),
-					Subject = entitiesMock.Object.Subjects.ElementAt(6)
-				}
-			});
+            #endregion
 
-
-			kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
-			//kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();   
-		}
+            kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
+			//kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();  
+            kernel.Bind<IUnitOfWork>().ToConstant(unitOfWorkMock.Object);
+            //kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+        }
 	}
 }

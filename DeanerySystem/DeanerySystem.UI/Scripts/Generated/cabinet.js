@@ -23,28 +23,22 @@ var DeanerySystem;
 (function (DeanerySystem) {
     var ClientSide;
     (function (ClientSide) {
-        var QueryString = ClientSide.Common.Utilities.QueryString;
-        var Initializer = (function () {
-            function Initializer(Color) {
-                this.Color = Color;
-            }
-            Initializer.prototype.Initialize = function () {
-                var _this = this;
-                var url = QueryString.GetQueryString();
-                var divs = jQuery("div");
-                divs.each(function (index, element) {
-                    jQuery(element).css("background-color", _this.Color);
-                });
-                console.log(url);
-                alert("initialzied");
-            };
-            return Initializer;
-        }());
-        ClientSide.Initializer = Initializer;
+        var Cabinet;
+        (function (Cabinet) {
+            var Initializer = (function () {
+                function Initializer(Color) {
+                    this.Color = Color;
+                }
+                Initializer.prototype.Initialize = function () {
+                };
+                return Initializer;
+            }());
+            Cabinet.Initializer = Initializer;
+        })(Cabinet = ClientSide.Cabinet || (ClientSide.Cabinet = {}));
     })(ClientSide = DeanerySystem.ClientSide || (DeanerySystem.ClientSide = {}));
 })(DeanerySystem || (DeanerySystem = {}));
 jQuery(document)
     .ready(function () {
-    var initializer = new DeanerySystem.ClientSide.Initializer("gray");
+    var initializer = new DeanerySystem.ClientSide.Cabinet.Initializer("gray");
     initializer.Initialize();
 });

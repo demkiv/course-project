@@ -2,7 +2,8 @@
 
 namespace DeanerySystem.UI.Models.Education.Schedule {
 	public class LessonGroupModel {
-		public LessonGroupModel() {
+		public LessonGroupModel(int groupId) {
+			GroupId = groupId;
 			Lessons = new List<LessonModel>();
 		}
 

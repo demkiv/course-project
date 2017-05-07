@@ -204,7 +204,7 @@ var DeanerySystem;
                     this.groups = groups;
                     this.TemplateName = "day-template";
                     this.Name = ko.observable(day.Name);
-                    var lessonNumbers = day.LessonNumbers.map(function (ln) {
+                    var lessonNumbers = day.LessonNumbers.sort(function (a, b) { return a.Number - b.Number; }).map(function (ln) {
                         return new ViewModels.LessonNumberVM(ln, groups);
                     });
                     this.LessonNumbers = ko.observableArray(lessonNumbers);

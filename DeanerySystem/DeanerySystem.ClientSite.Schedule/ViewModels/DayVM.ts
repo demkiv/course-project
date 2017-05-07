@@ -11,7 +11,7 @@ module DeanerySystem.ClientSide.ViewModels {
 		constructor(private day: Schedule.Models.DayModel, private groups: number[]) {
 			this.Name = ko.observable(day.Name);
 
-			var lessonNumbers = day.LessonNumbers.map(ln => {
+			var lessonNumbers = day.LessonNumbers.sort((a, b) => a.Number - b.Number).map(ln => {
 				return new LessonNumberVM(ln, groups);
 			});
 			this.LessonNumbers = ko.observableArray(lessonNumbers);

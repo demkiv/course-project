@@ -50,11 +50,9 @@ namespace DeanerySystem.UI.Controllers.API
 							if (lessonGroupInfo == null) {
 								lessonGroupInfo = new LessonGroupModel() {
 									GroupId = plan.Group.Id,
-									IsSolid = timeTable.Fraction == Fractions.Integer
 								};
 								lessonNumberInfo.LessonGroups.Add(lessonGroupInfo);
 							}
-
 
 							LessonModel lessonInfo = new LessonModel() {
 								Fraction = timeTable.Fraction,
@@ -69,11 +67,7 @@ namespace DeanerySystem.UI.Controllers.API
 								})
 							};
 
-							if (timeTable.Fraction == Fractions.Denominator) {
-								lessonGroupInfo.SecondRowLesson = lessonInfo;
-							} else {
-								lessonGroupInfo.FirstRowLesson = lessonInfo;
-							}
+							lessonGroupInfo.Lessons.Add(lessonInfo);
 						}
 					}
 				}

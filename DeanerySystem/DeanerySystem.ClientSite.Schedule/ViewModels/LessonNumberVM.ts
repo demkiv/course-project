@@ -20,9 +20,7 @@ module DeanerySystem.ClientSide.ViewModels {
 				var lessonGroup = ko.utils.arrayFirst(this.lessonNumber.LessonGroups, lg => lg.GroupId == group);
 				lessonGroups.push(new LessonGroupVM(lessonGroup));
 			});
-			//var lessonGroups = this.lessonNumber.LessonGroups.map(lg => {
-			//	return new LessonGroupVM(lg, groups);
-			//});
+
 			this.LessonGroups = ko.observableArray(lessonGroups);
 		}
 	}

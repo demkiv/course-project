@@ -17,9 +17,23 @@ module DeanerySystem.ClientSide.ViewModels {
 				this.RowSpanNumber = ko.observable(2);
 			} else {
 				this.TemplateName = ko.observable(this.TemplateNameWithContent);
-				this.FirstRowLesson = ko.observable(new LessonVM(this.lessonGroup.FirstRowLesson));
-				this.SecondRowLesson = ko.observable(new LessonVM(this.lessonGroup.SecondRowLesson));
-				this.RowSpanNumber = ko.observable(this.lessonGroup.IsSolid ? 2 : 1);
+
+				var lessons = this.lessonGroup.Lessons;
+				var integerLesson = ko.utils.arrayFirst(lessons, lg => lg.Fraction == Schedule.Models.Fractions.Integer);
+
+				if (integerLesson == null) {
+					var numeratorLesson = ko.utils.arrayFirst(lessons, lg => lg.Fraction == Schedule.Models.Fractions.Numerator);
+					this.FirstRowLesson = ko.observable(new LessonVM(numeratorLesson));
+
+					var denominatorLesson = ko.utils.arrayFirst(lessons, lg => lg.Fraction == Schedule.Models.Fractions.Denominator);
+					this.SecondRowLesson = ko.observable(new LessonVM(denominatorLesson));
+
+					this.RowSpanNumber = ko.observable(1);
+				} else {
+					this.FirstRowLesson = ko.observable(new LessonVM(integerLesson));
+					this.SecondRowLesson = ko.observable(new LessonVM(null));
+					this.RowSpanNumber = ko.observable(2);
+				}
 			}
 		}
 	}

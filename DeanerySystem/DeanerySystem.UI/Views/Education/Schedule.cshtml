@@ -1,7 +1,4 @@
-﻿@using DeanerySystem.Domain.Entities
-@using DeanerySystem.Domain.Entities.Enums
-@using DeanerySystem.UI.Models.Education
-@model DeanerySystem.UI.Models.Education.ScheduleInfo
+﻿<script src="~/Scripts/Generated/schedule.js"></script>
 
 @{
 	ViewBag.Title = "Schedule";
@@ -29,57 +26,69 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th style="text-align: center;">День</th>
-				<th style="text-align: center;">Пара</th>
-				@foreach (var group in @Model.Groups) {
-					<th style="text-align: center;">
-						<span>@group.Name</span>
-					</th>
-				}
+				<th class="text-center">День</th>
+				<th class="text-center">Пара</th>
+				<!-- ko foreach: Groups -->
+					<th class="text-center" data-bind="text: $data"></th>
+				<!-- /ko -->
 			</tr>
 		</thead>
-		<tbody>
-
-
-			@foreach (var day in @Model.Times.Keys.Where(t => t != null)) { 
-				bool dayFirstLoop = true;
-				if (@Model.Times[day] != null) {
-					foreach (var time in @Model.Times[day].Where(t => t != null)) {
-						<tr style="text-align: center;">
-							@if (@dayFirstLoop) {
-								dayFirstLoop = false;
-								int span = @Model.Times[day].Count(t => t != null)*2;
-								<td rowspan="@span">@Model.DayNames[day]</td>
-							}
-
-							<td rowspan="2">
-								<span>@time.Number</span><br/>
-								<span>@time.Start.ToString(@"hh\:mm") - @time.End.ToString(@"hh\:mm")</span>
-							</td>
-
-							@foreach (var group in @Model.Groups) {
-								var key = new Tuple<ClassNumberTime, Group>(time, group);
-								if (Model.NumeratorDenomerators.ContainsKey(key)) {
-									NumeratorDenomerator numeratorDenomerator = @Model.NumeratorDenomerators[key];
-									Html.RenderPartial("_NumeratorDenominator", numeratorDenomerator);
-								} else {
-									<td rowspan="2"/>
-								}
-							}
-						</tr>
-						<tr style="text-align: center;">
-							@foreach (var group in @Model.Groups) {
-								var key = new Tuple<ClassNumberTime, Group>(time, group);
-								if (Model.NumeratorDenomerators.ContainsKey(key)) {
-									NumeratorDenomerator numeratorDenomerator = @Model.NumeratorDenomerators[key];
-									Html.RenderPartial("_Denominator", numeratorDenomerator);
-								}
-							}
-						</tr>
-
-					}
-				}
-			}
+		<tbody class="text-center" data-bind="foreach: Days">
+			<!-- ko template: { name: $data.TemplateName, data: $data, as: 'day' } -->	
+			<!-- /ko -->
 		</tbody>
 	</table>
 </div>
+
+<script type="text/html" id="day-template">
+	<!-- ko foreach: LessonNumbers -->
+		<tr>
+			<!-- ko if: $index() == 0 -->
+				<td data-bind="text: day.Name, attr: { rowspan: $parent.RowSpanNumber }"></td>
+			<!-- /ko -->
+
+			<td rowspan="2" data-bind="template: { name: $data.TemplateName, data: $data }"></td>
+
+			<!-- ko foreach: LessonGroups -->
+				<td class="lesson-group-cell" 
+					data-bind="template: { name: $data.TemplateName, data: $data.FirstRowLesson }, attr: { rowspan: $data.RowSpanNumber }"></td>
+			<!-- /ko -->
+		</tr>
+		<tr>
+			<!-- ko foreach: LessonGroups -->
+				<!-- ko if: $data.RowSpanNumber() == 1 -->
+					<td class="lesson-group-cell" data-bind="template: { name: $data.TemplateName, data: $data.SecondRowLesson }"></td>
+				<!-- /ko -->
+			<!-- /ko -->
+		</tr>
+	<!-- /ko -->
+</script>
+
+<script type="text/html" id="lesson-number-template">
+	<span data-bind="text: Number" />
+	<br />
+	<span data-bind="text: Time" />
+</script>
+
+<script type="text/html" id="lesson-group-template-empty"></script>
+
+<script type="text/html" id="lesson-group-template">
+	<!-- ko template: { name: $data.TemplateName, data: $data } -->
+	<!-- /ko -->
+</script>
+
+<script type="text/html" id="lesson-template-empty">
+	<div class="lesson-empty"></div>
+</script>
+
+<script type="text/html" id="lesson-template">
+	<div class="lesson-cell">
+		<a class="lesson-cell-link" data-bind="attr: { href: JournalLink }">
+			<span data-bind="text: Subject" />
+			<br />
+			<span data-bind="text: Lector" />
+			<br />
+			<span data-bind="text: Type" />
+		</a>
+	</div>
+</script>

@@ -18,13 +18,6 @@ namespace DeanerySystem.UI.Controllers.API
 		}
 
 		[HttpGet]
-		[Route("json/{id}")]
-		public IHttpActionResult GetJson(int id) 
-		{
-			return Json("Markiyasyk" + id);
-		}
-
-		[HttpGet]
 		[Route("getSchedule")]
 		public IHttpActionResult GetSchedule() {
 			var scheduleInfo = new ScheduleModel();

@@ -6,11 +6,9 @@ using System.Web.UI.WebControls;
 using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
-using DeanerySystem.UI.Models.Education.Schedule;
 using DeanerySystem.WebUI.Models;
 using Rotativa;
 using Orientation = Rotativa.Options.Orientation;
-using System.Web.Routing;
 
 namespace DeanerySystem.UI.Controllers
 {
@@ -21,96 +19,11 @@ namespace DeanerySystem.UI.Controllers
 		public EducationController(IDeaneryEntitiesRepository deaneryEntitiesRepository) {
 			this.repository = deaneryEntitiesRepository;
 		}
-
+		
 		public ActionResult Schedule() {
-			var scheduleInfo = new ScheduleModel();
-
-			var currentSemester = repository.Semesters.First();
-			var educationalPlans = repository.EducationalPlans.Where(plan => plan.Semester == currentSemester);
-
-			foreach (var plan in educationalPlans) {
-				if (!scheduleInfo.Groups.Exists(group => group.Id == plan.Group.Id)) {
-					scheduleInfo.Groups.Add(new GroupModel() { Id = plan.Group.Id, Name = plan.Group.Name });
-				}
-				
-                foreach (var _class in plan.Subject.Classes) {
-					foreach (var timeTable in _class.TimeTables) {
-						var dayInfo = scheduleInfo.Days.SingleOrDefault(day => day.Id == timeTable.DayOfWeek);
-						if (dayInfo == null) {
-							string dayName = getUkrainianDay(timeTable.DayOfWeek);
-							dayInfo = new DayModel(timeTable.DayOfWeek, dayName);
-							scheduleInfo.Days.Add(dayInfo);
-						}
-
-                        foreach (var time in timeTable.ClassNumberTimes) {
-							var lessonNumberInfo = dayInfo.LessonNumbers.SingleOrDefault(ln => ln.Number == time.Number);
-							if (lessonNumberInfo == null) {
-								lessonNumberInfo = new LessonNumberModel(time.Number, time.Start, time.End);
-								dayInfo.LessonNumbers.Add(lessonNumberInfo);
-							}
-
-							var lessonGroupInfo = lessonNumberInfo.LessonGroups.SingleOrDefault(lg => lg.GroupId == plan.Group.Id);
-							if (lessonGroupInfo == null) {
-								lessonGroupInfo = new LessonGroupModel() {
-									GroupId = plan.Group.Id,
-									IsSolid = timeTable.Fraction == Fractions.Integer
-								};
-								lessonNumberInfo.LessonGroups.Add(lessonGroupInfo);
-							}
-
-
-							LessonModel lessonInfo = new LessonModel() {
-								Fraction = timeTable.Fraction,
-								Lector = _class.Professor.GetFullName(),
-								Subject = plan.Subject.Name,
-								Type = getClassType(_class.ClassType),
-								JournalLink = Url.Action("JournalLink", new RouteValueDictionary(new {
-									educationalPlanId = plan.Id,
-									classId = _class.Id
-								}))
-							};
-
-							if (timeTable.Fraction == Fractions.Denominator) {
-								lessonGroupInfo.SecondRowLesson = lessonInfo;
-							} else {
-								lessonGroupInfo.FirstRowLesson = lessonInfo;
-							}
-						}
-					}
-				}
-			}
-
-			// fill in empty sells in between 
-			foreach (var dayInfo in scheduleInfo.Days) {
-				for (int i = dayInfo.LessonNumbers.Min(ln => ln.Number) + 1; i < dayInfo.LessonNumbers.Max(ln => ln.Number); i++) {
-					if (!dayInfo.LessonNumbers.Any(ln => ln.Number == i)) {
-						var time = repository.ClassNumberTimes.Single(numberTime => numberTime.Number == i);
-						dayInfo.LessonNumbers.Add(new LessonNumberModel(time.Number, time.Start, time.End));
-					}
-				}
-				dayInfo.LessonNumbers = dayInfo.LessonNumbers.OrderBy(ln => ln.Number).ToList();
-			}
-
-			return View("Schedule/Schedule", scheduleInfo);
+			return View();
 		}
-
-		public ActionResult ScheduleNew() {
-			return View("Schedule/ScheduleNew");
-		}
-
-		private string getUkrainianDay(DayOfWeek day) {
-			switch (day) {
-				case DayOfWeek.Monday: return "Понеділок";
-				case DayOfWeek.Tuesday: return "Вівторок";
-				case DayOfWeek.Wednesday: return "Середа";
-				case DayOfWeek.Thursday: return "Четвер";
-				case DayOfWeek.Friday: return "П'ятниця";
-				case DayOfWeek.Saturday: return "Субота";
-				case DayOfWeek.Sunday: return "Неділя";
-				default: return String.Empty;
-			}
-		}
-
+		
 		public ActionResult JournalLink(int educationalPlanId, int classId) {
 			var journalId = repository.Classes.First(c => c.Id == classId).Journals.First(j => j.JournalType == JournalTypes.Assessment).Id;
             return RedirectToAction("Journal", new { educationalPlanId, classId, journalId });

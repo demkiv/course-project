@@ -2,12 +2,9 @@
 using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.UI.Models.Education.Schedule;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Helpers;
 using System.Web.Http;
+using System.Web.Routing;
 
 namespace DeanerySystem.UI.Controllers.API
 {
@@ -71,8 +68,12 @@ namespace DeanerySystem.UI.Controllers.API
 								Lector = _class.Professor.GetFullName(),
 								Subject = plan.Subject.Name,
 								Type = getClassType(_class.ClassType),
-								PlanId = plan.Id,
-								ClassId = _class.Id
+								JournalLink = Url.Link("Default", new {
+									Controller = "Education",
+									Action = "JournalLink",
+									educationalPlanId = plan.Id,
+									classId = _class.Id
+								})
 							};
 
 							if (timeTable.Fraction == Fractions.Denominator) {

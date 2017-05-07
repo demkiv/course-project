@@ -10,6 +10,7 @@ using DeanerySystem.UI.Models.Education.Schedule;
 using DeanerySystem.WebUI.Models;
 using Rotativa;
 using Orientation = Rotativa.Options.Orientation;
+using System.Web.Routing;
 
 namespace DeanerySystem.UI.Controllers
 {
@@ -63,8 +64,10 @@ namespace DeanerySystem.UI.Controllers
 								Lector = _class.Professor.GetFullName(),
 								Subject = plan.Subject.Name,
 								Type = getClassType(_class.ClassType),
-								PlanId = plan.Id,
-								ClassId = _class.Id
+								JournalLink = Url.Action("JournalLink", new RouteValueDictionary(new {
+									educationalPlanId = plan.Id,
+									classId = _class.Id
+								}))
 							};
 
 							if (timeTable.Fraction == Fractions.Denominator) {

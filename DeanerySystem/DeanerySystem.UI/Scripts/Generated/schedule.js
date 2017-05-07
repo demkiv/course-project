@@ -225,14 +225,14 @@ var DeanerySystem;
             var LessonGroupVM = (function () {
                 function LessonGroupVM(lessonGroup) {
                     this.lessonGroup = lessonGroup;
-                    this.TEMPLATE_NAME = "lesson-group-template";
-                    this.EMPTY_TEMPLATE_NAME = "empty-lesson-group-template";
+                    this.TemplateNameEmpty = "lesson-group-template-empty";
+                    this.TemplateNameWithContent = "lesson-group-template";
                     if (this.lessonGroup == null) {
-                        this.TemplateName = ko.observable(this.EMPTY_TEMPLATE_NAME);
+                        this.TemplateName = ko.observable(this.TemplateNameEmpty);
                         this.RowSpanNumber = ko.observable(2);
                     }
                     else {
-                        this.TemplateName = ko.observable(this.TEMPLATE_NAME);
+                        this.TemplateName = ko.observable(this.TemplateNameWithContent);
                         this.FirstRowLesson = ko.observable(new ViewModels.LessonVM(this.lessonGroup.FirstRowLesson));
                         this.SecondRowLesson = ko.observable(new ViewModels.LessonVM(this.lessonGroup.SecondRowLesson));
                         this.RowSpanNumber = ko.observable(this.lessonGroup.IsSolid ? 2 : 1);
@@ -282,16 +282,17 @@ var DeanerySystem;
             var LessonVM = (function () {
                 function LessonVM(lessonGroup) {
                     this.lessonGroup = lessonGroup;
-                    this.TEMPLATE_NAME = "lesson-template";
-                    this.EMPTY_TEMPLATE_NAME = "empty-lesson-template";
+                    this.TemplateNameEmpty = "lesson-template-empty";
+                    this.TemplateNameWithContent = "lesson-template";
                     if (lessonGroup == null) {
-                        this.TemplateName = ko.observable(this.EMPTY_TEMPLATE_NAME);
+                        this.TemplateName = ko.observable(this.TemplateNameEmpty);
                     }
                     else {
-                        this.TemplateName = ko.observable(this.TEMPLATE_NAME);
+                        this.TemplateName = ko.observable(this.TemplateNameWithContent);
                         this.Subject = ko.observable(lessonGroup.Subject);
                         this.Lector = ko.observable(lessonGroup.Lector);
                         this.Type = ko.observable(lessonGroup.Type);
+                        this.JournalLink = ko.observable(lessonGroup.JournalLink);
                     }
                 }
                 return LessonVM;

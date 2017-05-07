@@ -6,8 +6,6 @@ namespace DeanerySystem.UI.Models.Education.Schedule {
 		public string Subject { get; set; }
 		public string Lector { get; set; }
 		public string Type { get; set; }
-
-		public int PlanId { get; set; }
-		public int ClassId { get; set; }
+		public string JournalLink { get; set; }
 	}
 }

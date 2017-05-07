@@ -4,8 +4,7 @@
 		public Subject: string;
 		public Lector: string;
 		public Type: string;
-		public PlanId: number;
-		public ClassId: number;
+		public JournalLink: string;
 
 		constructor() { }
 	}

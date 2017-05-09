@@ -51,15 +51,28 @@ a, a:hover, a:visited, a:link, a:active {
     border-left: solid 5px #00776B;
 }
 
-.lesson-cell {
+.lesson-group-cell {
 	padding: 0 !important;
-	vertical-align: middle !important;
+	height: 100%;
 }
 
-.lesson-cell:hover {
+.lesson-group-cell .lesson-empty {
+	height: 16px;
+}
+
+.lesson-group-cell .lesson-cell {
+	display: table;
+	height: 100%;
+	width: 100%;
+}
+
+.lesson-group-cell .lesson-cell:hover {
 	background-color: #f3f4f6;
 }
 
-.lesson-cell .lesson-content {
+.lesson-group-cell .lesson-cell-link {
+	display: table-cell;
+	vertical-align: middle;
 	padding: 8px;
+	color: #333;
 }

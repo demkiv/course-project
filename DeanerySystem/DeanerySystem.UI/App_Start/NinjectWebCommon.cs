@@ -3,15 +3,18 @@
 
 namespace DeanerySystem.UI.App_Start
 {
-    using System;
-    using System.Web;
+	using System;
+	using System.Web;
 
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+	using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
-    using Ninject;
-    using Ninject.Web.Common;
+	using Ninject;
+	using Ninject.Web.Common;
+	using Infrastructure;
+	using System.Web.Http;
+	using System.Web.Http.Dependencies;
 
-    public static class NinjectWebCommon 
+	public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
@@ -46,6 +49,9 @@ namespace DeanerySystem.UI.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                //GlobalConfiguration.Configuration.DependencyResolver = kernel.Get<System.Web.Http.Dependencies.IDependencyResolver>();
+                //GlobalConfiguration.Configuration.DependencyResolver = (IDependencyResolver)new NinjectDependencyResolver(kernel);
+
                 return kernel;
             }
             catch
@@ -61,7 +67,7 @@ namespace DeanerySystem.UI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-			System.Web.Mvc.DependencyResolver.SetResolver(new DeanerySystem.UI.Infrastructure.NinjectDependencyResolver(kernel));
+			System.Web.Mvc.DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
 		}        
     }
 }

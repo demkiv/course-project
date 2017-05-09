@@ -8,7 +8,7 @@ using DeanerySystem.Domain.Entities.Identity;
 
 namespace DeanerySystem.Domain.Entities
 {
-    public class DeanaryUser
+    public class DeaneryUser
     {
 	    public virtual ApplicationUser Identity { get; set; }
         public Guid Id { get; set; }

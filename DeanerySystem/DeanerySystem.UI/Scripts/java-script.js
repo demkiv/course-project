@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
 
+    //test
 	$("#loader").click(function () {
 		console.log("xxx");
 		$.ajax({

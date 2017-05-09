@@ -76,7 +76,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href='@Url.Action("Index", "Home")'>
-                    <img src="~/Theme/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
+                    <img src="~/Content/Images/main.svg" alt="logo" class="logo-default" style="margin-top: 10px; height: 25px;"/>
                 </a>
                 <div class="menu-toggler sidebar-toggler">
                     <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -103,7 +103,7 @@ License: You must have a valid license purchased only from themeforest(the above
                    
                     <!-- END USER LOGIN DROPDOWN -->
                     <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                    <li class="dropdown dropdown-quick-sidebar-toggler">
+                    <li class="dropdown dropdown-quick-sidebar-toggler hidden">
                         <a href="javascript:;" class="dropdown-toggle">
                             <i class="icon-logout"></i>
                         </a>
@@ -194,62 +194,59 @@ License: You must have a valid license purchased only from themeforest(the above
 							</li>
 						</ul>
 					</li>
-                    <li class="heading">
-                        <h3 class="uppercase">Заголовок</h3>
-                    </li>
                     <li>
-                        <a href="javascript:;">
-                            <i class="icon-settings"></i>
-                            <span class="title">Категорія</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="form_controls.html">
-                                    Підкатегорія 1
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_icheck.html">
-                                    Підкатегорія 2
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_layouts.html">
-                                    Підкатегорія 3
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_editable.html">
-                                    <span class="badge badge-roundless badge-warning">new</span>Підкатегорія 4
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_wizard.html">
-                                    Підкатегорія 5
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_validation.html">
-                                    Підкатегорія 6
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_image_crop.html">
-                                    <span class="badge badge-roundless badge-danger">new</span>Підкатегорія 7
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_fileupload.html">
-                                    Підкатегорія 8
-                                </a>
-                            </li>
-                            <li>
-                                <a href="form_dropzone.html">
-                                    9
-                                </a>
-                            </li>
-                        </ul>
+                        @*<a href="javascript:;">
+        <i class="icon-settings"></i>
+        <span class="title">Категорія</span>
+        <span class="arrow "></span>
+    </a>
+    <ul class="sub-menu">
+        <li>
+            <a href="form_controls.html">
+                Підкатегорія 1
+            </a>
+        </li>
+        <li>
+            <a href="form_icheck.html">
+                Підкатегорія 2
+            </a>
+        </li>
+        <li>
+            <a href="form_layouts.html">
+                Підкатегорія 3
+            </a>
+        </li>
+        <li>
+            <a href="form_editable.html">
+                <span class="badge badge-roundless badge-warning">new</span>Підкатегорія 4
+            </a>
+        </li>
+        <li>
+            <a href="form_wizard.html">
+                Підкатегорія 5
+            </a>
+        </li>
+        <li>
+            <a href="form_validation.html">
+                Підкатегорія 6
+            </a>
+        </li>
+        <li>
+            <a href="form_image_crop.html">
+                <span class="badge badge-roundless badge-danger">new</span>Підкатегорія 7
+            </a>
+        </li>
+        <li>
+            <a href="form_fileupload.html">
+                Підкатегорія 8
+            </a>
+        </li>
+        <li>
+            <a href="form_dropzone.html">
+                9
+            </a>
+        </li>
+    </ul>*@
                     </li>
                 </ul>
                 <!-- END SIDEBAR MENU -->
@@ -412,7 +409,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="../../assets/admin/layout/img/avatar10.jpg" alt="...">
+                                        @*<img class="media-object" src="../../assets/admin/layout/img/avatar10.jpg" alt="...">*@
                                         <div class="media-body">
                                             <h4 class="media-heading">Irina Savikova</h4>
                                             <div class="media-heading-sub">
@@ -424,7 +421,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="media-status">
                                             <span class="badge badge-danger">4</span>
                                         </div>
-                                        <img class="media-object" src="../../assets/admin/layout/img/avatar11.jpg" alt="...">
+                                        @*<img class="media-object" src="../../assets/admin/layout/img/avatar11.jpg" alt="...">*@
                                         <div class="media-body">
                                             <h4 class="media-heading">Maria Gomez</h4>
                                             <div class="media-heading-sub">
@@ -444,7 +441,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                     <div class="page-quick-sidebar-chat-user-messages">
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Bob Nilson</a>
@@ -455,7 +452,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Ella Wong</a>
@@ -466,7 +463,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Bob Nilson</a>
@@ -477,7 +474,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Ella Wong</a>
@@ -488,7 +485,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Bob Nilson</a>
@@ -499,7 +496,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Ella Wong</a>
@@ -510,7 +507,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Bob Nilson</a>
@@ -521,7 +518,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar2.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Ella Wong</a>
@@ -532,7 +529,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />
+                                            @*<img class="avatar" alt="" src="../../assets/admin/layout/img/avatar3.jpg" />*@
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="#" class="name">Bob Nilson</a>
@@ -936,7 +933,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN FOOTER -->
     <div class="page-footer">
         <div class="page-footer-inner">
-            2016 &copy; Electronic Deanery by Solomiia Demkiv.
+            2017 &copy; Electronic Deanery by Solomiia Demkiv & Markiyan Fostyak.
         </div>
         <div class="scroll-to-top">
             <i class="icon-arrow-up"></i>

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.ClientSide.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.ClientSide.Common.Definitions", "DeanerySystem.ClientSide.Common.Definitions\DeanerySystem.ClientSide.Common.Definitions.csproj", "{713DC203-11D5-4CDA-B86F-EAB449E6CAB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.ClientSite.Schedule", "DeanerySystem.ClientSite.Schedule\DeanerySystem.ClientSite.Schedule.csproj", "{6996BF93-D07B-44FA-B9C4-9A6192069113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{713DC203-11D5-4CDA-B86F-EAB449E6CAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{713DC203-11D5-4CDA-B86F-EAB449E6CAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{713DC203-11D5-4CDA-B86F-EAB449E6CAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6996BF93-D07B-44FA-B9C4-9A6192069113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6996BF93-D07B-44FA-B9C4-9A6192069113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6996BF93-D07B-44FA-B9C4-9A6192069113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6996BF93-D07B-44FA-B9C4-9A6192069113}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,5 +64,6 @@ Global
 		{E8F643B4-04BB-49C6-B852-315674D2627D} = {14E40B68-63E2-4D4E-BEAC-FA2F6B3D4AF2}
 		{03012726-EC8F-4FBE-AA53-4E46FA2FF9BD} = {E8F643B4-04BB-49C6-B852-315674D2627D}
 		{713DC203-11D5-4CDA-B86F-EAB449E6CAB7} = {E8F643B4-04BB-49C6-B852-315674D2627D}
+		{6996BF93-D07B-44FA-B9C4-9A6192069113} = {14E40B68-63E2-4D4E-BEAC-FA2F6B3D4AF2}
 	EndGlobalSection
 EndGlobal

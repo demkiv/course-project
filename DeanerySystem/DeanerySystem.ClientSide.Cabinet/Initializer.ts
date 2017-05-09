@@ -11,17 +11,17 @@ module DeanerySystem.ClientSide.Cabinet {
         }
 
         public Initialize() {
-            var url = QueryString.GetQueryString();
-            var divs = jQuery("div");
-            divs.each((index, element) => {
-                jQuery(element).css("background-color", this.Color);
-            });
-            console.log(url);
-            var contact = new Cabinet.ContactInfo();
-            var vm = new Cabinet.ContactInfoVM(contact);
-            var elemet = $("#contactform")[0];
-            ko.applyBindings(vm, elemet);
-            alert("initialzied");            
+            //var url = QueryString.GetQueryString();
+            //var divs = jQuery("div");
+            //divs.each((index, element) => {
+            //    jQuery(element).css("background-color", this.Color);
+            //});
+            //console.log(url);
+            //var contact = new Cabinet.ContactInfo();
+            //var vm = new Cabinet.ContactInfoVM(contact);
+            //var elemet = $("#contactform")[0];
+            //ko.applyBindings(vm, elemet);
+            //alert("initialzied");            
         }
     }
 }

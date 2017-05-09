@@ -27,6 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	@Scripts.Render("~/bundles/modernizr")
 	@RenderSection("JavaScript", required: false)
     @RenderSection("Scripts", required: false)
+	<script src="~/Scripts/knockout-3.4.1.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-2.2.2.min.js"></script>
     <script type="text/javascript" src="~/Scripts/knockout-3.4.1.js"></script>
     <script type="text/javascript" src="~/Scripts/Generated/cabinet.js"></script>
@@ -185,7 +186,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
-							<li class="tooltips" data-container="body" data-placement="right" data-html="true">
+							<li>
 								<a href=@Url.Action("Schedule", "Education")>
 									<i class="fa fa-list-ol"></i>
 									Розклад

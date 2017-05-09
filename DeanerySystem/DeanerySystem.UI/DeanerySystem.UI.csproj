@@ -230,6 +230,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ScheduleProvider.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Models\Education\JournalInfo.cs" />
     <Compile Include="Models\Education\JournalRecord.cs" />

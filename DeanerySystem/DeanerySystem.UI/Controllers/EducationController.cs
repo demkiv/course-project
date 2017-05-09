@@ -4,12 +4,9 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using DeanerySystem.Domain;
-using DeanerySystem.Domain.Abstract;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.WebUI.Models;
-using Rotativa;
-using Orientation = Rotativa.Options.Orientation;
 
 namespace DeanerySystem.UI.Controllers
 {

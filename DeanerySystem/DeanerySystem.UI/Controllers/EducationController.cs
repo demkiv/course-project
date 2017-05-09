@@ -6,7 +6,8 @@ using System.Web.UI.WebControls;
 using DeanerySystem.Domain;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
-using DeanerySystem.WebUI.Models;
+using DeanerySystem.UI.Models;
+using DeanerySystem.UI.Providers;
 
 namespace DeanerySystem.UI.Controllers
 {
@@ -63,9 +64,12 @@ namespace DeanerySystem.UI.Controllers
 				AssessmentJournalId = _class.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id,
 				VisitingJournalId = _class.Journals.First(j => j.JournalType == JournalTypes.Visiting).Id,
 
+				AssessmentJournalName = ResourcesProvider.GetJournalTypeDisplay(JournalTypes.Assessment),
+				VisitingJournalName = ResourcesProvider.GetJournalTypeDisplay(JournalTypes.Visiting),
+
 				SubjectName = subject.Name,
 				GroupName = educationalPlan.Group.Name,
-				ClassType = getClassType(_class.ClassType),
+				ClassType = ResourcesProvider.GetClassTypeDisplay(_class.ClassType),
 				
 				LecturerFirstName = _class.Professor.FirstName,
 				LecturerLastName = _class.Professor.LastName,
@@ -114,9 +118,12 @@ namespace DeanerySystem.UI.Controllers
 				AssessmentJournalId = _class.Journals.First(j => j.JournalType == JournalTypes.Assessment).Id,
 				VisitingJournalId = _class.Journals.First(j => j.JournalType == JournalTypes.Visiting).Id,
 
+				AssessmentJournalName = ResourcesProvider.GetJournalTypeDisplay(JournalTypes.Assessment),
+				VisitingJournalName = ResourcesProvider.GetJournalTypeDisplay(JournalTypes.Visiting),
+
 				SubjectName = subject.Name,
 				GroupName = educationalPlan.Group.Name,
-				ClassType = getClassType(_class.ClassType),
+				ClassType = ResourcesProvider.GetClassTypeDisplay(_class.ClassType),
 
 				LecturerFirstName = _class.Professor.FirstName,
 				LecturerLastName = _class.Professor.LastName,
@@ -203,32 +210,6 @@ namespace DeanerySystem.UI.Controllers
 				columnId++;
 			}
 		}
-
-		private string getClassType(ClassTypes classType) {
-			string ukrClassType = "";
-			switch (classType) {
-				case ClassTypes.Lecture:
-					ukrClassType = "Лекція"; break;
-				case ClassTypes.PracticalClass:
-					ukrClassType = "Практична"; break;
-				case ClassTypes.LaboratoryClass:
-					ukrClassType = "Лабораторна";
-					break;
-			}
-			return ukrClassType;
-		}
-
-		private string GetJournalType(JournalTypes journalType) {
-			string ukrJournalType = "";
-			switch (journalType) {
-				case JournalTypes.Assessment:
-					ukrJournalType = "Оцінювання";
-					break;
-				case JournalTypes.Visiting:
-					ukrJournalType = "Відвідування";
-					break;
-			}
-			return ukrJournalType;
-		}
+		
 	}
 }

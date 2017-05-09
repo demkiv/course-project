@@ -1,4 +1,4 @@
-﻿@model DeanerySystem.WebUI.Models.JournalInfo
+﻿@model DeanerySystem.UI.Models.JournalInfo
 
 @{
 	ViewBag.Title = "Journal";
@@ -29,8 +29,8 @@
 			@Html.DropDownListFor(model => model.JournalId, new SelectList(
 				new List<Object>
 				{
-					new {value = Model.AssessmentJournalId, text = "Оцінювання"},
-					new {value = Model.VisitingJournalId, text = "Відвідування"}
+					new {value = Model.AssessmentJournalId, text = Model.AssessmentJournalName },
+					new {value = Model.VisitingJournalId, text = Model.VisitingJournalName }
 				},
 				"value",
 				"text", 2), new { @id = "JournalTypeSelection", @class = "form-control dropdown" })

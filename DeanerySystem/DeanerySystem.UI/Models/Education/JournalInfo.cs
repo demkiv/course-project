@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using DeanerySystem.Domain.Entities;
 
-namespace DeanerySystem.WebUI.Models
+namespace DeanerySystem.UI.Models
 {
     public class JournalInfo
     {
@@ -12,9 +9,11 @@ namespace DeanerySystem.WebUI.Models
         public int ClassId { get; set; }
 		public int JournalId { get; set; }
 		public int AssessmentJournalId { get; set; }
-        public int VisitingJournalId { get; set; }
+		public string AssessmentJournalName { get; set; }
+		public int VisitingJournalId { get; set; }
+		public string VisitingJournalName { get; set; }
 
-        public string SubjectName { get; set; }
+		public string SubjectName { get; set; }
         public string ClassType { get; set; }
         public string GroupName { get; set; }
 

@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using DeanerySystem.Domain.Entities.Enums;
-
 namespace DeanerySystem.UI.Providers
 {
 	public static class ScheduleProvider
@@ -36,7 +34,7 @@ namespace DeanerySystem.UI.Providers
 								Fraction = timeTable.Fraction,
 								Lector = _class.Professor.GetFullName(),
 								Subject = plan.Subject.Name,
-								Type = getClassType(_class.ClassType),
+								Type = ResourcesProvider.GetClassTypeDisplay(_class.ClassType),
 								JournalLink = getJournalUrlCallback(plan.Id, _class.Id)
 							};
 
@@ -67,7 +65,7 @@ namespace DeanerySystem.UI.Providers
 			var day = days.SingleOrDefault(d => d.Id == timeTable.DayOfWeek);
 			if (day == null)
 			{
-				string dayName = getUkrainianDay(timeTable.DayOfWeek);
+				string dayName = ResourcesProvider.GetWeekDayDisplay(timeTable.DayOfWeek);
 				day = new DayModel(timeTable.DayOfWeek, dayName);
 				days.Add(day);
 			}
@@ -114,37 +112,6 @@ namespace DeanerySystem.UI.Providers
 					}
 				}
 			}
-		}
-
-		private static string getUkrainianDay(DayOfWeek day)
-		{
-			switch (day)
-			{
-				case DayOfWeek.Monday: return "Понеділок";
-				case DayOfWeek.Tuesday: return "Вівторок";
-				case DayOfWeek.Wednesday: return "Середа";
-				case DayOfWeek.Thursday: return "Четвер";
-				case DayOfWeek.Friday: return "П'ятниця";
-				case DayOfWeek.Saturday: return "Субота";
-				case DayOfWeek.Sunday: return "Неділя";
-				default: return String.Empty;
-			}
-		}
-
-		private static string getClassType(ClassTypes classType)
-		{
-			string ukrClassType = "";
-			switch (classType)
-			{
-				case ClassTypes.Lecture:
-					ukrClassType = "Лекція"; break;
-				case ClassTypes.PracticalClass:
-					ukrClassType = "Практична"; break;
-				case ClassTypes.LaboratoryClass:
-					ukrClassType = "Лабораторна";
-					break;
-			}
-			return ukrClassType;
 		}
 	}
 }

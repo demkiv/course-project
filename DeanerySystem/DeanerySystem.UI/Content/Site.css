@@ -76,3 +76,7 @@ a, a:hover, a:visited, a:link, a:active {
 	padding: 8px;
 	color: #333;
 }
+
+.faculty-picture {
+    width: 125px;
+}

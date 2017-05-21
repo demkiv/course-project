@@ -21,7 +21,7 @@ namespace DeanerySystem.UI.Controllers
             var w = unitOfWork.SemesterRepository.Get();
             var e = unitOfWork.StreamRepository.Get();
             var r = unitOfWork.DepartmentRepository.Get();
-            var t = unitOfWork.StudentRepository.Get();
+            //var t = unitOfWork.StudentRepository.Get();
             var y = unitOfWork.ProfessorRepository.Get();
             var u = unitOfWork.GroupRepository.Get();
             var i = unitOfWork.ClassNumberTimeRepository.Get();

@@ -12,7 +12,7 @@ using DeanerySystem.Domain.Concrete;
 
 namespace DeanerySystem.UI.Controllers
 {
-	[Authorize]
+	//[Authorize]
     public class AdminController : Controller
     {
         // GET: Admin
@@ -43,7 +43,7 @@ namespace DeanerySystem.UI.Controllers
             }
         }
 
-		[Authorize(Roles = "SuperAdministrator")]
+		//[Authorize(Roles = "SuperAdministrator")]
 		public ActionResult ManageUniversity()
         {
             using (var ctx = new DeaneryDbContext()) {
@@ -53,7 +53,7 @@ namespace DeanerySystem.UI.Controllers
             }
 		}
 
-        [Authorize(Roles = "SuperAdministrator")]
+        //[Authorize(Roles = "SuperAdministrator")]
         [HttpPost]
         public ActionResult PostUniversityInfo(Models.Admin.University universityModel) {
             using (var ctx = new DeaneryDbContext()) {
@@ -61,7 +61,7 @@ namespace DeanerySystem.UI.Controllers
                 if (domainUniversity != null)
                 {
                     domainUniversity.Name = universityModel.Name;
-                    //domainUniversity.Rector = ctx.Professors.Find(universityModel.RectorId);
+                    domainUniversity.Rector = ctx.Professors.Find(universityModel.RectorId);
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace DeanerySystem.UI.Controllers
             return Json(GetUniversityInfo());
         }
 
-        [Authorize(Roles = "SuperAdministrator")]
+        //[Authorize(Roles = "SuperAdministrator")]
         [HttpGet]
         public ActionResult GetAllProfessors() {
             using (var ctx = new DeaneryDbContext()) {
@@ -88,11 +88,44 @@ namespace DeanerySystem.UI.Controllers
             }
         }
 
-        [Authorize(Roles = "SuperAdministrator")]
+        //[Authorize(Roles = "SuperAdministrator")]
         [HttpGet]
         public ActionResult OverviewFaculties() {
             using (var ctx = new DeaneryDbContext()) {
-                var faculties = ctx.Faculties.Any() ? ctx.Faculties.Select(x => new Models.Admin.Faculty() { Name = x.Name, Id = x.Id }).ToList() : new List<Models.Admin.Faculty>();
+                //var faculties = ctx.Faculties.Any() ? ctx.Faculties.Select(x => new Models.Admin.Faculty() { Name = x.Name, Id = x.Id }).ToList() : new List<Models.Admin.Faculty>();
+                var faculties = new List<Models.Admin.Faculty>()
+                {
+                    new Models.Admin.Faculty()
+                    {
+                        Id = 1,
+                        Name = "Факультет Прикладної Математики та Інформатики",
+                        PicureUrl = "https://monosnap.com/file/DazCHtNPbCh1xkVhv2mBNe6w2bsQBa.png"
+                    },
+                    new Models.Admin.Faculty()
+                    {
+                        Id = 2,
+                        Name = "Механіко-Математичний Факульутет",
+                        PicureUrl = "https://monosnap.com/file/aj0LdqBSFdx7ZsZ5uNjqXCXhTrPL95.png"
+                    },
+                    new Models.Admin.Faculty()
+                    {
+                        Id = 3,
+                        Name = "Фізичний Факультет",
+                        PicureUrl = "https://monosnap.com/file/8XMxPOpvtj7xQG8VjelQytGQzvN0sU.png"
+                    },
+                    new Models.Admin.Faculty()
+                    {
+                        Id = 4,
+                        Name = "Історичний Факультет",
+                        PicureUrl = "https://monosnap.com/file/wwQ9kTEZvylZR3xkRzoaeEtRuw7aRY.png"
+                    },
+                    new Models.Admin.Faculty()
+                    {
+                        Id = 5,
+                        Name = "Філологічний Факультет",
+                        PicureUrl = "https://monosnap.com/file/1J8z6PFNndOezmNZ5RTE0z2oymO8Qh.png"
+                    },
+                };
                 return View(faculties);
             }
                 

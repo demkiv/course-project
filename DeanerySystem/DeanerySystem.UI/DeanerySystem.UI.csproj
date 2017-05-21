@@ -255,6 +255,7 @@
     <None Include="Properties\PublishProfiles\edeanery - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\edeanery - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.2.intellisense.js" />
+    <Content Include="Scripts\Generated\administration.js" />
     <Content Include="Scripts\Generated\cabinet.js" />
     <Content Include="Scripts\Generated\schedule.js" />
     <Content Include="Scripts\java-script.js" />

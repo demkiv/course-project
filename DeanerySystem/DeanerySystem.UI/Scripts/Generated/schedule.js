@@ -92,12 +92,12 @@ var DeanerySystem;
         (function (Schedule) {
             var Models;
             (function (Models) {
-                var Fractions;
                 (function (Fractions) {
                     Fractions[Fractions["Numerator"] = 0] = "Numerator";
                     Fractions[Fractions["Denominator"] = 1] = "Denominator";
                     Fractions[Fractions["Integer"] = 2] = "Integer";
-                })(Fractions = Models.Fractions || (Models.Fractions = {}));
+                })(Models.Fractions || (Models.Fractions = {}));
+                var Fractions = Models.Fractions;
             })(Models = Schedule.Models || (Schedule.Models = {}));
         })(Schedule = ClientSide.Schedule || (ClientSide.Schedule = {}));
     })(ClientSide = DeanerySystem.ClientSide || (DeanerySystem.ClientSide = {}));

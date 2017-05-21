@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="admin/administration.js" />
 /// <reference path="bootstrap.min.js" />
+/// <reference path="generated/administration.js" />
 /// <reference path="generated/cabinet.js" />
 /// <reference path="generated/schedule.js" />
 /// <reference path="java-script.js" />

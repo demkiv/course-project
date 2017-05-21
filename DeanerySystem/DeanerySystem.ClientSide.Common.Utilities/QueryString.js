@@ -6,11 +6,14 @@ var DeanerySystem;
         (function (Common) {
             var Utilities;
             (function (Utilities) {
-                class QueryString {
-                    static GetQueryString() {
-                        return window.location.href;
+                var QueryString = (function () {
+                    function QueryString() {
                     }
-                }
+                    QueryString.GetQueryString = function () {
+                        return window.location.href;
+                    };
+                    return QueryString;
+                }());
                 Utilities.QueryString = QueryString;
             })(Utilities = Common.Utilities || (Common.Utilities = {}));
         })(Common = ClientSide.Common || (ClientSide.Common = {}));

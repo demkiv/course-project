@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.ClientSide.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.ClientSite.Schedule", "DeanerySystem.ClientSite.Schedule\DeanerySystem.ClientSite.Schedule.csproj", "{6996BF93-D07B-44FA-B9C4-9A6192069113}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.ClientSide.Administration", "DeanerySystem.ClientSide.Administration\DeanerySystem.ClientSide.Administration.csproj", "{D0E91887-7727-4048-ABF2-5FF0355847B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{6996BF93-D07B-44FA-B9C4-9A6192069113}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6996BF93-D07B-44FA-B9C4-9A6192069113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6996BF93-D07B-44FA-B9C4-9A6192069113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0E91887-7727-4048-ABF2-5FF0355847B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E91887-7727-4048-ABF2-5FF0355847B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E91887-7727-4048-ABF2-5FF0355847B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E91887-7727-4048-ABF2-5FF0355847B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +71,6 @@ Global
 		{03012726-EC8F-4FBE-AA53-4E46FA2FF9BD} = {E8F643B4-04BB-49C6-B852-315674D2627D}
 		{713DC203-11D5-4CDA-B86F-EAB449E6CAB7} = {E8F643B4-04BB-49C6-B852-315674D2627D}
 		{6996BF93-D07B-44FA-B9C4-9A6192069113} = {14E40B68-63E2-4D4E-BEAC-FA2F6B3D4AF2}
+		{D0E91887-7727-4048-ABF2-5FF0355847B1} = {14E40B68-63E2-4D4E-BEAC-FA2F6B3D4AF2}
 	EndGlobalSection
 EndGlobal

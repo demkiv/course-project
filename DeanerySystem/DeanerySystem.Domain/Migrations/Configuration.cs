@@ -45,15 +45,19 @@ namespace DeanerySystem.Domain.Migrations
                 }
             }
 
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var newApplicationUser = new ApplicationUser()
-            {
-                UserName = "admin@admin.com",
-                Email = "admin@admin.com",
-                EmailConfirmed = true
-            };
-            userManager.Create(newApplicationUser, password: "budka123");
-            userManager.AddToRole(newApplicationUser.Id, Roles.SuperAdministrator.ToString());
+			if (!context.Users.Any(user => user.UserName == "admin@admin.com"))
+			{
+				var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+				var newApplicationUser = new ApplicationUser()
+				{
+					UserName = "admin@admin.com",
+					Email = "admin@admin.com",
+					EmailConfirmed = true
+				};
+				userManager.Create(newApplicationUser, password: "budka123");
+				userManager.AddToRole(newApplicationUser.Id, Roles.SuperAdministrator.ToString());
+			}
             //using (var unit = new UnitOfWork())
             //{
             //    unit.SemesterRepository.Insert(new Semester() {CreditSessionStart = DateTime.Now, End = DateTime.Now, Id = 1, Number = SemesterNumber.First, SecondWritingStart = DateTime.Now, ThirdWritingStart = DateTime.Now, Start = DateTime.Now, SessionStart = DateTime.Now });

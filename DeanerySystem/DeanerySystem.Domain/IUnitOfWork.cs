@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Repositories;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.Domain
 {
@@ -28,6 +25,14 @@ namespace DeanerySystem.Domain
         IGenericRepository<Subject> SubjectRepository { get; }
         IGenericRepository<TimeTable> TimeTableRepository { get; }
         IGenericRepository<University> UniversityRepository { get; }
-        void Save();
+
+		IGenericRepository<IdentityRole> IdentityRoleRepository { get; }
+		IGenericRepository<Entities.Identity.ApplicationUser> IdentityUserRepository { get; }
+		IGenericRepository<IdentityUserRole> IdentityUserRoleRepository { get; }
+		IGenericRepository<IdentityUserClaim> IdentityUserClaimRepository { get; }
+		IGenericRepository<IdentityUserLogin> IdentityUserLoginRepository { get; }
+		
+		
+		void Save();
     }
 }

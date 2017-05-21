@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeanerySystem.Domain.Concrete;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Repositories;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.Domain
 {
@@ -33,7 +30,13 @@ namespace DeanerySystem.Domain
         private GenericRepository<TimeTable> timeTableRepository;
         private GenericRepository<University> universityRepository;
 
-        public IGenericRepository<Cellule> CelluleRepository
+		private GenericRepository<IdentityRole> identityRoleRepository;
+		private GenericRepository<Entities.Identity.ApplicationUser> identityUserRepository;
+		private GenericRepository<IdentityUserRole> identityUserRoleRepository;
+		private GenericRepository<IdentityUserClaim> identityUserClaimRepository;
+		private GenericRepository<IdentityUserLogin> identityUserLoginRepository;
+
+		public IGenericRepository<Cellule> CelluleRepository
         {
             get
             {
@@ -207,7 +210,7 @@ namespace DeanerySystem.Domain
             {
                 if(this.studentRepository == null)
                 {
-                    this.streamRepository = new GenericRepository<Stream>(this.context);
+                    this.studentRepository = new GenericRepository<Student>(this.context);
                 }
                 return this.studentRepository;
             }
@@ -249,7 +252,67 @@ namespace DeanerySystem.Domain
             }
         }
 
-        public void Save()
+		public IGenericRepository<IdentityRole> IdentityRoleRepository
+		{
+			get
+			{
+				if (this.identityRoleRepository == null)
+				{
+					this.identityRoleRepository = new GenericRepository<IdentityRole>(this.context);
+				}
+				return this.identityRoleRepository;
+			}
+		}
+
+		public IGenericRepository<Entities.Identity.ApplicationUser> IdentityUserRepository
+		{
+			get
+			{
+				if (this.identityUserRepository == null)
+				{
+					this.identityUserRepository = new GenericRepository<Entities.Identity.ApplicationUser>(this.context);
+				}
+				return this.identityUserRepository;
+			}
+		}
+
+		public IGenericRepository<IdentityUserRole> IdentityUserRoleRepository
+		{
+			get
+			{
+				if (this.identityUserRoleRepository == null)
+				{
+					this.identityUserRoleRepository = new GenericRepository<IdentityUserRole>(this.context);
+				}
+				return this.identityUserRoleRepository;
+			}
+		}
+
+		public IGenericRepository<IdentityUserClaim> IdentityUserClaimRepository
+		{
+			get
+			{
+				if (this.identityUserClaimRepository == null)
+				{
+					this.identityUserClaimRepository = new GenericRepository<IdentityUserClaim>(this.context);
+				}
+				return this.identityUserClaimRepository;
+			}
+		}
+
+		public IGenericRepository<IdentityUserLogin> IdentityUserLoginRepository
+		{
+			get
+			{
+				if (this.identityUserLoginRepository == null)
+				{
+					this.identityUserLoginRepository = new GenericRepository<IdentityUserLogin>(this.context);
+				}
+				return this.identityUserLoginRepository;
+			}
+		}
+
+		public void Save()
         {
             this.context.SaveChanges();
         }

@@ -1,6 +1,7 @@
 ﻿using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.UI.Properties;
 using System;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.UI.Providers
 {
@@ -39,6 +40,23 @@ namespace DeanerySystem.UI.Providers
 				case JournalTypes.Assessment: return Resources.Assessment;
 				case JournalTypes.Visiting: return Resources.Visiting;
 				default: throw new NotImplementedException($"No display has been found for {journalType} journal type!");
+			}
+		}
+
+		public static string GetRoleDisplay(IdentityRole identityRole)
+		{
+			return GetRoleDisplay((Roles)Enum.Parse(typeof(Roles), identityRole.Name));
+		}
+
+		public static string GetRoleDisplay(Roles role)
+		{
+			switch (role)
+			{
+				case Roles.SuperAdministrator: return Resources.SuperAdministrator;
+				case Roles.Administrator: return Resources.Administrator;
+				case Roles.Professor: return Resources.Professor;
+				case Roles.Student: return Resources.Student;
+				default: throw new NotImplementedException($"No display has been found for {role} role!");
 			}
 		}
 	}

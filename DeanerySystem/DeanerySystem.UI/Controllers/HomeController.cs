@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DeanerySystem.Domain;
 
 namespace DeanerySystem.UI.Controllers
@@ -31,7 +27,13 @@ namespace DeanerySystem.UI.Controllers
             var s = unitOfWork.ClassRepository.Get();
             var d = unitOfWork.SubjectRepository.Get();
             var f = unitOfWork.EducationalPlanRepository.Get();
-            unitOfWork.Save();
+
+			var ir = unitOfWork.IdentityRoleRepository.Get();
+			var iur = unitOfWork.IdentityUserRoleRepository.Get();
+			var ic = unitOfWork.IdentityUserClaimRepository.Get();
+			var il = unitOfWork.IdentityUserLoginRepository.Get();
+
+			unitOfWork.Save();
             unitOfWork.Dispose();
             return View();
         }

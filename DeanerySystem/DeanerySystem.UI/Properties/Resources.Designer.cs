@@ -61,6 +61,15 @@ namespace DeanerySystem.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Адміністратор.
+        /// </summary>
+        internal static string Administrator {
+            get {
+                return ResourceManager.GetString("Administrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Оцінювання.
         /// </summary>
         internal static string Assessment {
@@ -115,6 +124,15 @@ namespace DeanerySystem.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Викладач.
+        /// </summary>
+        internal static string Professor {
+            get {
+                return ResourceManager.GetString("Professor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Субота.
         /// </summary>
         internal static string Saturday {
@@ -124,11 +142,29 @@ namespace DeanerySystem.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Студент.
+        /// </summary>
+        internal static string Student {
+            get {
+                return ResourceManager.GetString("Student", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Неділя.
         /// </summary>
         internal static string Sunday {
             get {
                 return ResourceManager.GetString("Sunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Головний адміністратор.
+        /// </summary>
+        internal static string SuperAdministrator {
+            get {
+                return ResourceManager.GetString("SuperAdministrator", resourceCulture);
             }
         }
         

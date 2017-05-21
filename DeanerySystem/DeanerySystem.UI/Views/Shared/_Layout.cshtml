@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using DeanerySystem.UI.Extensions;
+
+<!DOCTYPE html>
 <!--
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.2.0
 Version: 3.3.1
@@ -88,29 +90,88 @@ License: You must have a valid license purchased only from themeforest(the above
             </a>
             <!-- END RESPONSIVE MENU TOGGLER -->
             <!-- BEGIN TOP NAVIGATION MENU -->
-            <div class="top-menu">
-                <ul class="nav navbar-nav pull-right">
-                    <!-- BEGIN NOTIFICATION DROPDOWN -->
+
+			@if (User.Identity.IsAuthenticated)
+			{
+				using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+				{
+					@Html.AntiForgeryToken()
+					<div class="top-menu">
+						<ul class="nav navbar-nav pull-right">
+							<!-- BEGIN NOTIFICATION DROPDOWN -->
          
-                    <!-- END NOTIFICATION DROPDOWN -->
-                    <!-- BEGIN INBOX DROPDOWN -->
+							<!-- END NOTIFICATION DROPDOWN -->
+							<!-- BEGIN INBOX DROPDOWN -->
                     
-                    <!-- END INBOX DROPDOWN -->
-                    <!-- BEGIN TODO DROPDOWN -->
+							<!-- END INBOX DROPDOWN -->
+							<!-- BEGIN TODO DROPDOWN -->
                 
-                    <!-- END TODO DROPDOWN -->
-                    <!-- BEGIN USER LOGIN DROPDOWN -->
-                   
-                    <!-- END USER LOGIN DROPDOWN -->
-                    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                    <li class="dropdown dropdown-quick-sidebar-toggler hidden">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <i class="icon-logout"></i>
-                        </a>
-                    </li>
-                    <!-- END QUICK SIDEBAR TOGGLER -->
-                </ul>
-            </div>
+							<!-- END TODO DROPDOWN -->
+							<!-- BEGIN USER LOGIN DROPDOWN -->
+
+							<li class="dropdown dropdown-user">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+									@if (!string.IsNullOrEmpty(User.Identity.GetPhotoPath()))
+									{
+										<img alt="" class="img-circle" src="@User.Identity.GetPhotoPath()">
+									}
+									<span class="username username-hide-on-mobile"> @User.Identity.GetGivenName() </span>
+									<i class="fa fa-angle-down"></i>
+								</a>
+
+								<ul class="dropdown-menu dropdown-menu-default">
+									<li>
+										<a href='@Url.Action("Index", "Profile")'>
+											<i class="icon-user"></i> My Profile
+										</a>
+									</li>
+									<li>
+										<a href="app_calendar.html">
+											<i class="icon-calendar"></i> My Calendar
+										</a>
+									</li>
+									<li>
+										<a href="app_inbox.html">
+											<i class="icon-envelope-open"></i> My Inbox
+											<span class="badge badge-danger"> 3 </span>
+										</a>
+									</li>
+									<li>
+										<a href="app_todo.html">
+											<i class="icon-rocket"></i> My Tasks
+											<span class="badge badge-success"> 7 </span>
+										</a>
+									</li>
+									<li class="divider"> </li>
+									<li>
+										<a href="page_user_lock_1.html">
+											<i class="icon-lock"></i> Lock Screen
+										</a>
+									</li>
+									<li>
+								
+											<a href="javascript:document.getElementById('logoutForm').submit()">
+												<i class="icon-key"></i> Log Out
+											</a>
+								
+									</li>
+								</ul>
+
+							</li>
+							<!-- END USER LOGIN DROPDOWN -->
+							<!-- BEGIN QUICK SIDEBAR TOGGLER -->
+							<li class="dropdown dropdown-quick-sidebar-toggler hidden">
+								<a href="javascript:;" class="dropdown-toggle">
+									<i class="icon-logout"></i>
+								</a>
+							</li>
+							<!-- END QUICK SIDEBAR TOGGLER -->
+
+						</ul>
+
+					</div>
+				}
+			}
             <!-- END TOP NAVIGATION MENU -->
         </div>
         <!-- END HEADER INNER -->

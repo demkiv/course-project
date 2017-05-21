@@ -142,7 +142,6 @@
     <Compile Include="Entities\Enums\Fractions.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Identity\ApplicationUser.cs" />
-    <Compile Include="Entities\Identity\UserRole.cs" />
     <Compile Include="Entities\Class.cs" />
     <Compile Include="Entities\Journal.cs" />
     <Compile Include="Entities\Enums\JournalTypes.cs" />
@@ -168,6 +167,10 @@
     <Compile Include="Migrations\201604111723091_InitializeDataBase.Designer.cs">
       <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705202104012_Add user photo.cs" />
+    <Compile Include="Migrations\201705202104012_Add user photo.Designer.cs">
+      <DependentUpon>201705202104012_Add user photo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
@@ -181,6 +184,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604111723091_InitializeDataBase.resx">
       <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705202104012_Add user photo.resx">
+      <DependentUpon>201705202104012_Add user photo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

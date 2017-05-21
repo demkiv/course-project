@@ -157,3 +157,6 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 Scripts/Generated/
+
+# User uploaded images
+DeanerySystem/DeanerySystem.UI/Uploads/MemberPhotos/

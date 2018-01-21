@@ -19,7 +19,7 @@ namespace DeanerySystem.Domain.Configurations
 			this.Property(f => f.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			this.HasRequired(f => f.University).WithMany(u => u.Faculties);
-			this.HasRequired(f => f.Dean).WithOptional(p => p.DeanOfFaculty);
+			this.HasOptional(f => f.Dean).WithOptionalDependent(p => p.DeanOfFaculty);
 
             this.HasMany(f => f.Streams).WithRequired(s => s.Faculty);
         }

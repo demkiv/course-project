@@ -11,7 +11,7 @@ namespace DeanerySystem.Domain
 {
     public class UnitOfWork: IUnitOfWork
     {
-        private readonly DeaneryDbContext context = new DeaneryDbContext();
+        public readonly DeaneryDbContext context = new DeaneryDbContext();
         private bool disposed = false;
 
         private GenericRepository<Cellule> celluleRepository;

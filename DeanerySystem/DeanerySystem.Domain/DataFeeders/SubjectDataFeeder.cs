@@ -12,11 +12,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public SubjectDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Subject> GetData()
-        {
-            var subjects = new List<Subject>
+            this.data = new List<Subject>
             {
                 new Subject
                 {
@@ -103,7 +99,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     }
                 }
             };
-            return subjects;
         }
     }
 }

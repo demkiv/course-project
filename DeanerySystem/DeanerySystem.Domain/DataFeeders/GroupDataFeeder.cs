@@ -11,11 +11,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public GroupDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Group> GetData()
-        {
-            var groups = new List<Group>
+            this.data = new List<Group>
             {
                 new Group
                 {
@@ -86,7 +82,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     //}
                 }
             };
-            return groups;
         }
     }
 }

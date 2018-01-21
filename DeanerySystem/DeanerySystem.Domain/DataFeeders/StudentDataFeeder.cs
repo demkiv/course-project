@@ -12,11 +12,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public StudentDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Student> GetData()
-        {
-            var students = new List<Student>
+            this.data = new List<Student>
             {
                 new Student
                 {
@@ -294,7 +290,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     MiddleName = "Віталіївна"
                 }
             };
-            return students;
         }
     }
 }

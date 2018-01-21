@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeanerySystem.Domain.Entities.Abstract;
 
 namespace DeanerySystem.Domain.Entities {
-	public class EducationalPlan {
+	public class EducationalPlan : IIdentifiableEntity<int>
+    {
 		public int Id { get; set; }
 
 		public virtual Semester Semester { get; set; }

@@ -3,7 +3,7 @@ namespace DeanerySystem.Domain.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitializeDataBase : DbMigration
+    public partial class InitDatabase : DbMigration
     {
         public override void Up()
         {
@@ -71,7 +71,7 @@ namespace DeanerySystem.Domain.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Dean_Id = c.Guid(nullable: false),
+                        Dean_Id = c.Guid(),
                         University_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -100,7 +100,7 @@ namespace DeanerySystem.Domain.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Number = c.Int(nullable: false),
-                        Head_Id = c.Guid(nullable: false),
+                        Head_Id = c.Guid(),
                         Stream_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

@@ -12,11 +12,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public TimeTableDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<TimeTable> GetData()
-        {
-            var timeTables = new List<TimeTable>
+            this.data = new List<TimeTable>
             {
                 new TimeTable //щербатий лекція
                 {
@@ -129,7 +125,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     }
                 }
             };
-            return timeTables;
         }
     }
 }

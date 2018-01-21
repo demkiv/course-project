@@ -11,6 +11,7 @@ using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.Domain.Repositories;
 using Moq;
 using Ninject;
+using System.Linq.Expressions;
 
 namespace DeanerySystem.UI.Infrastructure
 {
@@ -37,119 +38,145 @@ namespace DeanerySystem.UI.Infrastructure
             Mock<IUnitOfWork> unitOfWorkMock = new Mock<IUnitOfWork>();
 
             #region FacultiesUoW
-
-            var facultiesDataFeeder = new FacultyDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Faculty>> facultyRepositoryMock = new Mock<IGenericRepository<Faculty>>();
-            facultyRepositoryMock.Setup(fr => fr.Get(null, null, "")).Returns(facultiesDataFeeder.GetData());
+            var facultyRepositoryMock = MockFactory.GetMock<Faculty, int>(unitOfWorkMock.Object);           
             unitOfWorkMock.Setup(uw => uw.FacultyRepository).Returns(() => facultyRepositoryMock.Object);
+
             #endregion
 
             #region StreamsUoW
-            var streamDataFeeder = new StreamDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Stream>> streamRepositoryMock = new Mock<IGenericRepository<Stream>>();
-            streamRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(streamDataFeeder.GetData());
+            var streamRepositoryMock = MockFactory.GetMock<Stream, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.StreamRepository).Returns(() => streamRepositoryMock.Object);
+
+            //var streamDataFeeder = new StreamDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Stream>> streamRepositoryMock = new Mock<IGenericRepository<Stream>>();
+            //streamRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(streamDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.StreamRepository).Returns(() => streamRepositoryMock.Object);
             #endregion
 
             #region DepartmentsUoW   
 
-            var departmentDataFeeder = new DepartmentDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Department>> departmentRepositoryMock = new Mock<IGenericRepository<Department>>();
-            departmentRepositoryMock.Setup(dr => dr.Get(null, null, "")).Returns(departmentDataFeeder.GetData());
+            var departmentRepositoryMock = MockFactory.GetMock<Department, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.DepartmentRepository).Returns(() => departmentRepositoryMock.Object);
+
+            //var departmentDataFeeder = new DepartmentDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Department>> departmentRepositoryMock = new Mock<IGenericRepository<Department>>();
+            //departmentRepositoryMock.Setup(dr => dr.Get(null, null, "")).Returns(departmentDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.DepartmentRepository).Returns(() => departmentRepositoryMock.Object);
             #endregion
 
             #region SemestersUoW
 
-            var semesterDataFeeder = new SemesterDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Semester>> semesterRepositoryMock = new Mock<IGenericRepository<Semester>>();
-            semesterRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(semesterDataFeeder.GetData());
+            var semesterRepositoryMock = MockFactory.GetMock<Semester, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.SemesterRepository).Returns(() => semesterRepositoryMock.Object);
+            //var semesterDataFeeder = new SemesterDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Semester>> semesterRepositoryMock = new Mock<IGenericRepository<Semester>>();
+            //semesterRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(semesterDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.SemesterRepository).Returns(() => semesterRepositoryMock.Object);
             #endregion
 
             #region StudentsUoW      
 
-            var studentDataFeeder = new StudentDataFeeder(unitOfWorkMock.Object);     
-            Mock<IGenericRepository<Student>> studentRepositoryMock = new Mock<IGenericRepository<Student>>();
-            studentRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(studentDataFeeder.GetData());
+            var studentRepositoryMock = MockFactory.GetMock<Student, Guid>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.StudentRepository).Returns(() => studentRepositoryMock.Object);
+            //var studentDataFeeder = new StudentDataFeeder(unitOfWorkMock.Object);     
+            //Mock<IGenericRepository<Student>> studentRepositoryMock = new Mock<IGenericRepository<Student>>();
+            //studentRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(studentDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.StudentRepository).Returns(() => studentRepositoryMock.Object);
             #endregion
 
             #region ProfessorsUoW
 
-            var professorDataFeeder = new ProfessorDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Professor>> professorRepositoryMock = new Mock<IGenericRepository<Professor>>();
-            professorRepositoryMock.Setup(pr => pr.Get(null, null, "")).Returns(professorDataFeeder.GetData());
+            var professorRepositoryMock = MockFactory.GetMock<Professor, Guid>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.ProfessorRepository).Returns(() => professorRepositoryMock.Object);
+            //var professorDataFeeder = new ProfessorDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Professor>> professorRepositoryMock = new Mock<IGenericRepository<Professor>>();
+            //professorRepositoryMock.Setup(pr => pr.Get(null, null, "")).Returns(professorDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.ProfessorRepository).Returns(() => professorRepositoryMock.Object);
             #endregion
 
             #region GroupsUoW
 
-            var groupDataFeeder = new GroupDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Group>> groupRepositoryMock = new Mock<IGenericRepository<Group>>();
-            groupRepositoryMock.Setup(gr => gr.Get(null, null, "")).Returns(groupDataFeeder.GetData());
+            var groupRepositoryMock = MockFactory.GetMock<Group, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.GroupRepository).Returns(() => groupRepositoryMock.Object);
+            //var groupDataFeeder = new GroupDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Group>> groupRepositoryMock = new Mock<IGenericRepository<Group>>();
+            //groupRepositoryMock.Setup(gr => gr.Get(null, null, "")).Returns(groupDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.GroupRepository).Returns(() => groupRepositoryMock.Object);
 
             #endregion
 
             #region ClassNumberTimesUow
 
-            var classNumberTimeDataFeeder = new ClassNumberTimeDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<ClassNumberTime>> classNumberTimeRepositoryMock =
-                new Mock<IGenericRepository<ClassNumberTime>>();
-            classNumberTimeRepositoryMock.Setup(cnt => cnt.Get(null, null, "")).Returns(classNumberTimeDataFeeder.GetData());
+            var classNumberTimeRepositoryMock = MockFactory.GetMock<ClassNumberTime, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.ClassNumberTimeRepository).Returns(() => classNumberTimeRepositoryMock.Object);
+            //var classNumberTimeDataFeeder = new ClassNumberTimeDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<ClassNumberTime>> classNumberTimeRepositoryMock =
+            //    new Mock<IGenericRepository<ClassNumberTime>>();
+            //classNumberTimeRepositoryMock.Setup(cnt => cnt.Get(null, null, "")).Returns(classNumberTimeDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.ClassNumberTimeRepository).Returns(() => classNumberTimeRepositoryMock.Object);
             #endregion
 
             #region TimeTableUoW
 
-            var timeTableDataFeeder = new TimeTableDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<TimeTable>> timeTableRepositoryMock = new Mock<IGenericRepository<TimeTable>>();
-            timeTableRepositoryMock.Setup(ttr => ttr.Get(null, null, "")).Returns(timeTableDataFeeder.GetData());
+            var timeTableRepositoryMock = MockFactory.GetMock<TimeTable, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.TimeTableRepository).Returns(() => timeTableRepositoryMock.Object);
+            //var timeTableDataFeeder = new TimeTableDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<TimeTable>> timeTableRepositoryMock = new Mock<IGenericRepository<TimeTable>>();
+            //timeTableRepositoryMock.Setup(ttr => ttr.Get(null, null, "")).Returns(timeTableDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.TimeTableRepository).Returns(() => timeTableRepositoryMock.Object);
             #endregion
 
             #region CellulesUoW
 
-            var cellulesDataFeeder = new CellulesDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Cellule>> celluleRepositoryMock = new Mock<IGenericRepository<Cellule>>();
-            celluleRepositoryMock.Setup(cr => cr.Get(null, null, "")).Returns(cellulesDataFeeder.GetData());
+            var celluleRepositoryMock = MockFactory.GetMock<Cellule, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.CelluleRepository).Returns(() => celluleRepositoryMock.Object);
+            //var cellulesDataFeeder = new CellulesDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Cellule>> celluleRepositoryMock = new Mock<IGenericRepository<Cellule>>();
+            //celluleRepositoryMock.Setup(cr => cr.Get(null, null, "")).Returns(cellulesDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.CelluleRepository).Returns(() => celluleRepositoryMock.Object);
             #endregion
 
             #region JournalUoW
 
-            var journalDataFeeder = new JournalDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Journal>> journalRepository = new Mock<IGenericRepository<Journal>>();
-            journalRepository.Setup(jr => jr.Get(null, null, "")).Returns(journalDataFeeder.GetData());
-            unitOfWorkMock.Setup(uw => uw.JournalRepository).Returns(() => journalRepository.Object);
+            var journalRepositoryMock = MockFactory.GetMock<Journal, int>(unitOfWorkMock.Object);
+            unitOfWorkMock.Setup(uw => uw.JournalRepository).Returns(() => journalRepositoryMock.Object);
+            //var journalDataFeeder = new JournalDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Journal>> journalRepository = new Mock<IGenericRepository<Journal>>();
+            //journalRepository.Setup(jr => jr.Get(null, null, "")).Returns(journalDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.JournalRepository).Returns(() => journalRepository.Object);
             #endregion
 
             #region ClassesUoW
 
-            var classDataFeeder = new ClassDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Class>> classRepository = new Mock<IGenericRepository<Class>>();
-            classRepository.Setup(cr => cr.Get(null, null, "")).Returns(classDataFeeder.GetData());
-            unitOfWorkMock.Setup(uw => uw.ClassRepository).Returns(() => classRepository.Object);
+            var classRepositoryMock = MockFactory.GetMock<Class, int>(unitOfWorkMock.Object);
+            unitOfWorkMock.Setup(uw => uw.ClassRepository).Returns(() => classRepositoryMock.Object);
+            //var classDataFeeder = new ClassDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Class>> classRepository = new Mock<IGenericRepository<Class>>();
+            //classRepository.Setup(cr => cr.Get(null, null, "")).Returns(classDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.ClassRepository).Returns(() => classRepository.Object);
             #endregion
 
             #region SubjectsUoW
 
-            var subjectDataFeeder = new SubjectDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<Subject>> subjectRepositoryMock = new Mock<IGenericRepository<Subject>>();
-            subjectRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(subjectDataFeeder.GetData());
+            var subjectRepositoryMock = MockFactory.GetMock<Subject, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.SubjectRepository).Returns(() => subjectRepositoryMock.Object);
+            //var subjectDataFeeder = new SubjectDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<Subject>> subjectRepositoryMock = new Mock<IGenericRepository<Subject>>();
+            //subjectRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(subjectDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.SubjectRepository).Returns(() => subjectRepositoryMock.Object);
             #endregion
 
             #region EducationalPlanUoW
 
-            var educationalPlanDataFeeder = new EducationalPlanDataFeeder(unitOfWorkMock.Object);
-            Mock<IGenericRepository<EducationalPlan>> educationlPlanRepositoryMock =
-                new Mock<IGenericRepository<EducationalPlan>>();
-            educationlPlanRepositoryMock.Setup(epr => epr.Get(null, null, "")).Returns(educationalPlanDataFeeder.GetData());
+            var educationlPlanRepositoryMock = MockFactory.GetMock<EducationalPlan, int>(unitOfWorkMock.Object);
             unitOfWorkMock.Setup(uw => uw.EducationalPlanRepository).Returns(() => educationlPlanRepositoryMock.Object);
+            //var educationalPlanDataFeeder = new EducationalPlanDataFeeder(unitOfWorkMock.Object);
+            //Mock<IGenericRepository<EducationalPlan>> educationlPlanRepositoryMock =
+            //    new Mock<IGenericRepository<EducationalPlan>>();
+            //educationlPlanRepositoryMock.Setup(epr => epr.Get(null, null, "")).Returns(educationalPlanDataFeeder.GetData());
+            //unitOfWorkMock.Setup(uw => uw.EducationalPlanRepository).Returns(() => educationlPlanRepositoryMock.Object);
             #endregion
-
+            
             #region UnitOfWorkSetup           
 
 
@@ -1421,10 +1448,10 @@ namespace DeanerySystem.UI.Infrastructure
 
             #endregion
 
-            kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
-			//kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();  
-            kernel.Bind<IUnitOfWork>().ToConstant(unitOfWorkMock.Object);
-            //kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            //kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
+			kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();  
+            //---kernel.Bind<IUnitOfWork>().ToConstant(unitOfWorkMock.Object);
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
 	}
 }

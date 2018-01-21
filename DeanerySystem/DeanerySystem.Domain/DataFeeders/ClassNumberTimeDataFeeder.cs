@@ -11,11 +11,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public ClassNumberTimeDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<ClassNumberTime> GetData()
-        {
-            var classNumberTimes = new List<ClassNumberTime>
+            this.data = new List<ClassNumberTime>
             {
                 new ClassNumberTime()
                 {
@@ -67,7 +63,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     End = new TimeSpan(0, 19, 30, 0, 0)
                 }
             };
-            return classNumberTimes;
         }
     }
 }

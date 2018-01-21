@@ -11,11 +11,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public EducationalPlanDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<EducationalPlan> GetData()
-        {
-            var educationalPlans = new List<EducationalPlan>
+            this.data = new List<EducationalPlan>
             {
                 new EducationalPlan()
                 {
@@ -67,7 +63,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     Subject = unitOfWork.SubjectRepository.Get().ElementAt(6)
                 }
             };
-            return educationalPlans;
         }
     }
 }

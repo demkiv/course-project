@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DeanerySystem.Domain.DataFeeders
 {
-    interface IDataFeeder<T> where T: class
+    public interface IDataFeeder<T> where T: class
     {
+        List<T> Data { get; set; }
         List<T> GetData();
+
     }
 }

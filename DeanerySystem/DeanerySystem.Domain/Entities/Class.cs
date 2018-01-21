@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeanerySystem.Domain.Entities.Abstract;
 using DeanerySystem.Domain.Entities.Enums;
 
 namespace DeanerySystem.Domain.Entities
 {
-    public class Class
+    public class Class : IIdentifiableEntity<int>
     {
         public int Id { get; set; }
         public string Description { get; set; }

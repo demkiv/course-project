@@ -12,11 +12,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public JournalDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Journal> GetData()
-        {
-            var journals = new List<Journal>
+            this.data = new List<Journal>
             {
                 new Journal
                 {
@@ -186,7 +182,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     },
                 }
             };
-            return journals;
         }
     }
 }

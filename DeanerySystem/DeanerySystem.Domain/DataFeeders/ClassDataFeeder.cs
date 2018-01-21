@@ -12,11 +12,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public ClassDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Class> GetData()
-        {
-            var classes = new List<Class>
+            this.data = new List<Class>
             {
                 new Class
                 {
@@ -173,7 +169,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     }
                 }
             };
-            return classes;
         }
     }
 }

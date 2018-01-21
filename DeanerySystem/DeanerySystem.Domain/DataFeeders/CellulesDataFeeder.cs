@@ -11,11 +11,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public CellulesDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Cellule> GetData()
-        {
-            var cellules = new List<Cellule>
+            this.data = new List<Cellule>
             {
                 new Cellule
                 {
@@ -74,7 +70,6 @@ namespace DeanerySystem.Domain.DataFeeders
                     Student = unitOfWork.StudentRepository.Get().ElementAt(4)
                 }
             };
-            return cellules;
         }
     }
 }

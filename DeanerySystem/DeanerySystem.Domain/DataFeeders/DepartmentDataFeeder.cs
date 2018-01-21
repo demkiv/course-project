@@ -11,22 +11,30 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public DepartmentDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Department> GetData()
-        {
-            var departments = new List<Department>
+            this.data = new List<Department>
             {
                 new Department()
                 {
                     Id = 1,
-                    Name = "Інформаційні системи",
-                    //Head = entitiesMock.Object.Professors.ElementAt(1),
+                    Name = "Програмування",
+                    Number = 1,
+                    Stream = unitOfWork.StreamRepository.GetById(1)
+                },
+                new Department()
+                {
+                    Id = 2,
+                    Name = "Інформаційних систем",
                     Number = 2,
-                    Stream = unitOfWork.StreamRepository.Get().First(x => x.Id == 1)
+                    Stream = unitOfWork.StreamRepository.GetById(1)
+                },
+                new Department()
+                {
+                    Id = 3,
+                    Name = "Дискретного аналізу та інтелектуальних систем",
+                    Number = 3,
+                    Stream = unitOfWork.StreamRepository.GetById(1)
                 }
             };
-            return departments;
         }
     }
 }

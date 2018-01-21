@@ -1,6 +1,4 @@
-﻿/// <reference path="../../deanerysystem.clientside.common.definitions/scripts/typings/knockout/knockout.d.ts" />
-
-module DeanerySystem.ClientSide.ViewModels {
+﻿module DeanerySystem.ClientSide.Schedule.ViewModels {
 	export class LessonVM {
 		private readonly TemplateNameEmpty = "lesson-template-empty";
 		private readonly TemplateNameWithContent = "lesson-template";

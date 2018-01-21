@@ -24,6 +24,7 @@
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <UseGlobalApplicationHostFile />
     <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -259,8 +260,6 @@
     <None Include="Properties\PublishProfiles\edeanery - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\edeanery - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.2.intellisense.js" />
-    <Content Include="Scripts\Generated\cabinet.js" />
-    <Content Include="Scripts\Generated\schedule.js" />
     <Content Include="Scripts\java-script.js" />
     <Content Include="Scripts\jquery-2.2.2.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />
@@ -875,6 +874,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Generated\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

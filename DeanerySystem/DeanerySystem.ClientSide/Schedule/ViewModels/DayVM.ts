@@ -1,6 +1,4 @@
-﻿/// <reference path="../../deanerysystem.clientside.common.definitions/scripts/typings/knockout/knockout.d.ts" />
-
-module DeanerySystem.ClientSide.ViewModels {
+﻿module DeanerySystem.ClientSide.Schedule.ViewModels {
 	export class DayVM {
 		public TemplateName: string = "day-template";
 

@@ -1,6 +1,4 @@
-﻿/// <reference path="../../deanerysystem.clientside.common.definitions/scripts/typings/knockout/knockout.d.ts" />
-
-module DeanerySystem.ClientSide.ViewModels {
+﻿module DeanerySystem.ClientSide.Schedule.ViewModels {
 	export class ScheduleVM {
 		public Groups: KnockoutObservableArray<string>;
 		public Days: KnockoutObservableArray<DayVM>;

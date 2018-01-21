@@ -44,6 +44,7 @@ namespace DeanerySystem.UI.Controllers
                     uow.StreamRepository.Insert(s);
                 });
                 uow.Save();
+
                 var dDataFeeder = new DepartmentDataFeeder(uow);
                 var stream = uow.StreamRepository.GetById(1);
                 dDataFeeder.Data.ForEach(d =>
@@ -51,17 +52,26 @@ namespace DeanerySystem.UI.Controllers
                     d.Stream = stream;
                     uow.DepartmentRepository.Insert(d);
                 });
-                var semDataFeeder = new SemesterDataFeeder(unitOfWork);
+                var semDataFeeder = new SemesterDataFeeder(uow);
                 semDataFeeder.Data.ForEach(s =>
                 {
                     uow.SemesterRepository.Insert(s);
                 });
-
-                var pDataFeeder = new ProfessorDataFeeder(unitOfWork);
-                pDataFeeder.Data.ForEach(p =>
+                uow.Save();
+       
+                var pDataFeeder = new ProfessorDataFeeder(uow);
+                try
                 {
-                    uow.ProfessorRepository.Insert(p);
-                });
+                    pDataFeeder.Data.ForEach(p =>
+                    {
+                        uow.ProfessorRepository.Insert(p);
+                    });
+                }
+                catch (Exception ex)
+                {
+
+                }
+
 
                 //var professor = new Professor() {FirstName = "AAA", Department = department, DeanOfFaculty = faculty, HeadOfDepartment = department};
                 //uow.context.Users.FirstOrDefault().DeaneryUser = professor;

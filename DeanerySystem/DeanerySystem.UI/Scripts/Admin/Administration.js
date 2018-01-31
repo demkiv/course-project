@@ -1,22 +1,22 @@
 ﻿var AdministrationModule = function () {
     
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-center",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
+    //toastr.options = {
+    //    "closeButton": true,
+    //    "debug": false,
+    //    "newestOnTop": false,
+    //    "progressBar": false,
+    //    "positionClass": "toast-top-center",
+    //    "preventDuplicates": false,
+    //    "onclick": null,
+    //    "showDuration": "300",
+    //    "hideDuration": "1000",
+    //    "timeOut": "5000",
+    //    "extendedTimeOut": "1000",
+    //    "showEasing": "swing",
+    //    "hideEasing": "linear",
+    //    "showMethod": "fadeIn",
+    //    "hideMethod": "fadeOut"
+    //}
     var getUniversityTab = function () {
         $.ajax({
             url: "/Admin/ManageUniversity/",
@@ -57,7 +57,7 @@
             success: function (data) {
                 $("#university_name_label").text(data.Name);
                 switchToDisplayMode();
-                toastr["success"]("Зміни збережено!")
+               // toastr["success"]("Зміни збережено!")
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);

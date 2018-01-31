@@ -28,10 +28,10 @@ namespace DeanerySystem.UI.Controllers
             var d = unitOfWork.SubjectRepository.Get();
             var f = unitOfWork.EducationalPlanRepository.Get();
 
-			var ir = unitOfWork.IdentityRoleRepository.Get();
-			var iur = unitOfWork.IdentityUserRoleRepository.Get();
-			var ic = unitOfWork.IdentityUserClaimRepository.Get();
-			var il = unitOfWork.IdentityUserLoginRepository.Get();
+			//var ir = unitOfWork.IdentityRoleRepository.Get();
+			//var iur = unitOfWork.IdentityUserRoleRepository.Get();
+			//var ic = unitOfWork.IdentityUserClaimRepository.Get();
+			//var il = unitOfWork.IdentityUserLoginRepository.Get();
 
 			unitOfWork.Save();
             unitOfWork.Dispose();

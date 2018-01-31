@@ -1421,10 +1421,10 @@ namespace DeanerySystem.UI.Infrastructure
 
             #endregion
 
-            kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
-			//kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();  
-            kernel.Bind<IUnitOfWork>().ToConstant(unitOfWorkMock.Object);
-            //kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            //kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
+			kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();  
+            //kernel.Bind<IUnitOfWork>().ToConstant(unitOfWorkMock.Object);
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
 	}
 }

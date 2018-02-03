@@ -19,7 +19,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Number = 1,
                     Start = new TimeSpan(0, 8, 30, 0, 0),
                     End = new TimeSpan(0, 9, 50, 0, 0),
-                    TimeTable = unitOfWork.TimeTableRepository.Get().ElementAt(5)
+                    TimeTable = unitOfWork.TimeTableRepository.GetById(6)
                 },
                 new ClassNumberTime()
                 {
@@ -27,7 +27,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Number = 2,
                     Start = new TimeSpan(0, 10, 10, 0, 0),
                     End = new TimeSpan(0, 11, 30, 0, 0),
-                    TimeTable = unitOfWork.TimeTableRepository.Get().ElementAt(0)
+                    TimeTable = unitOfWork.TimeTableRepository.GetById(1)
                 },
                 new ClassNumberTime()
                 {
@@ -35,7 +35,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Number = 3,
                     Start = new TimeSpan(0, 11, 50, 0, 0),
                     End = new TimeSpan(0, 13, 10, 0, 0),
-                    TimeTable = unitOfWork.TimeTableRepository.Get().ElementAt(3)
+                    TimeTable = unitOfWork.TimeTableRepository.GetById(4)
                 },
                 new ClassNumberTime()
                 {
@@ -43,7 +43,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Number = 4,
                     Start = new TimeSpan(0, 13, 30, 0, 0),
                     End = new TimeSpan(0, 14, 50, 0, 0),
-                    TimeTable = unitOfWork.TimeTableRepository.Get().ElementAt(4)
+                    TimeTable = unitOfWork.TimeTableRepository.GetById(5)
                 },
                 new ClassNumberTime()
                 {
@@ -51,7 +51,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Number = 5,
                     Start = new TimeSpan(0, 15, 15, 0, 0),
                     End = new TimeSpan(0, 16, 25, 0, 0),
-                    TimeTable = unitOfWork.TimeTableRepository.Get().ElementAt(5)
+                    TimeTable = unitOfWork.TimeTableRepository.GetById(6)
                 },
                 new ClassNumberTime()
                 {
@@ -59,7 +59,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Number = 6,
                     Start = new TimeSpan(0, 16, 40, 0, 0),
                     End = new TimeSpan(0, 18, 0, 0, 0),
-                    TimeTable = unitOfWork.TimeTableRepository.Get().ElementAt(0)
+                    TimeTable = unitOfWork.TimeTableRepository.GetById(1)
                 },
                 new ClassNumberTime()
                 {
@@ -67,7 +67,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Number = 7,
                     Start = new TimeSpan(0, 18, 10, 0, 0),
                     End = new TimeSpan(0, 19, 30, 0, 0),
-                    TimeTable = unitOfWork.TimeTableRepository.Get().ElementAt(1)
+                    TimeTable = unitOfWork.TimeTableRepository.GetById(2)
                 }
             };
         }

@@ -16,51 +16,51 @@ namespace DeanerySystem.Domain.DataFeeders
                 new EducationalPlan()
                 {
                     Id = 1,
-                    Group = unitOfWork.GroupRepository.Get().ElementAt(0),
-                    Semester = unitOfWork.SemesterRepository.Get().ElementAt(0),
-                    Subject = unitOfWork.SubjectRepository.Get().ElementAt(0)
+                    Group = unitOfWork.GroupRepository.GetById(1),
+                    Semester = unitOfWork.SemesterRepository.GetById(1),
+                    Subject = unitOfWork.SubjectRepository.GetById(1)
                 },
                 new EducationalPlan()
                 {
                     Id = 2,
-                    Group = unitOfWork.GroupRepository.Get().ElementAt(0),
-                    Semester = unitOfWork.SemesterRepository.Get().ElementAt(0),
-                    Subject = unitOfWork.SubjectRepository.Get().ElementAt(1)
+                    Group = unitOfWork.GroupRepository.GetById(1),
+                    Semester = unitOfWork.SemesterRepository.GetById(1),
+                    Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
                 new EducationalPlan()
                 {
                     Id = 3,
-                    Group = unitOfWork.GroupRepository.Get().ElementAt(1),
-                    Semester = unitOfWork.SemesterRepository.Get().ElementAt(0),
-                    Subject = unitOfWork.SubjectRepository.Get().ElementAt(2)
+                    Group = unitOfWork.GroupRepository.GetById(2),
+                    Semester = unitOfWork.SemesterRepository.GetById(1),
+                    Subject = unitOfWork.SubjectRepository.GetById(3)
                 },
                 new EducationalPlan()
                 {
                     Id = 4,
-                    Group = unitOfWork.GroupRepository.Get().ElementAt(1),
-                    Semester = unitOfWork.SemesterRepository.Get().ElementAt(0),
-                    Subject = unitOfWork.SubjectRepository.Get().ElementAt(3)
+                    Group = unitOfWork.GroupRepository.GetById(2),
+                    Semester = unitOfWork.SemesterRepository.GetById(1),
+                    Subject = unitOfWork.SubjectRepository.GetById(4)
                 },
                 new EducationalPlan()
                 {
                     Id = 5,
-                    Group = unitOfWork.GroupRepository.Get().ElementAt(1),
-                    Semester = unitOfWork.SemesterRepository.Get().ElementAt(0),
-                    Subject = unitOfWork.SubjectRepository.Get().ElementAt(4)
+                    Group = unitOfWork.GroupRepository.GetById(2),
+                    Semester = unitOfWork.SemesterRepository.GetById(1),
+                    Subject = unitOfWork.SubjectRepository.GetById(5)
                 },
                 new EducationalPlan()
                 {
                     Id = 6,
-                    Group = unitOfWork.GroupRepository.Get().ElementAt(1),
-                    Semester = unitOfWork.SemesterRepository.Get().ElementAt(0),
-                    Subject = unitOfWork.SubjectRepository.Get().ElementAt(5)
+                    Group = unitOfWork.GroupRepository.GetById(2),
+                    Semester = unitOfWork.SemesterRepository.GetById(1),
+                    Subject = unitOfWork.SubjectRepository.GetById(6)
                 },
                 new EducationalPlan()
                 {
                     Id = 7,
-                    Group = unitOfWork.GroupRepository.Get().ElementAt(0),
-                    Semester = unitOfWork.SemesterRepository.Get().ElementAt(0),
-                    Subject = unitOfWork.SubjectRepository.Get().ElementAt(6)
+                    Group = unitOfWork.GroupRepository.GetById(1),
+                    Semester = unitOfWork.SemesterRepository.GetById(1),
+                    Subject = unitOfWork.SubjectRepository.GetById(7)
                 }
             };
         }

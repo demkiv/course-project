@@ -17,8 +17,7 @@ namespace DeanerySystem.Domain.DataFeeders
                 {
                     Id = 1,
                     Name = "ПМІ-61",
-                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(16),
-                    Department = unitOfWork.DepartmentRepository.Get().ElementAt(0),
+                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(17),
                     //Students = new List<Student>()
                     //{
                     //    unitOfWork.StudentRepository.Get().ElementAt(20),
@@ -46,14 +45,14 @@ namespace DeanerySystem.Domain.DataFeeders
                     //{
                     //	new EducationalPlan() { Semester = entitiesMock.Object.Semesters.ElementAt(0) }
                     //}
-                }
-                ,
+                
+                    Department = unitOfWork.DepartmentRepository.GetById(1),
+                },
                 new Group
                 {
                     Id = 2,
                     Name = "ПМІ-62",
-                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(0),
-                    Department = unitOfWork.DepartmentRepository.Get().ElementAt(0),
+                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(1),
                 //    Students = new List<Student>()
                 //    {
                 //        unitOfWork.StudentRepository.Get().ElementAt(0),
@@ -81,6 +80,14 @@ namespace DeanerySystem.Domain.DataFeeders
                     //{
                     //	new EducationalPlan() { Semester = entitiesMock.Object.Semesters.ElementAt(0) }
                     //}
+                    Department = unitOfWork.DepartmentRepository.GetById(2),
+                },
+                new Group
+                {
+                    Id = 2,
+                    Name = "ПМІ-63",
+                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(0),
+                    Department = unitOfWork.DepartmentRepository.GetById(3),
                 }
             };
         }

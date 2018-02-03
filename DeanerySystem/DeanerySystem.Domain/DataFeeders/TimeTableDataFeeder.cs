@@ -19,7 +19,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Id = 1,
                     DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Integer,
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                    Class = unitOfWork.ClassRepository.GetById(1)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
@@ -42,7 +42,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Numerator,
 
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(1)
+                    Class = unitOfWork.ClassRepository.GetById(2)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(6)
@@ -53,7 +53,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Id = 3,
                     DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Denominator,
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(2)
+                    Class = unitOfWork.ClassRepository.GetById(3)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(6)
@@ -65,7 +65,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Numerator,
 
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(3)
+                    Class = unitOfWork.ClassRepository.GetById(4)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(4)
@@ -77,7 +77,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Integer,
 
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(4)
+                    Class = unitOfWork.ClassRepository.GetById(5)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
@@ -89,7 +89,7 @@ namespace DeanerySystem.Domain.DataFeeders
                 //    DayOfWeek = DayOfWeek.Monday,
                 //    Fraction = Fractions.Denominator,
 
-                //    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                //    Class = unitOfWork.ClassRepository.GetById(0)
                 //    //ClassNumberTimes = new List<ClassNumberTime>
                 //    //{
                 //    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
@@ -101,7 +101,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     DayOfWeek = DayOfWeek.Tuesday,
                     Fraction = Fractions.Integer,
 
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(7)
+                    Class = unitOfWork.ClassRepository.GetById(8)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(0)
@@ -123,7 +123,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     DayOfWeek = DayOfWeek.Tuesday,
                     Fraction = Fractions.Integer,
 
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(8)
+                    Class = unitOfWork.ClassRepository.GetById(9)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(3)
@@ -135,7 +135,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     DayOfWeek = DayOfWeek.Tuesday,
                     Fraction = Fractions.Denominator,
 
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(9)
+                    Class = unitOfWork.ClassRepository.GetById(10)
                     //ClassNumberTimes = new List<ClassNumberTime>
                     //{
                     //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(3)

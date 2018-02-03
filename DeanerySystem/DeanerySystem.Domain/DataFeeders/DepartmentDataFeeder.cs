@@ -11,6 +11,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public DepartmentDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+            var stream = this.unitOfWork.StreamRepository.GetById(1);
             this.data = new List<Department>
             {
                 new Department()
@@ -18,21 +19,21 @@ namespace DeanerySystem.Domain.DataFeeders
                     Id = 1,
                     Name = "Програмування",
                     Number = 1,
-                    Stream = unitOfWork.StreamRepository.GetById(1)
+                    Stream = stream
                 },
                 new Department()
                 {
                     Id = 2,
                     Name = "Інформаційних систем",
                     Number = 2,
-                    Stream = unitOfWork.StreamRepository.GetById(1)
+                    Stream = stream
                 },
                 new Department()
                 {
                     Id = 3,
                     Name = "Дискретного аналізу та інтелектуальних систем",
                     Number = 3,
-                    Stream = unitOfWork.StreamRepository.GetById(1)
+                    Stream = stream
                 }
             };
         }

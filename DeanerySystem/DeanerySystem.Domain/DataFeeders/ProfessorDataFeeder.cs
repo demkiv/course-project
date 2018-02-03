@@ -17,6 +17,21 @@ namespace DeanerySystem.Domain.DataFeeders
                 new Professor
                 {
                     //Id = 4,
+                    FirstName = "Сергій",
+                    LastName = "Ярошко",
+                    MiddleName = "Адамович",
+                    LatinFirstName = "Serhiy",
+                    LatinLastName = "Yaroshko",
+                    HeadOfDepartment = unitOfWork.DepartmentRepository.GetById(1),
+                    //UserName = "Shef",
+                    //Password = "1",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
+                    //Id = 4,
                     FirstName = "Георгій",
                     LastName = "Шинкаренко",
                     MiddleName = "Андрійович",
@@ -168,19 +183,6 @@ namespace DeanerySystem.Domain.DataFeeders
                 new Professor
                 {
                     //Id = 8,
-                    FirstName = "Сергій",
-                    LastName = "Ярошко",
-                    MiddleName = "Адамович",
-                    LatinFirstName = "Serhiy",
-                    LatinLastName = "Yaroshko",
-                    //Role = Roles.Professor,
-                    HeadOfDepartment = unitOfWork.DepartmentRepository.GetById(2),
-                    Position = Positions.AssociateProfessor,
-                    Department = unitOfWork.DepartmentRepository.GetById(1)
-                },
-                new Professor
-                {
-                    //Id = 8,
                     FirstName = "Тарас",
                     LastName = "Заболоцький",
                     MiddleName = "Миколайович",
@@ -249,6 +251,19 @@ namespace DeanerySystem.Domain.DataFeeders
                     //Role = Roles.Professor,
                     Position = Positions.AssociateProfessor,
                     Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
+                    //Id = 8,
+                    FirstName = "Іван",
+                    LastName = "Дияк",
+                    MiddleName = "Іванович",
+                    LatinFirstName = "Ivan",
+                    LatinLastName = "Dyyak",
+                    //Role = Roles.Professor,
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1),
+                    DeanOfFaculty = unitOfWork.FacultyRepository.GetById(13)
                 },
             };
         }

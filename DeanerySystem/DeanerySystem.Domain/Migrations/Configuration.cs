@@ -20,8 +20,8 @@ namespace DeanerySystem.Domain.Migrations
 
         protected override void Seed(DeanerySystem.Domain.Concrete.DeaneryDbContext context)
         {
-            if (System.Diagnostics.Debugger.IsAttached == false)
-                System.Diagnostics.Debugger.Launch();
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //    System.Diagnostics.Debugger.Launch();
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

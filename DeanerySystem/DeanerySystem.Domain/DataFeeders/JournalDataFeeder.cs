@@ -28,178 +28,140 @@ namespace DeanerySystem.Domain.DataFeeders
                         //entitiesMock.Object.Cellules.ElementAt(5),
                         //entitiesMock.Object.Cellules.ElementAt(6)
                     },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                    Class = unitOfWork.ClassRepository.GetById(1)
                 },
                 new Journal
                 {
                     Id = 2,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(1)
                 },
                 new Journal
                 {
                     Id = 3,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(1)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(2)
                 },
                 new Journal
                 {
                     Id = 4,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(2)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(3)
                 },
                 new Journal
                 {
                     Id = 5,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(3)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(4)
                 },
                 new Journal
                 {
                     Id = 6,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                     Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(1)
                 },
                 new Journal
                 {
                     Id = 7,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                     Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(1)
                 },
                 new Journal
                 {
                     Id = 8,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                     Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(1)
                 },
                 new Journal
                 {
                     Id = 9,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(4)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(5)
                 },
                 new Journal
                 {
                     Id = 10,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(4)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(5)
                 },
                 new Journal
                 {
                     Id = 11,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(5)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(6)
                 },
                 new Journal
                 {
                     Id = 12,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(5)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(6)
                 },
                 new Journal
                 {
                     Id = 13,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(6)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(7)
                 },
                 new Journal
                 {
                     Id = 14,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(6)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(7)
                 },
                 new Journal
                 {
                     Id = 15,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(7)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(8)
                 },
                 new Journal
                 {
                     Id = 16,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(7)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(8)
                 },
                 new Journal
                 {
                     Id = 17,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(8)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(9)
                 },
                 new Journal
                 {
                     Id = 18,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(8)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(9)
                 },
                 new Journal
                 {
                     Id = 19,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(9)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(10)
                 },
                 new Journal
                 {
                     Id = 20,
                     JournalType = JournalTypes.Visiting,
-                    Cellules = new List<Cellule>()
-                    {
-                    },
-                    Class = unitOfWork.ClassRepository.Get().ElementAt(9)
+                    Cellules = new List<Cellule>(),
+                    Class = unitOfWork.ClassRepository.GetById(10)
                 }
             };
         }

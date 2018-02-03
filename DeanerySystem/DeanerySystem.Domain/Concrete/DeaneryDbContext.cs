@@ -52,6 +52,12 @@ namespace DeanerySystem.Domain.Concrete
             modelBuilder.Configurations.Add(new SubjectConfiguration());
             modelBuilder.Configurations.Add(new TimeTableConfiguration());
 			modelBuilder.Configurations.Add(new UniversityConfiguration());
+
+            modelBuilder.Entity<ApplicationUser>().ToTable("Users", "dbo");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles", "dbo");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles", "dbo");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims", "dbo");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins", "dbo");
         }
 
 		public static DeaneryDbContext Create() {

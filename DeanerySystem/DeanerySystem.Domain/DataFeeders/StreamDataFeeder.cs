@@ -11,7 +11,7 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public StreamDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            var faculty = unitOfWork.FacultyRepository.Get().First(x => x.Id == 13);
+            var faculty = unitOfWork.FacultyRepository.GetById(13);
             this.data = new List<Stream>
             {
                 new Stream()
@@ -19,7 +19,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Id = 1,
                     Name = "Комп'ютерні науки",
                     StreamAbbreviation = "ПМі",             
-                    Faculty = faculty
+                    Faculty = faculty,
                 },
                 new Stream()
                 {

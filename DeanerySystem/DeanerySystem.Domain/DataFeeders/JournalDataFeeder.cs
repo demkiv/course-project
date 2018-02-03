@@ -27,7 +27,8 @@ namespace DeanerySystem.Domain.DataFeeders
                         //entitiesMock.Object.Cellules.ElementAt(4),
                         //entitiesMock.Object.Cellules.ElementAt(5),
                         //entitiesMock.Object.Cellules.ElementAt(6)
-                    }
+                    },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
                 },
                 new Journal
                 {
@@ -36,6 +37,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
                 },
                 new Journal
                 {
@@ -44,6 +46,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(1)
                 },
                 new Journal
                 {
@@ -52,6 +55,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(2)
                 },
                 new Journal
                 {
@@ -60,6 +64,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(3)
                 },
                 new Journal
                 {
@@ -68,6 +73,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                     Class = unitOfWork.ClassRepository.Get().ElementAt(0)
                 },
                 new Journal
                 {
@@ -76,6 +82,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                     Class = unitOfWork.ClassRepository.Get().ElementAt(0)
                 },
                 new Journal
                 {
@@ -84,6 +91,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                     Class = unitOfWork.ClassRepository.Get().ElementAt(0)
                 },
                 new Journal
                 {
@@ -92,6 +100,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(4)
                 },
                 new Journal
                 {
@@ -100,6 +109,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(4)
                 },
                 new Journal
                 {
@@ -108,6 +118,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(5)
                 },
                 new Journal
                 {
@@ -116,6 +127,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(5)
                 },
                 new Journal
                 {
@@ -124,6 +136,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(6)
                 },
                 new Journal
                 {
@@ -132,6 +145,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(6)
                 },
                 new Journal
                 {
@@ -140,6 +154,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(7)
                 },
                 new Journal
                 {
@@ -148,6 +163,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(7)
                 },
                 new Journal
                 {
@@ -156,6 +172,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(8)
                 },
                 new Journal
                 {
@@ -164,6 +181,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(8)
                 },
                 new Journal
                 {
@@ -172,6 +190,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(9)
                 },
                 new Journal
                 {
@@ -180,6 +199,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Cellules = new List<Cellule>()
                     {
                     },
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(9)
                 }
             };
         }

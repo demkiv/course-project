@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.Domain.Entities.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using DeanerySystem.Domain.Concrete;
 
 namespace DeanerySystem.UI.Controllers
 {
@@ -64,8 +66,140 @@ namespace DeanerySystem.UI.Controllers
                 {
                     pDataFeeder.Data.ForEach(p =>
                     {
-                        uow.ProfessorRepository.Insert(p);
+                        var user = this.CreateAccount(p, uow.context, Roles.Professor);
+                        p.Identity = user;
+                        //uow.ProfessorRepository.Insert(p);
                     });
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                try
+                {
+                    var gDataFeeder = new GroupDataFeeder(uow);
+                    gDataFeeder.Data.ForEach(g =>
+                    {
+                       uow.GroupRepository.Insert(g);
+                    });
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+               
+                try
+                {
+                    var stDataFeeder = new StudentDataFeeder(uow);
+                    stDataFeeder.Data.ForEach(s =>
+                    {
+                        s.Group = uow.GroupRepository.Get().ElementAt(0);
+                        var user = this.CreateAccount(s, uow.context, Roles.Student);
+                        s.Identity = user;
+                        //uow.ProfessorRepository.Insert(p);
+                    });
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                try
+                {
+
+                    var subjDataFeeder = new SubjectDataFeeder(uow);
+                    subjDataFeeder.Data.ForEach(s =>
+                    {
+                        uow.SubjectRepository.Insert(s);
+
+                    });
+ 
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                try
+                {
+
+                    var classDataFeeder = new ClassDataFeeder(uow);
+                    classDataFeeder.Data.ForEach(c =>
+                    {
+                        uow.ClassRepository.Insert(c);
+
+                    });
+
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                {
+
+                    var timeTableDataFeeder = new TimeTableDataFeeder(uow);
+                    timeTableDataFeeder.Data.ForEach(t =>
+                    {
+                        uow.TimeTableRepository.Insert(t);
+
+                    });
+
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                {
+
+                    var classNumberTimes = new ClassNumberTimeDataFeeder(uow);
+                    classNumberTimes.Data.ForEach(c =>
+                    {
+                        uow.ClassNumberTimeRepository.Insert(c);
+
+                    });
+
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                {
+
+                    var jDataFeeder = new JournalDataFeeder(uow);
+                    jDataFeeder.Data.ForEach(j =>
+                    {
+                        uow.JournalRepository.Insert(j);
+
+                    });
+
+                    uow.Save();
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                {
+
+                    var cDataFeeder = new CellulesDataFeeder(uow);
+                    cDataFeeder.Data.ForEach(c =>
+                    {
+                        uow.CelluleRepository.Insert(c);
+
+                    });
+
+                    uow.Save();
                 }
                 catch (Exception ex)
                 {
@@ -73,10 +207,40 @@ namespace DeanerySystem.UI.Controllers
                 }
 
 
+                //try
+                //{
+                //    var cDataFeeder = new ClassDataFeeder(uow);
+                //    cDataFeeder.Data.ForEach(c =>
+                //    {
+                //        uow.context.Entry(c).State = EntityState.Added;
+                //    });
+
+                //    var tDataFeeder = new TimeTableDataFeeder(uow);
+                //    tDataFeeder.Data.ForEach(t =>
+                //    {
+                //        uow.context.Entry(t).State = EntityState.Added;
+                //    });
+                //    var jDataFeeder = new JournalDataFeeder(uow);
+                //    jDataFeeder.Data.ForEach(j =>
+                //    {
+                //        uow.context.Entry(j).State = EntityState.Added;
+                //    });
+
+                //    var subDataFeeder = new SubjectDataFeeder(uow);
+                //    subDataFeeder.Data.ForEach(s =>
+                //    {
+                //       uow.SubjectRepository.Insert(s);
+                //    });
+                //    uow.Save();
+                //}
+                //catch (Exception ex)
+                //{
+                //}
+
                 //var professor = new Professor() {FirstName = "AAA", Department = department, DeanOfFaculty = faculty, HeadOfDepartment = department};
                 //uow.context.Users.FirstOrDefault().DeaneryUser = professor;
                 //uow.ProfessorRepository.Insert(professor);
-                uow.Save();
+
             }
 
             return View();
@@ -111,6 +275,32 @@ namespace DeanerySystem.UI.Controllers
         //    return View();
         //}
 
+        private ApplicationUser CreateAccount(DeaneryUser professor, IdentityDbContext<ApplicationUser> ctx, Roles currRole) {
+
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(ctx));
+            var roles = Enum.GetNames(typeof(Roles));
+            foreach (var role in roles)
+            {
+                if (!roleManager.RoleExists(role))
+                {
+                    roleManager.Create(new IdentityRole(role));
+                }
+            }
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+            var newApplicationUser = new ApplicationUser()
+            {
+                UserName = $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com",
+                Email = $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com",
+                EmailConfirmed = true,
+                DeaneryUser = professor
+            };
+            ctx.Entry(professor).State = EntityState.Added;
+            
+            userManager.Create(newApplicationUser, password: "1234567890");
+            userManager.AddToRole(newApplicationUser.Id, currRole.ToString());
+            return newApplicationUser;
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

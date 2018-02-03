@@ -207,7 +207,7 @@ namespace DeanerySystem.Domain
             {
                 if(this.studentRepository == null)
                 {
-                    this.streamRepository = new GenericRepository<Stream>(this.context);
+                    this.studentRepository = new GenericRepository<Student>(this.context);
                 }
                 return this.studentRepository;
             }

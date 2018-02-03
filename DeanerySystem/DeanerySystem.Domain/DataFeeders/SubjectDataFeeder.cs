@@ -24,10 +24,10 @@ namespace DeanerySystem.Domain.DataFeeders
                     NumberOfPracticalClasses = 17,
                     NumberOflLaboratoryClasses = 0,
                     PassingDate = new DateTime(2015, 6, 6),
-                    Classes = new List<Class>()
-                    {
-                        unitOfWork.ClassRepository.Get().ElementAt(0)
-                    }
+                    //Classes = new List<Class>()
+                    //{
+                    //    unitOfWork.ClassRepository.Get().ElementAt(0)
+                    //}
                 },
                 new Subject
                 {
@@ -35,11 +35,11 @@ namespace DeanerySystem.Domain.DataFeeders
                     Name = "Основи права та основи конституційного права",
                     SemesterControl = SemesterControlTypes.Credit,
                     PassingDate = new DateTime(2015, 6, 6),
-                    Classes = new List<Class>()
-                    {
-                        unitOfWork.ClassRepository.Get().ElementAt(1),
-                        unitOfWork.ClassRepository.Get().ElementAt(2)
-                    }
+                    //Classes = new List<Class>()
+                    //{
+                    //    unitOfWork.ClassRepository.Get().ElementAt(1),
+                    //    unitOfWork.ClassRepository.Get().ElementAt(2)
+                    //}
                 },
                 new Subject
                 {
@@ -47,11 +47,11 @@ namespace DeanerySystem.Domain.DataFeeders
                     Name = "Моделювання складних систем",
                     SemesterControl = SemesterControlTypes.Credit,
                     PassingDate = new DateTime(2015, 6, 6),
-                    Classes = new List<Class>()
-                    {
-                        unitOfWork.ClassRepository.Get().ElementAt(3),
-                        unitOfWork.ClassRepository.Get().ElementAt(4)
-                    }
+                    //Classes = new List<Class>()
+                    //{
+                    //    unitOfWork.ClassRepository.Get().ElementAt(3),
+                    //    unitOfWork.ClassRepository.Get().ElementAt(4)
+                    //}
                 },
                 new Subject
                 {
@@ -59,11 +59,11 @@ namespace DeanerySystem.Domain.DataFeeders
                     Name = "Основи права та основи конституційного права",
                     SemesterControl = SemesterControlTypes.Exam,
                     PassingDate = new DateTime(2015, 6, 6),
-                    Classes = new List<Class>()
-                    {
-                        unitOfWork.ClassRepository.Get().ElementAt(5),
-                        unitOfWork.ClassRepository.Get().ElementAt(6)
-                    }
+                    //Classes = new List<Class>()
+                    //{
+                    //    unitOfWork.ClassRepository.Get().ElementAt(5),
+                    //    unitOfWork.ClassRepository.Get().ElementAt(6)
+                    //}
                 },
                 new Subject
                 {
@@ -71,10 +71,10 @@ namespace DeanerySystem.Domain.DataFeeders
                     Name = "Системи штучного інтелекту",
                     SemesterControl = SemesterControlTypes.Exam,
                     PassingDate = new DateTime(2015, 6, 6),
-                    Classes = new List<Class>()
-                    {
-                        unitOfWork.ClassRepository.Get().ElementAt(7)
-                    }
+                    //Classes = new List<Class>()
+                    //{
+                    //    unitOfWork.ClassRepository.Get().ElementAt(7)
+                    //}
                 },
                 new Subject
                 {
@@ -82,10 +82,10 @@ namespace DeanerySystem.Domain.DataFeeders
                     Name = "Чисельні методи математичної фізики",
                     SemesterControl = SemesterControlTypes.Exam,
                     PassingDate = new DateTime(2015, 6, 6),
-                    Classes = new List<Class>()
-                    {
-                        unitOfWork.ClassRepository.Get().ElementAt(8)
-                    }
+                    //Classes = new List<Class>()
+                    //{
+                    //    unitOfWork.ClassRepository.Get().ElementAt(8)
+                    //}
                 },
                 new Subject
                 {
@@ -93,10 +93,10 @@ namespace DeanerySystem.Domain.DataFeeders
                     Name = "Програмування під UNIX-подібними системами",
                     SemesterControl = SemesterControlTypes.Exam,
                     PassingDate = new DateTime(2015, 6, 6),
-                    Classes = new List<Class>()
-                    {
-                        unitOfWork.ClassRepository.Get().ElementAt(9)
-                    }
+                    //Classes = new List<Class>()
+                    //{
+                    //    unitOfWork.ClassRepository.Get().ElementAt(9)
+                    //}
                 }
             };
         }

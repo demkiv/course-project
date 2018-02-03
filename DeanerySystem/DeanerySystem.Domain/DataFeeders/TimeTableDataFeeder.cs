@@ -19,110 +19,127 @@ namespace DeanerySystem.Domain.DataFeeders
                     Id = 1,
                     DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Integer,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
-                    }
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
+                    //}
                 },
-                new TimeTable //щербатий лекція // not used
+                //new TimeTable //щербатий лекція // not used
+                //{
+                //    Id = 2,
+                //    DayOfWeek = DayOfWeek.Monday,
+                //    Fraction = Fractions.Denominator,
+
+                //    //ClassNumberTimes = new List<ClassNumberTime>
+                //    //{
+                //    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
+                //    //}
+                //},
+                new TimeTable // право лекція
                 {
                     Id = 2,
                     DayOfWeek = DayOfWeek.Monday,
-                    Fraction = Fractions.Denominator,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
-                    }
-                },
-                new TimeTable // право лекція
-                {
-                    Id = 3,
-                    DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Numerator,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(6)
-                    }
+
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(1)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(6)
+                    //}
                 },
                 new TimeTable // право практична
                 {
-                    Id = 4,
+                    Id = 3,
                     DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Denominator,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(6)
-                    }
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(2)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(6)
+                    //}
+                },
+                new TimeTable // мод 42
+                {
+                    Id = 4,
+                    DayOfWeek = DayOfWeek.Monday,
+                    Fraction = Fractions.Numerator,
+
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(3)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(4)
+                    //}
                 },
                 new TimeTable // мод 42
                 {
                     Id = 5,
                     DayOfWeek = DayOfWeek.Monday,
-                    Fraction = Fractions.Numerator,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(4)
-                    }
-                },
-                new TimeTable // мод 42
-                {
-                    Id = 6,
-                    DayOfWeek = DayOfWeek.Monday,
                     Fraction = Fractions.Integer,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
-                    }
+
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(4)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
+                    //}
                 },
-                new TimeTable // мод 42 // not used
-                {
-                    Id = 7,
-                    DayOfWeek = DayOfWeek.Monday,
-                    Fraction = Fractions.Denominator,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
-                    }
-                },
+                //new TimeTable // мод 42 // not used
+                //{
+                //    Id = 7,
+                //    DayOfWeek = DayOfWeek.Monday,
+                //    Fraction = Fractions.Denominator,
+
+                //    Class = unitOfWork.ClassRepository.Get().ElementAt(0)
+                //    //ClassNumberTimes = new List<ClassNumberTime>
+                //    //{
+                //    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(5)
+                //    //}
+                //},
                 new TimeTable // колос
                 {
-                    Id = 8,
+                    Id = 6,
                     DayOfWeek = DayOfWeek.Tuesday,
                     Fraction = Fractions.Integer,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(0)
-                    }
+
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(7)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(0)
+                    //}
                 },
-                new TimeTable // колос // not used
-                {
-                    Id = 9,
-                    DayOfWeek = DayOfWeek.Tuesday,
-                    Fraction = Fractions.Denominator,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(2)
-                    }
-                },
+                //new TimeTable // колос // not used
+                //{
+                //    Id = 9,
+                //    DayOfWeek = DayOfWeek.Tuesday,
+                //    Fraction = Fractions.Denominator,
+                //    //ClassNumberTimes = new List<ClassNumberTime>
+                //    //{
+                //    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(2)
+                //    //}
+                //},
                 new TimeTable // вовк
                 {
-                    Id = 10,
+                    Id = 7,
                     DayOfWeek = DayOfWeek.Tuesday,
                     Fraction = Fractions.Integer,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(3)
-                    }
+
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(8)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(3)
+                    //}
                 },
                 new TimeTable // літик
                 {
-                    Id = 11,
+                    Id = 8,
                     DayOfWeek = DayOfWeek.Tuesday,
                     Fraction = Fractions.Denominator,
-                    ClassNumberTimes = new List<ClassNumberTime>
-                    {
-                        unitOfWork.ClassNumberTimeRepository.Get().ElementAt(3)
-                    }
+
+                    Class = unitOfWork.ClassRepository.Get().ElementAt(9)
+                    //ClassNumberTimes = new List<ClassNumberTime>
+                    //{
+                    //    unitOfWork.ClassNumberTimeRepository.Get().ElementAt(3)
+                    //}
                 }
             };
         }

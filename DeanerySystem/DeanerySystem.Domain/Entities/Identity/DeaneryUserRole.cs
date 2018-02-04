@@ -7,9 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.Domain.Entities.Identity
 {
-    public class DeaneryRole : IdentityRole<Guid, DeaneryUserRole>
+    public class DeaneryUserRole: IdentityUserRole<int>
     {
-        public DeaneryRole() { }
-        public DeaneryRole(string name) { Name = name; }
     }
 }

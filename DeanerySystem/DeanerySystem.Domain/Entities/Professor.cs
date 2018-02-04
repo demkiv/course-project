@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities.Enums;
+using DeanerySystem.Domain.Entities.Identity;
 
 namespace DeanerySystem.Domain.Entities
 {

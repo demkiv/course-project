@@ -134,6 +134,11 @@
     <Compile Include="DataFeeders\TimeTableDataFeeder.cs" />
     <Compile Include="Entities\Abstract\IIdentifiableEntity.cs" />
     <Compile Include="Entities\Enums\SemesterNumber.cs" />
+    <Compile Include="Entities\Identity\DeaneryRoleStore.cs" />
+    <Compile Include="Entities\Identity\DeaneryUserClaim.cs" />
+    <Compile Include="Entities\Identity\DeaneryUserLogin.cs" />
+    <Compile Include="Entities\Identity\DeaneryUserRole.cs" />
+    <Compile Include="Entities\Identity\DeaneryUserStore.cs" />
     <Compile Include="Entities\ProgressRecord.cs" />
     <Compile Include="Entities\Cellule.cs" />
     <Compile Include="Entities\ClassNumberTime.cs" />
@@ -142,7 +147,7 @@
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="Entities\Enums\Fractions.cs" />
     <Compile Include="Entities\Group.cs" />
-    <Compile Include="Entities\Identity\ApplicationUser.cs" />
+    <Compile Include="Entities\Identity\DeaneryUser.cs" />
     <Compile Include="Entities\Identity\UserRole.cs" />
     <Compile Include="Entities\Class.cs" />
     <Compile Include="Entities\Journal.cs" />
@@ -165,9 +170,9 @@
     <Compile Include="Entities\FailureTicket.cs" />
     <Compile Include="Entities\Enums\FailureTicketTypes.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Migrations\201709162054123_InitDatabase.cs" />
-    <Compile Include="Migrations\201709162054123_InitDatabase.Designer.cs">
-      <DependentUpon>201709162054123_InitDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201802041701227_InitDatabase.cs" />
+    <Compile Include="Migrations\201802041701227_InitDatabase.Designer.cs">
+      <DependentUpon>201802041701227_InitDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -181,13 +186,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709162054123_InitDatabase.resx">
-      <DependentUpon>201709162054123_InitDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DbFeedingScripts\DbFeedSchema.sql" />
     <Content Include="DbFeedingScripts\DbFeedSchemaAndData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802041701227_InitDatabase.resx">
+      <DependentUpon>201802041701227_InitDatabase.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

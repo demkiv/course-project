@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
+using DeanerySystem.Domain.Entities.Identity;
 
 namespace DeanerySystem.Domain.Configurations
 {
@@ -14,10 +15,10 @@ namespace DeanerySystem.Domain.Configurations
 		public DeanaryUserConfiguration() 
 		{
 			this.ToTable("DeaneryUsers");
-			this.HasKey(du => du.Id);
-			this.Property(du => du.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.HasKey(du => du.Id);
+            this.Property(du => du.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-			this.HasRequired(du => du.Identity).WithRequiredDependent(i => i.DeaneryUser).WillCascadeOnDelete(true);
-		}
+            //this.HasRequired(du => du.Identity).WithRequiredDependent(i => i.DeaneryUser).WillCascadeOnDelete(true);
+        }
     }
 }

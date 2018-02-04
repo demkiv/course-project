@@ -52,18 +52,42 @@ namespace DeanerySystem.Domain.Migrations
                 .Index(t => t.Subject_Id);
             
             CreateTable(
-                "dbo.DeaneryUsers",
+                "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true),
                         FirstName = c.String(),
                         LastName = c.String(),
                         MiddleName = c.String(),
-                        Identity_Id = c.String(nullable: false, maxLength: 128),
+                        LatinFirstName = c.String(),
+                        LatinLastName = c.String(),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.Identity_Id, cascadeDelete: true)
-                .Index(t => t.Identity_Id);
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserClaims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.Guid(nullable: false),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.Faculties",
@@ -191,7 +215,7 @@ namespace DeanerySystem.Domain.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.ProgressRecorsds",
+                "dbo.ProgressRecords",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -207,45 +231,12 @@ namespace DeanerySystem.Domain.Migrations
                 .Index(t => t.Subject_Id);
             
             CreateTable(
-                "dbo.AspNetUsers",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
-            CreateTable(
-                "dbo.AspNetUserClaims",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
                     {
                         LoginProvider = c.String(nullable: false, maxLength: 128),
                         ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
@@ -255,12 +246,12 @@ namespace DeanerySystem.Domain.Migrations
                 "dbo.AspNetUserRoles",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.Guid(nullable: false),
+                        RoleId = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
@@ -307,7 +298,7 @@ namespace DeanerySystem.Domain.Migrations
                 "dbo.AspNetRoles",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.Guid(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
@@ -335,7 +326,7 @@ namespace DeanerySystem.Domain.Migrations
                         Position = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeaneryUsers", t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.Id)
                 .ForeignKey("dbo.Departments", t => t.Department_Id, cascadeDelete: true)
                 .Index(t => t.Id)
                 .Index(t => t.Department_Id);
@@ -350,7 +341,7 @@ namespace DeanerySystem.Domain.Migrations
                         TuitionFee = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeaneryUsers", t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.Id)
                 .ForeignKey("dbo.Groups", t => t.Group_Id, cascadeDelete: true)
                 .Index(t => t.Id)
                 .Index(t => t.Group_Id);
@@ -360,9 +351,12 @@ namespace DeanerySystem.Domain.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Students", "Group_Id", "dbo.Groups");
-            DropForeignKey("dbo.Students", "Id", "dbo.DeaneryUsers");
+            DropForeignKey("dbo.Students", "Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Professors", "Department_Id", "dbo.Departments");
-            DropForeignKey("dbo.Professors", "Id", "dbo.DeaneryUsers");
+            DropForeignKey("dbo.Professors", "Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Cellules", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.Cellules", "Journal_Id", "dbo.Journals");
@@ -381,13 +375,9 @@ namespace DeanerySystem.Domain.Migrations
             DropForeignKey("dbo.EducationalPlans", "Semester_Id", "dbo.Semesters");
             DropForeignKey("dbo.StudentsSemesters", "StudentId", "dbo.Students");
             DropForeignKey("dbo.StudentsSemesters", "SemesterId", "dbo.Semesters");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.DeaneryUsers", "Identity_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.FailureTickets", "Subject_Id", "dbo.Subjects");
-            DropForeignKey("dbo.ProgressRecorsds", "Subject_Id", "dbo.Subjects");
-            DropForeignKey("dbo.ProgressRecorsds", "Student_Id", "dbo.Students");
+            DropForeignKey("dbo.ProgressRecords", "Subject_Id", "dbo.Subjects");
+            DropForeignKey("dbo.ProgressRecords", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.FailureTickets", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.EducationalPlans", "Group_Id", "dbo.Groups");
             DropForeignKey("dbo.Faculties", "Dean_Id", "dbo.Professors");
@@ -405,10 +395,8 @@ namespace DeanerySystem.Domain.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.ProgressRecorsds", new[] { "Subject_Id" });
-            DropIndex("dbo.ProgressRecorsds", new[] { "Student_Id" });
+            DropIndex("dbo.ProgressRecords", new[] { "Subject_Id" });
+            DropIndex("dbo.ProgressRecords", new[] { "Student_Id" });
             DropIndex("dbo.FailureTickets", new[] { "Subject_Id" });
             DropIndex("dbo.FailureTickets", new[] { "Student_Id" });
             DropIndex("dbo.EducationalPlans", new[] { "Subject_Id" });
@@ -421,7 +409,8 @@ namespace DeanerySystem.Domain.Migrations
             DropIndex("dbo.Streams", new[] { "Faculty_Id" });
             DropIndex("dbo.Faculties", new[] { "University_Id" });
             DropIndex("dbo.Faculties", new[] { "Dean_Id" });
-            DropIndex("dbo.DeaneryUsers", new[] { "Identity_Id" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Classes", new[] { "Subject_Id" });
             DropIndex("dbo.Classes", new[] { "Professor_Id" });
             DropIndex("dbo.Journals", new[] { "Class_Id" });
@@ -436,9 +425,7 @@ namespace DeanerySystem.Domain.Migrations
             DropTable("dbo.Universities");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
-            DropTable("dbo.ProgressRecorsds");
+            DropTable("dbo.ProgressRecords");
             DropTable("dbo.Subjects");
             DropTable("dbo.FailureTickets");
             DropTable("dbo.Semesters");
@@ -447,7 +434,8 @@ namespace DeanerySystem.Domain.Migrations
             DropTable("dbo.Departments");
             DropTable("dbo.Streams");
             DropTable("dbo.Faculties");
-            DropTable("dbo.DeaneryUsers");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Classes");
             DropTable("dbo.Journals");
             DropTable("dbo.Cellules");

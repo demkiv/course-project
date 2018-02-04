@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using DeanerySystem.Domain;
 using DeanerySystem.Domain.DataFeeders;
@@ -26,7 +23,7 @@ namespace DeanerySystem.UI.Controllers
         public ActionResult Index()
         {
             //for testing mock of UnitOfWork
-            //this.FeedDataBase();
+            this.FeedDataBase();
             //this.MockSmokeTest();
             return View();
         }
@@ -109,7 +106,7 @@ namespace DeanerySystem.UI.Controllers
                     pDataFeeder.Data.ForEach(p =>
                     {
                         var user = this.CreateAccount(p, uow.context, Roles.Professor);
-                        p.Identity = user;
+                        //p.Identity = user;
                     });
                     uow.Save();
 
@@ -124,7 +121,7 @@ namespace DeanerySystem.UI.Controllers
                     stDataFeeder.Data.ForEach(s =>
                     {
                         var user = this.CreateAccount(s, uow.context, Roles.Student);
-                        s.Identity = user;
+                        //s.Identity = user;
                     });
                     uow.Save();
 
@@ -182,7 +179,7 @@ namespace DeanerySystem.UI.Controllers
             }
         }
 
-        private ApplicationUser CreateAccount(DeaneryUser professor, IdentityDbContext<ApplicationUser> ctx, Roles currRole) {
+        private DeaneryUser CreateAccount(DeaneryUser professor, DeaneryDbContext ctx, Roles currRole) {
 
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(ctx));
@@ -194,19 +191,17 @@ namespace DeanerySystem.UI.Controllers
                     roleManager.Create(new IdentityRole(role));
                 }
             }
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-            var newApplicationUser = new ApplicationUser()
-            {
-                UserName = $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com",
-                Email = $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com",
-                EmailConfirmed = true,
-                DeaneryUser = professor
-            };
+            var userManager = new UserManager<DeaneryUser, Guid>(new DeaneryUserStore(ctx));
+            professor.UserName =
+                $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com";
+            professor.Email = $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com";
+            professor.EmailConfirmed = true;
+  
             ctx.Entry(professor).State = EntityState.Added;
             
-            userManager.Create(newApplicationUser, password: "1234567890");
-            userManager.AddToRole(newApplicationUser.Id, currRole.ToString());
-            return newApplicationUser;
+            userManager.Create(professor, password: "1234567890");
+            userManager.AddToRole(professor.Id, currRole.ToString());
+            return professor;
         }
         public ActionResult About()
         {

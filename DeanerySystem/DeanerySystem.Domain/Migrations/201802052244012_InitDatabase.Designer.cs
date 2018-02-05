@@ -13,7 +13,7 @@ namespace DeanerySystem.Domain.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201802041701227_InitDatabase"; }
+            get { return "201802052244012_InitDatabase"; }
         }
         
         string IMigrationMetadata.Source

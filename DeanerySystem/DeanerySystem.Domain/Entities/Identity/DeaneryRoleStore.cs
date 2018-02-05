@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.Domain.Entities.Identity
 {
-    public class DeaneryRoleStore: RoleStore<DeaneryRole, int, DeaneryUserRole>
+    public class DeaneryRoleStore: RoleStore<DeaneryRole, Guid, DeaneryUserRole>
     {
         public DeaneryRoleStore(DbContext context) : base(context)
         {

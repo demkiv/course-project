@@ -18,6 +18,10 @@ namespace DeanerySystem.Domain.Entities.Identity {
 	    public string LatinFirstName { get; set; }
 	    public string LatinLastName { get; set; }
 
+	    public DeaneryUser()
+	    {
+            this.Id = Guid.NewGuid();
+        }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<DeaneryUser, Guid> manager) {
 			// Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
 			var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);

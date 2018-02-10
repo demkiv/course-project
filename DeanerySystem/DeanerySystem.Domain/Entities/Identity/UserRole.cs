@@ -9,7 +9,14 @@ namespace DeanerySystem.Domain.Entities.Identity
 {
     public class DeaneryRole : IdentityRole<Guid, DeaneryUserRole>
     {
-        public DeaneryRole() { }
-        public DeaneryRole(string name) { Name = name; }
+        public DeaneryRole()
+        {
+            base.Id = Guid.NewGuid();
+        }
+
+        public DeaneryRole(string name) : this()
+        {
+            Name = name;
+        }
     }
 }

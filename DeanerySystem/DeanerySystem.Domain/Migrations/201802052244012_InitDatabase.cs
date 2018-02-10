@@ -52,7 +52,7 @@ namespace DeanerySystem.Domain.Migrations
                 .Index(t => t.Subject_Id);
             
             CreateTable(
-                "dbo.AspNetUsers",
+                "dbo.Users",
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true),
@@ -77,7 +77,7 @@ namespace DeanerySystem.Domain.Migrations
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
-                "dbo.AspNetUserClaims",
+                "dbo.UserClaims",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -86,7 +86,7 @@ namespace DeanerySystem.Domain.Migrations
                         ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -231,7 +231,7 @@ namespace DeanerySystem.Domain.Migrations
                 .Index(t => t.Subject_Id);
             
             CreateTable(
-                "dbo.AspNetUserLogins",
+                "dbo.UserLogins",
                 c => new
                     {
                         LoginProvider = c.String(nullable: false, maxLength: 128),
@@ -239,19 +239,19 @@ namespace DeanerySystem.Domain.Migrations
                         UserId = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.UserRoles",
                 c => new
                     {
                         UserId = c.Guid(nullable: false),
                         RoleId = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Roles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
@@ -295,10 +295,10 @@ namespace DeanerySystem.Domain.Migrations
                 .Index(t => t.TimeTable_Id);
             
             CreateTable(
-                "dbo.AspNetRoles",
+                "dbo.Roles",
                 c => new
                     {
-                        Id = c.Guid(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         Name = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
@@ -326,7 +326,7 @@ namespace DeanerySystem.Domain.Migrations
                         Position = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.Id)
+                .ForeignKey("dbo.Users", t => t.Id)
                 .ForeignKey("dbo.Departments", t => t.Department_Id, cascadeDelete: true)
                 .Index(t => t.Id)
                 .Index(t => t.Department_Id);
@@ -341,7 +341,7 @@ namespace DeanerySystem.Domain.Migrations
                         TuitionFee = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.Id)
+                .ForeignKey("dbo.Users", t => t.Id)
                 .ForeignKey("dbo.Groups", t => t.Group_Id, cascadeDelete: true)
                 .Index(t => t.Id)
                 .Index(t => t.Group_Id);
@@ -351,13 +351,13 @@ namespace DeanerySystem.Domain.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Students", "Group_Id", "dbo.Groups");
-            DropForeignKey("dbo.Students", "Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Students", "Id", "dbo.Users");
             DropForeignKey("dbo.Professors", "Department_Id", "dbo.Departments");
-            DropForeignKey("dbo.Professors", "Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Professors", "Id", "dbo.Users");
+            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserLogins", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserClaims", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserRoles", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.Cellules", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.Cellules", "Journal_Id", "dbo.Journals");
             DropForeignKey("dbo.TimeTables", "Class_Id", "dbo.Classes");
@@ -388,13 +388,13 @@ namespace DeanerySystem.Domain.Migrations
             DropIndex("dbo.Professors", new[] { "Id" });
             DropIndex("dbo.StudentsSemesters", new[] { "StudentId" });
             DropIndex("dbo.StudentsSemesters", new[] { "SemesterId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Roles", "RoleNameIndex");
             DropIndex("dbo.ClassNumberTimes", new[] { "TimeTable_Id" });
             DropIndex("dbo.TimeTables", new[] { "Class_Id" });
             DropIndex("dbo.Universities", new[] { "Rector_Id" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.UserRoles", new[] { "RoleId" });
+            DropIndex("dbo.UserRoles", new[] { "UserId" });
+            DropIndex("dbo.UserLogins", new[] { "UserId" });
             DropIndex("dbo.ProgressRecords", new[] { "Subject_Id" });
             DropIndex("dbo.ProgressRecords", new[] { "Student_Id" });
             DropIndex("dbo.FailureTickets", new[] { "Subject_Id" });
@@ -409,8 +409,8 @@ namespace DeanerySystem.Domain.Migrations
             DropIndex("dbo.Streams", new[] { "Faculty_Id" });
             DropIndex("dbo.Faculties", new[] { "University_Id" });
             DropIndex("dbo.Faculties", new[] { "Dean_Id" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.UserClaims", new[] { "UserId" });
+            DropIndex("dbo.Users", "UserNameIndex");
             DropIndex("dbo.Classes", new[] { "Subject_Id" });
             DropIndex("dbo.Classes", new[] { "Professor_Id" });
             DropIndex("dbo.Journals", new[] { "Class_Id" });
@@ -419,12 +419,12 @@ namespace DeanerySystem.Domain.Migrations
             DropTable("dbo.Students");
             DropTable("dbo.Professors");
             DropTable("dbo.StudentsSemesters");
-            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Roles");
             DropTable("dbo.ClassNumberTimes");
             DropTable("dbo.TimeTables");
             DropTable("dbo.Universities");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.UserRoles");
+            DropTable("dbo.UserLogins");
             DropTable("dbo.ProgressRecords");
             DropTable("dbo.Subjects");
             DropTable("dbo.FailureTickets");
@@ -434,8 +434,8 @@ namespace DeanerySystem.Domain.Migrations
             DropTable("dbo.Departments");
             DropTable("dbo.Streams");
             DropTable("dbo.Faculties");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.UserClaims");
+            DropTable("dbo.Users");
             DropTable("dbo.Classes");
             DropTable("dbo.Journals");
             DropTable("dbo.Cellules");

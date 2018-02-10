@@ -171,6 +171,13 @@ namespace DeanerySystem.UI.Controllers
                         uow.CelluleRepository.Insert(c);
                     });
                     uow.Save();
+
+                    var eDataFeeder = new EducationalPlanDataFeeder(uow);
+                    eDataFeeder.Data.ForEach(e =>
+                    {
+                        uow.EducationalPlanRepository.Insert(e);
+                    });
+                    uow.Save();
                 }
             }
             catch (Exception e)
@@ -182,13 +189,13 @@ namespace DeanerySystem.UI.Controllers
         private DeaneryUser CreateAccount(DeaneryUser professor, DeaneryDbContext ctx, Roles currRole) {
 
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(ctx));
+            var roleManager = new DeaneryRoleManager(new DeaneryRoleStore(ctx));
             var roles = Enum.GetNames(typeof(Roles));
             foreach (var role in roles)
             {
                 if (!roleManager.RoleExists(role))
                 {
-                    roleManager.Create(new IdentityRole(role));
+                    roleManager.Create(new DeaneryRole(role));
                 }
             }
             var userManager = new UserManager<DeaneryUser, Guid>(new DeaneryUserStore(ctx));

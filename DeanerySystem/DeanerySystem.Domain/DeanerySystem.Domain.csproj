@@ -138,6 +138,7 @@
     <Compile Include="DataFeeders\StudentDataFeeder.cs" />
     <Compile Include="DataFeeders\SubjectDataFeeder.cs" />
     <Compile Include="DataFeeders\TimeTableDataFeeder.cs" />
+    <Compile Include="DataFeeders\UniversityDataFeeder.cs" />
     <Compile Include="Entities\Abstract\IIdentifiableEntity.cs" />
     <Compile Include="Entities\Enums\SemesterNumber.cs" />
     <Compile Include="Entities\Identity\DeaneryRoleManager.cs" />

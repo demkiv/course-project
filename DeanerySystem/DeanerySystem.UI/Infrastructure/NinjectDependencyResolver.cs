@@ -37,6 +37,12 @@ namespace DeanerySystem.UI.Infrastructure
 
             Mock<IUnitOfWork> unitOfWorkMock = new Mock<IUnitOfWork>();
 
+            #region UniversitiesUoW
+            var universityRepositoryMock = MockFactory.GetMock<University, int>(unitOfWorkMock.Object);
+            unitOfWorkMock.Setup(uw => uw.UniversityRepository).Returns(() => universityRepositoryMock.Object);
+
+            #endregion
+
             #region FacultiesUoW
             var facultyRepositoryMock = MockFactory.GetMock<Faculty, int>(unitOfWorkMock.Object);           
             unitOfWorkMock.Setup(uw => uw.FacultyRepository).Returns(() => facultyRepositoryMock.Object);
@@ -83,6 +89,7 @@ namespace DeanerySystem.UI.Infrastructure
             //semesterRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(semesterDataFeeder.GetData());
             //unitOfWorkMock.Setup(uw => uw.SemesterRepository).Returns(() => semesterRepositoryMock.Object);
             #endregion
+
             #region GroupsUoW
 
             var groupRepositoryMock = MockFactory.GetMock<Group, int>(unitOfWorkMock.Object);
@@ -103,17 +110,6 @@ namespace DeanerySystem.UI.Infrastructure
             //studentRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(studentDataFeeder.GetData());
             //unitOfWorkMock.Setup(uw => uw.StudentRepository).Returns(() => studentRepositoryMock.Object);
             #endregion
-
-           
-
-         
-
-          
-
-            
-
-            
-
             
             #region SubjectsUoW
 
@@ -124,6 +120,7 @@ namespace DeanerySystem.UI.Infrastructure
             //subjectRepositoryMock.Setup(sr => sr.Get(null, null, "")).Returns(subjectDataFeeder.GetData());
             //unitOfWorkMock.Setup(uw => uw.SubjectRepository).Returns(() => subjectRepositoryMock.Object);
             #endregion
+
             #region ClassesUoW
 
             var classRepositoryMock = MockFactory.GetMock<Class, int>(unitOfWorkMock.Object);
@@ -133,6 +130,7 @@ namespace DeanerySystem.UI.Infrastructure
             //classRepository.Setup(cr => cr.Get(null, null, "")).Returns(classDataFeeder.GetData());
             //unitOfWorkMock.Setup(uw => uw.ClassRepository).Returns(() => classRepository.Object);
             #endregion
+
             #region JournalUoW
 
             var journalRepositoryMock = MockFactory.GetMock<Journal, int>(unitOfWorkMock.Object);
@@ -142,6 +140,7 @@ namespace DeanerySystem.UI.Infrastructure
             //journalRepository.Setup(jr => jr.Get(null, null, "")).Returns(journalDataFeeder.GetData());
             //unitOfWorkMock.Setup(uw => uw.JournalRepository).Returns(() => journalRepository.Object);
             #endregion
+
             #region CellulesUoW
 
             var celluleRepositoryMock = MockFactory.GetMock<Cellule, int>(unitOfWorkMock.Object);
@@ -151,6 +150,7 @@ namespace DeanerySystem.UI.Infrastructure
             //celluleRepositoryMock.Setup(cr => cr.Get(null, null, "")).Returns(cellulesDataFeeder.GetData());
             //unitOfWorkMock.Setup(uw => uw.CelluleRepository).Returns(() => celluleRepositoryMock.Object);
             #endregion
+
             #region TimeTableUoW
 
             var timeTableRepositoryMock = MockFactory.GetMock<TimeTable, int>(unitOfWorkMock.Object);
@@ -160,6 +160,7 @@ namespace DeanerySystem.UI.Infrastructure
             //timeTableRepositoryMock.Setup(ttr => ttr.Get(null, null, "")).Returns(timeTableDataFeeder.GetData());
             //unitOfWorkMock.Setup(uw => uw.TimeTableRepository).Returns(() => timeTableRepositoryMock.Object);
             #endregion
+
             #region ClassNumberTimesUow
 
             var classNumberTimeRepositoryMock = MockFactory.GetMock<ClassNumberTime, int>(unitOfWorkMock.Object);
@@ -1455,8 +1456,8 @@ namespace DeanerySystem.UI.Infrastructure
 
             //kernel.Bind<IDeaneryEntitiesRepository>().ToConstant(entitiesMock.Object);
 			//kernel.Bind<IDeaneryEntitiesRepository>().To<DeaneryEntitiesRepository>();  
-            //kernel.Bind<IUnitOfWork>().ToConstant(unitOfWorkMock.Object);
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<IUnitOfWork>().ToConstant(unitOfWorkMock.Object);
+            //kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
 	}
 }

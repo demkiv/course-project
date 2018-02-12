@@ -36,6 +36,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Faculty = faculty
                 },
             };
+            this.Data.ForEach(s => faculty.Streams.Add(s));
         }
     }
 }

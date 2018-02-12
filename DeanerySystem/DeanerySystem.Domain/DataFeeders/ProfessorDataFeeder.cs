@@ -214,7 +214,8 @@ namespace DeanerySystem.Domain.DataFeeders
                     LatinLastName = "Klakovych",
                     //Role = Roles.Professor,
                     Position = Positions.AssociateProfessor,
-                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                    Department = unitOfWork.DepartmentRepository.GetById(1),
+                    RectorOfUniversity = unitOfWork.UniversityRepository.GetById(1)
                 },
                 new Professor
                 {
@@ -264,8 +265,21 @@ namespace DeanerySystem.Domain.DataFeeders
                     Position = Positions.AssociateProfessor,
                     Department = unitOfWork.DepartmentRepository.GetById(1),
                     DeanOfFaculty = unitOfWork.FacultyRepository.GetById(13)
-                },
+                }
             };
+            this.Data.ForEach(prof =>
+            {
+                prof.Department.Professors.Add(prof);
+
+                if (prof.RectorOfUniversity != null)
+                    prof.RectorOfUniversity.Rector = prof;
+
+                if (prof.DeanOfFaculty != null)
+                    prof.DeanOfFaculty.Dean = prof;
+
+                if (prof.HeadOfDepartment != null)
+                    prof.HeadOfDepartment.Head = prof;
+            });
         }
     }
 }

@@ -1,139 +1,246 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
+using DeanerySystem.Domain.Entities.Identity;
+using DeanerySystem.Domain.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace DeanerySystem.Domain.DataFeeders
 {
-    public class ProfessorDataFeeder: AbstractDataFeeder<Professor>
+    public class ProfessorDataFeeder : AbstractDataFeeder<Professor>
     {
         public ProfessorDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Professor> GetData()
-        {
-            var professors = new List<Professor>
+            this.data = new List<Professor>
             {
                 new Professor
                 {
-                    //Id = 4,
+                    FirstName = "Сергій",
+                    LastName = "Ярошко",
+                    MiddleName = "Адамович",
+                    LatinFirstName = "Serhiy",
+                    LatinLastName = "Yaroshko",
+                    HeadOfDepartment = unitOfWork.DepartmentRepository.GetById(1),
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
                     FirstName = "Георгій",
                     LastName = "Шинкаренко",
                     MiddleName = "Андрійович",
-                    //UserName = "Shef",
-                    //Password = "1",
-                    //Role = Roles.Professor,
-                    Position = Positions.Professor
+                    LatinFirstName = "Heorhii",
+                    LatinLastName = "Shynkarenko",
+                    HeadOfDepartment = unitOfWork.DepartmentRepository.GetById(2),
+                    Position = Positions.Professor,
+                    Department = unitOfWork.DepartmentRepository.GetById(2)
                 },
                 new Professor
                 {
-                    //Id = 5,
                     FirstName = "Віталій",
                     LastName = "Горлач",
                     MiddleName = "Михайлович",
-                    //UserName = "VHM5",
-                    //Password = "1",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Vitalii",
+                    LatinLastName = "Horlatch",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(2)
                 },
                 new Professor
                 {
-                    //Id = 6,
                     FirstName = "Петро",
                     LastName = "Вагін",
                     MiddleName = "Петрович",
-                    //UserName = "PVP6",
-                    //Password = "1",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Petro",
+                    LatinLastName = "Vahin",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(2)
                 },
                 new Professor
                 {
-                    //Id = 7,
                     FirstName = "Роман",
                     LastName = "Рикалюк",
                     MiddleName = "Євстахович",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Roman",
+                    LatinLastName = "Rykalyuk",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Марта",
                     LastName = "Жук",
                     MiddleName = "Вікторівна",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Marta",
+                    LatinLastName = "Zhuk",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(3)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Михайло",
                     LastName = "Щербатий",
                     MiddleName = "Васильович",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Mykhailo",
+                    LatinLastName = "Scherbatyy",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(3)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Роман",
                     LastName = "Шандра",
                     MiddleName = "Станіславович",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Roman",
+                    LatinLastName = "Shandra",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(3)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Валерія",
                     LastName = "Семків",
                     MiddleName = "Олегівна",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Valeriya",
+                    LatinLastName = "Semkiv",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(3)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Віталій",
                     LastName = "Чорненький",
                     MiddleName = "Ігорович",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Vitalii",
+                    LatinLastName = "Chornenkiy",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(3)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Надія",
                     LastName = "Колос",
                     MiddleName = "Мирославівна",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Nadiya",
+                    LatinLastName = "Kolos",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(3)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Святослав",
                     LastName = "Літинський",
                     MiddleName = "Володимирович",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Svyatoslav",
+                    LatinLastName = "Litynskiy",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
                 },
                 new Professor
                 {
-                    //Id = 8,
                     FirstName = "Володимир",
                     LastName = "Вовк",
                     MiddleName = "Дмитрович",
-                    //Role = Roles.Professor,
-                    Position = Positions.AssociateProfessor
+                    LatinFirstName = "Volodymyr",
+                    LatinLastName = "Vovk",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(2)
+                },
+                new Professor
+                {
+                    FirstName = "Тарас",
+                    LastName = "Заболоцький",
+                    MiddleName = "Миколайович",
+                    LatinFirstName = "Taras",
+                    LatinLastName = "Zabolotskiy",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
+                    FirstName = "Андрій",
+                    LastName = "Кардаш",
+                    MiddleName = "Іванович",
+                    LatinFirstName = "Andriy",
+                    LatinLastName = "Kardash",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
+                    FirstName = "Леся",
+                    LastName = "Клакович",
+                    MiddleName = "Миронівна",
+                    LatinFirstName = "Lesya",
+                    LatinLastName = "Klakovych",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1),
+                    RectorOfUniversity = unitOfWork.UniversityRepository.GetById(1)
+                },
+                new Professor
+                {
+                    FirstName = "Анатолій",
+                    LastName = "Музичук",
+                    MiddleName = "Омелянович",
+                    LatinFirstName = "Anatoliy",
+                    LatinLastName = "Muzychuk",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
+                    FirstName = "Богдан",
+                    LastName = "Подлевський",
+                    MiddleName = "Михайлович",
+                    LatinFirstName = "Bohdan",
+                    LatinLastName = "Podlevskyy",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
+                    FirstName = "Юрій",
+                    LastName = "Сибіль",
+                    MiddleName = "Миколайович",
+                    LatinFirstName = "Yuriy",
+                    LatinLastName = "Sybil",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1)
+                },
+                new Professor
+                {
+                    FirstName = "Іван",
+                    LastName = "Дияк",
+                    MiddleName = "Іванович",
+                    LatinFirstName = "Ivan",
+                    LatinLastName = "Dyyak",
+                    Position = Positions.AssociateProfessor,
+                    Department = unitOfWork.DepartmentRepository.GetById(1),
+                    DeanOfFaculty = unitOfWork.FacultyRepository.GetById(13)
                 }
             };
-            return professors;
+
+            this.Data.ForEach(prof =>
+            {
+                prof.UserName =
+                    $"{prof.LatinFirstName.ToLower()}.{prof.LatinLastName.ToLower()}@edeanery.com";
+                prof.Email = $"{prof.LatinFirstName.ToLower()}.{prof.LatinLastName.ToLower()}@edeanery.com";
+                prof.EmailConfirmed = true;
+                prof.Department.Professors.Add(prof);
+                if (this.unitOfWork.Context != null)
+                {
+                    var manager = new IdentityUtilityManager(this.unitOfWork);
+                    manager.CreateAccount(prof, Roles.Professor);
+                }
+                if (prof.RectorOfUniversity != null)
+                    prof.RectorOfUniversity.Rector = prof;
+
+                if (prof.DeanOfFaculty != null)
+                    prof.DeanOfFaculty.Dean = prof;
+
+                if (prof.HeadOfDepartment != null)
+                    prof.HeadOfDepartment.Head = prof;
+            });
         }
     }
 }

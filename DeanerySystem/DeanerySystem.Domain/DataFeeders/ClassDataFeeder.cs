@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
 
@@ -12,168 +9,85 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public ClassDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Class> GetData()
-        {
-            var classes = new List<Class>
+            this.data = new List<Class>
             {
                 new Class
                 {
                     Id = 1,
                     ClassType = ClassTypes.Lecture,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(5),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(0),
-                        unitOfWork.JournalRepository.Get().ElementAt(1)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(0),
-                        //entitiesMock.Object.TimeTables.ElementAt(1)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(1)
                 },
-                new Class // право
+                new Class
                 {
                     Id = 2,
                     ClassType = ClassTypes.Lecture,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(6),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(2),
-                        unitOfWork.JournalRepository.Get().ElementAt(3)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(2)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
-                new Class // право
+                new Class
                 {
                     Id = 3,
                     ClassType = ClassTypes.PracticalClass,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(7),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(4),
-                        unitOfWork.JournalRepository.Get().ElementAt(5)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(3)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(1)
                 },
                 new Class
                 {
                     Id = 4,
                     ClassType = ClassTypes.PracticalClass,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(5),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(6),
-                        unitOfWork.JournalRepository.Get().ElementAt(7)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(4)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(1)
                 },
                 new Class
                 {
                     Id = 5,
                     ClassType = ClassTypes.Lecture,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(5),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(8),
-                        unitOfWork.JournalRepository.Get().ElementAt(9)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(5),
-                        //entitiesMock.Object.TimeTables.ElementAt(6)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
-                new Class // право
+                new Class
                 {
                     Id = 6,
                     ClassType = ClassTypes.Lecture,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(6),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(10),
-                        unitOfWork.JournalRepository.Get().ElementAt(11)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(2)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
-                new Class // право
+                new Class
                 {
                     Id = 7,
                     ClassType = ClassTypes.PracticalClass,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(8),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(12),
-                        unitOfWork.JournalRepository.Get().ElementAt(13)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(3)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
-                new Class // колос
+                new Class
                 {
                     Id = 8,
                     ClassType = ClassTypes.PracticalClass,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(9),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(14),
-                        unitOfWork.JournalRepository.Get().ElementAt(15)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(7),
-                        //entitiesMock.Object.TimeTables.ElementAt(8)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(5)
                 },
-                new Class // вовк
+                new Class
                 {
                     Id = 9,
                     ClassType = ClassTypes.PracticalClass,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(11),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(16),
-                        unitOfWork.JournalRepository.Get().ElementAt(17)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(9),
-                        //entitiesMock.Object.TimeTables.ElementAt(10)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(6)
                 },
-                new Class // літик
+                new Class
                 {
                     Id = 10,
                     ClassType = ClassTypes.PracticalClass,
                     Professor = unitOfWork.ProfessorRepository.Get().ElementAt(10),
-                    Journals = new List<Journal>
-                    {
-                        unitOfWork.JournalRepository.Get().ElementAt(18),
-                        unitOfWork.JournalRepository.Get().ElementAt(19)
-                    },
-                    TimeTables = new List<TimeTable>
-                    {
-                        unitOfWork.TimeTableRepository.Get().ElementAt(10)
-                    }
+                    Subject = unitOfWork.SubjectRepository.GetById(7)
                 }
             };
-            return classes;
+
+            this.Data.ForEach(c =>
+            {
+                c.Subject.Classes.Add(c);
+                c.Professor.Classes.Add(c);
+            });
         }
     }
 }

@@ -11,11 +11,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DeanerySystem.Domain.Concrete
 {
-	public class DeaneryDbContext : IdentityDbContext<ApplicationUser> {
+	public class DeaneryDbContext : IdentityDbContext<DeaneryUser, DeaneryRole, Guid, DeaneryUserLogin, DeaneryUserRole, DeaneryUserClaim> {
 		public DbSet<Cellule> Cellules { get; set; }
 		public DbSet<Class> Classes { get; set; }
 		public DbSet<ClassNumberTime> ClassNumberTimes { get; set; }
-		public DbSet<DeaneryUser> DeaneryUsers { get; set; }
 		public DbSet<Department> Departments { get; set; }
 		public DbSet<EducationalPlan> EducationalPlans { get; set; }
 		public DbSet<Faculty> Faculties { get; set; }
@@ -37,7 +36,6 @@ namespace DeanerySystem.Domain.Concrete
 			modelBuilder.Configurations.Add(new CelluleConfiguration());
 			modelBuilder.Configurations.Add(new ClassConfiguration());
 			modelBuilder.Configurations.Add(new ClassNumberTimeConfiguration());
-			modelBuilder.Configurations.Add(new DeanaryUserConfiguration());
             modelBuilder.Configurations.Add(new DepartmentConfiguration());
 			modelBuilder.Configurations.Add(new EducationalPlanConfiguration());
 			modelBuilder.Configurations.Add(new FacultyConfiguration());
@@ -52,6 +50,12 @@ namespace DeanerySystem.Domain.Concrete
             modelBuilder.Configurations.Add(new SubjectConfiguration());
             modelBuilder.Configurations.Add(new TimeTableConfiguration());
 			modelBuilder.Configurations.Add(new UniversityConfiguration());
+
+            modelBuilder.Entity<DeaneryUser>().ToTable("Users", "dbo");
+            modelBuilder.Entity<DeaneryRole>().ToTable("Roles", "dbo");
+            modelBuilder.Entity<DeaneryUserRole>().ToTable("UserRoles", "dbo");
+            modelBuilder.Entity<DeaneryUserClaim>().ToTable("UserClaims", "dbo");
+            modelBuilder.Entity<DeaneryUserLogin>().ToTable("UserLogins", "dbo");
         }
 
 		public static DeaneryDbContext Create() {

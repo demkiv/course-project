@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.DataFeeders
@@ -11,30 +7,31 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public FacultyDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-        public override List<Faculty> GetData()
-        {
-            var facultioes = new List<Faculty>
+            var university = unitOfWork.UniversityRepository.GetById(1); 
+            this.data = new List<Faculty>
             {
-                new Faculty {Id = 1, Name = "Biology"},
-                new Faculty {Id = 2, Name = "Geography"},
-                new Faculty {Id = 3, Name = "Geology"},
-                new Faculty {Id = 4, Name = "Economics"},
-                new Faculty {Id = 5, Name = "Electronics"},
-                new Faculty {Id = 6, Name = "Jornalism"},
-                new Faculty {Id = 7, Name = "Foreign Languages"},
-                new Faculty {Id = 8, Name = "History"},
-                new Faculty {Id = 9, Name = "Culture and Arts"},
-                new Faculty {Id = 10, Name = "International Relations"},
-                new Faculty {Id = 11, Name = "Mechanics and Mathematics"},
-                new Faculty {Id = 12, Name = "Applied Mathematics and Information Science"},
-                new Faculty {Id = 13, Name = "Physics"},
-                new Faculty {Id = 14, Name = "Philology"},
-                new Faculty {Id = 15, Name = "Philosophy"},
-                new Faculty {Id = 16, Name = "Chemistry"},
-                new Faculty {Id = 17, Name = "Law"}
+                new Faculty {Id = 1, Name = "Біологічний факультет", University = university},
+                new Faculty {Id = 2, Name = "Географічний факультет", University = university},
+                new Faculty {Id = 3, Name = "Геологічний факультет", University = university},
+                new Faculty {Id = 4, Name = "Економічний факультет", University = university},
+                new Faculty {Id = 5, Name = "Факультет електроніки та комп'ютерних технологій", University = university},
+                new Faculty {Id = 6, Name = "Факультет журналістики", University = university},
+                new Faculty {Id = 7, Name = "Факультет іноземних мов", University = university},
+                new Faculty {Id = 8, Name = "Історичний факультет", University = university},
+                new Faculty {Id = 9, Name = "Факультет культури та мистецтв", University = university},
+                new Faculty {Id = 10, Name = "Механіко-математичний факультет", University = university},
+                new Faculty {Id = 11, Name = "Факультет міжнародних відносин", University = university},
+                new Faculty {Id = 12, Name = "Факультет педагогічної освіти", University = university},
+                new Faculty {Id = 13, Name = "Факультет прикладної математики та інформатики", University = university},
+                new Faculty {Id = 14, Name = "Факультет управління фінансами та бізнесу", University = university},
+                new Faculty {Id = 15, Name = "Фізичний факультет", University = university},
+                new Faculty {Id = 16, Name = "Філологічний факультет", University = university},
+                new Faculty {Id = 17, Name = "Філософський факультет", University = university},
+                new Faculty {Id = 18, Name = "Хімічний факультет", University = university},
+                new Faculty {Id = 19, Name = "Юридичний факультет", University = university}
             };
-            return facultioes;
+
+            this.Data.ForEach(f => university.Faculties.Add(f));
         }
     }
 }

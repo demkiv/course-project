@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DeanerySystem.Domain.Concrete;
 using DeanerySystem.Domain.Entities;
+using DeanerySystem.Domain.Entities.Identity;
 using DeanerySystem.Domain.Repositories;
 
 namespace DeanerySystem.Domain
@@ -33,6 +34,7 @@ namespace DeanerySystem.Domain
         private GenericRepository<TimeTable> timeTableRepository;
         private GenericRepository<University> universityRepository;
 
+        public DeaneryDbContext Context => this.context;
         public IGenericRepository<Cellule> CelluleRepository
         {
             get
@@ -207,7 +209,7 @@ namespace DeanerySystem.Domain
             {
                 if(this.studentRepository == null)
                 {
-                    this.streamRepository = new GenericRepository<Stream>(this.context);
+                    this.studentRepository = new GenericRepository<Student>(this.context);
                 }
                 return this.studentRepository;
             }

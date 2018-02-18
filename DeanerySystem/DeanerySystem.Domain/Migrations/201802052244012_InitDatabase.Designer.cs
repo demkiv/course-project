@@ -7,13 +7,13 @@ namespace DeanerySystem.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitializeDataBase : IMigrationMetadata
+    public sealed partial class InitDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitializeDataBase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604111723091_InitializeDataBase"; }
+            get { return "201802052244012_InitDatabase"; }
         }
         
         string IMigrationMetadata.Source

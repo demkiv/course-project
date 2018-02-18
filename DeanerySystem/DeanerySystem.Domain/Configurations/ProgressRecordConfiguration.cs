@@ -13,7 +13,7 @@ namespace DeanerySystem.Domain.Configurations
     {
 		public ProgressRecordConfiguration() 
 		{
-			this.ToTable("ProgressRecorsds");
+			this.ToTable("ProgressRecords");
 			this.HasKey(p => p.Id);
 			this.Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 

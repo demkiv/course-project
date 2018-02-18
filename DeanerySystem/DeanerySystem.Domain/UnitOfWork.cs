@@ -12,7 +12,7 @@ namespace DeanerySystem.Domain
 {
     public class UnitOfWork: IUnitOfWork
     {
-        public readonly DeaneryDbContext context = new DeaneryDbContext();
+        private readonly DeaneryDbContext context = new DeaneryDbContext();
         private bool disposed = false;
 
         private GenericRepository<Cellule> celluleRepository;
@@ -34,6 +34,7 @@ namespace DeanerySystem.Domain
         private GenericRepository<TimeTable> timeTableRepository;
         private GenericRepository<University> universityRepository;
 
+        public DeaneryDbContext Context => this.context;
         public IGenericRepository<Cellule> CelluleRepository
         {
             get

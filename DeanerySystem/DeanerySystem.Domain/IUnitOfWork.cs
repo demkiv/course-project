@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeanerySystem.Domain.Concrete;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Identity;
 using DeanerySystem.Domain.Repositories;
@@ -29,6 +31,7 @@ namespace DeanerySystem.Domain
         IGenericRepository<Subject> SubjectRepository { get; }
         IGenericRepository<TimeTable> TimeTableRepository { get; }
         IGenericRepository<University> UniversityRepository { get; }
+        DeaneryDbContext Context { get; }
         void Save();
     }
 }

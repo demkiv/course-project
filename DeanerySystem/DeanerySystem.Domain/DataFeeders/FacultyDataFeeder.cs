@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.DataFeeders
@@ -34,6 +30,7 @@ namespace DeanerySystem.Domain.DataFeeders
                 new Faculty {Id = 18, Name = "Хімічний факультет", University = university},
                 new Faculty {Id = 19, Name = "Юридичний факультет", University = university}
             };
+
             this.Data.ForEach(f => university.Faculties.Add(f));
         }
     }

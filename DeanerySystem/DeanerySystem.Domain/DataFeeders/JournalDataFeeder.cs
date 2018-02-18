@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
 
@@ -18,16 +14,7 @@ namespace DeanerySystem.Domain.DataFeeders
                 {
                     Id = 1,
                     JournalType = JournalTypes.Assessment,
-                    Cellules = new List<Cellule>()
-                    {
-                        //entitiesMock.Object.Cellules.ElementAt(0),
-                        //entitiesMock.Object.Cellules.ElementAt(1),
-                        //entitiesMock.Object.Cellules.ElementAt(2),
-                        //entitiesMock.Object.Cellules.ElementAt(3),
-                        //entitiesMock.Object.Cellules.ElementAt(4),
-                        //entitiesMock.Object.Cellules.ElementAt(5),
-                        //entitiesMock.Object.Cellules.ElementAt(6)
-                    },
+                    Cellules = new List<Cellule>(),
                     Class = unitOfWork.ClassRepository.GetById(1)
                 },
                 new Journal
@@ -164,6 +151,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Class = unitOfWork.ClassRepository.GetById(10)
                 }
             };
+            this.Data.ForEach(j => j.Class.Journals.Add(j));
         }
     }
 }

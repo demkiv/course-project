@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.DataFeeders
@@ -36,6 +32,7 @@ namespace DeanerySystem.Domain.DataFeeders
                     Faculty = faculty
                 },
             };
+
             this.Data.ForEach(s => faculty.Streams.Add(s));
         }
     }

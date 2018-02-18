@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.DataFeeders
@@ -63,6 +59,13 @@ namespace DeanerySystem.Domain.DataFeeders
                     Subject = unitOfWork.SubjectRepository.GetById(7)
                 }
             };
+
+            this.Data.ForEach(e =>
+            {
+                e.Subject.EducationalPlans.Add(e);
+                e.Group.EducationalPlans.Add(e);
+                e.Semester.EducationalPlans.Add(e);
+            });
         }
     }
 }

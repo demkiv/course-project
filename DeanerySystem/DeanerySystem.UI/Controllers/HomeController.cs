@@ -105,7 +105,7 @@ namespace DeanerySystem.UI.Controllers
                     var pDataFeeder = new ProfessorDataFeeder(uow);
                     pDataFeeder.Data.ForEach(p =>
                     {
-                        var user = this.CreateAccount(p, uow.context, Roles.Professor);
+                        //var user = this.CreateAccount(p, uow.Context, Roles.Professor);
                         //p.Identity = user;
                     });
                     uow.Save();
@@ -120,7 +120,7 @@ namespace DeanerySystem.UI.Controllers
                     var stDataFeeder = new StudentDataFeeder(uow);
                     stDataFeeder.Data.ForEach(s =>
                     {
-                        var user = this.CreateAccount(s, uow.context, Roles.Student);
+                        //var user = this.CreateAccount(s, uow.Context, Roles.Student);
                         //s.Identity = user;
                     });
                     uow.Save();
@@ -199,12 +199,12 @@ namespace DeanerySystem.UI.Controllers
                 }
             }
             var userManager = new UserManager<DeaneryUser, Guid>(new DeaneryUserStore(ctx));
-            professor.UserName =
-                $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com";
-            professor.Email = $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com";
-            professor.EmailConfirmed = true;
+            //professor.UserName =
+            //    $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com";
+            //professor.Email = $"{professor.LatinFirstName.ToLower()}.{professor.LatinLastName.ToLower()}@edeanery.com";
+            //professor.EmailConfirmed = true;
   
-            ctx.Entry(professor).State = EntityState.Added;
+            //ctx.Entry(professor).State = EntityState.Added;
             
             userManager.Create(professor, password: "1234567890");
             userManager.AddToRole(professor.Id, currRole.ToString());

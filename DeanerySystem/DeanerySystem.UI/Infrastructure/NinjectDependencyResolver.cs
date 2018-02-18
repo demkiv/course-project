@@ -36,6 +36,7 @@ namespace DeanerySystem.UI.Infrastructure
             #region UnitOfWork
 
             Mock<IUnitOfWork> unitOfWorkMock = new Mock<IUnitOfWork>();
+            unitOfWorkMock.Setup(uw => uw.Context).Returns(() => null);
 
             #region UniversitiesUoW
             var universityRepositoryMock = MockFactory.GetMock<University, int>(unitOfWorkMock.Object);

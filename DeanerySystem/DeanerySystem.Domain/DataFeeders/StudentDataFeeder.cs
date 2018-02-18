@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
+using DeanerySystem.Domain.Entities.Identity;
+using DeanerySystem.Domain.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace DeanerySystem.Domain.DataFeeders
 {
@@ -175,6 +175,20 @@ namespace DeanerySystem.Domain.DataFeeders
                     Group = this.unitOfWork.GroupRepository.GetById(1)
                 }
             };
+
+            this.Data.ForEach(s =>
+            {
+                s.UserName =
+                    $"{s.LatinFirstName.ToLower()}.{s.LatinLastName.ToLower()}@edeanery.com";
+                s.Email = $"{s.LatinFirstName.ToLower()}.{s.LatinLastName.ToLower()}@edeanery.com";
+                s.EmailConfirmed = true;
+                if (this.unitOfWork.Context != null)
+                {
+                    var manager = new IdentityUtilityManager(this.unitOfWork);
+                    manager.CreateAccount(s, Roles.Student);
+                }
+                s.Group.Students.Add(s);
+            });
         }
     }
 }

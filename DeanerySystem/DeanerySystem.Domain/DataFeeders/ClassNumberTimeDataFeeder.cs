@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.DataFeeders
@@ -70,6 +67,8 @@ namespace DeanerySystem.Domain.DataFeeders
                     TimeTable = unitOfWork.TimeTableRepository.GetById(2)
                 }
             };
+
+            this.Data.ForEach(c=>c.TimeTable.ClassNumberTimes.Add(c));
         }
     }
 }

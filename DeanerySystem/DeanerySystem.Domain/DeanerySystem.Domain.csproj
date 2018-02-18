@@ -141,12 +141,12 @@
     <Compile Include="DataFeeders\UniversityDataFeeder.cs" />
     <Compile Include="Entities\Abstract\IIdentifiableEntity.cs" />
     <Compile Include="Entities\Enums\SemesterNumber.cs" />
-    <Compile Include="Entities\Identity\DeaneryRoleManager.cs" />
-    <Compile Include="Entities\Identity\DeaneryRoleStore.cs" />
+    <Compile Include="Identity\DeaneryRoleManager.cs" />
+    <Compile Include="Identity\DeaneryRoleStore.cs" />
     <Compile Include="Entities\Identity\DeaneryUserClaim.cs" />
     <Compile Include="Entities\Identity\DeaneryUserLogin.cs" />
     <Compile Include="Entities\Identity\DeaneryUserRole.cs" />
-    <Compile Include="Entities\Identity\DeaneryUserStore.cs" />
+    <Compile Include="Identity\DeaneryUserStore.cs" />
     <Compile Include="Entities\ProgressRecord.cs" />
     <Compile Include="Entities\Cellule.cs" />
     <Compile Include="Entities\ClassNumberTime.cs" />
@@ -173,10 +173,10 @@
     <Compile Include="Entities\Subject.cs" />
     <Compile Include="Entities\Enums\TuitionFees.cs" />
     <Compile Include="Entities\Enums\Tuitions.cs" />
-    <Compile Include="Entities\DeanaryUser.cs" />
     <Compile Include="Entities\University.cs" />
     <Compile Include="Entities\FailureTicket.cs" />
     <Compile Include="Entities\Enums\FailureTicketTypes.cs" />
+    <Compile Include="Identity\IdentityUtility.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Migrations\201802052244012_InitDatabase.cs" />
     <Compile Include="Migrations\201802052244012_InitDatabase.Designer.cs">

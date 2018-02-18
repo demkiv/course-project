@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.DataFeeders
@@ -78,6 +76,12 @@ namespace DeanerySystem.Domain.DataFeeders
                    Journal = unitOfWork.JournalRepository.GetById(1)
                 }
             };
+
+            this.Data.ForEach(c =>
+            {
+                c.Journal.Cellules.Add(c);
+                c.Student.Cellules.Add(c);
+            });
         }
     }
 }

@@ -7,6 +7,9 @@ using DeanerySystem.Domain;
 using DeanerySystem.Domain.DataFeeders;
 namespace DeanerySystem.UI.Infrastructure
 {
+    /// <summary>
+    /// Gets instance of the data feeder.
+    /// </summary>
     public class FeederFactory
     {
         public static IDataFeeder<T> GetFeeder<T>(IUnitOfWork unitOfWork) where T : class

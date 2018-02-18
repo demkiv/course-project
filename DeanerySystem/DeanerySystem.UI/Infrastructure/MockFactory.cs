@@ -10,6 +10,9 @@ using Moq;
 
 namespace DeanerySystem.UI.Infrastructure
 {
+    /// <summary>
+    /// Provides mock instance for the typed repository
+    /// </summary>
     public class MockFactory
     {
         public static Mock<IGenericRepository<T>> GetMock<T, TId>(IUnitOfWork unitOfWork) where T: class, IIdentifiableEntity<TId>

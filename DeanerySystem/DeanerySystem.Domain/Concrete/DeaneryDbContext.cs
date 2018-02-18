@@ -15,7 +15,6 @@ namespace DeanerySystem.Domain.Concrete
 		public DbSet<Cellule> Cellules { get; set; }
 		public DbSet<Class> Classes { get; set; }
 		public DbSet<ClassNumberTime> ClassNumberTimes { get; set; }
-		//public DbSet<DeaneryUser> DeaneryUsers { get; set; }
 		public DbSet<Department> Departments { get; set; }
 		public DbSet<EducationalPlan> EducationalPlans { get; set; }
 		public DbSet<Faculty> Faculties { get; set; }
@@ -37,7 +36,6 @@ namespace DeanerySystem.Domain.Concrete
 			modelBuilder.Configurations.Add(new CelluleConfiguration());
 			modelBuilder.Configurations.Add(new ClassConfiguration());
 			modelBuilder.Configurations.Add(new ClassNumberTimeConfiguration());
-			//modelBuilder.Configurations.Add(new DeanaryUserConfiguration());
             modelBuilder.Configurations.Add(new DepartmentConfiguration());
 			modelBuilder.Configurations.Add(new EducationalPlanConfiguration());
 			modelBuilder.Configurations.Add(new FacultyConfiguration());

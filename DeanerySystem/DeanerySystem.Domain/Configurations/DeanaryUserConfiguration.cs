@@ -17,8 +17,6 @@ namespace DeanerySystem.Domain.Configurations
 			this.ToTable("DeaneryUsers");
             this.HasKey(du => du.Id);
             this.Property(du => du.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-            //this.HasRequired(du => du.Identity).WithRequiredDependent(i => i.DeaneryUser).WillCascadeOnDelete(true);
         }
     }
 }

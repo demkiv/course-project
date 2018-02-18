@@ -1,6 +1,7 @@
 using DeanerySystem.Domain.Entities;
 using DeanerySystem.Domain.Entities.Enums;
 using DeanerySystem.Domain.Entities.Identity;
+using DeanerySystem.Domain.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -43,18 +44,15 @@ namespace DeanerySystem.Domain.Migrations
                 };
                 userManager.Create(newApplicationUser, password: "ChangeItAsap!");
                 userManager.AddToRole(newApplicationUser.Id, Roles.SuperAdministrator.ToString());
+                
+                //Uncomment this line to prepopulate database with test data.
+                //DataBaseUtilities.FeedDataBase();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-
-            //using (var unit = new UnitOfWork())
-            //{
-            //    unit.SemesterRepository.Insert(new Semester() {CreditSessionStart = DateTime.Now, End = DateTime.Now, Id = 1, Number = SemesterNumber.First, SecondWritingStart = DateTime.Now, ThirdWritingStart = DateTime.Now, Start = DateTime.Now, SessionStart = DateTime.Now });
-            //    unit.Save();
-            //}
         }
     }
 }

@@ -177,7 +177,7 @@
     <Compile Include="Entities\FailureTicket.cs" />
     <Compile Include="Entities\Enums\FailureTicketTypes.cs" />
     <Compile Include="Identity\IdentityUtility.cs" />
-    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Abstract\IUnitOfWork.cs" />
     <Compile Include="Migrations\201802052244012_InitDatabase.cs" />
     <Compile Include="Migrations\201802052244012_InitDatabase.Designer.cs">
       <DependentUpon>201802052244012_InitDatabase.cs</DependentUpon>
@@ -187,7 +187,8 @@
     <Compile Include="Repositories\FacultyRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Concrete\UnitOfWork.cs" />
+    <Compile Include="Utilities\DataBaseUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -23,11 +23,6 @@ textarea {
     border-left: solid 5px #F16700;
 }
 
-a, a:hover, a:visited, a:link, a:active {
-    color: #000000;
-    text-decoration: none;
-}
-
 .custom-title {
     margin: 30px 0; 
 }

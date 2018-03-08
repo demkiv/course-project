@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
+    <Content Include="Admin\University\tsconfig.json" />
+    <Content Include="Common\tsconfig.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -80,6 +82,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Admin\University\DataProvider.ts" />
+    <TypeScriptCompile Include="Admin\University\DTO.ts" />
+    <TypeScriptCompile Include="Admin\University\Initializer.ts" />
+    <TypeScriptCompile Include="Admin\University\ViewModels\DashboardStatisticVM.ts" />
+    <TypeScriptCompile Include="Common\Utilities\PageBar.ts" />
+    <TypeScriptCompile Include="Admin\University\ViewModels\UniversityVM.ts" />
     <TypeScriptCompile Include="Common\Utilities\QueryString.ts" />
     <TypeScriptCompile Include="Schedule\DataProvider.ts" />
     <TypeScriptCompile Include="Schedule\Initializer.ts" />

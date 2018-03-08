@@ -42,6 +42,12 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -132,7 +138,16 @@
     <Compile Include="DataFeeders\StudentDataFeeder.cs" />
     <Compile Include="DataFeeders\SubjectDataFeeder.cs" />
     <Compile Include="DataFeeders\TimeTableDataFeeder.cs" />
+    <Compile Include="DataFeeders\UniversityDataFeeder.cs" />
+    <Compile Include="Entities\Abstract\IIdentifiableEntity.cs" />
     <Compile Include="Entities\Enums\SemesterNumber.cs" />
+    <Compile Include="Entities\Identity\DeaneryUser.cs" />
+    <Compile Include="Identity\DeaneryRoleManager.cs" />
+    <Compile Include="Identity\DeaneryRoleStore.cs" />
+    <Compile Include="Entities\Identity\DeaneryUserClaim.cs" />
+    <Compile Include="Entities\Identity\DeaneryUserLogin.cs" />
+    <Compile Include="Entities\Identity\DeaneryUserRole.cs" />
+    <Compile Include="Identity\DeaneryUserStore.cs" />
     <Compile Include="Entities\ProgressRecord.cs" />
     <Compile Include="Entities\Cellule.cs" />
     <Compile Include="Entities\ClassNumberTime.cs" />
@@ -141,7 +156,7 @@
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="Entities\Enums\Fractions.cs" />
     <Compile Include="Entities\Group.cs" />
-    <Compile Include="Entities\Identity\ApplicationUser.cs" />
+    <Compile Include="Entities\Identity\UserRole.cs" />
     <Compile Include="Entities\Class.cs" />
     <Compile Include="Entities\Journal.cs" />
     <Compile Include="Entities\Enums\JournalTypes.cs" />
@@ -158,39 +173,37 @@
     <Compile Include="Entities\Subject.cs" />
     <Compile Include="Entities\Enums\TuitionFees.cs" />
     <Compile Include="Entities\Enums\Tuitions.cs" />
-    <Compile Include="Entities\DeanaryUser.cs" />
     <Compile Include="Entities\University.cs" />
     <Compile Include="Entities\FailureTicket.cs" />
     <Compile Include="Entities\Enums\FailureTicketTypes.cs" />
-    <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Migrations\201604111723091_InitializeDataBase.cs" />
-    <Compile Include="Migrations\201604111723091_InitializeDataBase.Designer.cs">
-      <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705202104012_Add user photo.cs" />
-    <Compile Include="Migrations\201705202104012_Add user photo.Designer.cs">
-      <DependentUpon>201705202104012_Add user photo.cs</DependentUpon>
+    <Compile Include="Identity\IdentityUtility.cs" />
+    <Compile Include="Abstract\IUnitOfWork.cs" />
+    <Compile Include="Migrations\201802052244012_InitDatabase.cs" />
+    <Compile Include="Migrations\201802052244012_InitDatabase.Designer.cs">
+      <DependentUpon>201802052244012_InitDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\FacultyRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\UniversityRepository.cs" />
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Concrete\UnitOfWork.cs" />
+    <Compile Include="Utilities\DataBaseUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604111723091_InitializeDataBase.resx">
-      <DependentUpon>201604111723091_InitializeDataBase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705202104012_Add user photo.resx">
-      <DependentUpon>201705202104012_Add user photo.cs</DependentUpon>
+    <Content Include="DbFeedingScripts\DbFeedSchema.sql" />
+    <Content Include="DbFeedingScripts\DbFeedSchemaAndData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802052244012_InitDatabase.resx">
+      <DependentUpon>201802052244012_InitDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

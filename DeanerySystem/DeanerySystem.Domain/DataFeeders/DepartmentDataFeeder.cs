@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DeanerySystem.Domain.Entities;
 
 namespace DeanerySystem.Domain.DataFeeders
@@ -11,22 +7,33 @@ namespace DeanerySystem.Domain.DataFeeders
     {
         public DepartmentDataFeeder(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-        }
-
-        public override List<Department> GetData()
-        {
-            var departments = new List<Department>
+            var stream = this.unitOfWork.StreamRepository.GetById(1);
+            this.data = new List<Department>
             {
                 new Department()
                 {
                     Id = 1,
-                    Name = "Інформаційні системи",
-                    //Head = entitiesMock.Object.Professors.ElementAt(1),
+                    Name = "Програмування",
+                    Number = 1,
+                    Stream = stream
+                },
+                new Department()
+                {
+                    Id = 2,
+                    Name = "Інформаційних систем",
                     Number = 2,
-                    Stream = unitOfWork.StreamRepository.Get().First(x => x.Id == 1)
+                    Stream = stream
+                },
+                new Department()
+                {
+                    Id = 3,
+                    Name = "Дискретного аналізу та інтелектуальних систем",
+                    Number = 3,
+                    Stream = stream
                 }
             };
-            return departments;
+
+            this.Data.ForEach(d=>stream.Departments.Add(d));
         }
     }
 }

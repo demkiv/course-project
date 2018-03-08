@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DeanerySystem.Domain.DataFeeders
 {
-    interface IDataFeeder<T> where T: class
+    public interface IDataFeeder<T> where T: class
     {
+        List<T> Data { get; set; }
         List<T> GetData();
+
     }
 }

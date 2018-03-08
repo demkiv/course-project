@@ -10,31 +10,10 @@ namespace DeanerySystem.UI.Controllers
         {
             this.unitOfWork = unitOfWork;
         }
+
         public ActionResult Index()
         {
-            //for testing mock of UnitOfWork
-            var q = unitOfWork.FacultyRepository.Get();
-            var w = unitOfWork.SemesterRepository.Get();
-            var e = unitOfWork.StreamRepository.Get();
-            var r = unitOfWork.DepartmentRepository.Get();
-            var t = unitOfWork.StudentRepository.Get();
-            var y = unitOfWork.ProfessorRepository.Get();
-            var u = unitOfWork.GroupRepository.Get();
-            var i = unitOfWork.ClassNumberTimeRepository.Get();
-            var o = unitOfWork.TimeTableRepository.Get();
-            var p = unitOfWork.CelluleRepository.Get();
-            var a = unitOfWork.JournalRepository.Get();
-            var s = unitOfWork.ClassRepository.Get();
-            var d = unitOfWork.SubjectRepository.Get();
-            var f = unitOfWork.EducationalPlanRepository.Get();
-
-			//var ir = unitOfWork.IdentityRoleRepository.Get();
-			//var iur = unitOfWork.IdentityUserRoleRepository.Get();
-			//var ic = unitOfWork.IdentityUserClaimRepository.Get();
-			//var il = unitOfWork.IdentityUserLoginRepository.Get();
-
-			unitOfWork.Save();
-            unitOfWork.Dispose();
+			Infrastructure.MockTesting.Test(unitOfWork);
             return View();
         }
 

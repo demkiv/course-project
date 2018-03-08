@@ -22,22 +22,22 @@ namespace DeanerySystem.UI.Controllers
 		public ActionResult Index()
         {
 			var currentMember = unitOfWork.DeaneryUserRepository.Get().Single(user => 
-				user.Identity.Email == User.Identity.Name);
+				user.Email == User.Identity.Name);
 
-			var identityRoles = unitOfWork.IdentityRoleRepository.Get().Where(role => 
-				currentMember.Identity.Roles.Select(r => r.RoleId).Contains(role.Id));
-			var roles = identityRoles.Select(identityRole => (Roles)Enum.Parse(typeof(Roles), identityRole.Name));
-			if (!roles.Any()) {
-				throw new InvalidOperationException("Each member should have a role!");
-			}
+			//var identityRoles = unitOfWork.DeaneryUserRepository.Get().Where(role => 
+			//	currentMember.Roles.Select(r => r.RoleId).Contains(role.Id));
+			//var roles = identityRoles.Select(identityRole => (Roles)Enum.Parse(typeof(Roles), identityRole.Name));
+			//if (!roles.Any()) {
+			//	throw new InvalidOperationException("Each member should have a role!");
+			//}
 
 			var memberModer = new MemberModel()
 			{
 				FirstName = currentMember.FirstName,
 				LastName = currentMember.LastName,
 				MiddleName = currentMember.MiddleName,
-				PhotoPath = currentMember.PhotoPath ?? "/Content/Images/DefaultMemberPhoto.png",
-				MainRole = Providers.ResourcesProvider.GetRoleDisplay(roles.Min())
+				//PhotoPath = currentMember.PhotoPath ?? "/Content/Images/DefaultMemberPhoto.png",
+				//MainRole = Providers.ResourcesProvider.GetRoleDisplay(roles.Min())
 			};
 
 			return View(memberModer);

@@ -1,176 +1,49 @@
-﻿<script src="~/Scripts/Admin/Administration.js"></script>
-@model DeanerySystem.UI.Models.Admin.GeneralInfo
+﻿@Html.Partial("_PageBar")
 
-<h3 class="page-title">
-    Адміністрування <small>Університет</small>
-</h3>
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>
-            <a href=@Url.Action("Index", "Home")>Головна</a>
-            <i class="fa fa-angle-right"></i>
-        </li>
-        <li>
-            <a href="#">Адміністрування</a>
-        </li>
-    </ul>
-</div>
-<!-- END PAGE HEADER-->
-<!-- BEGIN PAGE CONTENT-->
-<div class="row">
-    <div class="col-md-12">
-        <!-- BEGIN DASHBOARD STATS -->
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="dashboard-stat blue-madison">
-                    <div class="visual">
-                        <i class="fa fa-university"></i>
-                    </div>
-                    <div class="details">
-                        <div class="number">
-                            @Model.FacultiesCount
-                        </div>
-                        <div class="desc">
-                            Факультети
-                        </div>
-                    </div>
-                    <a class="more" href=@Url.Action("OverviewFaculties", "Admin")>
-                        Детальніше <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="dashboard-stat red-intense">
-                    <div class="visual">
-                        <i class="fa fa-graduation-cap"></i>
-                    </div>
-                    <div class="details">
-                        <div class="number">
-                            @Model.FacultiesCount
-                        </div>
-                        <div class="desc">
-                            Потоки
-                        </div>
-                    </div>
-                    <a class="more" href="#">
-                        Детальніше <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="dashboard-stat green-haze">
-                    <div class="visual">
-                        <i class="fa fa-cubes"></i>
-                    </div>
-                    <div class="details">
-                        <div class="number">
-                            @Model.DepartmentsCount
-                        </div>
-                        <div class="desc">
-                            Кафедри
-                        </div>
-                    </div>
-                    <a class="more" href="#">
-                        Детальніше <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="dashboard-stat purple-plum">
-                    <div class="visual">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <div class="details">
-                        <div class="number">
-                            @Model.GroupsCount
-                        </div>
-                        <div class="desc">
-                            Групи
-                        </div>
-                    </div>
-                    <a class="more" href="#">
-                        Детальніше <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="dashboard-stat blue-dark">
-                    <div class="visual">
-                        <i class="fa fa-briefcase"></i>
-                    </div>
-                    <div class="details">
-                        <div class="number">
-                            @Model.ProfessorsCount
-                        </div>
-                        <div class="desc">
-                            Викладачі
-                        </div>
-                    </div>
-                    <a class="more" href="#">
-                        Детальніше <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="dashboard-stat yellow">
-                    <div class="visual">
-                        <i class="fa fa-child"></i>
-                    </div>
-                    <div class="details">
-                        <div class="number">
-                            @Model.StudentsCount
-                        </div>
-                        <div class="desc">
-                            Студенти
-                        </div>
-                    </div>
-                    <a class="more" href="#">
-                        Детальніше <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- END DASHBOARD STATS -->
-        <div id="manage_university_edit_mode" style="display:none">
-            @using (Html.BeginForm("PostUniversityInfo", "Admin", FormMethod.Post, new { id = "university_info_form" }))
-            {
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <label>Назва університету</label>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.University.Name, new { htmlAttributes = new { @class = "form-control", id="university_name" } })
-                            @Html.ValidationMessageFor(model => model.University.Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <label>Ректор</label>
-                        </div>
-                        <div class="col-md-6">
-                            <select class="form-control" id="rector_name">
+<h1 class="page-title">
+	Адміністрування <small>Університет</small>
+</h1>
 
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <input type="submit" value="Зберегти" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-        <div id="manage_university_display_mode">
-            <h4><span style="font-weight:bold">Назва університету: </span><span id="university_name_label">@Model.University.Name</span></h4>
-            <h4><span style="font-weight:bold">Ректор: </span><span id="university_name_label">@Model.University.RectorFirstName @Model.University.RectorLastName</span></h4>
-            <button id="switch_to_edit_mode" class="btn btn-default">Редагувати</button>
-        </div>
-    </div>
+<div class="row" data-bind="foreach: UniversityStatistics">
+	<!-- ko template: { name: 'dashboard-stat-template', data: $data, afterRender: $parent.AfterRender } -->
+	<!-- /ko -->
 </div>
-<!-- END PAGE CONTENT-->
+
+<script type="text/html" id="dashboard-stat-template">
+	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-v2" data-bind="css: ColorClass, attr: { href: Link }">
+			<div class="visual">
+				<i class="fa" data-bind="css: IconClass"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<span class="counter" data-bind="attr: { 'data-value': Count }"></span>
+				</div>
+				<div class="desc" data-bind="text: Name"></div>
+			</div>
+		</a>
+	</div>
+</script>
+
+<script>
+	require.config({
+		baseUrl: '../',
+		paths: {
+			'Admin/University/Initializer': 'Scripts/Generated/admin/university',
+			'jquery': 'scripts/jquery-2.2.2', //'node_modules/jquery/dist/jquery.min',
+			'knockout': 'node_modules/knockout/build/output/knockout-latest',
+			'counterup': 'theme/assets/global/plugins/counterup/jquery.counterup', //'node_modules/counterup/jquery.counterup.min'
+			'waypoints': 'node_modules/jquery-waypoints/waypoints.min',
+		}
+	});
+
+	require(['jquery', 'knockout'], function ($, ko) {
+		if (!window['ko']) {
+			window['ko'] = ko;
+		}
+		require(['waypoints', 'counterup', 'Admin/University/Initializer'], function (waypoints, counterup, initializer) {
+			var app = new initializer.Initializer();
+			app.Start();
+		});
+	});
+</script>

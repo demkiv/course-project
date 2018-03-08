@@ -13,6 +13,7 @@ namespace DeanerySystem.UI.Controllers
 
         public ActionResult Index()
         {
+			Infrastructure.MockTesting.Test(unitOfWork);
             return View();
         }
 

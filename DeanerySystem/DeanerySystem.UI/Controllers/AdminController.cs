@@ -12,38 +12,14 @@ using DeanerySystem.Domain.Concrete;
 
 namespace DeanerySystem.UI.Controllers
 {
-	[Authorize]
+    //[Authorize(Roles = "SuperAdministrator")]
     public class AdminController : Controller
     {
-        // GET: Admin
         public ActionResult Index()
         {
-            using (var ctx = new DeaneryDbContext()) {
-                var university = ctx.Universities.FirstOrDefault() ?? new Domain.Entities.University { Name = "", Rector = new Professor() };
-                university.Rector = university.Rector ?? new Professor();
-                var universityModel = new Models.Admin.University
-                {
-                    Name = university.Name,
-                    RectorFirstName = university.Rector.FirstName,
-                    RectorLastName = university.Rector.LastName,
-                    RectorId = university.Rector.Id
-                };
-    
-                var stats = new GeneralInfo()
-                {
-                    FacultiesCount = ctx.Faculties.Count(),
-                    StreamsCount = ctx.Faculties.Count(),
-                    DepartmentsCount = ctx.Departments.Count(),
-                    GroupsCount = ctx.Groups.Count(),
-                    ProfessorsCount = ctx.Professors.Count(),
-                    StudentsCount = ctx.Streams.Count(),
-                    University = universityModel
-                };
-                return View(stats);
-            }
+            return View();
         }
 
-		[Authorize(Roles = "SuperAdministrator")]
 		public ActionResult ManageUniversity()
         {
             using (var ctx = new DeaneryDbContext()) {
@@ -53,9 +29,8 @@ namespace DeanerySystem.UI.Controllers
             }
 		}
 
-        [Authorize(Roles = "SuperAdministrator")]
         [HttpPost]
-        public ActionResult PostUniversityInfo(Models.Admin.University universityModel) {
+        public ActionResult PostUniversityInfo(Models.Admin.UniversityModel universityModel) {
             using (var ctx = new DeaneryDbContext()) {
                 var domainUniversity = ctx.Universities.FirstOrDefault();
                 if (domainUniversity != null)
@@ -73,7 +48,6 @@ namespace DeanerySystem.UI.Controllers
             return Json(GetUniversityInfo());
         }
 
-        [Authorize(Roles = "SuperAdministrator")]
         [HttpGet]
         public ActionResult GetAllProfessors() {
             using (var ctx = new DeaneryDbContext()) {
@@ -88,7 +62,6 @@ namespace DeanerySystem.UI.Controllers
             }
         }
 
-        [Authorize(Roles = "SuperAdministrator")]
         [HttpGet]
         public ActionResult OverviewFaculties() {
             using (var ctx = new DeaneryDbContext()) {
@@ -98,11 +71,11 @@ namespace DeanerySystem.UI.Controllers
                 
         }
 
-        public Models.Admin.University GetUniversityInfo() {
+        public Models.Admin.UniversityModel GetUniversityInfo() {
             using (var ctx = new DeaneryDbContext())
             {
                 var domainUniversity = ctx.Universities.FirstOrDefault();
-                var university = new Models.Admin.University() { Name = domainUniversity != null ? domainUniversity.Name : "" };
+                var university = new Models.Admin.UniversityModel() { Name = domainUniversity != null ? domainUniversity.Name : "" };
                 return university;
             }
         }

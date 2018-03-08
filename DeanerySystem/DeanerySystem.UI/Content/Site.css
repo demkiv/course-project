@@ -1,15 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
+﻿/* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
@@ -32,11 +21,6 @@ textarea {
 .grid-item:hover {
     background-color: #DBDBDC;
     border-left: solid 5px #F16700;
-}
-
-a, a:hover, a:visited, a:link, a:active {
-    color: #000000;
-    text-decoration: none;
 }
 
 .custom-title {

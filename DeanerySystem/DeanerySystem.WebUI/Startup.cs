@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DeanerySystem.DataAccess.Concrete;
+using DeanerySystem.DataAccess.Entities.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DeanerySystem.WebUI.Data;
 using DeanerySystem.WebUI.Models;
 using DeanerySystem.WebUI.Services;
 
@@ -26,11 +23,12 @@ namespace DeanerySystem.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            var conntectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<DeaneryDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<DeaneryUser, DeaneryRole>()
+                .AddEntityFrameworkStores<DeaneryDbContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.

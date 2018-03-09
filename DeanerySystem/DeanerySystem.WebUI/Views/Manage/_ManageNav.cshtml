@@ -1,5 +1,6 @@
-﻿@using DeanerySystem.WebUI.Views.Manage
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@using DeanerySystem.DataAccess.Entities.Identity
+@using DeanerySystem.WebUI.Views.Manage
+@inject SignInManager<DeaneryUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

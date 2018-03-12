@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-DeanerySystem.WebUI-36E48F76-B80B-4EBA-BA6F-294056617CB1</UserSecretsId>
+    <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
   </PropertyGroup>
 
 
@@ -20,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeanerySystem.DataAccess\DeanerySystem.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 
 </Project>

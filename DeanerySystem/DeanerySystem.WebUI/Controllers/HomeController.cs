@@ -19,6 +19,7 @@ namespace DeanerySystem.WebUI.Controllers
         }
         public IActionResult Index()
         {
+            var u = unitOfWork.UniversityRepository.GetById(1);
             return View();
         }
 

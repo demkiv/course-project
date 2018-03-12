@@ -10,10 +10,10 @@ namespace DeanerySystem.DataAccess.Concrete {
 		private readonly DeaneryDbContext context; 
 		private bool disposed = false;
 
-	    public UnitOfWork()
-	    {
-	        this.context = new DeaneryDbContext(new DbContextOptions<DeaneryDbContext>());
-        }
+	    //public UnitOfWork()
+	    //{
+	    //    this.context = new DeaneryDbContext(new DbContextOptions<DeaneryDbContext>());
+     //   }
 
 	    public UnitOfWork(DeaneryDbContext context)
 	    {

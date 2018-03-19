@@ -9,10 +9,6 @@ namespace DeanerySystem.DataAccess.Configurations
     {
         public override void Configure(EntityTypeBuilder<Student> entity)
         { 
-			//entity.ToTable("Students");
-			//entity.HasKey(s => s.Id);
-			//entity.Property(s => s.Id).ValueGeneratedOnAdd();
-            
 			entity.HasOne(s => s.Group)
 			    .WithMany(g => g.Students)
                 .IsRequired(false)

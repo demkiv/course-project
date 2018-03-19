@@ -14,14 +14,14 @@ namespace DeanerySystem.DataAccess.Entities
         public virtual ICollection<ProgressRecord> ProgressRecords { get; set; }
         public virtual ICollection<FailureTicket> FailureTickets { get; set; }
         public virtual ICollection<Cellule> Cellules { get; set; }
-	    public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
+        public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
 
         public Student()
         {
             this.ProgressRecords = new List<ProgressRecord>();
             this.FailureTickets = new List<FailureTicket>();
-			this.Cellules = new List<Cellule>();
-			this.StudentSemesters = new List<StudentSemester>();
+            this.Cellules = new List<Cellule>();
+            this.StudentSemesters = new List<StudentSemester>();
         }
     }
 }

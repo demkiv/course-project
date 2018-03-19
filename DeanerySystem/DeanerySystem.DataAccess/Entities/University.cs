@@ -14,7 +14,8 @@ namespace DeanerySystem.DataAccess.Entities
 		public virtual Professor Rector { get; set; }
 		public virtual ICollection<Faculty> Faculties { get; set; }
 
-		public University() {
+		public University()
+        {
 			Faculties = new List<Faculty>();
 		}
 	}

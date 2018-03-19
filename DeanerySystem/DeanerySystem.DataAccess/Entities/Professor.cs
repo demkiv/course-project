@@ -23,7 +23,8 @@ namespace DeanerySystem.DataAccess.Entities
             this.Classes = new List<Class>();
         }
 
-		public string GetFullName() {
+		public string GetFullName()
+        {
 			return $"{LastName} {FirstName} {MiddleName}";
 		}
 	}

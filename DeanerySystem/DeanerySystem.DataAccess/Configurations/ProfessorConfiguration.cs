@@ -8,11 +8,7 @@ namespace DeanerySystem.DataAccess.Configurations
     class ProfessorConfiguration : DbEntityConfiguration<Professor>
     {
         public override void Configure(EntityTypeBuilder<Professor> entity)
-        {
-			//entity.ToTable("Professors");
-			//entity.HasKey(p => p.Id);
-			//entity.Property(p => p.Id).ValueGeneratedOnAdd();
-            
+        {            
 			entity.HasOne(p => p.Department)
 			    .WithMany(d => d.Professors)
 			    .IsRequired(false)
@@ -37,8 +33,7 @@ namespace DeanerySystem.DataAccess.Configurations
                 WithOne(d => d.Head)
                 .HasForeignKey<Department>(d => d.HeadId)
                 .IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
-            
+                .OnDelete(DeleteBehavior.SetNull);       
 			entity.HasMany(p => p.Classes)
 			    .WithOne(j => j.Professor)
                 .IsRequired(true)

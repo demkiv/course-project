@@ -16,11 +16,11 @@ namespace DeanerySystem.DataAccess.Entities
 
         public virtual Department Department { get; set; }
         public virtual Professor Mentor { get; set; }
-	    public virtual ICollection<EducationalPlan> EducationalPlans { get; set; }
+        public virtual ICollection<EducationalPlan> EducationalPlans { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public Group()
         {
-			this.EducationalPlans = new List<EducationalPlan>();
+            this.EducationalPlans = new List<EducationalPlan>();
             this.Students = new List<Student>();
         }
     }

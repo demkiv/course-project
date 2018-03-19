@@ -28,8 +28,7 @@ namespace DeanerySystem.WebUI
             if (UseSqlDb)
             {
                 services.AddDbContext<DeaneryDbContext>(options =>
-                    options./*UseLazyLoadingProxies()
-                        .*/UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 );
             }
             else
@@ -56,15 +55,15 @@ namespace DeanerySystem.WebUI
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                //using (var serviceScope =
-                //    app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                //{
-                //    if (UseSqlDb && !serviceScope.ServiceProvider.GetService<DeaneryDbContext>().AllMigrationsApplied())
-                //    {
-                //        serviceScope.ServiceProvider.GetService<DeaneryDbContext>().Database.Migrate();
-                //    }
-                //    serviceScope.ServiceProvider.GetService<DeaneryDbContext>().EnsureSeeded();   
-                //}
+                using (var serviceScope =
+                    app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    if (UseSqlDb && !serviceScope.ServiceProvider.GetService<DeaneryDbContext>().AllMigrationsApplied())
+                    {
+                        serviceScope.ServiceProvider.GetService<DeaneryDbContext>().Database.Migrate();
+                    }
+                    serviceScope.ServiceProvider.GetService<DeaneryDbContext>().EnsureSeeded();
+                }
             }
             else
             {

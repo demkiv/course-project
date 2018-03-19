@@ -8,6 +8,7 @@ namespace DeanerySystem.DataAccess.Utilities
 {
     public static class DataBaseUtilities
     {
+        //TODO: refactor using attributes with feed order, reflection and loop.
         public static void FeedDataBase(DeaneryDbContext context)
         {
             try

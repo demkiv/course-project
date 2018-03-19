@@ -4,8 +4,10 @@ using DeanerySystem.DataAccess.Entities;
 using DeanerySystem.DataAccess.Entities.Identity;
 using DeanerySystem.DataAccess.Repositories;
 
-namespace DeanerySystem.DataAccess.Abstract {
-	public interface IUnitOfWork : IDisposable {
+namespace DeanerySystem.DataAccess.Abstract
+{
+    public interface IUnitOfWork : IDisposable
+    {
         IGenericRepository<Cellule> CelluleRepository { get; }
         IGenericRepository<Class> ClassRepository { get; }
         IGenericRepository<ClassNumberTime> ClassNumberTimeRepository { get; }
@@ -25,6 +27,6 @@ namespace DeanerySystem.DataAccess.Abstract {
         IGenericRepository<TimeTable> TimeTableRepository { get; }
         IGenericRepository<University> UniversityRepository { get; }
         DeaneryDbContext Context { get; }
-		void Save();
-	}
+        void Save();
+    }
 }

@@ -1,9 +1,9 @@
-﻿namespace DeanerySystem.DataAccess.Entities.Enums 
+﻿namespace DeanerySystem.DataAccess.Entities.Enums
 {
     public enum Fractions
     {
         Numerator,
         Denominator,
-		Integer
-	}
+        Integer
+    }
 }

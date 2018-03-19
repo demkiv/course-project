@@ -40,7 +40,7 @@ namespace DeanerySystem.DataAccess.Identity {
 			var createUserResult = userManager.CreateAsync(user, password: "12qwas!@QWAS").Result;
 		    if (createUserResult.Succeeded)
 		    {
-		        var addToRoleResult = userManager.AddToRoleAsync(user, Roles.Professor.ToString()).Result;
+		        var addToRoleResult = userManager.AddToRoleAsync(user, role.ToString()).Result;
 		    }
 		}
 

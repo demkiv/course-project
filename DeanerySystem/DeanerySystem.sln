@@ -16,7 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.ClientSide", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeanerySystem.WebUI", "DeanerySystem.WebUI\DeanerySystem.WebUI.csproj", "{69BB90F8-926F-4A76-9FA5-27DE52A72E5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.DataAccess", "DeanerySystem.DataAccess\DeanerySystem.DataAccess.csproj", "{28CD26D2-B2BF-4326-898F-205CFC7FC73B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeanerySystem.DataAccess", "DeanerySystem.DataAccess\DeanerySystem.DataAccess.csproj", "{28CD26D2-B2BF-4326-898F-205CFC7FC73B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanerySystem.BusinessLogic", "DeanerySystem.BusinessLogic\DeanerySystem.BusinessLogic.csproj", "{DF92EB9C-4D69-411D-80CA-46858515FD83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{28CD26D2-B2BF-4326-898F-205CFC7FC73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28CD26D2-B2BF-4326-898F-205CFC7FC73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28CD26D2-B2BF-4326-898F-205CFC7FC73B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF92EB9C-4D69-411D-80CA-46858515FD83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF92EB9C-4D69-411D-80CA-46858515FD83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF92EB9C-4D69-411D-80CA-46858515FD83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF92EB9C-4D69-411D-80CA-46858515FD83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

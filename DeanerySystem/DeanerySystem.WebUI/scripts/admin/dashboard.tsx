@@ -57,42 +57,42 @@ class Dashboard extends React.Component {
 			<div className="row">
 				{this.renderStatisticsTile({
 					name: "Факультети",
-					count: 100, //universityStatistics.FacultiesCount,
+					count: 5, //universityStatistics.FacultiesCount,
 					link: "#",
 					colorClass: "blue",
 					iconClass: "fa-university"
 				})}
 				{this.renderStatisticsTile({
 					name: "Потоки",
-					count: 320, //universityStatistics.StreamsCount,
+					count: 12, //universityStatistics.StreamsCount,
 					link: "#",
 					colorClass: "red",
 					iconClass: "fa-graduation-cap"
 				})}
 				{this.renderStatisticsTile({
 					name: "Кафедри",
-					count: 572, //universityStatistics.DepartmentsCount,
+					count: 28, //universityStatistics.DepartmentsCount,
 					link: "#",
 					colorClass: "green",
 					iconClass: "fa-cubes"
 				})}
 				{this.renderStatisticsTile({
 					name: "Групи",
-					count: 632, //universityStatistics.GroupsCount,
+					count: 56, //universityStatistics.GroupsCount,
 					link: "#",
 					colorClass: "purple",
 					iconClass: "fa-users"
 				})}
 				{this.renderStatisticsTile({
 					name: "Викладачі",
-					count: 716, //universityStatistics.ProfessorsCount,
+					count: 199, //universityStatistics.ProfessorsCount,
 					link: "#",
 					colorClass: "green-meadow",
 					iconClass: "fa-briefcase"
 				})}
 				{this.renderStatisticsTile({
 					name: "Студенти",
-					count: 923, //universityStatistics.StudentsCount,
+					count: 548, //universityStatistics.StudentsCount,
 					link: "#",
 					colorClass: "yellow-crusta",
 					iconClass: "fa-child"

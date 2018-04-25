@@ -27,12 +27,12 @@ namespace DeanerySystem.UI.Controllers.API
 
             var statisticsModel = new UniversityStatisticsModel()
             {
-                FacultiesCount = 10,//university.Faculties.Count(),
-                StreamsCount = 20, //UniversityProvider.GetStreams(university).Count(),
-                DepartmentsCount = 30, //UniversityProvider.GetDepartments(university).Count(),
-                GroupsCount = 40, //UniversityProvider.GetGroups(university).Count(),
-                ProfessorsCount = 1000, //UniversityProvider.GetProfessors(university).Count(),
-                StudentsCount = 10020 //UniversityProvider.GetStudents(university).Count(),
+                FacultiesCount = 5,//university.Faculties.Count(),
+                StreamsCount = 12, //UniversityProvider.GetStreams(university).Count(),
+                DepartmentsCount = 28, //UniversityProvider.GetDepartments(university).Count(),
+                GroupsCount = 56, //UniversityProvider.GetGroups(university).Count(),
+                ProfessorsCount = 119, //UniversityProvider.GetProfessors(university).Count(),
+                StudentsCount = 528 //UniversityProvider.GetStudents(university).Count(),
             };
 
             var universityModel = new UniversityModel

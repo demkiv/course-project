@@ -11,7 +11,7 @@ using DeanerySystem.UI.Providers;
 
 namespace DeanerySystem.UI.Controllers
 {
-	[Authorize]
+	//[Authorize]
     public class EducationController : Controller
     {
 		private IUnitOfWork unitOfWork;

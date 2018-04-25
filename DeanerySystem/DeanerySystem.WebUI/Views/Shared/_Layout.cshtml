@@ -8,19 +8,19 @@
 	<!-- END JAVASCRIPTS -->
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-	<link href="~/Theme/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href="~/Theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-	<link href="~/Theme/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="~/Theme/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/theme/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/theme/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/theme/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN THEME GLOBAL STYLES -->
-	<link href="~/Theme/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-	<link href="~/Theme/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/theme/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+	<link href="~/theme/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
 	<!-- END THEME GLOBAL STYLES -->
 	<!-- BEGIN THEME LAYOUT STYLES -->
-	<link href="~/Theme/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
-	<link href="~/Theme/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-	<link href="~/Theme/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/theme/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/theme/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+	<link href="~/theme/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
 	<!-- END THEME LAYOUT STYLES -->
 
 
@@ -39,7 +39,7 @@
 				<!-- BEGIN LOGO -->
 				<div class="page-logo">
 					<a href=@Url.Action("Index", "Home")>
-						<img src="~/Content/Images/main.svg" alt="logo" class="logo-default" />
+						<img src="~/images/main.svg" alt="logo" class="logo-default" />
 					</a>
 					<div class="menu-toggler sidebar-toggler">
 						<span></span>
@@ -52,10 +52,8 @@
 				</a>
 				<!-- END RESPONSIVE MENU TOGGLER -->
 				<!-- BEGIN TOP NAVIGATION MENU -->
-				@if (User.Identity.IsAuthenticated)
-				{
-					using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-					{
+				@*@if (User.Identity.IsAuthenticated) {*@
+					using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
 						@Html.AntiForgeryToken()
 						<div class="top-menu">
 							<ul class="nav navbar-nav pull-right">
@@ -64,10 +62,12 @@
 								<li class="dropdown dropdown-user">
 									<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 										@*@if (!string.IsNullOrEmpty(User.Identity.GetPhotoPath()))
-										{
-											<img alt="" class="img-circle" src="@User.Identity.GetPhotoPath()" />
-										}
-										<span class="username username-hide-on-mobile"> @User.Identity.GetGivenName() </span>*@
+		{
+			<img alt="" class="img-circle" src="@User.Identity.GetPhotoPath()" />
+		}
+		<span class="username username-hide-on-mobile"> @User.Identity.GetGivenName() </span>*@
+										<img alt="" class="img-circle" src="~/images/Mia.jpg" />
+										<span class="username username-hide-on-mobile"> Соломія Демків </span>
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="dropdown-menu dropdown-menu-default">
@@ -86,7 +86,7 @@
 								<!-- END USER LOGIN DROPDOWN -->
 							</ul>
 						</div>
-					}
+					@*}*@
 				}
 				<!-- END TOP NAVIGATION MENU -->
 			</div>
@@ -157,18 +157,37 @@
 										<span class="title"> Факультети </span>
 									</a>
 								</li>
+								<li class="nav-item  ">
+									<a href="javascript:;" class="nav-link nav-toggle">
+										<span class="title"> Облікові записи </span>
+										<span class="arrow"></span>
+									</a>
+									<ul class="sub-menu">
+										<li class="nav-item ">
+											<a href="ui_page_progress_style_1.html" class="nav-link "> Викладачі </a>
+										</li>
+										<li class="nav-item ">
+											<a href="ui_page_progress_style_2.html" class="nav-link "> Студенти </a>
+										</li>
+									</ul>
+								</li>
 							</ul>
 						</li>
 						<li class="nav-item">
 							<a href="javascript:;" class="nav-link nav-toggle">
 								<i class="icon-puzzle"></i>
-								<span class="title">Навчання</span>
+								<span class="title"> Навчання </span>
 								<span class="arrow"></span>
 							</a>
 							<ul class="sub-menu">
 								<li class="nav-item">
+									<a href="#" class="nav-link">
+										<span class="title"> Розклад </span>
+									</a>
+								</li>
+								<li class="nav-item">
 									<a href=@Url.Action("Schedule", "Education") class="nav-link">
-										<span class="title">Розклад</span>
+										<span class="title"> Успішність </span>
 									</a>
 								</li>
 							</ul>
@@ -193,7 +212,7 @@
 		<!-- BEGIN FOOTER -->
 		<div class="page-footer">
 			<div class="page-footer-inner">
-				2017 &copy; Electronic Deanery by Solomiia Demkiv & Markiyan Fostyak.
+				2018 &copy; Electronic Deanery by Solomiia Demkiv & Markiyan Fostyak
 			</div>
 			<div class="scroll-to-top">
 				<i class="icon-arrow-up"></i>
@@ -203,6 +222,23 @@
 	</div>
 
 
+	<!-- BEGIN CORE PLUGINS -->
+	<script src="~/theme/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+	<script src="~/theme/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="~/theme/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+	<script src="~/theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="~/theme/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+	<script src="~/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+	<!-- END CORE PLUGINS -->
+	<!-- BEGIN THEME GLOBAL SCRIPTS -->
+	<script src="~/theme/assets/global/scripts/app.min.js" type="text/javascript"></script>
+	<!-- END THEME GLOBAL SCRIPTS -->
+	<!-- BEGIN THEME LAYOUT SCRIPTS -->
+	<script src="~/theme/assets/layouts/layout/scripts/layout.js" type="text/javascript"></script>
+	<script src="~/theme/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+	<script src="~/theme/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+	<script src="~/theme/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+	<!-- END THEME LAYOUT SCRIPTS -->
 	<!-- BEGIN CORE PLUGINS -->
 	@*<script src="~/Theme/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 		<script src="~/Theme/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

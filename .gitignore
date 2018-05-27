@@ -59,6 +59,7 @@ ipch/
 *.vsp
 *.vspx
 .vs/
+.vscode/
 
 # Guidance Automation Toolkit
 *.gpState
@@ -230,3 +231,4 @@ typings/
 # next.js build output
 .next
 ### Node End
+DeanerySystem/DeanerySystem.WebUI/wwwroot/dist/

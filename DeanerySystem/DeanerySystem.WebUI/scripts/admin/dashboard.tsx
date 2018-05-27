@@ -2,10 +2,6 @@
 import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
 
-import * as app from '../../wwwroot/Theme/assets/global/scripts/app.min.js';
-import * as counterup from '../../wwwroot/Theme/assets/global/plugins/counterup/jquery.counterup.min';
-import * as waypoints from '../../wwwroot/Theme/assets/global/plugins/counterup/jquery.waypoints.min';
-
 interface StatisticsTileProps {
 	name: string,
 	count: number,

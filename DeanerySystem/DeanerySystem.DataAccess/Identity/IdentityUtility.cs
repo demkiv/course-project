@@ -6,6 +6,8 @@ using DeanerySystem.DataAccess.Entities.Enums;
 using DeanerySystem.DataAccess.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace DeanerySystem.DataAccess.Identity {
 	public class IdentityUtilityManager {
@@ -13,7 +15,12 @@ namespace DeanerySystem.DataAccess.Identity {
 		public IdentityUtilityManager(IUnitOfWork unitOfWork) {
 			this.context = unitOfWork.Context;
 		}
-		public void CreateAccount(DeaneryUser user, Roles role)
+
+	    public IdentityUtilityManager(DeaneryDbContext context)
+	    {
+	        this.context = context;
+	    }
+        public void CreateAccount(DeaneryUser user, Roles role)
 		{
 		    var userStore = new UserStore<DeaneryUser, DeaneryRole, DeaneryDbContext, Guid, DeaneryUserClaim, DeaneryUserRole, DeaneryUserLogin, DeaneryUserToken, DeaneryRoleClaim>(this.context);
             var hasher = new PasswordHasher<DeaneryUser>();
@@ -26,10 +33,15 @@ namespace DeanerySystem.DataAccess.Identity {
 		    {
 		        new PasswordValidator<DeaneryUser>()
 		    };
-		    var userManager = new UserManager<DeaneryUser>(userStore, null, hasher, validators, passwordValidators, null,
-		        null, null, null);
-			userManager.CreateAsync(user, password: "1234567890");
-			userManager.AddToRoleAsync(user, Roles.Professor.ToString());
+		    var logger = new Logger<UserManager<DeaneryUser>>(new NullLoggerFactory());
+            var userManager = new UserManager<DeaneryUser>(userStore, null, hasher, validators, passwordValidators, null,
+		        null, null, logger);
+		    user.SecurityStamp = Guid.NewGuid().ToString();
+			var createUserResult = userManager.CreateAsync(user, password: "12qwas!@QWAS").Result;
+		    if (createUserResult.Succeeded)
+		    {
+		        var addToRoleResult = userManager.AddToRoleAsync(user, role.ToString()).Result;
+		    }
 		}
 
 		public void InitRoles()
@@ -41,9 +53,21 @@ namespace DeanerySystem.DataAccess.Identity {
 			var roles = Enum.GetNames(typeof(Roles));
 			foreach (var currRole in roles) {
 				if (!roleManager.RoleExistsAsync(currRole).Result) {
-					roleManager.CreateAsync(new DeaneryRole(currRole));
+					roleManager.CreateAsync(new DeaneryRole(currRole)).Wait();
 				}
 			}
 		}
+
+	    public void InitAdministrator()
+	    {
+	        var admin = new DeaneryUser
+	        {
+	            UserName = "admin@eadeanery.com",
+	            Email = "admin@eadeanery.com",
+	            EmailConfirmed = true,
+	            SecurityStamp = Guid.NewGuid().ToString()
+	        };
+            this.CreateAccount(admin, Roles.SuperAdministrator);
+	    }
 	}
 }

@@ -1,10 +1,11 @@
 ﻿using System;
+using DeanerySystem.DataAccess.Entities.Abstract;
 using Microsoft.AspNetCore.Identity;
 
 namespace DeanerySystem.DataAccess.Entities.Identity
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class DeaneryUser : IdentityUser<Guid>
+    public class DeaneryUser : IdentityUser<Guid>, IIdentifiableEntity<Guid>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

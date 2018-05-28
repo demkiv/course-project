@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DeanerySystem.DataAccess.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using DeanerySystem.WebUI.Models;
 
@@ -10,8 +11,15 @@ namespace DeanerySystem.WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IUnitOfWork unitOfWork;
+
+        public HomeController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
         public IActionResult Index()
         {
+            var u = unitOfWork.UniversityRepository.Get(x => x.Id == 1, null, "Faculties");
             return View();
         }
 

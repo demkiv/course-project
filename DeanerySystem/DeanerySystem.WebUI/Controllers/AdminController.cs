@@ -3,6 +3,7 @@ using DeanerySystem.WebUI.Models.Admin;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System;
 
 namespace DeanerySystem.WebUI.Controllers
 {
@@ -43,6 +44,49 @@ namespace DeanerySystem.WebUI.Controllers
 
 			ViewData["data"] = JsonConvert.SerializeObject(universityModel);
 			return View("Dashboard");
+        }
+
+        public IActionResult StudentAccounts()
+        {
+            var students = unitOfWork.StudentRepository.Get(includeProperties: "Group");
+            var accounts = students.Select(student => new StudentModel()
+            {
+                Id = student.Id,
+                StudentCardId = student.StudentCode,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastName = student.LastName,
+                FirstNameEng = student.LatinFirstName,
+                LastNameEng = student.LatinLastName,
+                Email = student.Email,
+                PhoneNumber = student.PhoneNumber,
+                BirthDate = DateTime.Now,
+                Stream = student.Group.Department.Stream.Name,
+                Group = student.Group.Name
+            });
+            ViewData["Data"] = JsonConvert.SerializeObject(accounts);
+            return View();
+        }
+
+        public IActionResult ProfessorAccounts()
+        {
+            var accounts = unitOfWork.StudentRepository.Get(includeProperties: "Group").Select(student => new StudentModel()
+            {
+                Id = student.Id,
+                StudentCardId = student.StudentCode,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastName = student.LastName,
+                FirstNameEng = student.LatinFirstName,
+                LastNameEng = student.LatinLastName,
+                Email = student.Email,
+                PhoneNumber = student.PhoneNumber,
+                BirthDate = DateTime.Now,
+                Stream = student.Group.Department.Stream.Name,
+                Group = student.Group.Name
+            });
+            ViewData["Data"] = JsonConvert.SerializeObject(accounts);
+            return View();
         }
     }
 }

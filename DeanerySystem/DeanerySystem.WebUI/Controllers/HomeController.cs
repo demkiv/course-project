@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using DeanerySystem.DataAccess.Abstract;
-using Microsoft.AspNetCore.Mvc;
+﻿using DeanerySystem.DataAccess.Abstract;
 using DeanerySystem.WebUI.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace DeanerySystem.WebUI.Controllers
 {
@@ -19,7 +15,6 @@ namespace DeanerySystem.WebUI.Controllers
         }
         public IActionResult Index()
         {
-            var u = unitOfWork.UniversityRepository.Get(x => x.Id == 1, null, "Faculties");
             return View();
         }
 

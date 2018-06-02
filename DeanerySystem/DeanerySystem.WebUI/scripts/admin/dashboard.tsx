@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
+import * as DTO from 'DTO';
 
 interface StatisticsTileProps {
 	name: string,
@@ -11,7 +12,7 @@ interface StatisticsTileProps {
 }
 
 class StatisticsTile extends React.Component<StatisticsTileProps, any> {
-	constructor(props) {
+	constructor(props: StatisticsTileProps) {
 		super(props);
 	}
 
@@ -37,7 +38,11 @@ class StatisticsTile extends React.Component<StatisticsTileProps, any> {
 	}
 }
 
-class Dashboard extends React.Component {
+class Dashboard extends React.Component<DTO.UniversityModel, any> {
+	constructor(props: DTO.UniversityModel) {
+		super(props);
+	}
+
 	renderStatisticsTile(props: StatisticsTileProps) {
 		return <StatisticsTile
 			name={props.name}
@@ -53,42 +58,42 @@ class Dashboard extends React.Component {
 			<div className="row">
 				{this.renderStatisticsTile({
 					name: "Факультети",
-					count: 5, //universityStatistics.FacultiesCount,
+					count: this.props.UniversityStatisticsModel.FacultiesCount,
 					link: "#",
 					colorClass: "blue",
 					iconClass: "fa-university"
 				})}
 				{this.renderStatisticsTile({
 					name: "Потоки",
-					count: 12, //universityStatistics.StreamsCount,
+					count: this.props.UniversityStatisticsModel.StreamsCount,
 					link: "#",
 					colorClass: "red",
 					iconClass: "fa-graduation-cap"
 				})}
 				{this.renderStatisticsTile({
 					name: "Кафедри",
-					count: 28, //universityStatistics.DepartmentsCount,
+					count: this.props.UniversityStatisticsModel.DepartmentsCount,
 					link: "#",
 					colorClass: "green",
 					iconClass: "fa-cubes"
 				})}
 				{this.renderStatisticsTile({
 					name: "Групи",
-					count: 56, //universityStatistics.GroupsCount,
+					count: this.props.UniversityStatisticsModel.GroupsCount,
 					link: "#",
 					colorClass: "purple",
 					iconClass: "fa-users"
 				})}
 				{this.renderStatisticsTile({
 					name: "Викладачі",
-					count: 199, //universityStatistics.ProfessorsCount,
+					count: this.props.UniversityStatisticsModel.ProfessorsCount,
 					link: "#",
 					colorClass: "green-meadow",
 					iconClass: "fa-briefcase"
 				})}
 				{this.renderStatisticsTile({
 					name: "Студенти",
-					count: 548, //universityStatistics.StudentsCount,
+					count: this.props.UniversityStatisticsModel.StudentsCount,
 					link: "#",
 					colorClass: "yellow-crusta",
 					iconClass: "fa-child"
@@ -98,7 +103,8 @@ class Dashboard extends React.Component {
 	}
 }
 
+var data = (window as any).data;
 ReactDOM.render(
-	<Dashboard />,
+	<Dashboard {...data} />,
     $('#dashboard')[0]
 );

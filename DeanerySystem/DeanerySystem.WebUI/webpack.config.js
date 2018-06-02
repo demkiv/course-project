@@ -6,7 +6,7 @@ module.exports = function (env) {
 
     var config = {
         entry: {
-            bundle: path.resolve(__dirname, 'scripts/admin/dashboard.tsx'),
+			dashboard: path.resolve(__dirname, 'scripts/admin/dashboard.tsx'),
         },
         output: {
             filename: '[name].js',

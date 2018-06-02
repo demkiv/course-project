@@ -6,6 +6,16 @@
     <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Scripts\Education\DTO.ts" />
+    <None Remove="Scripts\Education\schedule.ts" />
+    <None Remove="Scripts\Education\Schedule\ViewModels\DayVM.ts" />
+    <None Remove="Scripts\Education\Schedule\ViewModels\LessonGroupVM.ts" />
+    <None Remove="Scripts\Education\Schedule\ViewModels\LessonNumberVM.ts" />
+    <None Remove="Scripts\Education\Schedule\ViewModels\LessonVM.ts" />
+    <None Remove="Scripts\Education\Schedule\ViewModels\ScheduleVM.ts" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
@@ -24,6 +34,58 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Education\Schedule\DTO.ts" />
+    <TypeScriptCompile Include="Scripts\Education\Schedule\schedule.ts" />
+    <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\DayVM.ts" />
+    <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\LessonGroupVM.ts" />
+    <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\LessonNumberVM.ts" />
+    <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\LessonVM.ts" />
+    <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\ScheduleVM.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\ClassTypes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClassTypes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\DayOfWeek.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DayOfWeek.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\JournalTypes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>JournalTypes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Roles.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Roles.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ClassTypes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClassTypes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\DayOfWeek.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DayOfWeek.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\JournalTypes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>JournalTypes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Roles.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Roles.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,85 @@
+﻿@model DeanerySystem.UI.Models.JournalInfo
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width"/>
+	<title>Журнал</title>
+	    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/assets/global/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Theme/assets/global/plugins/simple-line-icons/simple-line-icons.css" rel="stylesheet" />
+    <link href="~/Theme/assets/global/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Theme/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" />
+    <link href="~/Theme/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Theme/assets/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" />
+    <link href="~/Theme/assets/global/plugins/select2/select2.css" rel="stylesheet" />
+	<link href="~/Theme/assets/global/css/components.css" rel="stylesheet"/>
+	<link href="~/Theme/assets/global/css/plugins.css" rel="stylesheet"/>
+	<link href="~/Theme/assets/admin/layout/css/layout.css" rel="stylesheet"/>
+	<link href="~/Theme/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet"/>
+	<link href="~/Theme/assets/admin/layout/css/custom.css" rel="stylesheet"/>
+	<style>
+	tr, td {
+page-break-inside: avoid !important;
+}
+</style>
+</head>
+
+<body>
+	<div style="padding-left: 10px;" class="page-content">
+		<div>
+			<h2 style="text-align: center;">Журнал</h2>
+
+			<p class="col-md-12 text-center">
+				<label>Предмет</label> : @Model.SubjectName | <label>Викладач</label> : @Model.LecturerLastName @Model.LecturerFirstName @Model.LecturerMiddleName | <label>Група</label> : @Model.GroupName | <label>Тип пари</label> : @Model.ClassType
+			</p>
+		</div>
+		<div>
+
+			<div class="table-scrollable">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th style="text-align: center; width: 52px;">#</th>
+							<th style="width: 150px;">
+								<p style="width: 150px; margin: 0">
+									Прізвище Ім'я<br />По-батькові
+								</p>
+							</th>
+							@foreach (var date in @Model.Date) {
+								<th style="text-align: center;">
+									<span>@date.Day/@date.Month</span><br />
+									<span>@date.Hour:@date.Minute</span>
+								</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var jornalRecorl in @Model.JournalRecords) {
+							<tr>
+								<td style="text-align: center;">
+									<span>@jornalRecorl.Number</span>
+								</td>
+								<td>
+									<span>@jornalRecorl.StudentLastName @jornalRecorl.StudentFirstName<br />@jornalRecorl.StudentMiddleName</span>
+								</td>
+								@foreach (var mark in jornalRecorl.Marks) {
+									<td style="padding: 0;">
+										@Html.TextBoxFor(x => mark, new { @class = "form-control", style = "border: 0px; width: 52px; height: 52px; text-align: center;" })
+									</td>
+								}
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
+	<p>Electonic Deanery System | Solomiia Demkiv</p>
+</body>
+</html>

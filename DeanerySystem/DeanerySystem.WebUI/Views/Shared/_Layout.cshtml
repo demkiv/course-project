@@ -22,11 +22,9 @@
 	<link href="~/theme/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 	<link href="~/theme/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
 	<!-- END THEME LAYOUT STYLES -->
-
-
 	@*<link rel="shortcut icon" href="favicon.ico" />
 
-	<link href="~/Content/Site.css" rel="stylesheet" />*@
+		<link href="~/Content/Site.css" rel="stylesheet" />*@
 </head>
 <!-- END HEAD -->
 
@@ -53,40 +51,47 @@
 				<!-- END RESPONSIVE MENU TOGGLER -->
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				@*@if (User.Identity.IsAuthenticated) {*@
-					using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-						@Html.AntiForgeryToken()
-						<div class="top-menu">
-							<ul class="nav navbar-nav pull-right">
-								<!-- BEGIN USER LOGIN DROPDOWN -->
-								<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-								<li class="dropdown dropdown-user">
-									<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-										@*@if (!string.IsNullOrEmpty(User.Identity.GetPhotoPath()))
-		{
-			<img alt="" class="img-circle" src="@User.Identity.GetPhotoPath()" />
-		}
-		<span class="username username-hide-on-mobile"> @User.Identity.GetGivenName() </span>*@
-										<img alt="" class="img-circle" src="~/images/Mia.jpg" />
-										<span class="username username-hide-on-mobile"> Соломія Демків </span>
-										<i class="fa fa-angle-down"></i>
-									</a>
-									<ul class="dropdown-menu dropdown-menu-default">
-										<li>
-											<a href=@Url.Action("Index", "Profile")>
-												<i class="icon-user"></i> Профіль
-											</a>
-										</li>
-										<li>
-											<a href="page_user_login_1.html">
-												<i class="icon-key"></i> Вийти
-											</a>
-										</li>
-									</ul>
-								</li>
-								<!-- END USER LOGIN DROPDOWN -->
-							</ul>
-						</div>
-					@*}*@
+				using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+				@Html.AntiForgeryToken()
+				<div class="top-menu">
+					<form id="logOutForm" method="post" asp-controller="Account" asp-action="Logout">
+						<ul class="nav navbar-nav pull-right">
+
+							<!-- BEGIN USER LOGIN DROPDOWN -->
+							<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+							<li class="dropdown dropdown-user">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+									@*@if (!string.IsNullOrEmpty(User.Identity.GetPhotoPath()))
+										{
+											<img alt="" class="img-circle" src="@User.Identity.GetPhotoPath()" />
+										}
+										<span class="username username-hide-on-mobile"> @User.Identity.GetGivenName() </span>*@
+									<img alt="" class="img-circle" src="~/images/Mia.jpg" />
+									<span class="username username-hide-on-mobile"> Соломія Демків </span>
+									<i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-default">
+									<li>
+										<a href=@Url.Action("Index", "Profile")>
+											<i class="icon-user"></i> Профіль
+										</a>
+									</li>
+									<li>
+
+										@*<input type="submit" value="Logout" />*@
+										<a onclick="document.getElementById('logOutForm').submit()">
+											<i class="icon-key"></i> Вийти
+										</a>
+
+									</li>
+								</ul>
+							</li>
+							<!-- END USER LOGIN DROPDOWN -->
+
+						</ul>
+					</form>
+				</div>
+				@*}*@
 				}
 				<!-- END TOP NAVIGATION MENU -->
 			</div>

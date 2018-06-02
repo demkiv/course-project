@@ -23,7 +23,9 @@ namespace DeanerySystem.WebUI.Controllers
 		public ActionResult Schedule() 
 		{
 			var currentSemester = unitOfWork.SemesterRepository.Get().First();
-			var educationalPlans = unitOfWork.EducationalPlanRepository.Get().Where(plan => plan.Semester == currentSemester);
+			var educationalPlans = unitOfWork.EducationalPlanRepository.Get(
+				filter: plan => plan.Semester == currentSemester,
+				includeProperties: "Group,Subject");
 			var scheduleModel = ScheduleProvider.GetSchedule(educationalPlans, unitOfWork.ClassNumberTimeRepository.Get(), getJournalLink);
 			ViewData["data"] = JsonConvert.SerializeObject(scheduleModel);
 			return View();

@@ -1,6 +1,7 @@
 ﻿import * as $ from 'jquery';
 import * as ko from 'knockout';
 import { StudentAccountDTO } from "./StudentAccountDTO";
+import { access } from 'fs';
 
 export class AccountsPageContextVM {
     private Accounts: KnockoutObservableArray<StudentAccountDTO>;
@@ -10,6 +11,7 @@ export class AccountsPageContextVM {
     }
 
     public DrawTable(): void {
+        var _this = this;
         function restoreRow(oTable, nRow) {
             var aData = oTable.row(nRow).data();
             var jqTds = $('>td', nRow);
@@ -25,7 +27,7 @@ export class AccountsPageContextVM {
         function editRow(oTable, nRow) {
             var aData = oTable.row(nRow).data();
             var jqTds = $('>td', nRow);
-            jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[0] + '">';
+            //jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[1] + '">';
             jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
             jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[3] + '">';
@@ -41,10 +43,26 @@ export class AccountsPageContextVM {
         }
 
         function saveRow(oTable, nRow) {
+            debugger;
             var jqInputs = $('input', nRow);
-            var values = (<any>jqInputs).map((x, e) => { return e.value });
+            var tds = $('td', nRow);
+            var id = tds[0] && $(tds[0]).data("id");
+            var values = [tds[0].innerText];
+            var values = values.concat((<any>jqInputs).map((x, e) => { return e.value }).toArray());
             values.push('<a class="edit" href="">Редагувати</a>');
             values.push('<a class="delete" href="">Видалити</a>');
+            var account = _this.GetStudentAccountDTO(values);
+
+            if (id) {
+                account.Id = id;
+                _this.UpdateStudent(account).done(() => {
+                    oTable.row(nRow).data(values).draw();
+                });
+            } else {
+                _this.SaveStudent(account).done(() => {
+                    oTable.row(nRow).data(values).draw();
+                });
+            }
             //oTable.row(nRow).data((<any>jqInputs)[0].value, 0, false);
             //oTable.row(nRow).data((<any>jqInputs)[1].value, 1, false);
             //oTable.row(nRow).data((<any>jqInputs)[2].value, 2, false);
@@ -58,7 +76,6 @@ export class AccountsPageContextVM {
             //oTable.row(nRow).data((<any>jqInputs)[10].value, 10, false);
             //oTable.row(nRow).data('<a class="edit" href="">Редагувати</a>', nRow, 11, false);
             //oTable.row(nRow).data('<a class="delete" href="">Видалити</a>', nRow, 12, false);
-            oTable.row(nRow).data(values).draw();
         }
 
         function cancelEditRow(oTable, nRow) {
@@ -161,7 +178,7 @@ export class AccountsPageContextVM {
             e.preventDefault();
 
             if (nNew && nEditing) {
-                if (confirm("Попередній рядок не збережено.Ви маєте намір зберегти його ?")) {
+                if (confirm("Попередній рядок не збережено. Ви маєте намір зберегти його ?")) {
                     saveRow(oTable, nEditing); // save
                     $(nEditing).find("td:first").html("Untitled");
                     nEditing = null;
@@ -185,14 +202,15 @@ export class AccountsPageContextVM {
 
         table.on('click', '.delete', function (e) {
             e.preventDefault();
-
-            if (confirm("Ви впевнені, що хочете видалити цей рядок ?") == false) {
-                return;
-            }
-
             var nRow = $(this).parents('tr')[0];
-            oTable.row(nRow).remove().draw();
-            alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+            if (confirm("Ви впевнені, що хочете видалити цей рядок ?") != false) {
+                var vals = $('td', nRow);
+                var id = $(vals[0]).data("id");
+                _this.RemoveStudent(id).done(() => {
+                    oTable.row(nRow).remove().draw();
+                    alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+                })
+            }
         });
 
         table.on('click', '.cancel', function (e) {
@@ -230,5 +248,78 @@ export class AccountsPageContextVM {
                 nEditing = nRow;
             }
         });
+    }
+
+    private GetStudentAccountDTO(values: string[]): StudentAccountDTO {
+        var account = new StudentAccountDTO();
+        account.Id = "";
+        account.StudentCardId = values[0];
+        account.LastName = values[1];
+        account.FirstName = values[2];
+        account.MiddleName = values[3];
+        account.FirstNameEng = values[4];
+        account.LastNameEng = values[5];
+        account.Email = values[6];
+        account.PhoneNumber = values[7];
+        account.BirthDate = new Date(values[8]);
+        account.Stream = values[9];
+        account.Group = values[10];
+        return account;
+    }
+
+    private SaveStudent(student: StudentAccountDTO): JQueryPromise<{}> {
+        var deferr = jQuery.Deferred();
+        $.ajax({
+            url: '/api/admin/student',
+            type: 'POST',
+            data: JSON.stringify(student),
+            contentType: "application/json; charset=utf-8",
+            success: (data: any) => {
+                alert("Зміни збережено!");
+                deferr.resolve();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                deferr.reject();
+            }
+        });
+        return deferr.promise();
+    }
+
+    private UpdateStudent(student: StudentAccountDTO): JQueryPromise<{}> {
+        var deferr = jQuery.Deferred();
+        $.ajax({
+            url: '/api/admin/student',
+            type: 'PUT',
+            data: JSON.stringify(student),
+            contentType: "application/json; charset=utf-8",
+            success: (data: any) => {
+                alert("Зміни збережено!");
+                deferr.resolve();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                deferr.reject();
+            }
+        });
+        return deferr.promise();
+    }
+
+    private RemoveStudent(id: string): JQueryPromise<{}> {
+        var deferr = jQuery.Deferred();
+        $.ajax({
+            url: `/api/admin/student/${id}`,
+            type: 'DELETE',
+            contentType: "application/json; charset=utf-8",
+            success: (data: any) => {
+                alert("Зміни збережено!");
+                deferr.resolve();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                deferr.reject();
+            }
+        });
+        return deferr.promise();
     }
 }

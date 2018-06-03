@@ -62,7 +62,7 @@
                     </thead>
                     <tbody data-bind="foreach: {data: Accounts}">
                         <tr role="row" class="odd">
-                            <td data-bind="text: StudentCardId"> </td>
+                            <td data-bind="text: StudentCardId, attr: {'data-id': Id}"> </td>
                             <td class="sorting_1" data-bind="text: LastName"></td>
                             <td data-bind="text: FirstName"></td>
                             <td data-bind="text: MiddleName"></td>

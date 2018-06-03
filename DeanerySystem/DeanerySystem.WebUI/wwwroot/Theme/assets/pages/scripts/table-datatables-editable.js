@@ -173,6 +173,7 @@ var TableDatatablesEditable = function () {
 
 }();
 
-jQuery(document).ready(function() {
-    TableDatatablesEditable.init();
+jQuery(document).ready(function () {
+    debugger;
+    //TableDatatablesEditable.init();
 });

@@ -18,6 +18,7 @@
     <None Remove="Scripts\Education\Schedule\ViewModels\LessonNumberVM.ts" />
     <None Remove="Scripts\Education\Schedule\ViewModels\LessonVM.ts" />
     <None Remove="Scripts\Education\Schedule\ViewModels\ScheduleVM.ts" />
+    <None Remove="Scripts\Utils\PageBar.ts" />
     <None Remove="Scripts\Utils\QueryStringUtilities.ts" />
   </ItemGroup>
 
@@ -53,6 +54,7 @@
     <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\LessonNumberVM.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\LessonVM.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\ScheduleVM.ts" />
+    <TypeScriptCompile Include="Scripts\Utils\PageBar.ts" />
     <TypeScriptCompile Include="Scripts\Utils\QueryStringUtilities.ts" />
   </ItemGroup>
 

@@ -65,5 +65,9 @@ namespace DeanerySystem.WebUI.Controllers
 			var journalInfo = JournalProvider.GenerateJournalInfo(educationalPlan, _class, journalId);
 			return View(journalInfo);
 		}
+
+		public ActionResult Assessment() {
+			return View();
+		}
 	}
 }

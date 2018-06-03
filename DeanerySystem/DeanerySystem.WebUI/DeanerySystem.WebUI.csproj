@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="scripts\accounts\accounts.ts" />
     <None Remove="scripts\accounts\AccountsPageContextVM.ts" />
-    <None Remove="scripts\accounts\Initializer.ts" />
     <None Remove="scripts\accounts\StudentAccountDTO.ts" />
     <None Remove="Scripts\Education\DTO.ts" />
     <None Remove="Scripts\Education\schedule.ts" />
@@ -41,7 +41,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="scripts\accounts\AccountsPageContextVM.ts" />
-    <TypeScriptCompile Include="scripts\accounts\Initializer.ts" />
+    <TypeScriptCompile Include="scripts\accounts\accounts.ts" />
     <TypeScriptCompile Include="scripts\accounts\StudentAccountDTO.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\DTO.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\schedule.ts" />

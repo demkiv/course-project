@@ -1,9 +1,11 @@
-﻿import { StudentAccountDTO } from "./StudentAccountDTO";
+﻿import * as $ from 'jquery';
+import * as ko from 'knockout';
+import { StudentAccountDTO } from "./StudentAccountDTO";
 
 export class AccountsPageContextVM {
     private Accounts: KnockoutObservableArray<StudentAccountDTO>;
     constructor() {
-        var students = JSON.parse(window["data"]);
+        var students = window["data"];
         this.Accounts = ko.observableArray(students);
     }
 
@@ -26,8 +28,15 @@ export class AccountsPageContextVM {
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[1] + '">';
             jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
             jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[3] + '">';
-            jqTds[4].innerHTML = '<a class="edit" href="">Save</a>';
-            jqTds[5].innerHTML = '<a class="cancel" href="">Cancel</a>';
+            jqTds[4].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[4] + '">';
+            jqTds[5].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[5] + '">';
+            jqTds[6].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[6] + '">';
+            jqTds[7].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[7] + '">';
+            jqTds[8].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[8] + '">';
+            jqTds[9].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[9] + '">';
+            jqTds[10].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[10] + '">';
+            jqTds[11].innerHTML = '<a class="edit" href="">Зберегти</a>';
+            jqTds[12].innerHTML = '<a class="cancel" href="">Скасувати</a>';
         }
 
         function saveRow(oTable, nRow) {
@@ -36,8 +45,15 @@ export class AccountsPageContextVM {
             oTable.fnUpdate((<any>jqInputs)[1].value, nRow, 1, false);
             oTable.fnUpdate((<any>jqInputs)[2].value, nRow, 2, false);
             oTable.fnUpdate((<any>jqInputs)[3].value, nRow, 3, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
-            oTable.fnUpdate('<a class="delete" href="">Delete</a>', nRow, 5, false);
+            oTable.fnUpdate((<any>jqInputs)[4].value, nRow, 4, false);
+            oTable.fnUpdate((<any>jqInputs)[6].value, nRow, 5, false);
+            oTable.fnUpdate((<any>jqInputs)[6].value, nRow, 6, false);
+            oTable.fnUpdate((<any>jqInputs)[7].value, nRow, 7, false);
+            oTable.fnUpdate((<any>jqInputs)[9].value, nRow, 8, false);
+            oTable.fnUpdate((<any>jqInputs)[9].value, nRow, 9, false);
+            oTable.fnUpdate((<any>jqInputs)[10].value, nRow, 10, false);
+            oTable.fnUpdate('<a class="edit" href="">Редагувати</a>', nRow, 11, false);
+            oTable.fnUpdate('<a class="delete" href="">Видалити</a>', nRow, 12, false);
             oTable.fnDraw();
         }
 
@@ -47,11 +63,18 @@ export class AccountsPageContextVM {
             oTable.fnUpdate((<any>jqInputs)[1].value, nRow, 1, false);
             oTable.fnUpdate((<any>jqInputs)[2].value, nRow, 2, false);
             oTable.fnUpdate((<any>jqInputs)[3].value, nRow, 3, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
+            oTable.fnUpdate((<any>jqInputs)[4].value, nRow, 4, false);
+            oTable.fnUpdate((<any>jqInputs)[5].value, nRow, 5, false);
+            oTable.fnUpdate((<any>jqInputs)[6].value, nRow, 6, false);
+            oTable.fnUpdate((<any>jqInputs)[7].value, nRow, 7, false);
+            oTable.fnUpdate((<any>jqInputs)[8].value, nRow, 8, false);
+            oTable.fnUpdate((<any>jqInputs)[9].value, nRow, 9, false);
+            oTable.fnUpdate((<any>jqInputs)[10].value, nRow, 10, false);
+            oTable.fnUpdate('<a class="edit" href="">Редагувати</a>', nRow, 11, false);
             oTable.fnDraw();
         }
 
-        var table = $('#sample_editable_1');
+        var table = (<any>window).$('#sample_editable_1');
 
         var oTable = (<any>table).dataTable({
 
@@ -62,7 +85,7 @@ export class AccountsPageContextVM {
 
             "lengthMenu": [
                 [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
+                [5, 15, 20, "Всі"] // change per page values here
             ],
 
             // Or you can use remote translation file
@@ -84,7 +107,7 @@ export class AccountsPageContextVM {
                 "targets": [0]
             }],
             "order": [
-                [0, "asc"]
+                [1, "asc"]
             ] // set first column as a default sort by asc
         });
 
@@ -97,7 +120,7 @@ export class AccountsPageContextVM {
             e.preventDefault();
 
             if (nNew && nEditing) {
-                if (confirm("Previose row not saved. Do you want to save it ?")) {
+                if (confirm("Попередній рядок не збережено.Ви маєте намір зберегти його ?")) {
                     saveRow(oTable, nEditing); // save
                     $(nEditing).find("td:first").html("Untitled");
                     nEditing = null;
@@ -112,7 +135,7 @@ export class AccountsPageContextVM {
                 }
             }
 
-            var aiNew = oTable.fnAddData(['', '', '', '', '', '']);
+            var aiNew = oTable.fnAddData(['', '', '', '', '', '', '', '', '', '', '', '', '']);
             var nRow = oTable.fnGetNodes(aiNew[0]);
             editRow(oTable, nRow);
             nEditing = nRow;
@@ -122,7 +145,7 @@ export class AccountsPageContextVM {
         table.on('click', '.delete', function (e) {
             e.preventDefault();
 
-            if (confirm("Are you sure to delete this row ?") == false) {
+            if (confirm("Ви впевнені, що хочете видалити цей рядок ?") == false) {
                 return;
             }
 
@@ -155,7 +178,7 @@ export class AccountsPageContextVM {
                 restoreRow(oTable, nEditing);
                 editRow(oTable, nRow);
                 nEditing = nRow;
-            } else if (nEditing == nRow && this.innerHTML == "Save") {
+            } else if (nEditing == nRow && this.innerHTML == "Зберегти") {
                 /* Editing this row and want to save it */
                 saveRow(oTable, nEditing);
                 nEditing = null;

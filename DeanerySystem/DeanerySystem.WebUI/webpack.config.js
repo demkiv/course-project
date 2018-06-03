@@ -7,7 +7,8 @@ module.exports = function (env) {
     var config = {
         entry: {
 			dashboard: path.resolve(__dirname, 'scripts/admin/dashboard.tsx'),
-			schedule: path.resolve(__dirname, 'scripts/education/schedule/schedule.ts'),
+            schedule: path.resolve(__dirname, 'scripts/education/schedule/schedule.ts'),
+            accounts: path.resolve(__dirname, 'scripts/accounts/accounts.ts'),
         },
         output: {
             filename: '[name].js',

@@ -210,7 +210,7 @@ namespace DeanerySystem.DataAccess.Concrete
             {
                 if (this.studentRepository == null)
                 {
-                    this.studentRepository = new GenericRepository<Student>(this.context);
+                    this.studentRepository = new StudentRepository(this.context);
                 }
                 return this.studentRepository;
             }

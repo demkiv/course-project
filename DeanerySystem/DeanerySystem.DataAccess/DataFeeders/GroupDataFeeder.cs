@@ -15,21 +15,21 @@ namespace DeanerySystem.DataAccess.DataFeeders
                 {
                     Id = 1,
                     Name = "ПМІ-61",
-                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(17),              
+                    Mentor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(17),              
                     Department = unitOfWork.DepartmentRepository.GetById(1),
                 },
                 new Group
                 {
                     Id = 2,
                     Name = "ПМІ-62",
-                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(1),
+                    Mentor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(1),
                     Department = unitOfWork.DepartmentRepository.GetById(2),
                 },
                 new Group
                 {
                     Id = 2,
                     Name = "ПМІ-63",
-                    Mentor = unitOfWork.ProfessorRepository.Get().ElementAt(0),
+                    Mentor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(0),
                     Department = unitOfWork.DepartmentRepository.GetById(3),
                 }
             };

@@ -16,70 +16,70 @@ namespace DeanerySystem.DataAccess.DataFeeders
                 {
                     Id = 1,
                     ClassType = ClassTypes.Lecture,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(5),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(5),
                     Subject = unitOfWork.SubjectRepository.GetById(1)
                 },
                 new Class
                 {
                     Id = 2,
                     ClassType = ClassTypes.Lecture,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(6),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(6),
                     Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
                 new Class
                 {
                     Id = 3,
                     ClassType = ClassTypes.PracticalClass,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(7),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(7),
                     Subject = unitOfWork.SubjectRepository.GetById(1)
                 },
                 new Class
                 {
                     Id = 4,
                     ClassType = ClassTypes.PracticalClass,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(5),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(5),
                     Subject = unitOfWork.SubjectRepository.GetById(1)
                 },
                 new Class
                 {
                     Id = 5,
                     ClassType = ClassTypes.Lecture,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(5),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(5),
                     Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
                 new Class
                 {
                     Id = 6,
                     ClassType = ClassTypes.Lecture,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(6),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(6),
                     Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
                 new Class
                 {
                     Id = 7,
                     ClassType = ClassTypes.PracticalClass,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(8),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(8),
                     Subject = unitOfWork.SubjectRepository.GetById(2)
                 },
                 new Class
                 {
                     Id = 8,
                     ClassType = ClassTypes.PracticalClass,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(9),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(9),
                     Subject = unitOfWork.SubjectRepository.GetById(5)
                 },
                 new Class
                 {
                     Id = 9,
                     ClassType = ClassTypes.PracticalClass,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(11),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(11),
                     Subject = unitOfWork.SubjectRepository.GetById(6)
                 },
                 new Class
                 {
                     Id = 10,
                     ClassType = ClassTypes.PracticalClass,
-                    Professor = unitOfWork.ProfessorRepository.Get().ElementAt(10),
+                    Professor = unitOfWork.ProfessorRepository.Get().ToList().ElementAt(10),
                     Subject = unitOfWork.SubjectRepository.GetById(7)
                 }
             };

@@ -105,12 +105,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DeanerySystem.Domain\DeanerySystem.Domain.csproj">
-      <Project>{9d449daa-41be-461f-bef9-5fa2aac89967}</Project>
-      <Name>DeanerySystem.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

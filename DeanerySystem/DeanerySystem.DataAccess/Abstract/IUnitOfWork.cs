@@ -13,7 +13,7 @@ namespace DeanerySystem.DataAccess.Abstract
         IGenericRepository<ClassNumberTime> ClassNumberTimeRepository { get; }
         IGenericRepository<DeaneryUser> DeaneryUserRepository { get; }
         IGenericRepository<Department> DepartmentRepository { get; }
-        IGenericRepository<EducationalPlan> EducationalPlanRepository { get; }
+        EducationalPlanRepository EducationalPlanRepository { get; }
         IGenericRepository<Faculty> FacultyRepository { get; }
         IGenericRepository<FailureTicket> FailureTicketRepository { get; }
         IGenericRepository<Group> GroupRepository { get; }

@@ -32,7 +32,7 @@ namespace DeanerySystem.WebUI.Providers
 							LessonModel lesson = new LessonModel()
 							{
 								Fraction = timeTable.Fraction,
-								Lector = _class.Professor.GetFullName(),
+								Lector = _class.Professor?.GetFullName() ?? "",
 								Subject = plan.Subject.Name,
 								Type = ResourcesProvider.GetClassTypeDisplay(_class.ClassType),
 								JournalLink = getJournalUrlCallback(plan.Id, _class.Id)

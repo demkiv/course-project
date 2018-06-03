@@ -21,7 +21,7 @@ namespace DeanerySystem.DataAccess.Concrete
         private GenericRepository<ClassNumberTime> classNumberTimeRepository;
         private GenericRepository<DeaneryUser> deaneryUserRepository;
         private GenericRepository<Department> departmentRepository;
-        private GenericRepository<EducationalPlan> educationalPlanRepository;
+        private EducationalPlanRepository educationalPlanRepository;
         private GenericRepository<Faculty> facultyRepository;
         private GenericRepository<FailureTicket> failureTicketRepository;
         private GenericRepository<Group> groupRepository;
@@ -96,13 +96,13 @@ namespace DeanerySystem.DataAccess.Concrete
             }
         }
 
-        public IGenericRepository<EducationalPlan> EducationalPlanRepository
+        public EducationalPlanRepository EducationalPlanRepository
         {
             get
             {
                 if (this.educationalPlanRepository == null)
                 {
-                    this.educationalPlanRepository = new GenericRepository<EducationalPlan>(this.context);
+                    this.educationalPlanRepository = new EducationalPlanRepository(this.context);
                 }
                 return this.educationalPlanRepository;
             }

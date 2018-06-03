@@ -53,8 +53,6 @@
 				<!-- END RESPONSIVE MENU TOGGLER -->
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				@*@if (User.Identity.IsAuthenticated) {*@
-				using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-				@Html.AntiForgeryToken()
 				<div class="top-menu">
 					<form id="logOutForm" method="post" asp-controller="Account" asp-action="Logout">
 						<ul class="nav navbar-nav pull-right">
@@ -94,7 +92,6 @@
 					</form>
 				</div>
 				@*}*@
-				}
 				<!-- END TOP NAVIGATION MENU -->
 			</div>
 			<!-- END HEADER INNER -->

@@ -37,35 +37,35 @@ namespace DeanerySystem.DataAccess.DataFeeders
                     Id = 4,
                     JournalType = JournalTypes.Visiting,
                     Cellules = new List<Cellule>(),
-                    Class = unitOfWork.ClassRepository.GetById(3)
+                    Class = unitOfWork.ClassRepository.GetById(2)
                 },
                 new Journal
                 {
                     Id = 5,
                     JournalType = JournalTypes.Assessment,
                     Cellules = new List<Cellule>(),
-                    Class = unitOfWork.ClassRepository.GetById(4)
+                    Class = unitOfWork.ClassRepository.GetById(3)
                 },
                 new Journal
                 {
                     Id = 6,
                     JournalType = JournalTypes.Visiting,
                     Cellules = new List<Cellule>(),
-                    Class = unitOfWork.ClassRepository.GetById(1)
+                    Class = unitOfWork.ClassRepository.GetById(3)
                 },
                 new Journal
                 {
                     Id = 7,
                     JournalType = JournalTypes.Assessment,
                     Cellules = new List<Cellule>(),
-                    Class = unitOfWork.ClassRepository.GetById(1)
+                    Class = unitOfWork.ClassRepository.GetById(4)
                 },
                 new Journal
                 {
                     Id = 8,
                     JournalType = JournalTypes.Visiting,
                     Cellules = new List<Cellule>(),
-                    Class = unitOfWork.ClassRepository.GetById(1)
+                    Class = unitOfWork.ClassRepository.GetById(4)
                 },
                 new Journal
                 {

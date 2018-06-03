@@ -11,12 +11,14 @@
     <None Remove="scripts\accounts\AccountsPageContextVM.ts" />
     <None Remove="scripts\accounts\StudentAccountDTO.ts" />
     <None Remove="Scripts\Education\DTO.ts" />
+    <None Remove="Scripts\Education\Journal\Journal.ts" />
     <None Remove="Scripts\Education\schedule.ts" />
     <None Remove="Scripts\Education\Schedule\ViewModels\DayVM.ts" />
     <None Remove="Scripts\Education\Schedule\ViewModels\LessonGroupVM.ts" />
     <None Remove="Scripts\Education\Schedule\ViewModels\LessonNumberVM.ts" />
     <None Remove="Scripts\Education\Schedule\ViewModels\LessonVM.ts" />
     <None Remove="Scripts\Education\Schedule\ViewModels\ScheduleVM.ts" />
+    <None Remove="Scripts\Utils\QueryStringUtilities.ts" />
   </ItemGroup>
 
 
@@ -43,6 +45,7 @@
     <TypeScriptCompile Include="scripts\accounts\AccountsPageContextVM.ts" />
     <TypeScriptCompile Include="scripts\accounts\accounts.ts" />
     <TypeScriptCompile Include="scripts\accounts\StudentAccountDTO.ts" />
+    <TypeScriptCompile Include="Scripts\Education\Journal\journal.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\DTO.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\schedule.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\DayVM.ts" />
@@ -50,6 +53,7 @@
     <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\LessonNumberVM.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\LessonVM.ts" />
     <TypeScriptCompile Include="Scripts\Education\Schedule\ViewModels\ScheduleVM.ts" />
+    <TypeScriptCompile Include="Scripts\Utils\QueryStringUtilities.ts" />
   </ItemGroup>
 
   <ItemGroup>

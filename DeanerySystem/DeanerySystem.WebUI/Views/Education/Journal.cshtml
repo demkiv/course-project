@@ -1,9 +1,11 @@
-﻿@model DeanerySystem.UI.Models.JournalInfo
+﻿@model DeanerySystem.WebUI.Models.JournalInfo
 
 @{
 	ViewBag.Title = "Journal";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script src="~/dist/journal.js"></script>
 
 <div>
 	<h2 style="text-align: center;">Журнал</h2>
@@ -27,66 +29,70 @@
 		<p class="col-md-offset-1 col-md-5 form-inline">
 			<label>Режим журналу</label> :
 			@Html.DropDownListFor(model => model.JournalId, new SelectList(
-				new List<Object>
-				{
+					 new List<Object>
+					 {
 					new {value = Model.AssessmentJournalId, text = Model.AssessmentJournalName },
 					new {value = Model.VisitingJournalId, text = Model.VisitingJournalName }
-				},
-				"value",
-				"text", 2), new { @id = "JournalTypeSelection", @class = "form-control dropdown" })
+					 },
+					 "value",
+					 "text", 2), new { @id = "JournalTypeSelection", @class = "form-control dropdown" })
 		</p>
 	</div>
 </div>
 <div>
-	@using (Html.BeginForm("SaveMarkings", "Education", FormMethod.Post, new {@id = "submit-mark-form"})) {
+	<form id="submit-mark-form" method="post" asp-controller="api/education" asp-action="markings">
 		<div class="table-scrollable">
 			<table class="table table-bordered table-hover">
 				<thead>
-				<tr>
-					<th style="text-align: center; width: 52px;">#</th>
-					<th style="width: 150px;">
-						<p style="width: 150px; margin: 0">Прізвище Ім'я<br/>По-батькові
-						</p>
-					</th>
-					@foreach (var date in @Model.Date) {
-						<th style="text-align: center;">
-							<span>@date.Day/@date.Month</span><br/>
-							<span>@date.Hour:@date.Minute</span>
-						</th>
-					}
-				</tr>
-				</thead>
-				<tbody>
-				@foreach (var jornalRecorl in @Model.JournalRecords) {
 					<tr>
-						<td style="text-align: center;">
-							<span>@jornalRecorl.Number</span>
-						</td>
-						<td>
-							<span>@jornalRecorl.StudentLastName @jornalRecorl.StudentFirstName<br />@jornalRecorl.StudentMiddleName</span>
-						</td>
-						@foreach (var mark in jornalRecorl.Marks) {
-							<td style="padding: 0;">
-								@Html.TextBoxFor(x => mark, new {@class = "form-control", style = "border: 0px; min-width: 52px; height: 52px; text-align: center;"})
-							</td>
+						<th style="text-align: center; width: 52px;">#</th>
+						<th style="width: 150px;">
+							<p style="width: 150px; margin: 0">
+								Прізвище Ім'я<br />По-батькові
+							</p>
+						</th>
+						@foreach (var date in @Model.Date)
+						{
+							<th style="text-align: center;">
+								<span>@date.Day/@date.Month</span><br />
+								<span>@date.Hour:@date.Minute</span>
+							</th>
 						}
 					</tr>
-				}
+				</thead>
+				<tbody>
+					@foreach (var jornalRecorl in @Model.JournalRecords)
+					{
+						<tr>
+							<td style="text-align: center;">
+								<span>@jornalRecorl.Number</span>
+							</td>
+							<td>
+								<span>@jornalRecorl.StudentLastName @jornalRecorl.StudentFirstName<br />@jornalRecorl.StudentMiddleName</span>
+							</td>
+							@foreach (var mark in jornalRecorl.Marks)
+							{
+								<td style="padding: 0;">
+									@Html.TextBoxFor(x => mark, new { @class = "form-control", style = "border: 0px; min-width: 52px; height: 52px; text-align: center;" })
+								</td>
+							}
+						</tr>
+					}
 				</tbody>
 			</table>
 		</div>
 
-		<br/>
+		<br />
 		<div class="row">
 			<div class="col-md-6">
 				<input type="submit" value="Зберегти зміни" class="btn btn-default form-control" id="save-marks-button" data-educationalplanid=@Model.EducationalPlanId data-classid=@Model.ClassId data-journalid=@Model.JournalId />
 			</div>
 			<div class="col-md-6">
-				<input value="Назад" class="btn btn-default form-control" id="back-button" data-url="@Url.Action("Schedule", "Education")"/>
+				<a class="btn btn-default form-control" href="@Url.Action("Schedule", "Education")">Назад</a>
 			</div>
 		</div>
-		<br/><br/>
-	}
+		<br /><br />
+	</form>
 </div>
 
-@Html.ActionLink("Друкувати", "PrintJournal", "Education",  Model, null)
+@Html.ActionLink("Друкувати", "PrintJournal", "Education", Model, null)

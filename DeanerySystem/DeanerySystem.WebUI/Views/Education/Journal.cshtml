@@ -5,40 +5,41 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/dist/journal.js"></script>
+<h3 class="page-title">
+	Журнал 
+</h3>
 
-<div>
-	<h2 style="text-align: center;">Журнал</h2>
-
-	<p class="col-md-12 text-center">
-		<label>Предмет</label> : @Model.SubjectName
-	</p>
-	<div class="row">
-		<p class="col-md-offset-2 col-md-4">
-			<label>Викладач</label> : @Model.LecturerLastName @Model.LecturerFirstName @Model.LecturerMiddleName
-		</p>
-		<p class="col-md-offset-1 col-md-5">
-			<label>Група</label> : @Model.GroupName
-		</p>
-	</div>
-	<div class="row">
-		<p class="col-md-offset-2 col-md-4">
-			<label>Тип пари</label> : @Model.ClassType
-		</p>
-
-		<p class="col-md-offset-1 col-md-5 form-inline">
-			<label>Режим журналу</label> :
+<div class="portlet light bordered">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">@Model.SubjectName</span>
+		</div>
+		<div class="actions">
 			@Html.DropDownListFor(model => model.JournalId, new SelectList(
-					 new List<Object>
-					 {
-					new {value = Model.AssessmentJournalId, text = Model.AssessmentJournalName },
-					new {value = Model.VisitingJournalId, text = Model.VisitingJournalName }
-					 },
-					 "value",
-					 "text", 2), new { @id = "JournalTypeSelection", @class = "form-control dropdown" })
-		</p>
+				  new List<Object>
+				  {
+				new {value = Model.AssessmentJournalId, text = Model.AssessmentJournalName },
+				new {value = Model.VisitingJournalId, text = Model.VisitingJournalName }
+				  },
+				  "value",
+				  "text", 2), new { @id = "JournalTypeSelection", @class = "form-control dropdown dropdown-green font-green" })
+		</div>
+	</div>
+	<div class="portlet-body">
+		<ul class="list-inline">
+			<li>
+				<i class="fa fa-group"></i> @Model.GroupName
+			</li>
+			<li>
+				<i class="fa fa-briefcase"></i> @Model.LecturerLastName @Model.LecturerFirstName @Model.LecturerMiddleName
+			</li>
+			<li>
+				<i class="fa fa-book"></i> @Model.ClassType
+			</li>
+		</ul>
 	</div>
 </div>
+
 <div>
 	<form id="submit-mark-form" method="post" asp-controller="api/education" asp-action="markings">
 		<div class="table-scrollable">
@@ -96,3 +97,5 @@
 </div>
 
 @Html.ActionLink("Друкувати", "PrintJournal", "Education", Model, null)
+
+<script src="~/dist/journal.js"></script>

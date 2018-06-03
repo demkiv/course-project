@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DeanerySystem.WebUI.Services;
+using DeanerySystem.WebUI.Identity;
 
 namespace DeanerySystem.WebUI
 {
@@ -44,7 +45,8 @@ namespace DeanerySystem.WebUI
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddMvc();
+			services.AddScoped<IUserClaimsPrincipalFactory<DeaneryUser>, ApplicationClaimsIdentityFactory>();
+			services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

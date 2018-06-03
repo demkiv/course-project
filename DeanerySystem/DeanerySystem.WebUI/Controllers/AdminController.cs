@@ -88,5 +88,20 @@ namespace DeanerySystem.WebUI.Controllers
             ViewData["Data"] = JsonConvert.SerializeObject(accounts);
             return View();
         }
-    }
+
+		public ActionResult Faculties() {
+			var faculties = unitOfWork.FacultyRepository.Get(includeProperties: "Streams");
+			var facultiesModel = new Faculties();
+			foreach (var faculty in faculties)
+			{
+				facultiesModel.FacultiesList.Add(new Faculty()
+				{
+					Name = faculty.Name,
+					DeanName = faculty.Dean?.GetFullName() ?? "",
+					NumberOfStreams = faculty.Streams.Count()
+				});
+			}
+			return View(facultiesModel);
+		}
+	}
 }

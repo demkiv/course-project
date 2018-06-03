@@ -14,7 +14,6 @@ namespace DeanerySystem.WebUI.Providers
 			List<DateTime> dates = JournalProvider.GetDates(educationalPlan, _class);
 			List<JournalRecord> journalRecords = new List<JournalRecord>();
 
-			int number = 1;
 			foreach (var student in educationalPlan.Group.Students)
 			{
 				string[] marks = new string[dates.Count];
@@ -32,10 +31,8 @@ namespace DeanerySystem.WebUI.Providers
 					StudentFirstName = student.FirstName,
 					StudentLastName = student.LastName,
 					StudentMiddleName = student.MiddleName,
-					Number = number,
 					Marks = marks.ToList()
 				});
-				number++;
 			}
 
 			journalRecords = journalRecords.OrderBy(jr => jr.StudentLastName + jr.StudentFirstName).ToList();

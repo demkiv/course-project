@@ -4,8 +4,6 @@ namespace DeanerySystem.WebUI.Models
 {
     public class JournalRecord
     {
-        public int Number { get; set; }
-
         public string StudentFirstName { get; set; }
         public string StudentLastName { get; set; }
         public string StudentMiddleName { get; set; }

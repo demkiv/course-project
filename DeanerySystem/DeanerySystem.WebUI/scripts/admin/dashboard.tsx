@@ -59,7 +59,7 @@ class Dashboard extends React.Component<DTO.UniversityModel, any> {
 				{this.renderStatisticsTile({
 					name: "Факультети",
 					count: this.props.UniversityStatisticsModel.FacultiesCount,
-					link: "#",
+					link: "/Admin/Faculties",
 					colorClass: "blue",
 					iconClass: "fa-university"
 				})}

@@ -25,8 +25,3 @@
     "prod": "webpack --env.NODE_ENV=production --config webpack.config.js"
   },
   "-vs-binding": {
-    "AfterBuild": [
-      "build"
-    ]
-  }
-}

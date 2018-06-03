@@ -1,10 +1,12 @@
 ﻿import * as ko from 'knockout';
 import * as DTO from '../DTO';
 import DayVM from './DayVM';
+import * as PageBar from '../../../Utils/PageBar';
 
 class ScheduleVM {
 	public Groups: KnockoutObservableArray<string>;
 	public Days: KnockoutObservableArray<DayVM>;
+	public PageBar: KnockoutObservable<PageBar.PageBarVM>;
 
 	constructor(private schedule: DTO.ScheduleModel) {
 		var groupNames = this.schedule.Groups.map(g => {
@@ -17,6 +19,9 @@ class ScheduleVM {
 			return new DayVM(day, groupIds);
 		});
 		this.Days = ko.observableArray(days);
+
+		var homeLink = new PageBar.PageBarLinkVM("Головна", "/home");
+		this.PageBar = ko.observable(new PageBar.PageBarVM([homeLink], "Розклад"));
 	}
 }
 

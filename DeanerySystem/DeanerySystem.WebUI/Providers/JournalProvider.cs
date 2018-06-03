@@ -38,6 +38,8 @@ namespace DeanerySystem.WebUI.Providers
 				number++;
 			}
 
+			journalRecords = journalRecords.OrderBy(jr => jr.StudentLastName + jr.StudentFirstName).ToList();
+
 			JournalInfo journalInfo = new JournalInfo
 			{
 				EducationalPlanId = educationalPlan.Id,

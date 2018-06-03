@@ -5,9 +5,23 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3 class="page-title">
-	Журнал 
-</h3>
+<div class="page-bar" data-bind="with: PageBar">
+	<ul class="page-breadcrumb">
+		<li>
+			<a href="@Url.Action("Index", "Home")"> Головна </a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="@Url.Action("Schedule", "Education")"> Розклад </a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<span> Журнал </span>
+		</li>
+	</ul>
+</div>
+
+<br/>
 
 <div class="portlet light bordered">
 	<div class="portlet-title">

@@ -23,13 +23,6 @@ namespace DeanerySystem.WebUI.Controllers
 			var currentMember = unitOfWork.DeaneryUserRepository.Get().Single(user =>
 				user.Email == User.Identity.Name);
 
-			//var identityRoles = unitOfWork.DeaneryUserRepository.Get().Where(role => 
-			//	currentMember.Roles.Select(r => r.RoleId).Contains(role.Id));
-			//var roles = identityRoles.Select(identityRole => (Roles)Enum.Parse(typeof(Roles), identityRole.Name));
-			//if (!roles.Any()) {
-			//	throw new InvalidOperationException("Each member should have a role!");
-			//}
-
 			var memberModel = new MemberModel()
 			{
 				FirstName = currentMember.FirstName,

@@ -5,7 +5,17 @@
 <script>
     this.data = @Html.Raw(@ViewData["Data"]);
 </script>
-
+<div class="page-bar" data-bind="with: PageBar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Index", "Home")"> Головна </a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span> Студенти </span>
+        </li>
+    </ul>
+</div>
 <h3 class="page-title">Студенти <small>Список студентів університету</small></h3>
 <div class="portlet light portlet-fit bordered" id="accountsPage">
     <div class="portlet-body">

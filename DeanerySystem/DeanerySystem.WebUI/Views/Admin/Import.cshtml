@@ -2,7 +2,21 @@
 @{
     ViewData["Title"] = "Імпорт";
 }
-
+<div class="page-bar" data-bind="with: PageBar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Index", "Home")"> Головна </a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("StudentAccounts", "Admin")"> Студенти </a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span> Імпорт </span>
+        </li>
+    </ul>
+</div>
 <h3 class="page-title">Імпорт <small>Завантажте файл з даними для імпорту</small></h3>
 
 <div class="portlet light bordered" id="accountsPage">

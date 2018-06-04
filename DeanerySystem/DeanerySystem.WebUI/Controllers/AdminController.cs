@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using DeanerySystem.BusinessLogic.UserImport;
 using DeanerySystem.DataAccess.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DeanerySystem.WebUI.Controllers
 {
-    public class AdminController : Controller
+	[Authorize]
+	public class AdminController : Controller
     {
 		private IUnitOfWork unitOfWork;
 		public AdminController(IUnitOfWork unitOfWork) 

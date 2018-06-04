@@ -1,13 +1,14 @@
 ﻿using DeanerySystem.DataAccess.Abstract;
 using DeanerySystem.DataAccess.Entities.Enums;
 using DeanerySystem.WebUI.Providers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Linq;
 
 namespace DeanerySystem.WebUI.Controllers 
 {
-	//[Authorize]
+	[Authorize]
 	public class EducationController : Controller 
 	{
 		private IUnitOfWork unitOfWork;

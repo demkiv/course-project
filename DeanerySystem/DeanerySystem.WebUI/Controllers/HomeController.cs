@@ -1,11 +1,13 @@
 ﻿using DeanerySystem.DataAccess.Abstract;
 using DeanerySystem.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace DeanerySystem.WebUI.Controllers
 {
-    public class HomeController : Controller
+	[Authorize]
+	public class HomeController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
 

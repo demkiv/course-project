@@ -3,6 +3,8 @@ using DeanerySystem.WebUI.Models.Profile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using DeanerySystem.WebUI.Extensions;
+using DeanerySystem.DataAccess.Entities.Enums;
 
 namespace DeanerySystem.WebUI.Controllers
 {
@@ -28,17 +30,17 @@ namespace DeanerySystem.WebUI.Controllers
 			//	throw new InvalidOperationException("Each member should have a role!");
 			//}
 
-			var memberModer = new MemberModel()
+			var memberModel = new MemberModel()
 			{
 				FirstName = currentMember.FirstName,
 				LastName = currentMember.LastName,
 				MiddleName = currentMember.MiddleName,
-				Email = currentMember.Email
-				//PhotoPath = currentMember.PhotoPath ?? "/Content/Images/DefaultMemberPhoto.png",
-				//MainRole = Providers.ResourcesProvider.GetRoleDisplay(roles.Min())
+				Email = currentMember.Email,
+				PhotoPath = User.Identity.GetPhotoPath(),
+				MainRole = Providers.ResourcesProvider.GetRoleDisplay(Roles.Student)
 			};
 
-			return View(memberModer);
+			return View(memberModel);
 		}
 	}
 }

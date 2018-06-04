@@ -1,50 +1,53 @@
 ﻿@model DeanerySystem.WebUI.Models.Admin.Faculties
-
+@{
+    ViewData["Title"] = "Факультети";
+}
 <div class="page-bar" data-bind="with: PageBar">
-	<ul class="page-breadcrumb">
-		<li>
-			<a href="@Url.Action("Index", "Home")"> Головна </a>
-			<i class="fa fa-angle-right"></i>
-		</li>
-		<li>
-			<span> Адміністрування </span>
-		</li>
-	</ul>
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Index", "Home")"> Головна </a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span> Адміністрування </span>
+        </li>
+    </ul>
 </div>
 
 <h3 class="page-title">
-	Адміністрування <small> Факультет </small>
+    Адміністрування <small> Факультет </small>
 </h3>
 
 <div class="row">
-	<div class="col-md-12">
-		@if (!Model.FacultiesList.Any())
-		{
-			<div class="well well-lg">
-				<h4 class="block">Покищо немає створених факультетів</h4>
-				<p>Створіть факультет на цій сторінці. Потім ви зможете додати до нього кафедри та користувачів.</p>
-			</div>
-		}
-		@foreach (var faculty in Model.FacultiesList)
-		{
-			<div class="note note-info">
-				<h4 class="block">@faculty.Name</h4>
-				<ul class="list-inline">
-					<li>
-						<i class="fa fa-group"></i> @faculty.NumberOfStreams
-					</li>
-					<li>
-						<i class="fa fa-briefcase"></i>
-						@if (string.IsNullOrEmpty(faculty.DeanName))
-						{
-							<span>Декан не вказаний</span>
-						}
-						else { 
-							<span>@faculty.DeanName</span>
-						}
-					</li>
-				</ul>
-			</div>
-		}
-	</div>
+    <div class="col-md-12">
+        @if (!Model.FacultiesList.Any())
+        {
+            <div class="well well-lg">
+                <h4 class="block">Покищо немає створених факультетів</h4>
+                <p>Створіть факультет на цій сторінці. Потім ви зможете додати до нього кафедри та користувачів.</p>
+            </div>
+        }
+        @foreach (var faculty in Model.FacultiesList)
+        {
+            <div class="note note-info">
+                <h4 class="block">@faculty.Name</h4>
+                <ul class="list-inline">
+                    <li>
+                        <i class="fa fa-group"></i> @faculty.NumberOfStreams
+                    </li>
+                    <li>
+                        <i class="fa fa-briefcase"></i>
+                        @if (string.IsNullOrEmpty(faculty.DeanName))
+                        {
+                            <span>Декан не вказаний</span>
+                        }
+                        else
+                        {
+                            <span>@faculty.DeanName</span>
+                        }
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>
 </div>

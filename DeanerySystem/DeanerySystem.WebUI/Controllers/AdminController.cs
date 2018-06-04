@@ -5,6 +5,11 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using DeanerySystem.BusinessLogic.UserImport;
+using DeanerySystem.DataAccess.Entities;
 
 namespace DeanerySystem.WebUI.Controllers
 {
@@ -61,8 +66,7 @@ namespace DeanerySystem.WebUI.Controllers
                 FirstNameEng = student.LatinFirstName,
                 LastNameEng = student.LatinLastName,
                 Email = student.Email,
-                PhoneNumber = student.PhoneNumber,
-                BirthDate = DateTime.Now,
+                PhoneNumber = student.PhoneNumber,               
                 Stream = student.Group.Department.Stream.Name,
                 Group = student.Group.Name
             });
@@ -96,7 +100,7 @@ namespace DeanerySystem.WebUI.Controllers
 			var facultiesModel = new Faculties();
 			foreach (var faculty in faculties)
 			{
-				facultiesModel.FacultiesList.Add(new Faculty()
+				facultiesModel.FacultiesList.Add(new Models.Admin.Faculty()
 				{
 					Name = faculty.Name,
 					DeanName = faculty.Dean?.GetFullName() ?? "",
@@ -105,5 +109,70 @@ namespace DeanerySystem.WebUI.Controllers
 			}
 			return View(facultiesModel);
 		}
-	}
+
+        public ActionResult Import()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ImportFile(IFormFile file)
+        {
+            var students = new List<Student>();
+            var filePath = Path.GetTempFileName();
+            using (var stream = file.OpenReadStream())
+            {
+                var excelImporter = new ExcelImporter();
+                var users = excelImporter.ImportData(stream);
+                users.ForEach(student =>
+                {
+                    var studentEntity = this.GetStudentEntity(student);
+                    this.unitOfWork.StudentRepository.Insert(studentEntity);
+                    this.unitOfWork.Save();
+                    students.Add(studentEntity);
+                });
+                var accounts = students.Select(student => this.GetStudentModel(student));
+                ViewData["Data"] = JsonConvert.SerializeObject(accounts);
+                return View("StudentAccounts");
+            }
+        }
+
+        private Student GetStudentEntity(BusinessLogic.UserImport.Models.UserModel student)
+        {
+            var studentEntity = new Student()
+            {
+                StudentCode = student.StudentCardNumber,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastName = student.LastName,
+                LatinFirstName = student.LatinFirstName,
+                LatinLastName = student.LatinLastName,
+                PhoneNumber = student.PhoneNumber,
+                Email = student.Email,
+                UserName = student.Email,
+                Group = this.unitOfWork.GroupRepository.GetById(1)
+            };
+            return studentEntity;
+        }
+
+        private StudentModel GetStudentModel(Student student)
+        {
+            var studentModel = new StudentModel()
+            {
+                Id = student.Id,
+                StudentCardId = student.StudentCode,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastName = student.LastName,
+                FirstNameEng = student.LatinFirstName,
+                LastNameEng = student.LatinLastName,
+                Email = student.Email,
+                PhoneNumber = student.PhoneNumber,
+                BirthDate = DateTime.Now,
+                Stream = "Комп'ютерні науки",
+                Group = student.Group.Name
+            };
+            return studentModel;
+        }
+    }
 }

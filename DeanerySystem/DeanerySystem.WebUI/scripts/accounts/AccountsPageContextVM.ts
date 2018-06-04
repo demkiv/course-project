@@ -63,19 +63,6 @@ export class AccountsPageContextVM {
                     oTable.row(nRow).data(values).draw();
                 });
             }
-            //oTable.row(nRow).data((<any>jqInputs)[0].value, 0, false);
-            //oTable.row(nRow).data((<any>jqInputs)[1].value, 1, false);
-            //oTable.row(nRow).data((<any>jqInputs)[2].value, 2, false);
-            //oTable.row(nRow).data((<any>jqInputs)[3].value, 3, false);
-            //oTable.row(nRow).data((<any>jqInputs)[4].value, 4, false);
-            //oTable.row(nRow).data((<any>jqInputs)[6].value, 5, false);
-            //oTable.row(nRow).data((<any>jqInputs)[6].value, 6, false);
-            //oTable.row(nRow).data((<any>jqInputs)[7].value, 7, false);
-            //oTable.row(nRow).data((<any>jqInputs)[9].value, 8, false);
-            //oTable.row(nRow).data((<any>jqInputs)[9].value, 9, false);
-            //oTable.row(nRow).data((<any>jqInputs)[10].value, 10, false);
-            //oTable.row(nRow).data('<a class="edit" href="">Редагувати</a>', nRow, 11, false);
-            //oTable.row(nRow).data('<a class="delete" href="">Видалити</a>', nRow, 12, false);
         }
 
         function cancelEditRow(oTable, nRow) {
@@ -83,46 +70,17 @@ export class AccountsPageContextVM {
             var values = (<any>jqInputs).map((x, e) => { return e.value });
             values.push('<a class="edit" href="">Редагувати</a>');
             values.push('<a class="delete" href="">Видалити</a>');
-            //oTable.fnUpdate((<any>jqInputs)[0].value, nRow, 0, false);
-            //oTable.fnUpdate((<any>jqInputs)[1].value, nRow, 1, false);
-            //oTable.fnUpdate((<any>jqInputs)[2].value, nRow, 2, false);
-            //oTable.fnUpdate((<any>jqInputs)[3].value, nRow, 3, false);
-            //oTable.fnUpdate((<any>jqInputs)[4].value, nRow, 4, false);
-            //oTable.fnUpdate((<any>jqInputs)[5].value, nRow, 5, false);
-            //oTable.fnUpdate((<any>jqInputs)[6].value, nRow, 6, false);
-            //oTable.fnUpdate((<any>jqInputs)[7].value, nRow, 7, false);
-            //oTable.fnUpdate((<any>jqInputs)[8].value, nRow, 8, false);
-            //oTable.fnUpdate((<any>jqInputs)[9].value, nRow, 9, false);
-            //oTable.fnUpdate((<any>jqInputs)[10].value, nRow, 10, false);
-            //oTable.fnUpdate('<a class="edit" href="">Редагувати</a>', nRow, 11, false);
             oTable.row(nRow).data(values).draw();
         }
 
         var table = (<any>window).$('#sample_editable_1');
 
         var oTable = (<any>table).DataTable({
-
-            // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
-            //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
-
             "lengthMenu": [
                 [5, 15, 20, -1],
-                [5, 15, 20, "Всі"] // change per page values here
-            ],
-
-            // Or you can use remote translation file
-            //"language": {
-            //   url: '//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Portuguese.json'
-            //},
-
-            // set the initial value
+                [5, 15, 20, "Всі"]
+            ],          
             "pageLength": 5,
-
-            "language": {
-                "lengthMenu": " _MENU_ records"
-            },
             buttons: [
                 {
                     extend: 'print', className: 'btn dark btn-outline', text: 'Друкувати', autoPrint: true,
@@ -156,16 +114,40 @@ export class AccountsPageContextVM {
                     }
                 }
             ],
-            "columnDefs": [{ // set default column settings
+            "columnDefs": [{ 
                 'orderable': true,
                 'targets': [0]
             }, {
                 "searchable": true,
                 "targets": [0]
-            }],
+                }],
+            "language": {
+                "decimal": "",
+                "emptyTable": "Немає даних",
+                "info": "Показано від _START_ до _END_ з _TOTAL_ записів",
+                "infoEmpty": "Показано від 0 до 0 з 0 записів",
+                "infoFiltered": "(знайдено з _MAX_ записів)",
+                "lengthMenu": "_MENU_ записів",
+                "infoPostFix": "",
+                "thousands": ",",
+                "loadingRecords": "Завантаження...",
+                "processing": "Обробка...",
+                "search": "Пошук:",
+                "zeroRecords": "Не знайдено жодного співпадіння",
+                "paginate": {
+                    "first": "Перша",
+                    "last": "Остання",
+                    "next": "Наступна",
+                    "previous": "Попередня"
+                },
+                "aria": {
+                    "sortAscending": ": сортувати за зростанням",
+                    "sortDescending": ": сортувати за спаданням"
+                }
+            },
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ] 
         });
 
         oTable.buttons().container().appendTo($('#actions'));
@@ -179,13 +161,13 @@ export class AccountsPageContextVM {
 
             if (nNew && nEditing) {
                 if (confirm("Попередній рядок не збережено. Ви маєте намір зберегти його ?")) {
-                    saveRow(oTable, nEditing); // save
+                    saveRow(oTable, nEditing);
                     $(nEditing).find("td:first").html("Untitled");
                     nEditing = null;
                     nNew = false;
 
                 } else {
-                    oTable.row(nEditing).remove().draw(); // cancel
+                    oTable.row(nEditing).remove().draw(); 
                     nEditing = null;
                     nNew = false;
 
@@ -208,7 +190,6 @@ export class AccountsPageContextVM {
                 var id = $(vals[0]).data("id");
                 _this.RemoveStudent(id).done(() => {
                     oTable.row(nRow).remove().draw();
-                    alert("Deleted! Do not forget to do some ajax to sync with backend :)");
                 })
             }
         });
@@ -227,23 +208,17 @@ export class AccountsPageContextVM {
 
         table.on('click', '.edit', function (e) {
             e.preventDefault();
-            nNew = false;
-
-            /* Get the row as a parent of the link that was clicked on */
+            nNew = false;          
             var nRow = $(this).parents('tr')[0];
 
             if (nEditing !== null && nEditing != nRow) {
-                /* Currently editing - but not this row - restore the old before continuing to edit mode */
                 restoreRow(oTable, nEditing);
                 editRow(oTable, nRow);
                 nEditing = nRow;
             } else if (nEditing == nRow && this.innerHTML == "Зберегти") {
-                /* Editing this row and want to save it */
                 saveRow(oTable, nEditing);
                 nEditing = null;
-                alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
-                /* No edit in progress - let's start one */
                 editRow(oTable, nRow);
                 nEditing = nRow;
             }
@@ -275,11 +250,11 @@ export class AccountsPageContextVM {
             data: JSON.stringify(student),
             contentType: "application/json; charset=utf-8",
             success: (data: any) => {
-                alert("Зміни збережено!");
                 deferr.resolve();
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
+                alert("Сталася помилка!");
                 deferr.reject();
             }
         });
@@ -294,11 +269,11 @@ export class AccountsPageContextVM {
             data: JSON.stringify(student),
             contentType: "application/json; charset=utf-8",
             success: (data: any) => {
-                alert("Зміни збережено!");
                 deferr.resolve();
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
+                alert("Сталася помилка!");
                 deferr.reject();
             }
         });
@@ -312,11 +287,11 @@ export class AccountsPageContextVM {
             type: 'DELETE',
             contentType: "application/json; charset=utf-8",
             success: (data: any) => {
-                alert("Зміни збережено!");
                 deferr.resolve();
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
+                alert("Сталася помилка!");
                 deferr.reject();
             }
         });

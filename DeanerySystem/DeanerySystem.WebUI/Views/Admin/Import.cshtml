@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Імпорт";
+}
+
+<h3 class="page-title">Імпорт <small>Завантажте файл з даними для імпорту</small></h3>
+
+<div class="portlet light bordered" id="accountsPage">
+    <div class="portlet-body form">
+        <form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="ImportFile">
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="exampleInputFile1">Завантажити файл</label>
+                    <input type="file" id="exampleInputFile1" name="file">
+                </div>
+                <div class="form-group">
+                    <input class="btn green" type="submit" value="Завантажити" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

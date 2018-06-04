@@ -11,7 +11,7 @@ namespace DeanerySystem.BusinessLogic.UserImport
     /// <summary>
     /// Imports users form excel file
     /// </summary>
-    class ExcelImporter : IImporter
+    public class ExcelImporter : IImporter
     {
         public List<UserModel> ImportData(Stream stream)
         {

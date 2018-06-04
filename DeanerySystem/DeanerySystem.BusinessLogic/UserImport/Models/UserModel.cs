@@ -3,7 +3,7 @@ using DeanerySystem.BusinessLogic.Utilities.Excel;
 
 namespace DeanerySystem.BusinessLogic.UserImport.Models
 {
-    class UserModel
+    public class UserModel
     {
         [MapExcel("A")]
         public string StudentCardNumber { get; set; }

@@ -1,0 +1,116 @@
+﻿@model DeanerySystem.WebUI.Models.JournalInfo
+
+@{
+	ViewBag.Title = "Журнал";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-bar" data-bind="with: PageBar">
+	<ul class="page-breadcrumb">
+		<li>
+			<a href="@Url.Action("Index", "Home")"> Головна </a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="@Url.Action("Schedule", "Education")"> Розклад </a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<span> Журнал </span>
+		</li>
+	</ul>
+</div>
+
+<br/>
+
+<div class="portlet light bordered">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">@Model.SubjectName</span>
+		</div>
+		<div class="actions">
+			@Html.DropDownListFor(model => model.JournalId, new SelectList(
+				  new List<Object>
+				  {
+				new {value = Model.AssessmentJournalId, text = Model.AssessmentJournalName },
+				new {value = Model.VisitingJournalId, text = Model.VisitingJournalName }
+				  },
+				  "value",
+				  "text", 2), new { @id = "JournalTypeSelection", @class = "form-control dropdown dropdown-green font-green" })
+		</div>
+	</div>
+	<div class="portlet-body">
+		<ul class="list-inline">
+			<li>
+				<i class="fa fa-group"></i> @Model.GroupName
+			</li>
+			<li>
+				<i class="fa fa-briefcase"></i> @Model.LecturerLastName @Model.LecturerFirstName @Model.LecturerMiddleName
+			</li>
+			<li>
+				<i class="fa fa-book"></i> @Model.ClassType
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div>
+	<form id="submit-mark-form" method="post" asp-controller="api/education" asp-action="markings">
+		<div class="table-scrollable">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th style="text-align: center; width: 52px;">#</th>
+						<th style="width: 150px;">
+							<p style="width: 150px; margin: 0">
+								Прізвище Ім'я<br />По-батькові
+							</p>
+						</th>
+						@foreach (var date in @Model.Date)
+						{
+							<th style="text-align: center;">
+								<span>@date.Day/@date.Month</span><br />
+								<span>@date.Hour:@date.Minute</span>
+							</th>
+						}
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i = 0; i < Model.JournalRecords.Count(); ++i)
+					{
+						<tr>
+							<td style="text-align: center;">
+								@{ var nubmer = i + 1; }
+								<span>@nubmer</span>
+							</td>
+							<td>
+								<span>@Model.JournalRecords[i].StudentLastName @Model.JournalRecords[i].StudentFirstName<br />@Model.JournalRecords[i].StudentMiddleName</span>
+							</td>
+							@foreach (var mark in @Model.JournalRecords[i].Marks)
+							{
+								<td style="padding: 0;">
+									@Html.TextBoxFor(x => mark, new { @class = "form-control", style = "border: 0px; min-width: 52px; height: 52px; text-align: center;" })
+								</td>
+							}
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+		<br />
+		<div class="row">
+			<div class="col-md-6">
+				<input type="submit" value="Зберегти зміни" class="btn btn-default form-control" id="save-marks-button" data-educationalplanid=@Model.EducationalPlanId data-classid=@Model.ClassId data-journalid=@Model.JournalId />
+			</div>
+			<div class="col-md-6">
+				<a class="btn btn-default form-control" href="@Url.Action("Schedule", "Education")">Назад</a>
+			</div>
+		</div>
+		<br /><br />
+	</form>
+</div>
+
+@*@Html.ActionLink("Друкувати", "PrintJournal", "Education", Model, null)*@
+
+<script src="~/dist/journal.js"></script>

@@ -1,0 +1,15 @@
+﻿<div class="page-bar" data-bind="with: PageBar">
+    <ul class="page-breadcrumb">
+        <!-- ko foreach: Links -->
+            <li data-bind="template: { name: $data.TemplateName, data: $data }"></li>
+        <!-- /ko -->
+        <li>
+            <span data-bind="text: CurrentPageText"></span>
+        </li>
+    </ul>
+</div>
+
+<script type="text/html" id="page-bar-link">
+    <a data-bind="attr: { href: Link }, text: Text">Home</a>
+    <i class="fa fa-angle-right"></i>
+</script>

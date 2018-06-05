@@ -1,0 +1,45 @@
+﻿@model DeanerySystem.WebUI.Models.Profile.MemberModel
+
+@{
+    ViewBag.Title = "Мій профіль";
+}
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href=@Url.Action("Index", "Home")>Головна</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Мій профіль</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title">
+	Мій профіль <small>@Model.MainRole</small>
+</h3>
+<div class="profile">
+    <div class="tab-pane active">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="list-unstyled profile-nav">
+                    <li>
+                        <img src="@Model.PhotoPath" class="img-responsive pic-bordered" alt="Фото профілю">
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-8 profile-info">
+                        <h3 class="font-green sbold uppercase">@Model.FirstName @Model.MiddleName @Model.LastName</h3>
+                        <p>
+                            <a href="mailto:@Model.Email">@Model.Email</a>
+                        </p>
+                        <p>Роль: @Model.MainRole</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,8 @@
+﻿namespace DeanerySystem.WebUI.Models.Education.Schedule 
+{
+	public class GroupModel 
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+	}
+}

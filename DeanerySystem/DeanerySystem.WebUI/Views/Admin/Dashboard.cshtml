@@ -1,0 +1,27 @@
+﻿@{
+	ViewData["Title"] = "Адміністрування";
+}
+
+<div class="page-bar" data-bind="with: PageBar">
+	<ul class="page-breadcrumb">
+		<li>
+			<a href="@Url.Action("Index", "Home")"> Головна </a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<span> Адміністрування </span>
+		</li>
+	</ul>
+</div>
+
+<h3 class="page-title">
+	Адміністрування <small> Університет </small>
+</h3>
+
+<div id="dashboard"></div>
+
+<script>
+	this.data = @Html.Raw(ViewData["data"]);
+</script>
+
+<script src="~/dist/dashboard.js"></script>
